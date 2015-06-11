@@ -1,5 +1,7 @@
 package diversity;
 
+import java.util.logging.Logger;
+
 import net.minecraft.entity.EntityList;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -53,6 +55,8 @@ public class Diversity
     @Mod.Instance(Diversity.MODID)
     public static Diversity instance;
     
+    public static Logger Divlogger;
+    
     @SidedProxy(clientSide="diversity.proxy.ClientProxy", serverSide="diversity.proxy.ServerProxy")
     public static ServerProxy proxy;
          
@@ -60,6 +64,7 @@ public class Diversity
     public void PreLoad(FMLPreInitializationEvent event)
     {
     	ConfigTool.values();
+    	Divlogger = Logger.getLogger("Diversity");
     	
 		EnumFluid.register();
 		EnumBlock.register();
