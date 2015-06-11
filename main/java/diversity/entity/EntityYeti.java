@@ -276,7 +276,7 @@ public class EntityYeti  extends EntityMob
 	    	{
 	    		entityToAttack = player.getAITarget();
 	    	}
-	    	else if(getDistanceToEntity(player) >= 2.5D)
+	    	else if(getDistanceToEntity(player) >= 3.5D)
 			   {
 				   PathEntity pathToPlayer = this.worldObj.getPathEntityToEntity(this, player, 12.0F, true, false, false, true);
 				   this.setPathToEntity(pathToPlayer);
