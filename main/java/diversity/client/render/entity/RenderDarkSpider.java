@@ -18,12 +18,13 @@ import net.minecraft.client.renderer.entity.RenderSpider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
 public class RenderDarkSpider extends RenderLiving
 {
-    private static final ResourceLocation spiderEyesTextures = new ResourceLocation(Diversity.MODID + PathTool.entityMonsterTexturePath + "spider_eyes" + PathTool.ext);
+    private static final ResourceLocation spiderEyesTextures = new ResourceLocation(Diversity.MODID+  ":" + "textures/entities/monsters/spider_eyes.png");
 
     public RenderDarkSpider()
     {
@@ -81,6 +82,23 @@ public class RenderDarkSpider extends RenderLiving
     protected float getDeathMaxRotation(EntityLivingBase p_77037_1_)
     {
         return this.getDeathMaxRotation((EntityDarkSpider)p_77037_1_);
+    }
+    
+    protected float handleRotationFloat(EntityLivingBase entityliving, float f)
+    {
+        EntityDarkSpider entityDarkSpider = (EntityDarkSpider)entityliving;
+        float f1 = entityDarkSpider.squishe + (entityDarkSpider.squishb - entityDarkSpider.squishe) * f;
+        float f2 = entityDarkSpider.squishd + (entityDarkSpider.squishc - entityDarkSpider.squishd) * f;
+        return (MathHelper.sin(f1) + 0.2F) * f2;
+    }
+    
+    /**
+     * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
+     * entityLiving, partialTickTime
+     */
+    protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2)
+    {
+    	GL11.glScalef(2F, 2F, 2F);
     }
 
     /**
