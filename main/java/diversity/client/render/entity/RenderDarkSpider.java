@@ -11,6 +11,7 @@ import diversity.entity.EntityWarriorSkeleton;
 import diversity.suppliers.EnumEntity;
 import diversity.utils.PathTool;
 import diversity.utils.ResourceTools;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelSpider;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -25,11 +26,14 @@ import net.minecraft.util.ResourceLocation;
 public class RenderDarkSpider extends RenderLiving
 {
     private static final ResourceLocation spiderEyesTextures = new ResourceLocation(Diversity.MODID+  ":" + "textures/entities/monsters/spider_eyes.png");
-
+    private static final ResourceLocation spiderBackTextures = new ResourceLocation(Diversity.MODID+  ":" + "textures/entities/monsters/darkspider_back.png");
+    private ModelBase eggSack;
+    
     public RenderDarkSpider()
     {
-        super(new ModelDarkSpider(), 1.0F);
-        this.setRenderPassModel(new ModelDarkSpider());
+        super(new ModelDarkSpider(0), 1.0F);
+        this.setRenderPassModel(new ModelDarkSpider(0));
+        this.eggSack = new ModelDarkSpider(1);
     }
 
     protected float getDeathMaxRotation(EntityDarkSpider p_77037_1_)
@@ -42,12 +46,23 @@ public class RenderDarkSpider extends RenderLiving
      */
     protected int shouldRenderPass(EntityDarkSpider p_77032_1_, int p_77032_2_, float p_77032_3_)
     {
-        if (p_77032_2_ != 0)
+        if (p_77032_2_ == 0)
         {
-            return -1;
+            this.setRenderPassModel(this.eggSack);
+            this.bindTexture(spiderBackTextures);
+            GL11.glEnable(GL11.GL_NORMALIZE);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc( GL11.GL_SRC_ALPHA,GL11.GL_ONE_MINUS_SRC_ALPHA);
+            return 1;
         }
         else
         {
+            if (p_77032_2_ == 1)
+            {
+                GL11.glDisable(GL11.GL_BLEND);
+                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+            }
+
             this.bindTexture(spiderEyesTextures);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glDisable(GL11.GL_ALPHA_TEST);
@@ -67,7 +82,7 @@ public class RenderDarkSpider extends RenderLiving
             int k = c0 / 65536;
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)j / 1.0F, (float)k / 1.0F);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            return 1;
+            return -1;
         }
     }
 
