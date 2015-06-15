@@ -24,7 +24,9 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent.CheckSpawn;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
+import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.InitMapGenEvent.EventType;
+import net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -87,6 +89,13 @@ public class DiversityHandler
     	    		event.setResult(Result.ALLOW);
     	    	}
             }
+		}
+    }
+	
+	@SubscribeEvent
+    public void OnPopulateChunkEvent(PopulateChunkEvent.Populate event) {
+		if (event.type.equals(Populate.EventType.DUNGEON)) {
+			
 		}
     }
 	

@@ -1,6 +1,10 @@
 package diversity.world;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import javax.vecmath.Point4i;
 
 import cpw.mods.fml.common.IWorldGenerator;
 import diversity.suppliers.EnumBlock;
@@ -17,12 +21,12 @@ import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenVines;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class WorldGenMushroomCave extends WorldGenCave
+public class WorldGenMushroomCave extends WorldGenNewCave
 {
 	
 	public WorldGenMushroomCave()
 	{
-		super(40, 7, 10, 30, 3, 8, BiomeGenBase.swampland);
+		super(14, 35, 6, 10, 30, 3, 8, BiomeGenBase.swampland);
 	}
 	
 	public IWorldGenerator create() {
@@ -32,11 +36,49 @@ public class WorldGenMushroomCave extends WorldGenCave
 	@Override
 	protected boolean isBiomeViable(World world, int x, int y, int z, int size)
 	{
-		if (world.getSavedLightValue(EnumSkyBlock.Sky, x, y + maxSize + 5, z) > 0) {
+		if (world.getSavedLightValue(EnumSkyBlock.Sky, x, y + maxRadius + 5, z) > 0) {
 			return false;
 		}
 		
 		return super.isBiomeViable(world, x, y, z, size);
+	}
+	
+	@Override
+	protected List<Point4i> getSphereCenter(World world, Random random, int initX, int initY, int initZ, int radius) {
+		List<Point4i> sphereCenter = new ArrayList<Point4i>();
+		sphereCenter.add(new Point4i(initX, initY, initZ, radius));
+		int numberOfPoint = caveSize;
+		
+		int counter = 1000;
+		
+		while (numberOfPoint > 0 && radius >= minRadius && counter-- > 0)
+		{
+			Point4i randomCenter = sphereCenter.get(random.nextInt(sphereCenter.size()));
+			int x = randomCenter.x + (random.nextBoolean()? -1 : 1) * random.nextInt(radius*2-1);
+			int y = randomCenter.y + (random.nextBoolean()? -1 : 1) * random.nextInt(2);
+			int z = randomCenter.z + (random.nextBoolean()? -1 : 1) * random.nextInt(radius*2-1);
+			
+			boolean canTakeThisPoint = true;
+			for (Point4i center : sphereCenter)
+			{
+				float dist = (float) Math.sqrt(
+						Math.pow(x-center.x, 2) +
+						Math.pow(y-center.y, 2) +
+						Math.pow(z-center.z, 2));
+				if (dist < radius * 0.9 || dist > radius * 1.7) {
+					canTakeThisPoint = false;
+					break;
+				}
+			}
+			if (canTakeThisPoint && isBiomeViable(world, x, y, z, radius))
+			{
+				radius += random.nextInt(10)==0 ? -1 : 0;
+				sphereCenter.add(new Point4i(x, y, z, radius));
+				numberOfPoint--;
+			}
+			
+		}
+		return sphereCenter;
 	}
 	
 	@Override

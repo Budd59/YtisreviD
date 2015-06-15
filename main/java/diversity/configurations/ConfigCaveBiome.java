@@ -17,9 +17,10 @@ import diversity.world.WorldGenMushroomCave;
 public enum ConfigCaveBiome
 {
 	MUSHROOM_CAVE (BiomeGenBase.swampland),
-	LOST_CAVE (BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsEdge, BiomeGenBase.extremeHillsPlus, BiomeGenBase.savanna, BiomeGenBase.savannaPlateau),
+	LOST_CAVE (BiomeGenBase.jungle, BiomeGenBase.jungleEdge, BiomeGenBase.jungleHills),
 	ICE_CAVE (BiomeGenBase.iceMountains, BiomeGenBase.icePlains.createMutation()),
-	SPIDER_DEN (BiomeGenBase.roofedForest);
+	SPIDER_DEN (BiomeGenBase.roofedForest),
+	DWARVES_CAVE (BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsEdge, BiomeGenBase.extremeHillsPlus);
 	
 	public BiomeGenBase[] biomes;
 	

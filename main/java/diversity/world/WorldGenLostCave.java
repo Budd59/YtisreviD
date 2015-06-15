@@ -1,6 +1,10 @@
 package diversity.world;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import javax.vecmath.Point4i;
 
 import cpw.mods.fml.common.IWorldGenerator;
 import diversity.suppliers.EnumBlock;
@@ -15,15 +19,53 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenVines;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class WorldGenLostCave extends WorldGenCave
+public class WorldGenLostCave extends WorldGenNewCave
 {
 	public WorldGenLostCave()
 	{
-		super(45, 9, 12, 35, 4, 4, BiomeGenBase.jungle);
+		super(40, 50, 6, 13, 40, 4, 4, BiomeGenBase.jungle);
 	}
 	
 	public IWorldGenerator create() {
 		return new WorldGenLostCave();
+	}
+	
+	@Override
+	protected List<Point4i> getSphereCenter(World world, Random random, int initX, int initY, int initZ, int radius) {
+		List<Point4i> sphereCenter = new ArrayList<Point4i>();
+		sphereCenter.add(new Point4i(initX, initY, initZ, radius));
+		int numberOfPoint = caveSize;
+		
+		int counter = 1000;
+		
+		while (numberOfPoint > 0 && radius >= minRadius && counter-- > 0)
+		{
+			Point4i randomCenter = sphereCenter.get(random.nextInt(sphereCenter.size()));
+			int x = randomCenter.x + (random.nextBoolean()? -1 : 1) * random.nextInt(radius*2-1);
+			int y = randomCenter.y + (random.nextBoolean()? -1 : 1) * random.nextInt(2) + random.nextInt(2);
+			int z = randomCenter.z + (random.nextBoolean()? -1 : 1) * random.nextInt(radius*2-1);
+			
+			boolean canTakeThisPoint = true;
+			for (Point4i center : sphereCenter)
+			{
+				float dist = (float) Math.sqrt(
+						Math.pow(x-center.x, 2) +
+						Math.pow(y-center.y, 2) +
+						Math.pow(z-center.z, 2));
+				if (dist < radius * 0.9 || dist > radius * 1.7) {
+					canTakeThisPoint = false;
+					break;
+				}
+			}
+			if (canTakeThisPoint && isBiomeViable(world, x, y, z, radius))
+			{
+				radius += random.nextInt(10)==0 ? -1 : 0;
+				sphereCenter.add(new Point4i(x, y, z, radius));
+				numberOfPoint--;
+			}
+			
+		}
+		return sphereCenter;
 	}
 
 	@Override
@@ -107,19 +149,14 @@ public class WorldGenLostCave extends WorldGenCave
 					return;
 				}
 			}
+		} else {
+			world.setBlockToAir(x, y , z);
 		}
 	}
 
 	@Override
 	protected void generateWater(World world, Random random, int x, int y, int z) {
 		world.setBlock(x, y, z, EnumBlock.poison_water.block);
-		y--;
-		if (random.nextInt(30) == 0) {
-			if (!blocks.containsKey(x, y, z) || world.getBlock(x, y, z).getMaterial().equals(Material.rock) )
-			{
-				this.biome.theBiomeDecorator.goldGen.generate(world, random, x, y, z);
-			}
-		}
 	}
 	
 	@Override
@@ -150,6 +187,12 @@ public class WorldGenLostCave extends WorldGenCave
 
 	@Override
 	protected void generateUnderGround(World world, Random random, int x, int y, int z) {
+		if (!blocks.containsKey(x, y-1, z) && blocks.get(x, y+1, z).equals(EnumCubeType.WATER)) {
+			if (random.nextInt(30) == 0 && world.getBlock(x, y, z).getMaterial().equals(Material.rock)) {
+				this.biome.theBiomeDecorator.goldGen.generate(world, random, x, y, z);
+			}
+		} else {
 		world.setBlock(x, y, z, biome.fillerBlock);
+		}
 	}
 }

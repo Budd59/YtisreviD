@@ -11,9 +11,11 @@ import diversity.configurations.ConfigCaveRate;
 import diversity.configurations.ConfigVillageRate;
 import diversity.world.WorldGenAbyss;
 import diversity.world.WorldGenCave;
+import diversity.world.WorldGenDwarvesCave;
 import diversity.world.WorldGenIceCave;
 import diversity.world.WorldGenLostCave;
 import diversity.world.WorldGenMushroomCave;
+import diversity.world.WorldGenNewCave;
 import diversity.world.WorldGenSpiderDen;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -23,11 +25,12 @@ import net.minecraft.world.gen.ChunkProviderFlat;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public enum EnumGenerator implements IWorldGenerator
-{
-	MUSHROOM_CAVE (new WorldGenMushroomCave(), 15, ConfigCaveBiome.MUSHROOM_CAVE),
-	LOST_CAVE (new WorldGenLostCave(), 10, ConfigCaveBiome.LOST_CAVE),
-	ICE_CAVE (new WorldGenIceCave(), 15, ConfigCaveBiome.ICE_CAVE),
-	SPIDER_DEN (new WorldGenSpiderDen(), 5, ConfigCaveBiome.SPIDER_DEN);
+{	
+	//ICE_CAVE (new WorldGenIceCave(), 15, ConfigCaveBiome.ICE_CAVE),
+	//MUSHROOM_CAVE (new WorldGenMushroomCave(), 15, ConfigCaveBiome.MUSHROOM_CAVE),
+	//LOST_CAVE (new WorldGenLostCave(), 10, ConfigCaveBiome.LOST_CAVE),
+	// SPIDER_DEN (new WorldGenSpiderDen(), 5, ConfigCaveBiome.SPIDER_DEN),
+	DWARVES_CAVE (new WorldGenDwarvesCave(), 15, ConfigCaveBiome.DWARVES_CAVE);
 	
 	private final ConfigCaveBiome config;
 	public final IWorldGenerator worldGen;
@@ -59,21 +62,21 @@ public enum EnumGenerator implements IWorldGenerator
 	{
 		if (world.getWorldInfo().getTerrainType().equals(WorldType.FLAT))
 			return;
-		if (worldGen instanceof WorldGenCave) {
+		if (worldGen instanceof WorldGenNewCave) {
 			int spawnRate = ConfigCaveRate.caveBiomeSpawnRate.getIntegerConfig();
 			if (spawnRate <= 0) {
 				spawnRate = 1;
 			}
 		    if (new Random().nextInt(100 + spawnRate*100) == 0)
 		    {
-		    	((WorldGenCave) worldGen).create().generate(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+		    	((WorldGenNewCave) worldGen).create().generate(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
 		    }
 		}
 	}
 	
 	public static void load() {
 		for (EnumGenerator enumGenerator : EnumGenerator.values()) {
-			GameRegistry.registerWorldGenerator(enumGenerator, enumGenerator.priority);  
+			GameRegistry.registerWorldGenerator(enumGenerator, 1);  
 		}
 	}
 }

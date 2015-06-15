@@ -18,6 +18,11 @@ public abstract class StructureTools
 		private int avarageGroundLevel;
 		
         public GlobalFeature() {}
+        
+        public GlobalFeature(Random random, int coordX, int coordZ) 
+        {
+        	super(random, coordX, coordZ);
+        }
 
         public GlobalFeature(Random random, int coordX, int coordZ, int sizeX, int sizeY, int sizeZ)
         {
