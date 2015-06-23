@@ -1,19 +1,21 @@
 package diversity.suppliers;
 
 import net.minecraft.world.gen.structure.MapGenStructureIO;
-import diversity.structure.StructureDesert;
-import diversity.structure.StructureForest;
-import diversity.structure.StructureJungle;
-import diversity.structure.StructurePlain;
-import diversity.structure.StructureSwamp;
+import diversity.structure.AztecPyramid;
+import diversity.structure.Catacomb;
+import diversity.structure.DwarvesCave;
+import diversity.structure.EgyptianPyramid;
+import diversity.structure.Inn;
+import diversity.structure.WitchHutt;
 
 public enum EnumStructurePiece
 {
-	EGYPTIAN_PYRAMID (EnumStructure.DESERT, 25, StructureDesert.Pyramid.class),
-	AZTEC_PYRAMID (EnumStructure.JUNGLE, 25, StructureJungle.Pyramid.class),
-	CATACOMB (EnumStructure.FOREST, 25, StructureForest.Catacomb.class),
-	SWAMPHUT (EnumStructure.SWAMP, 25, StructureSwamp.SwampHut.class),
-	INN (EnumStructure.PLAIN, 25, StructurePlain.Inn.class);
+	EGYPTIAN_PYRAMID (EnumStructure.EGYPTIAN_PYRAMID, 25, EgyptianPyramid.class),
+	AZTEC_PYRAMID (EnumStructure.JUNGLE, 25, AztecPyramid.class),
+	CATACOMB (EnumStructure.FOREST, 25, Catacomb.class),
+	SWAMPHUT (EnumStructure.SWAMP, 25, WitchHutt.class),
+	INN (EnumStructure.PLAIN, 25, Inn.class),
+	DWARVES_CAVE (EnumStructure.SNOW_MOUNTAINS, 25, DwarvesCave.class);
 	
 	public final EnumStructure structure;
 	public final int weight;

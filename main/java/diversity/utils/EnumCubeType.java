@@ -8,5 +8,6 @@ public enum EnumCubeType
 	WALL,
 	ROOF,
 	UNDERGROUND,
-	OUTSIDE;
+	OUTSIDE,
+	ORE;
 }

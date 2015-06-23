@@ -10,13 +10,14 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
+import diversity.DiversityHandler;
 import diversity.utils.EnumCubeType;
 
 public class WorldGenDwarvesCave extends WorldGenNewCave
 {
 	Point4i startPoint;
-	
 	
 	public WorldGenDwarvesCave()
 	{
@@ -86,83 +87,33 @@ public class WorldGenDwarvesCave extends WorldGenNewCave
 			int minZ = -radius - radiusRandomer / 2 + random.nextInt(radiusRandomer + 1);
 			int maxZ = radius - radiusRandomer / 2 + random.nextInt(radiusRandomer + 1);
 			
-			for (int tempX = minX*2; tempX <= maxX*2; tempX++)
-			for (int tempZ = minZ*2; tempZ <= maxZ*2; tempZ++)
 			for (int tempY = maxY*2; tempY >= minY*2; tempY--)
 			{
-				if (Math.pow(tempX, 2.0D) + Math.pow(tempY, 2.0D) + Math.pow(tempZ, 2.0D) < Math.pow(radius*2, 2.0D)
-						&& ((y+tempY) >= 20 || Math.pow(x+tempX-this.startPoint.x, 2.0D) + Math.pow(z+tempZ-this.startPoint.z, 2.0D) > Math.pow(30+(20-y)/2, 2.0D)))
+				for (int tempX = minX*2; tempX <= maxX*2; tempX++)
+				for (int tempZ = minZ*2; tempZ <= maxZ*2; tempZ++)
 				{
-					blocks.put(x + tempX, y + tempY/2, z + tempZ, EnumCubeType.AIR);
+					if (Math.pow(tempX, 2.0D) + Math.pow(tempY, 2.0D) + Math.pow(tempZ, 2.0D) < Math.pow(radius*2, 2.0D)
+							&& ((y+tempY/2) >= 20 || ((y+tempY/2) >= 12 && Math.pow(x+tempX-this.startPoint.x, 2.0D) + Math.pow(z+tempZ-this.startPoint.z, 2.0D) > Math.pow(24+random.nextInt(2)+(20-y-tempY/2)*3, 2.0D))))
+					{
+						blocks.put(x + tempX, y + tempY/2, z + tempZ, EnumCubeType.AIR);
+					}
 				}
 			}
 		}
 	}
+	
+	protected void postGenerate(World world, Random random, List<Point4i> sphereCenter) {
+		DiversityHandler.mapGenCaveStructureDiversity.addStructure(startPoint.x/16, startPoint.z/16);
+	}
+
 
 	@Override
 	protected void generateRoof(World world, Random random, int x, int y, int z) {
-//		if (y > 60 && !world.getBlock(x, y + 2, z).getMaterial().equals(Material.water))
-//		{
-//			int tempY = y + 10;
-//			if (world.isAirBlock(x, tempY, z)
-//					|| world.getBlock(x, tempY, z).getMaterial().equals(Material.wood)
-//					|| world.getBlock(x, tempY, z).getMaterial().equals(Material.leaves))
-//			{
-//				while (y < tempY)
-//		        {
-//					if (world.getBlock(x, y, z).getMaterial().equals(Material.wood))
-//					{
-//						for (int tempX = x - 2; tempX <= x + 2; tempX++)
-//						{
-//							for (int tempZ = z - 2; tempZ <= z + 2; tempZ++)
-//							{
-//					        	if (world.getBlock(tempX, y, tempZ).getMaterial().equals(Material.wood)
-//										|| world.getBlock(tempX, y, tempZ).getMaterial().equals(Material.leaves))
-//					        	{
-//					        		world.setBlockToAir(tempX, y, tempZ);
-//					        	}
-//							}
-//						}
-//					}
-//					else
-//					{
-//		        		world.setBlockToAir(x, y, z);
-//		        	}
-//					if (world.getBlock(x, tempY, z).getMaterial().equals(Material.wood)
-//							|| world.getBlock(x, tempY + 1, z).getMaterial().equals(Material.wood)
-//							|| world.getBlock(x, tempY + 2, z).getMaterial().equals(Material.wood))
-//					{
-//						tempY++;
-//					}
-//		            ++y;
-//		        }
-//			}
-//		}
-//		
-//		for (int tempX = -1; tempX <= 1; tempX++)
-//		for (int tempZ = -1; tempZ <= 1; tempZ++)
-//		{
-//			if (world.getBlock(tempX + x, y, tempZ + z) == Blocks.air && random.nextInt(5) == 0)
-//			{
-//				WorldGenUnderGroundVine gen = new WorldGenUnderGroundVine();
-//				gen.generate(world, random, x, y, z, blocks.lastKey().intValue());
-//			}
-//		}
+		world.setBlock(x, y, z, Blocks.stone);
 	}
 	
 	@Override
-	protected void generateGround(World world, Random random, int x, int y, int z)
-	{
-//		if (random.nextInt(20) == 0)
-//		{
-//			WorldGenerator grassGenerator = biome.getRandomWorldGenForGrass(random);
-//			grassGenerator.generate(world, random, x, y + 1, z);
-//		} else if (random.nextInt(4) == 0)
-//		{
-//			WorldGenerator treeGenerator = biome.func_150567_a(random);
-//			treeGenerator.generate(world, random, x, y + 1, z);
-//		}
-//		
+	protected void generateGround(World world, Random random, int x, int y, int z) {
 		world.setBlock(x, y, z, Blocks.stone);
 	}
 
@@ -173,7 +124,7 @@ public class WorldGenDwarvesCave extends WorldGenNewCave
 
 	@Override
 	protected void generateWater(World world, Random random, int x, int y, int z) {
-		world.setBlock(x, y, z, Blocks.lava);
+		world.setBlock(x, y, z, Blocks.water);
 	}
 	
 	@Override

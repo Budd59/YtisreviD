@@ -8,30 +8,34 @@ import java.util.Properties;
 
 import cpw.mods.fml.common.Loader;
 
-public enum ConfigStructureRate
+public enum ConfigGenerationRate
 {
-	maxDistanceBetweenStructures(32),
-	minDistanceBetweenStructures(8);
+	MAXDISTANCEBETWEENVILLAGES(32),
+	MINDISTANCEBETWEENVILLAGES(8),
+	MAXDISTANCEBETWEENSTRUCTURES(32),
+	MINDISTANCEBETWEENSTRUCTURES(8),
+	MAXDISTANCEBETWEENCAVES(32),
+	MINDISTANCEBETWEENCAVES(8);
 	
 	private String value;
 	
-	private ConfigStructureRate(int config) {
+	private ConfigGenerationRate(int config) {
 		this.value = String.valueOf(config);
+	}
+	
+	private ConfigGenerationRate(String config) {
+		this.value = config;
 	}
 	
 	public int getIntegerConfig() {
 		return Integer.valueOf(value);
 	}
 	
-	public String getStringConfig() {
-		return value;
-	}
-	
-	private static final String configFile = Loader.instance().getConfigDir() + "/diversity-structure-rate.cfg";
+	private static final String configFile = Loader.instance().getConfigDir() + "/diversity-generation-rate.cfg";
 
 	public static void saveConfig() {
 		Properties properties = new Properties();
-		for (ConfigStructureRate config : ConfigStructureRate.values()) {
+		for (ConfigGenerationRate config : ConfigGenerationRate.values()) {
 			properties.setProperty(config.name(), config.value);
 		}
 
@@ -54,7 +58,7 @@ public enum ConfigStructureRate
 			return;
 		}
 		
-		for (ConfigStructureRate config : ConfigStructureRate.values()) {
+		for (ConfigGenerationRate config : ConfigGenerationRate.values()) {
 			String value = properties.getProperty(config.name());
 			if (value != null && !value.isEmpty()) {
 				config.value = value;

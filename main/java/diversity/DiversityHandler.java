@@ -16,17 +16,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.client.event.EntityViewRenderEvent.FogColors;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent.CheckSpawn;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
-import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.InitMapGenEvent.EventType;
-import net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -36,13 +31,17 @@ import diversity.suppliers.EnumBlock;
 
 public class DiversityHandler
 {
+	public final static MapGenVillageDiversity mapGenVillageDiversity = new MapGenVillageDiversity();
+	public final static MapGenStructureDiversity mapGenStructureDiversity = new MapGenStructureDiversity();
+	public final static MapGenCaveDiversity mapGenCaveStructureDiversity = new MapGenCaveDiversity();
+	
 	@SubscribeEvent
 	public void checkUpdate(InitMapGenEvent event)
 	{
 		if (EventType.VILLAGE == event.type) {
-			event.newGen = new MapGenVillageDiversity();
+			event.newGen = mapGenVillageDiversity;
 		} else if (EventType.SCATTERED_FEATURE == event.type) {
-			event.newGen = new MapGenStructureDiversity();
+			event.newGen = mapGenStructureDiversity;
 		}
 	}
     
@@ -89,13 +88,6 @@ public class DiversityHandler
     	    		event.setResult(Result.ALLOW);
     	    	}
             }
-		}
-    }
-	
-	@SubscribeEvent
-    public void OnPopulateChunkEvent(PopulateChunkEvent.Populate event) {
-		if (event.type.equals(Populate.EventType.DUNGEON)) {
-			
 		}
     }
 	

@@ -9,9 +9,10 @@ import java.util.Random;
 
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeManager;
-import diversity.configurations.ConfigVillageBiome;
+import diversity.configurations.ConfigBiomeGroup;
 import diversity.village.VillageApache;
 import diversity.village.VillageAztec;
+import diversity.village.VillageDwarf;
 import diversity.village.VillageEgyptian;
 import diversity.village.VillageInuit;
 import diversity.village.VillageLakeside;
@@ -22,24 +23,25 @@ import diversity.village.VillageZulu;
 
 public enum EnumVillage
 {
-	APACHE (VillageApache.class, ConfigVillageBiome.APACHE),
-	AZTEC (VillageAztec.class, ConfigVillageBiome.AZTEC),
-	INUIT (VillageInuit.class, ConfigVillageBiome.INUIT),
-	SETTLED (VillageSettled.class, ConfigVillageBiome.SETTLED),
-	ZULU (VillageZulu.class, ConfigVillageBiome.ZULU),
-	TIBETAN (VillageTibetan.class, ConfigVillageBiome.TIBETAN), 
-	EGYPTIAN (VillageEgyptian.class, ConfigVillageBiome.EGYPTIAN),
-	LAKESIDE (VillageLakeside.class, ConfigVillageBiome.LAKESIDE);
+	APACHE (VillageApache.class, ConfigBiomeGroup.APACHE_VILLAGE, true),
+	AZTEC (VillageAztec.class, ConfigBiomeGroup.AZTEC_VILLAGE, true),
+	INUIT (VillageInuit.class, ConfigBiomeGroup.INUIT_VILLAGE, true),
+	SETTLED (VillageSettled.class, ConfigBiomeGroup.SETTLED_VILLAGE, true),
+	ZULU (VillageZulu.class, ConfigBiomeGroup.ZULU_VILLAGE, true),
+	TIBETAN (VillageTibetan.class, ConfigBiomeGroup.TIBETAN_VILLAGE, true), 
+	EGYPTIAN (VillageEgyptian.class, ConfigBiomeGroup.EGYPTIAN_VILLAGE, true),
+	LAKESIDE (VillageLakeside.class, ConfigBiomeGroup.LAKESIDE_VILLAGE, true),
+	DWARF (VillageDwarf.class, ConfigBiomeGroup.DWARVES_VILLAGE, false);
 	
 	public VillageTools instance;
-	
-	private final ConfigVillageBiome config;
+	private final boolean canSpawnRandomly;
+	private final ConfigBiomeGroup config;
 	public final List<EnumVillagePiece> pieces = new ArrayList<EnumVillagePiece>();
 	public final List<EnumVillageBasicPiece> defaultPieces = new ArrayList<EnumVillageBasicPiece>();
 	
 	private static Map<BiomeGenBase, List<EnumVillage>> biomeEnumMap = new HashMap();
 	
-	private EnumVillage(Class villageClass, ConfigVillageBiome config)
+	private EnumVillage(Class villageClass, ConfigBiomeGroup config, boolean canSpawnRandomly)
 	{
 		if (villageClass.getSuperclass()==VillageTools.class)
 		{
@@ -53,7 +55,7 @@ public enum EnumVillage
 			}
 		}
 		this.config = config;
-
+		this.canSpawnRandomly = canSpawnRandomly;
 	}
 	
 	public static void load() {
@@ -62,17 +64,22 @@ public enum EnumVillage
     	}
     	biomeEnumMap.clear();
 		for (EnumVillage enumVillage : EnumVillage.values())
-		for (BiomeGenBase biome : enumVillage.config.biomes)
 		{
-			if (!biomeEnumMap.containsKey(biome))
+			if (enumVillage.canSpawnRandomly)
 			{
-				biomeEnumMap.put(biome, new ArrayList<EnumVillage>(Arrays.asList(enumVillage)));
-			}
-			else 
-			{
-				if (!biomeEnumMap.get(biome).contains(enumVillage))
+				for (BiomeGenBase biome : enumVillage.config.getBiomes())
 				{
-					biomeEnumMap.get(biome).add(enumVillage);
+					if (!biomeEnumMap.containsKey(biome))
+					{
+						biomeEnumMap.put(biome, new ArrayList<EnumVillage>(Arrays.asList(enumVillage)));
+					}
+					else 
+					{
+						if (!biomeEnumMap.get(biome).contains(enumVillage))
+						{
+							biomeEnumMap.get(biome).add(enumVillage);
+						}
+					}
 				}
 			}
 		}

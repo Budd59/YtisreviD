@@ -3,7 +3,6 @@ package diversity.suppliers;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,34 +12,30 @@ import net.minecraft.world.biome.BiomeGenBase;
 import diversity.configurations.ConfigBiomeGroup;
 import diversity.structure.GlobalFeature;
 
-public enum EnumStructure
+public enum EnumCave
 {
-	EGYPTIAN_PYRAMID (ConfigBiomeGroup.EGYPTIAN_PYRAMID),
-	JUNGLE (ConfigBiomeGroup.AZTEC_PYRAMID),
-	FOREST (ConfigBiomeGroup.CATACOMB),
-	SWAMP (ConfigBiomeGroup.WITCH_HUTT),
-	PLAIN (ConfigBiomeGroup.INN),
-	SNOW_MOUNTAINS (ConfigBiomeGroup.DWARVES_VILLAGE);
+	DWARVES_CAVE (ConfigBiomeGroup.DWARVES_VILLAGE);
 	
 	public int totalWeight;
-	public final List<EnumStructurePiece> components = new ArrayList<EnumStructurePiece>();	
+	public List<EnumCavePiece> components = new ArrayList<EnumCavePiece>();
+	
 	private final ConfigBiomeGroup config;
 	
-	private static Map<BiomeGenBase, List<EnumStructure>> biomeEnumMap = new HashMap();
+	private static Map<BiomeGenBase, List<EnumCave>> biomeEnumMap = new HashMap();
 	
-	private EnumStructure(ConfigBiomeGroup config)
+	private EnumCave(ConfigBiomeGroup config)
 	{
 		this.config = config;
 	}
 	
 	public static void load() {
 		biomeEnumMap.clear();
-		for (EnumStructure enumStructure : EnumStructure.values())
+		for (EnumCave enumStructure : EnumCave.values())
 		for (BiomeGenBase biome : enumStructure.config.getBiomes())
 		{
 			if (!biomeEnumMap.containsKey(biome))
 			{
-				biomeEnumMap.put(biome, new ArrayList<EnumStructure>(Arrays.asList(enumStructure)));
+				biomeEnumMap.put(biome, new ArrayList<EnumCave>(Arrays.asList(enumStructure)));
 			}
 			else 
 			{
@@ -54,18 +49,18 @@ public enum EnumStructure
 	
 	public static boolean canSpawnInBiome(BiomeGenBase biome) {
 		return !(biomeEnumMap.get(biome) == null || biomeEnumMap.get(biome).isEmpty());
-	}
-	
+	}	
+		
 	public static GlobalFeature getRandomComponent(BiomeGenBase biome, Random random, int coordX, int coordZ) {
-		List<EnumStructure> list = biomeEnumMap.get(biome);
+		List<EnumCave> list = biomeEnumMap.get(biome);
 		if (list == null || list.isEmpty())
 		{
 			return null;
 		}
-		EnumStructure structure = list.get(random.nextInt(list.size()));
+		EnumCave structure = list.get(random.nextInt(list.size()));
 		
 		try {
-			EnumStructurePiece piece = structure.components.get(random.nextInt(structure.components.size()));
+			EnumCavePiece piece = structure.components.get(random.nextInt(structure.components.size()));
 			return (GlobalFeature)piece.pieceClass.getConstructors()[1].newInstance(random, coordX, coordZ);
 		} catch (InstantiationException e) {
 			e.printStackTrace();
@@ -80,5 +75,5 @@ public enum EnumStructure
 		}
 		return null;
 	}
-
+	
 }

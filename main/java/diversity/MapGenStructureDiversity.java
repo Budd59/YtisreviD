@@ -3,17 +3,20 @@ package diversity;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Level;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.structure.MapGenScatteredFeature;
+import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureStart;
-import diversity.configurations.ConfigStructureRate;
-import diversity.configurations.ConfigVillageRate;
-import diversity.structure.StructureTools;
-import diversity.structure.StructureTools.GlobalFeature;
+import diversity.configurations.ConfigGenerationRate;
+import diversity.structure.GlobalFeature;
 import diversity.suppliers.EnumStructure;
 
 public class MapGenStructureDiversity extends MapGenScatteredFeature
@@ -25,8 +28,8 @@ public class MapGenStructureDiversity extends MapGenScatteredFeature
 
     public MapGenStructureDiversity()
     {
-        this.maxDistanceBetweenScatteredFeatures = ConfigStructureRate.maxDistanceBetweenStructures.getIntegerConfig();
-        this.minDistanceBetweenScatteredFeatures = ConfigStructureRate.minDistanceBetweenStructures.getIntegerConfig();
+        this.maxDistanceBetweenScatteredFeatures = ConfigGenerationRate.MAXDISTANCEBETWEENSTRUCTURES.getIntegerConfig();
+        this.minDistanceBetweenScatteredFeatures = ConfigGenerationRate.MINDISTANCEBETWEENSTRUCTURES.getIntegerConfig();
     }
 
     public MapGenStructureDiversity(Map p_i2061_1_)
@@ -54,7 +57,7 @@ public class MapGenStructureDiversity extends MapGenScatteredFeature
     @Override
     protected boolean canSpawnStructureAtCoords(int x, int z)
     {
-        int coordX = x;
+    	int coordX = x;
         int coordZ = z;
 
         if (x < 0)
@@ -104,15 +107,29 @@ public class MapGenStructureDiversity extends MapGenScatteredFeature
         {
             super(coordX, coordZ);
             BiomeGenBase biome = world.getBiomeGenForCoords(coordX * 16 + 8, coordZ * 16 + 8);
-            StructureTools structure = EnumStructure.getRandomStructure(biome, random);
-            if (structure != null)
-            {
-            	GlobalFeature feature = structure.getRandomComponent(random, coordX * 16, coordZ * 16);
-            	if (feature != null) {
-            			this.components.add(feature);
-            	}
-            }
+        	GlobalFeature feature = EnumStructure.getRandomComponent(biome, random, coordX * 16, coordZ * 16);
+        	if (feature != null) {
+        		this.components.add(feature);
+        	}
             this.updateBoundingBox();
         }
     }
+    
+    @Override
+    public void func_151539_a(IChunkProvider chunkProvider, World world, int chunkX, int chunkZ, Block[] blocks)
+    {
+    	DiversityHandler.mapGenCaveStructureDiversity.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);
+    	super.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);
+    }
+    
+    
+    /**
+     * Generates structures in specified chunk next to existing structures. Does *not* generate StructureStarts.
+     */
+    @Override
+    public boolean generateStructuresInChunk(World world, Random random, int p_75051_3_, int p_75051_4_)
+    {
+        return DiversityHandler.mapGenCaveStructureDiversity.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_) && super.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_);
+    }
+    
 }

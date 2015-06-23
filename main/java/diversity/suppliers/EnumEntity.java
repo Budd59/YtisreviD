@@ -6,7 +6,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import diversity.Diversity;
-import diversity.configurations.ConfigCaveBiome;
+import diversity.configurations.ConfigBiomeGroup;
 import diversity.entity.EntityDarkSpider;
 import diversity.entity.EntityMummy;
 import diversity.entity.EntityTzitzimime;
@@ -20,7 +20,7 @@ public enum EnumEntity
 	MUMMY (EntityMummy.class),
 	TZITZIMIME (EntityTzitzimime.class),
 	WARRIOR_SKELETON (EntityWarriorSkeleton.class, 75, 2, 5, EnumCreatureType.monster, BiomeGenBase.swampland),
-	WORSHIPPER (EntityWorshipper.class, 25, 1, 2, EnumCreatureType.monster, ConfigCaveBiome.MUSHROOM_CAVE),
+	WORSHIPPER (EntityWorshipper.class, 25, 1, 2, EnumCreatureType.monster, ConfigBiomeGroup.WITCH_HUTT),
 	DARKSPIDER (EntityDarkSpider.class),
 	YETI (EntityYeti.class);
 	
@@ -31,7 +31,7 @@ public enum EnumEntity
 	public final int max;
 	public final EnumCreatureType spawnList;
 	public final BiomeGenBase[] biomes;
-	public final ConfigCaveBiome config;
+	public final ConfigBiomeGroup config;
 		
 	private EnumEntity (Class entityClass)
 	{
@@ -43,12 +43,12 @@ public enum EnumEntity
 		this(entityClass, weight, min, max, spawnList, null, biomes);
 	}
 	
-	private EnumEntity (Class entityClass, int weight, int min, int max, EnumCreatureType spawnList, ConfigCaveBiome config)
+	private EnumEntity (Class entityClass, int weight, int min, int max, EnumCreatureType spawnList, ConfigBiomeGroup config)
 	{
 		this(entityClass, weight, min, max, spawnList, config, (BiomeGenBase[])null);
 	}
 	
-	private EnumEntity (Class entityClass, int weight, int min, int max, EnumCreatureType spawnList, ConfigCaveBiome config, BiomeGenBase...biomes)
+	private EnumEntity (Class entityClass, int weight, int min, int max, EnumCreatureType spawnList, ConfigBiomeGroup config, BiomeGenBase...biomes)
 	{
 		this.entityClass = entityClass;
 		this.resourcePath = PathTool.entityMonsterTexturePath + name().toLowerCase() + PathTool.ext;
@@ -91,7 +91,7 @@ public enum EnumEntity
 			if (entity.biomes != null && entity.biomes.length > 0) {
 				EntityRegistry.addSpawn(entity.entityClass, entity.weight, entity.min, entity.max, entity.spawnList, entity.biomes);
 			} else if (entity.config != null) {
-				EntityRegistry.addSpawn(entity.entityClass, entity.weight, entity.min, entity.max, entity.spawnList, entity.config.biomes);
+				EntityRegistry.addSpawn(entity.entityClass, entity.weight, entity.min, entity.max, entity.spawnList, entity.config.getBiomes());
 			}
     	}	
 	}

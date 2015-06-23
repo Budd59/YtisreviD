@@ -171,11 +171,20 @@ public class VillageTibetan extends VillageTools
     
     public static class MainHouse  extends GlobalVillage
     {
+    	private int darkOakStair0;
+    	private int darkOakStair1;
+    	private int darkOakStair2;
+    	private int darkOakStair3;
+    	
  		public MainHouse() {}
  		
  		public MainHouse(StructureVillagePieces.Start villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
  			super(EnumVillagePiece.TIBETAN_MAINHOUSE, villagePiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(13);
+ 			darkOakStair0 = coordBaseMode==0 ? 0 : coordBaseMode == 1 ? 2 : coordBaseMode == 2 ? 0 : 2;
+           	darkOakStair1 = coordBaseMode==0 ? 1 : coordBaseMode == 1 ? 3 : coordBaseMode == 2 ? 1 : 3;
+           	darkOakStair2 = coordBaseMode==0 ? 3 : coordBaseMode == 1 ? 0 : coordBaseMode == 2 ? 2 : 1;
+           	darkOakStair3 = coordBaseMode==0 ? 2 : coordBaseMode == 1 ? 1 : coordBaseMode == 2 ? 3 : 0;
  		}
 
 		public static MainHouse buildComponent(StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
@@ -445,11 +454,20 @@ public class VillageTibetan extends VillageTools
 	
     public static class House2  extends GlobalVillage
     {
+    	private int darkOakStair0;
+    	private int darkOakStair1;
+    	private int darkOakStair2;
+    	private int darkOakStair3;
+		
  		public House2() {}
  		
  		public House2(StructureVillagePieces.Start villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
  			super(EnumVillagePiece.TIBETAN_HOUSE2, villagePiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(9);
+ 			darkOakStair0 = coordBaseMode==0 ? 0 : coordBaseMode == 1 ? 2 : coordBaseMode == 2 ? 0 : 2;
+           	darkOakStair1 = coordBaseMode==0 ? 1 : coordBaseMode == 1 ? 3 : coordBaseMode == 2 ? 1 : 3;
+           	darkOakStair2 = coordBaseMode==0 ? 3 : coordBaseMode == 1 ? 0 : coordBaseMode == 2 ? 2 : 1;
+           	darkOakStair3 = coordBaseMode==0 ? 2 : coordBaseMode == 1 ? 1 : coordBaseMode == 2 ? 3 : 0;
  		}
 
  		public static House2 buildComponent(StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
@@ -698,11 +716,20 @@ public class VillageTibetan extends VillageTools
     
     public static class House1  extends GlobalVillage
     {
+		private int darkOakStair0;
+		private int darkOakStair1;
+		private int darkOakStair2;
+		private int darkOakStair3;
+		
  		public House1() {}
  		
  		public House1(StructureVillagePieces.Start villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
  			super(EnumVillagePiece.TIBETAN_HOUSE1, villagePiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(8);
+ 			darkOakStair0 = coordBaseMode==0 ? 0 : coordBaseMode == 1 ? 2 : coordBaseMode == 2 ? 0 : 2;
+           	darkOakStair1 = coordBaseMode==0 ? 1 : coordBaseMode == 1 ? 3 : coordBaseMode == 2 ? 1 : 3;
+           	darkOakStair2 = coordBaseMode==0 ? 3 : coordBaseMode == 1 ? 0 : coordBaseMode == 2 ? 2 : 1;
+           	darkOakStair3 = coordBaseMode==0 ? 2 : coordBaseMode == 1 ? 1 : coordBaseMode == 2 ? 3 : 0;
  		}
 
  		public static House1 buildComponent(StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {

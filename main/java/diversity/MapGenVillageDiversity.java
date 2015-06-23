@@ -14,7 +14,7 @@ import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
-import diversity.configurations.ConfigVillageRate;
+import diversity.configurations.ConfigGenerationRate;
 import diversity.suppliers.EnumVillage;
 import diversity.village.VillageTools;
 import diversity.village.VillageTools.GlobalStart;
@@ -28,8 +28,8 @@ public class MapGenVillageDiversity extends MapGenVillage
 	
     public MapGenVillageDiversity()
     {
-        this.maxDistanceBetweenVillages = ConfigVillageRate.maxDistanceBetweenVillages.getIntegerConfig();
-        this.minDistanceBetweenVillages = ConfigVillageRate.minDistanceBetweenVillages.getIntegerConfig();
+        this.maxDistanceBetweenVillages = ConfigGenerationRate.MAXDISTANCEBETWEENVILLAGES.getIntegerConfig();
+        this.minDistanceBetweenVillages = ConfigGenerationRate.MINDISTANCEBETWEENVILLAGES.getIntegerConfig();
     }
 
     public MapGenVillageDiversity(Map p_i2093_1_)

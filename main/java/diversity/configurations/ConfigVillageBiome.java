@@ -45,7 +45,7 @@ public enum ConfigVillageBiome
 	public static void saveConfig() {
 		Properties properties = new Properties();
 		for (ConfigVillageBiome config : ConfigVillageBiome.values()) {
-			properties.setProperty(config.name(), ConfigTool.join(config.biomes));
+			properties.setProperty(config.name(), AConfigTool.join(config.biomes));
 		}
 		
 		try {
@@ -68,7 +68,7 @@ public enum ConfigVillageBiome
 		}
 		
 		for (ConfigVillageBiome config : ConfigVillageBiome.values()) {
-			BiomeGenBase[] biomes = ConfigTool.split(properties.getProperty(config.name()));
+			BiomeGenBase[] biomes = AConfigTool.split(properties.getProperty(config.name()));
 			if (biomes != null) {
 				config.biomes = biomes;
 			}

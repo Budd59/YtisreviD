@@ -566,11 +566,6 @@ public abstract class VillageTools
 		
 		private int offset;
 		
-		protected int darkOakStair0;
-		protected int darkOakStair1;
-		protected int darkOakStair2;
-		protected int darkOakStair3;
-		
     	public GlobalVillage() {}
     	
         protected GlobalVillage(IEnumPiece piece, StructureVillagePieces.Start startPiece, int componentType, StructureBoundingBox structureBoundingBox, int coordBaseMode)
@@ -579,11 +574,6 @@ public abstract class VillageTools
  			this.coordBaseMode = coordBaseMode;
  			this.boundingBox = structureBoundingBox;
             this.piece = piece;
-            
-           	darkOakStair0 = coordBaseMode==0 ? 0 : coordBaseMode == 1 ? 2 : coordBaseMode == 2 ? 0 : 2;
-           	darkOakStair1 = coordBaseMode==0 ? 1 : coordBaseMode == 1 ? 3 : coordBaseMode == 2 ? 1 : 3;
-           	darkOakStair2 = coordBaseMode==0 ? 3 : coordBaseMode == 1 ? 0 : coordBaseMode == 2 ? 2 : 1;
-           	darkOakStair3 = coordBaseMode==0 ? 2 : coordBaseMode == 1 ? 1 : coordBaseMode == 2 ? 3 : 0;
         }
         
         @Override

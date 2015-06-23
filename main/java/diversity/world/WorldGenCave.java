@@ -18,7 +18,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.IWorldGenerator;
-import diversity.configurations.ConfigVillageRate;
+import diversity.configurations.ConfigGenerationRate;
 import diversity.suppliers.EnumGenerator;
 import diversity.utils.Table3d;
 import diversity.utils.EnumCubeType;

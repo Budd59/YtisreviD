@@ -46,7 +46,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import diversity.Diversity;
-import diversity.configurations.ConfigVillageRate;
+import diversity.configurations.ConfigGenerationRate;
 import diversity.configurations.ConfigVillager;
 import diversity.entity.ai.EntityAIChiefHurtByTarget;
 import diversity.entity.ai.EntityAIOpenGate;

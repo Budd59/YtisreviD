@@ -6,9 +6,9 @@ import java.util.Random;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
-import diversity.structure.StructureForest;
-import diversity.structure.StructurePlain;
-import diversity.structure.StructureSwamp;
+import diversity.structure.Catacomb;
+import diversity.structure.Inn;
+import diversity.structure.WitchHutt;
 
 public class ChestGenTools extends ChestGenHooks
 {
@@ -32,9 +32,9 @@ public class ChestGenTools extends ChestGenHooks
         }
 
         hasInit = true;
-        addInfo(SWAMPHUT_CHEST,     StructureSwamp.SwampHut.itemsToGenerateInHut,   3,  7);
-        addInfo(CATACOMB_CHEST,     StructureForest.Catacomb.itemsToGenerateCatacomb,  4,  8);
-        addInfo(INN_CHEST,       	StructurePlain.Inn.itemsToGenerateInn,  2,  5);
+        addInfo(SWAMPHUT_CHEST,     WitchHutt.itemsToGenerateInHut,   3,  7);
+        addInfo(CATACOMB_CHEST,     Catacomb.itemsToGenerateCatacomb,  4,  8);
+        addInfo(INN_CHEST,       	Inn.itemsToGenerateInn,  2,  5);
 
     }
     	

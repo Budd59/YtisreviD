@@ -6,9 +6,9 @@ import java.util.Random;
 
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.registry.GameRegistry;
-import diversity.configurations.ConfigCaveBiome;
 import diversity.configurations.ConfigCaveRate;
-import diversity.configurations.ConfigVillageRate;
+import diversity.configurations.ConfigBiomeGroup;
+import diversity.configurations.ConfigGenerationRate;
 import diversity.world.WorldGenAbyss;
 import diversity.world.WorldGenCave;
 import diversity.world.WorldGenDwarvesCave;
@@ -30,17 +30,17 @@ public enum EnumGenerator implements IWorldGenerator
 	//MUSHROOM_CAVE (new WorldGenMushroomCave(), 15, ConfigCaveBiome.MUSHROOM_CAVE),
 	//LOST_CAVE (new WorldGenLostCave(), 10, ConfigCaveBiome.LOST_CAVE),
 	// SPIDER_DEN (new WorldGenSpiderDen(), 5, ConfigCaveBiome.SPIDER_DEN),
-	DWARVES_CAVE (new WorldGenDwarvesCave(), 15, ConfigCaveBiome.DWARVES_CAVE);
-	
-	private final ConfigCaveBiome config;
+	//DWARVES_CAVE (new WorldGenDwarvesCave(), 15, ConfigBiomeGroup.DWARVES_VILLAGE);
+	;
+	private final ConfigBiomeGroup config;
 	public final IWorldGenerator worldGen;
 	private final int priority;
 	
-	private EnumGenerator(IWorldGenerator worldGen, ConfigCaveBiome config) {
+	private EnumGenerator(IWorldGenerator worldGen, ConfigBiomeGroup config) {
 		this(worldGen, 10, config);
 	}
 	
-	private EnumGenerator(IWorldGenerator worldGen, int priority, ConfigCaveBiome config) {
+	private EnumGenerator(IWorldGenerator worldGen, int priority, ConfigBiomeGroup config) {
 		this.worldGen = worldGen;
 		this.config = config;
 		this.priority = priority;
@@ -48,9 +48,9 @@ public enum EnumGenerator implements IWorldGenerator
 	
 	public boolean canGenerate(World world, int x, int y, int z) {
 		BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
-		for (int i = 0; i < config.biomes.length; i++)
+		for (int i = 0; i < config.getBiomes().length; i++)
 		{
-			if (config.biomes[i]!=null && config.biomes[i].equals(biome)) {
+			if (config.getBiomes()[i]!=null && config.getBiomes()[i].equals(biome)) {
 				return true;
 			}
 		}

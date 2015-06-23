@@ -5,7 +5,7 @@ import java.util.List;
 
 import net.minecraft.world.biome.BiomeGenBase;
 
-public class ConfigTool
+public abstract class AConfigTool
 {
 	static String join(BiomeGenBase[] biomes) {
 		int biomeNumber = 0;
@@ -56,32 +56,23 @@ public class ConfigTool
 	}
 	
 	public static void values() {
-    	ConfigVillageRate.values();
-       	ConfigVillageBiome.values();   	
-    	ConfigStructureRate.values();    	
-    	ConfigStructureBiome.values();    	
-       	ConfigCaveRate.values();    	
-    	ConfigCaveBiome.values();
+    	ConfigGenerationRate.values();
+    	ConfigBiomeGroup.values();    	
+       	ConfigCaveRate.values();
     	ConfigVillager.values();
 	}
 
 	public static void loadAllConfig() {
-    	ConfigVillageRate.loadConfig();
-       	ConfigVillageBiome.loadConfig();   	
-    	ConfigStructureRate.loadConfig();    	
-    	ConfigStructureBiome.loadConfig();    	
+    	ConfigGenerationRate.loadConfig();
+    	ConfigBiomeGroup.loadConfig();    	
        	ConfigCaveRate.loadConfig();    	
-    	ConfigCaveBiome.loadConfig();
     	ConfigVillager.loadConfig();
 	}
 	
 	public static void saveAllConfig() {
-    	ConfigVillageRate.saveConfig();
-    	ConfigVillageBiome.saveConfig();
-    	ConfigStructureRate.saveConfig();
-    	ConfigStructureBiome.saveConfig();
+    	ConfigGenerationRate.saveConfig();
+    	ConfigBiomeGroup.saveConfig();
     	ConfigCaveRate.saveConfig();
-    	ConfigCaveBiome.saveConfig();
     	ConfigVillager.saveConfig();
 	}
 }

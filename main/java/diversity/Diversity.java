@@ -20,15 +20,15 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerAboutToStartEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import diversity.configurations.ConfigCaveBiome;
 import diversity.configurations.ConfigCaveRate;
-import diversity.configurations.ConfigStructureBiome;
-import diversity.configurations.ConfigStructureRate;
-import diversity.configurations.ConfigTool;
+import diversity.configurations.ConfigBiomeGroup;
+import diversity.configurations.AConfigTool;
 import diversity.configurations.ConfigVillageBiome;
-import diversity.configurations.ConfigVillageRate;
+import diversity.configurations.ConfigGenerationRate;
 import diversity.configurations.ConfigVillager;
 import diversity.proxy.ServerProxy;
+import diversity.suppliers.EnumCave;
+import diversity.suppliers.EnumCavePiece;
 import diversity.suppliers.EnumVillageBasicPiece;
 import diversity.suppliers.EnumBlock;
 import diversity.suppliers.EnumStructurePiece;
@@ -63,7 +63,9 @@ public class Diversity
     @EventHandler
     public void PreLoad(FMLPreInitializationEvent event)
     {
-    	ConfigTool.values();
+    	AConfigTool.values();
+    	AConfigTool.loadAllConfig();
+    	AConfigTool.saveAllConfig();
     	Divlogger = Logger.getLogger("Diversity");
     	
 		EnumFluid.register();
@@ -101,12 +103,15 @@ public class Diversity
 		EnumVillagePiece.register();
 			
 		EnumStructure.values();
+		EnumCave.values();
 		EnumStructurePiece.register();
+		EnumCavePiece.register();
 		
 		EnumGenerator.values();
 		
     	MapGenStructureIO.registerStructure(MapGenVillageDiversity.Start.class, Diversity.MODID + ".Village"); 
     	MapGenStructureIO.registerStructure(MapGenStructureDiversity.Start.class, Diversity.MODID + ".Structure"); 
+    	MapGenStructureIO.registerStructure(MapGenCaveDiversity.Start.class, Diversity.MODID + ".CaveStructure"); 
 
 		EnumVillager.register();
 		EnumEntity.register();
@@ -118,8 +123,6 @@ public class Diversity
     @EventHandler
     public void PostInit(FMLPostInitializationEvent event)
     {
-    	ConfigTool.loadAllConfig();
-    	ConfigTool.saveAllConfig();
     	EnumEntity.load();
     	
     	if (ConfigVillager.removeVanillaSpawnEgg.equals("true")) {
@@ -131,6 +134,7 @@ public class Diversity
     public void StartWorld(FMLServerAboutToStartEvent event)
     {
 		EnumStructure.load();
+		EnumCave.load();
 	  	EnumGenerator.load();
     	EnumVillage.load();
     }
