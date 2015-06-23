@@ -107,9 +107,9 @@ public class DwarvesCaveGenerator implements ICaveGenerator
 					if (Math.pow(tempX/2, 2.0D) + Math.pow(tempY, 2.0D) + Math.pow(tempZ/2, 2.0D) < Math.pow(radius, 2.0D)
 							&& ((y+tempY) >= 30 || ((y+tempY) >= 12
 									&& Math.pow(x+tempX-sphereCenter.get(0).x, 2.0D) + Math.pow(z+tempZ-sphereCenter.get(0).z, 2.0D) + Math.pow(y+tempY-sphereCenter.get(0).z, 2.0D) > Math.pow(sphereCenter.get(0).w*2/3, 2.0D)
-									&& Math.pow(x+tempX-sphereCenter.get(0).x, 2.0D) + Math.pow(z+tempZ-sphereCenter.get(0).z, 2.0D) > Math.pow(sphereCenter.get(0).w/2, 2.0D))))
+									&& Math.pow(x+tempX-sphereCenter.get(0).x, 2.0D) + Math.pow(z+tempZ-sphereCenter.get(0).z, 2.0D) > Math.pow(sphereCenter.get(0).w*2/3, 2.0D))))
 					{
-						blocks.put(x + tempX, y + tempY*2/3, z + tempZ, EnumCubeType.AIR);
+						blocks.put(x + tempX, y + tempY, z + tempZ, EnumCubeType.AIR);
 					}
 				}
 			} else if (radius==maxRadius/2 || radius== maxRadius/2-1) {
@@ -119,8 +119,8 @@ public class DwarvesCaveGenerator implements ICaveGenerator
 				{
 					if (Math.pow(tempX, 2.0D) + Math.pow(tempY, 2.0D) + Math.pow(tempZ, 2.0D) < Math.pow(radius, 2.0D)
 							&& ((y+tempY) >= 30 || ((y+tempY) >= 12
-									&& Math.pow(x+tempX-sphereCenter.get(0).x, 2.0D) + Math.pow(z+tempZ-sphereCenter.get(0).z, 2.0D) + Math.pow(y+tempY-sphereCenter.get(0).z, 2.0D) > Math.pow(sphereCenter.get(0).w, 2.0D)
-									&& Math.pow(x+tempX-sphereCenter.get(0).x, 2.0D) + Math.pow(z+tempZ-sphereCenter.get(0).z, 2.0D) > Math.pow(sphereCenter.get(0).w/2, 2.0D))))
+									//&& Math.pow(x+tempX-sphereCenter.get(0).x, 2.0D) + Math.pow(z+tempZ-sphereCenter.get(0).z, 2.0D) + Math.pow(y+tempY-sphereCenter.get(0).z, 2.0D) > Math.pow(sphereCenter.get(0).w, 2.0D)
+									&& Math.pow(x+tempX-sphereCenter.get(0).x, 2.0D) + Math.pow(z+tempZ-sphereCenter.get(0).z, 2.0D) > Math.pow(sphereCenter.get(0).w*2/3, 2.0D))))
 					{
 						blocks.put(x + tempX, y + tempY, z + tempZ, EnumCubeType.AIR);
 					}
@@ -130,10 +130,10 @@ public class DwarvesCaveGenerator implements ICaveGenerator
 				for (int tempX = minX; tempX <= maxX; tempX++)
 				for (int tempZ = minZ; tempZ <= maxZ; tempZ++)
 				{
-					if (Math.pow(tempX, 2.0D) + Math.pow(tempY/2, 2.0D) + Math.pow(tempZ, 2.0D) < Math.pow(radius, 2.0D)
-							&& ((y+tempY) >= 30 || ((y+tempY) >= 12
-									&& Math.pow(x+tempX-sphereCenter.get(0).x, 2.0D) + Math.pow(z+tempZ-sphereCenter.get(0).z, 2.0D) + Math.pow(y+tempY-sphereCenter.get(0).z, 2.0D) > Math.pow(sphereCenter.get(0).w/2, 2.0D)
-									&& Math.pow(x+tempX-sphereCenter.get(0).x, 2.0D) + Math.pow(z+tempZ-sphereCenter.get(0).z, 2.0D) > Math.pow(sphereCenter.get(0).w/2, 2.0D))))
+					if (Math.pow(tempX, 2.0D) + Math.pow(tempY/2, 2.0D) + Math.pow(tempZ, 2.0D) < Math.pow(radius, 2.0D))
+							//&& ((y+tempY) >= 30 || ((y+tempY) >= 12
+									//&& Math.pow(x+tempX-sphereCenter.get(0).x, 2.0D) + Math.pow(z+tempZ-sphereCenter.get(0).z, 2.0D) + Math.pow(y+tempY-sphereCenter.get(0).z, 2.0D) > Math.pow(sphereCenter.get(0).w, 2.0D)
+									//&& Math.pow(x+tempX-sphereCenter.get(0).x, 2.0D) + Math.pow(z+tempZ-sphereCenter.get(0).z, 2.0D) > Math.pow(sphereCenter.get(0).w*2/3, 2.0D))))
 					{
 						blocks.put(x + tempX, y + tempY, z + tempZ, EnumCubeType.AIR);
 					}

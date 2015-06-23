@@ -69,10 +69,10 @@ public class VillageDwarf extends VillageTools
 			{
 				case 0:
 				case 2:
-					this.boundingBox = new StructureBoundingBox(p_i2104_4_, 30, p_i2104_5_, p_i2104_4_ + 6 - 1, 35, p_i2104_5_ + 6 - 1);
+					this.boundingBox = new StructureBoundingBox(p_i2104_4_-3, 30, p_i2104_5_-3, p_i2104_4_ + 3 - 1, 35, p_i2104_5_ + 3 - 1);
 					break;
 				default:
-					this.boundingBox = new StructureBoundingBox(p_i2104_4_, 30, p_i2104_5_, p_i2104_4_ + 6 - 1, 35, p_i2104_5_ + 6 - 1);
+					this.boundingBox = new StructureBoundingBox(p_i2104_4_-3, 30, p_i2104_5_-3, p_i2104_4_ + 3 - 1, 35, p_i2104_5_ + 3 - 1);
 			}
 		}
 		         

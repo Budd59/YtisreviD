@@ -38,7 +38,7 @@ public class DwarvesCave extends GlobalFeature
         ICaveGenerator caveGen = new DwarvesCaveGenerator(7, 20, 4);
         List<Point4i> sphereCenter = caveGen.getControlPoints(random, coordX, 40, coordZ, 100);
         blocks = caveGen.getCavePoints(sphereCenter, random);
-        caveGen.generateBlockType(random, blocks, 19);
+        caveGen.generateBlockType(random, blocks, 15);
         blocks.mutateTable();
         
         startPoint = sphereCenter.get(0);
@@ -147,6 +147,7 @@ public class DwarvesCave extends GlobalFeature
 								world.setBlock(x, y, z, Blocks.iron_ore);
 							//BiomeGenBase.extremeHills.theBiomeDecorator.goldGen.generate(world, random, x, y, z);
 						}
+						blocks.remove(x, y, z);
 					}
 				}
 	        }
