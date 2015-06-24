@@ -51,7 +51,7 @@ public class EntityDarkSpider extends EntitySpider
 		{
 			squishe = squishb;
 			squishd = squishc;
-			squishc = (float)((double)squishc + 4 * 0.8D);
+			squishc = (float)((double)squishc + 4 * 0.2D);
 
 			if (squishc < 0.0F)
 			{
@@ -68,8 +68,8 @@ public class EntityDarkSpider extends EntitySpider
 				squishh = 0.2F;
 			}
 
-			squishh = (float)((double)squishh * 0.9D);
-			squishb += squishh * 2.0F;
+			squishh = (float)((double)squishh * 0.2D);
+			squishb += squishh * 1.5F;
 		}
         
         if(getPhase() == 0)
@@ -142,7 +142,7 @@ public class EntityDarkSpider extends EntitySpider
     
     public boolean isMovementCeased()
     {
-    	return getPhase() == 2;
+    	return getPhase() != 2;
     }
     
     

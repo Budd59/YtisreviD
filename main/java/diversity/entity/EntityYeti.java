@@ -70,7 +70,7 @@ public class EntityYeti  extends EntityMob
      */
     protected void attackEntity(Entity p_70785_1_, float p_70785_2_)
     {
-        if (this.attackTime <= 0 && p_70785_2_ < 3.0F && p_70785_1_.boundingBox.maxY > this.boundingBox.minY && p_70785_1_.boundingBox.minY < this.boundingBox.maxY)
+        if (this.attackTime <= 0 && p_70785_2_ < 3.2F && p_70785_1_.boundingBox.maxY > this.boundingBox.minY && p_70785_1_.boundingBox.minY < this.boundingBox.maxY)
         {
             this.attackTime = 20;
             this.attackEntityAsMob(p_70785_1_);
@@ -83,8 +83,8 @@ public class EntityYeti  extends EntityMob
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.80000000417232513D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(7.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10D);
     }
 	
     protected Entity findPlayerToAttack()
@@ -228,7 +228,7 @@ public class EntityYeti  extends EntityMob
 		            {
 		                worldObj.spawnParticle("heart", this.posX + (rand.nextFloat() - rand.nextFloat()), this.posY + 3.5D + (rand.nextFloat() - rand.nextFloat()) , this.posZ + (rand.nextFloat() - rand.nextFloat()), 0.0D, 0.0D, 0.0D);
 		            }
-		            setHealth(80);
+		            setHealth(100);
 			   }
 		   }
 		   
@@ -338,6 +338,7 @@ public class EntityYeti  extends EntityMob
 	        this.setCurrentItemOrArmor(0, itemstack);
 	        setOwnerUUID(entityplayer.getUniqueID().toString());
 	        eatingTimer = 50;
+	        entityToAttack = null;
 	        return true;
 	    }
 	    }
@@ -345,6 +346,20 @@ public class EntityYeti  extends EntityMob
 	    
 	 return super.interact(entityplayer);
 	}
+	
+    /**
+     * Called when the entity is attacked.
+     */
+    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_)
+    {
+    	if (super.attackEntityFrom(p_70097_1_, p_70097_2_))
+        {
+    		this.motionX *= 0.1;
+    		this.motionZ *= 0.1;
+    		return true;
+        }
+    	return false;
+    }
 
  	
 	protected void entityInit()

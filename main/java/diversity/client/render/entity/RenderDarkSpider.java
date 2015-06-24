@@ -52,7 +52,7 @@ public class RenderDarkSpider extends RenderLiving
             this.bindTexture(spiderBackTextures);
             GL11.glEnable(GL11.GL_NORMALIZE);
             GL11.glEnable(GL11.GL_BLEND);
-            GL11.glBlendFunc( GL11.GL_SRC_ALPHA, GL11.GL_SRC_ALPHA);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             return 1;
         }
         else
@@ -82,6 +82,7 @@ public class RenderDarkSpider extends RenderLiving
             int k = c0 / 65536;
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)j / 1.0F, (float)k / 1.0F);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+            GL11.glDisable(GL11.GL_BLEND);
             return -1;
         }
     }
@@ -104,7 +105,7 @@ public class RenderDarkSpider extends RenderLiving
         EntityDarkSpider entityDarkSpider = (EntityDarkSpider)entityliving;
         float f1 = entityDarkSpider.squishe + (entityDarkSpider.squishb - entityDarkSpider.squishe) * f;
         float f2 = entityDarkSpider.squishd + (entityDarkSpider.squishc - entityDarkSpider.squishd) * f;
-        return (MathHelper.sin(f1) + 0.2F) * f2;
+        return (MathHelper.sin(f1) + 0.1F) * f2;
     }
     
     /**
