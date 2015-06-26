@@ -28,13 +28,10 @@ import diversity.configurations.ConfigGenerationRate;
 import diversity.configurations.ConfigVillager;
 import diversity.proxy.ServerProxy;
 import diversity.suppliers.EnumCave;
-import diversity.suppliers.EnumCavePiece;
 import diversity.suppliers.EnumVillageBasicPiece;
 import diversity.suppliers.EnumBlock;
-import diversity.suppliers.EnumStructurePiece;
 import diversity.suppliers.EnumEntity;
 import diversity.suppliers.EnumFluid;
-import diversity.suppliers.EnumGenerator;
 import diversity.suppliers.EnumItem;
 import diversity.suppliers.EnumTribe;
 import diversity.suppliers.EnumVillagePiece;
@@ -104,11 +101,9 @@ public class Diversity
 			
 		EnumStructure.values();
 		EnumCave.values();
-		EnumStructurePiece.register();
-		EnumCavePiece.register();
-		
-		EnumGenerator.values();
-		
+		EnumStructure.register();
+		EnumCave.register();
+				
     	MapGenStructureIO.registerStructure(MapGenVillageDiversity.Start.class, Diversity.MODID + ".Village"); 
     	MapGenStructureIO.registerStructure(MapGenStructureDiversity.Start.class, Diversity.MODID + ".Structure"); 
     	MapGenStructureIO.registerStructure(MapGenCaveDiversity.Start.class, Diversity.MODID + ".CaveStructure"); 
@@ -135,7 +130,6 @@ public class Diversity
     {
 		EnumStructure.load();
 		EnumCave.load();
-	  	EnumGenerator.load();
     	EnumVillage.load();
     }
 }

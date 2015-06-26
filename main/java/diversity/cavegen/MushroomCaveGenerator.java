@@ -100,12 +100,22 @@ public class MushroomCaveGenerator implements ICaveGenerator {
 			int minZ = -radius - radiusRandomer / 2 + random.nextInt(radiusRandomer + 1);
 			int maxZ = radius - radiusRandomer / 2 + random.nextInt(radiusRandomer + 1);
 			
-			if (center.w == maxRadius/2+1) {
+			if (sphereCenter.get(0).equals(center)) {
+				for (int tempY = maxY; tempY >= minY/2; tempY--)
+					for (int tempX = minX; tempX <= maxX; tempX++)
+					for (int tempZ = minZ; tempZ <= maxZ; tempZ++)
+					{
+						if (Math.pow(tempX, 2.0D) + Math.pow(tempY*2, 2.0D) + Math.pow(tempZ, 2.0D) < Math.pow(radius, 2.0D))
+						{
+							blocks.put(x + tempX, y + tempY, z + tempZ, EnumCubeType.AIR);
+						}
+					}
+			} else if (center.w == maxRadius/2+1) {
 				for (double tempY = maxY*1.5; tempY >= minY; tempY--)
 				for (int tempX = minX; tempX <= maxX; tempX++)
 				for (int tempZ = minZ; tempZ <= maxZ; tempZ++)
 				{
-					if ((tempY<0 && Math.pow(tempX/2, 2.0D) + Math.pow(tempY, 2.0D) + Math.pow(tempZ, 2.0D) < Math.pow(radius, 2.0D)) ||  Math.pow(tempX/2, 2.0D) + Math.pow(tempY/2, 2.0D) + Math.pow(tempZ, 2.0D) < Math.pow(radius, 2.0D))
+					if ((tempY<0 && Math.pow(tempX/2, 2.0D) + Math.pow(tempY, 2.0D) + Math.pow(tempZ, 2.0D) < Math.pow(radius, 2.0D)) ||  Math.pow(tempX/2, 2.0D) + Math.pow(tempY/1.5, 2.0D) + Math.pow(tempZ, 2.0D) < Math.pow(radius, 2.0D))
 					{
 						blocks.put(x + tempX, y + (int)(tempY), z + tempZ, EnumCubeType.AIR);
 					}

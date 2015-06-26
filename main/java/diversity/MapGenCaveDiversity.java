@@ -34,7 +34,7 @@ import diversity.village.VillageTools.GlobalStart;
 
 public class MapGenCaveDiversity extends MapGenScatteredFeature
 {
-	Map<Integer, Integer> caveStructureMap = new HashMap<Integer, Integer>();
+	static Map<Class, Class> caveStructureMap = new HashMap<Class, Class>();
 	
 	/** the maximum distance between scattered features */
     private int maxDistanceBetweenScatteredFeatures;
@@ -122,12 +122,17 @@ public class MapGenCaveDiversity extends MapGenScatteredFeature
         {
             super(coordX, coordZ);
             BiomeGenBase biome = world.getBiomeGenForCoords(coordX * 16 + 8, coordZ * 16 + 8);
-        	GlobalFeature feature = EnumCave.getRandomComponent(biome, random, coordX * 16, coordZ * 16);
+            EnumCave cave = EnumCave.getRandomCave(biome, random);
+        	GlobalFeature feature = cave.getCaveComponent(random, coordX * 16, coordZ * 16);
         	if (feature != null) {
         		Diversity.Divlogger.log(Level.INFO, coordX*16 + " " + coordZ*16);
-
         		this.components.add(feature);
-        		
+
+        		feature = cave.getStructureComponent(random, coordX*16, coordZ*16);
+        		if (feature != null) {
+        			this.components.add(feature);
+        		}
+
 //        		LinkedList structureComponents = new LinkedList();
 //        		VillageTools villageInstance = new VillageDwarf(EnumVillage.AZTEC);
 //                List list = villageInstance.getStructureVillageWeightedPieceList(random);
@@ -176,32 +181,5 @@ public class MapGenCaveDiversity extends MapGenScatteredFeature
         	}
             this.updateBoundingBox();
         }
-    }
-
-//    
-//    @Override
-//    public void func_151539_a(IChunkProvider chunkProvider, World world, int chunkX, int chunkZ, Block[] blocks)
-//    {
-//        int range = this.range;
-//        this.worldObj = world;
-//        this.rand.setSeed(world.getSeed());
-//        long l = this.rand.nextLong();
-//        long i1 = this.rand.nextLong();
-//        
-//        for (Integer caveX : caveStructureMap.keySet()) {
-//        	if (caveX >= (chunkX - range) && caveX <= (chunkX + range)) {
-//        		Integer caveZ = caveStructureMap.get(caveX);
-//        		if (caveZ >= (chunkZ - range) && caveZ <= (chunkZ + range)) {
-//	                long l1 = (long)caveX * l;
-//	                long i2 = (long)caveZ * i1;
-//	                this.rand.setSeed(l1 ^ i2 ^ world.getSeed());
-//	                this.func_151538_a(world, caveX, caveZ, chunkX, chunkZ, blocks);
-//        		}
-//        	}
-//        }
-//    }
-    
-    public void addStructure(int chunkX, int chunkZ) {
-    	this.caveStructureMap.put(chunkX, chunkZ);
     }
 }

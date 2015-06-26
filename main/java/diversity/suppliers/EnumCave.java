@@ -9,25 +9,40 @@ import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
 import diversity.configurations.ConfigBiomeGroup;
+import diversity.structure.DwarvesCave;
 import diversity.structure.GlobalFeature;
+import diversity.structure.LostCave;
+import diversity.structure.MushroomCave;
 
 public enum EnumCave
 {
-	DWARVES_CAVE (ConfigBiomeGroup.DWARVES_VILLAGE),
-	LOST_CAVE (ConfigBiomeGroup.LOST_CAVE),
-	MUSHROOM_CAVE (ConfigBiomeGroup.MUSHROOM_CAVE);
+	DWARVES_CAVE (ConfigBiomeGroup.DWARVES_CAVE, 25, DwarvesCave.class, EnumStructure.DWARVES_CITY),
+	LOST_CAVE (ConfigBiomeGroup.LOST_CAVE, 25, LostCave.class),
+	MUSHROOM_CAVE (ConfigBiomeGroup.MUSHROOM_CAVE, 25, MushroomCave.class, EnumStructure.WITCH_HOUSE);
 	
 	public int totalWeight;
-	public List<EnumCavePiece> components = new ArrayList<EnumCavePiece>();
-	
 	private final ConfigBiomeGroup config;
+	public final int weight;
+	public final Class pieceClass;
+	private EnumStructure structure;
 	
 	private static Map<BiomeGenBase, List<EnumCave>> biomeEnumMap = new HashMap();
 	
-	private EnumCave(ConfigBiomeGroup config)
+	private EnumCave(ConfigBiomeGroup config, int weight, Class pieceClass)
 	{
 		this.config = config;
+		this.weight = weight;
+		this.pieceClass = pieceClass;
+	}
+	
+	private EnumCave(ConfigBiomeGroup config, int weight, Class pieceClass, EnumStructure structure)
+	{
+		this.config = config;
+		this.structure = structure;
+		this.weight = weight;
+		this.pieceClass = pieceClass;
 	}
 	
 	public static void load() {
@@ -51,19 +66,20 @@ public enum EnumCave
 	
 	public static boolean canSpawnInBiome(BiomeGenBase biome) {
 		return !(biomeEnumMap.get(biome) == null || biomeEnumMap.get(biome).isEmpty());
-	}	
-		
-	public static GlobalFeature getRandomComponent(BiomeGenBase biome, Random random, int coordX, int coordZ) {
+	}
+	
+	public static EnumCave getRandomCave(BiomeGenBase biome, Random random) {
 		List<EnumCave> list = biomeEnumMap.get(biome);
 		if (list == null || list.isEmpty())
 		{
 			return null;
 		}
-		EnumCave structure = list.get(random.nextInt(list.size()));
+		return list.get(random.nextInt(list.size()));
+	}
 		
+	public GlobalFeature getCaveComponent(Random random, int coordX, int coordZ) {		
 		try {
-			EnumCavePiece piece = structure.components.get(random.nextInt(structure.components.size()));
-			return (GlobalFeature)piece.pieceClass.getConstructors()[1].newInstance(random, coordX, coordZ);
+			return (GlobalFeature)pieceClass.getConstructors()[1].newInstance(random, coordX, coordZ);
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -78,4 +94,17 @@ public enum EnumCave
 		return null;
 	}
 	
+	public GlobalFeature getStructureComponent(Random random, int coordX, int coordZ) {
+		if (structure != null) {
+			return structure.getStructureComponent(random, coordX, coordZ);
+		}
+		return null;
+	}
+
+	public static void register() {
+    	for (EnumCave structure : EnumCave.values())
+    	{
+            MapGenStructureIO.func_143031_a(structure.pieceClass, structure.name());
+    	}
+	}
 }

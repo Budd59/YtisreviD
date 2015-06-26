@@ -31,7 +31,7 @@ public enum EnumVillage
 	TIBETAN (VillageTibetan.class, ConfigBiomeGroup.TIBETAN_VILLAGE, true), 
 	EGYPTIAN (VillageEgyptian.class, ConfigBiomeGroup.EGYPTIAN_VILLAGE, true),
 	LAKESIDE (VillageLakeside.class, ConfigBiomeGroup.LAKESIDE_VILLAGE, true),
-	DWARF (VillageDwarf.class, ConfigBiomeGroup.DWARVES_VILLAGE, false);
+	DWARF (VillageDwarf.class, ConfigBiomeGroup.DWARVES_CAVE, false);
 	
 	public VillageTools instance;
 	private final boolean canSpawnRandomly;

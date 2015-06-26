@@ -107,7 +107,8 @@ public class MapGenStructureDiversity extends MapGenScatteredFeature
         {
             super(coordX, coordZ);
             BiomeGenBase biome = world.getBiomeGenForCoords(coordX * 16 + 8, coordZ * 16 + 8);
-        	GlobalFeature feature = EnumStructure.getRandomComponent(biome, random, coordX * 16, coordZ * 16);
+            EnumStructure structure = EnumStructure.getRandomStructure(biome, random);
+        	GlobalFeature feature = structure.getStructureComponent(random, coordX * 16, coordZ * 16);
         	if (feature != null) {
         		this.components.add(feature);
         	}

@@ -26,7 +26,7 @@ public enum ConfigBiomeGroup
 	MUSHROOM_CAVE (BiomeGenBase.swampland),
 	YETI_CAVE (BiomeGenBase.iceMountains, BiomeGenBase.icePlains.createMutation()),
 	SPIDER_DEN (BiomeGenBase.roofedForest),
-	DWARVES_VILLAGE (BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsPlus),
+	DWARVES_CAVE (BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsPlus),
 	APACHE_VILLAGE (BiomeGenBase.mesaPlateau, BiomeGenBase.mesaPlateau_F),
 	AZTEC_VILLAGE (BiomeGenBase.jungle),
 	INUIT_VILLAGE (BiomeGenBase.icePlains),
