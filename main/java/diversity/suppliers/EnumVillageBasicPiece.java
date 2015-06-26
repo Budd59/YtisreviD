@@ -3,7 +3,6 @@ package diversity.suppliers;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import diversity.village.VillageApache;
 import diversity.village.VillageAztec;
-import diversity.village.VillageDwarf;
 import diversity.village.VillageEgyptian;
 import diversity.village.VillageInuit;
 import diversity.village.VillageLakeside;
@@ -43,11 +42,7 @@ public enum EnumVillageBasicPiece implements IEnumPiece
 	
 	LAKE_START (EnumVillage.LAKESIDE, VillageLakeside.Start.class),
 	LAKE_PATH (EnumVillage.LAKESIDE, VillageLakeside.Path.class),
-	LAKE_TORCH (EnumVillage.LAKESIDE, VillageLakeside.Torch.class),
-	
-	DWARF_START (EnumVillage.DWARF, VillageDwarf.Start.class),
-	DWARF_PATH (EnumVillage.DWARF, VillageDwarf.Path.class);
-	
+	LAKE_TORCH (EnumVillage.LAKESIDE, VillageLakeside.Torch.class);
 	
 	public EnumVillage village;
 	public Class pieceClass;

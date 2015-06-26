@@ -14,13 +14,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeGenBase;
 
-public class DwarvesCaveGenerator implements ICaveGenerator
+public class DwarvenCaveGenerator implements ICaveGenerator
 {
 	private final int minRadius;
 	private final int maxRadius;
 	private final int radiusRandomer;
 
-	public DwarvesCaveGenerator(int minRadius, int maxRadius, int radiusRandomer) {
+	public DwarvenCaveGenerator(int minRadius, int maxRadius, int radiusRandomer) {
 		this.minRadius = minRadius;
 		this.maxRadius = maxRadius;
 		this.radiusRandomer = radiusRandomer;

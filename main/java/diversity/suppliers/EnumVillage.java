@@ -12,7 +12,6 @@ import net.minecraftforge.common.BiomeManager;
 import diversity.configurations.ConfigBiomeGroup;
 import diversity.village.VillageApache;
 import diversity.village.VillageAztec;
-import diversity.village.VillageDwarf;
 import diversity.village.VillageEgyptian;
 import diversity.village.VillageInuit;
 import diversity.village.VillageLakeside;
@@ -30,9 +29,7 @@ public enum EnumVillage
 	ZULU (VillageZulu.class, ConfigBiomeGroup.ZULU_VILLAGE, true),
 	TIBETAN (VillageTibetan.class, ConfigBiomeGroup.TIBETAN_VILLAGE, true), 
 	EGYPTIAN (VillageEgyptian.class, ConfigBiomeGroup.EGYPTIAN_VILLAGE, true),
-	LAKESIDE (VillageLakeside.class, ConfigBiomeGroup.LAKESIDE_VILLAGE, true),
-	DWARF (VillageDwarf.class, ConfigBiomeGroup.DWARVES_CAVE, false);
-	
+	LAKESIDE (VillageLakeside.class, ConfigBiomeGroup.LAKESIDE_VILLAGE, true);	
 	public VillageTools instance;
 	private final boolean canSpawnRandomly;
 	private final ConfigBiomeGroup config;

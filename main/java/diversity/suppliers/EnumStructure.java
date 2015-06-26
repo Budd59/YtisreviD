@@ -16,7 +16,8 @@ import diversity.Diversity;
 import diversity.configurations.ConfigBiomeGroup;
 import diversity.structure.AztecPyramid;
 import diversity.structure.Catacomb;
-import diversity.structure.DwarvesCave;
+import diversity.structure.DwarvenCity;
+import diversity.structure.DwarvenCave;
 import diversity.structure.EgyptianPyramid;
 import diversity.structure.GlobalFeature;
 import diversity.structure.Inn;
@@ -30,8 +31,8 @@ public enum EnumStructure
 	CATACOMB (ConfigBiomeGroup.CATACOMB, 25, Catacomb.class),
 	WITCH_HUTT (ConfigBiomeGroup.WITCH_HUTT, 25, WitchHutt.class),
 	INN (ConfigBiomeGroup.INN, 25, Inn.class),
-	DWARVES_CITY (ConfigBiomeGroup.DWARVES_CAVE, 25, DwarvesCave.class),
-	WITCH_HOUSE (ConfigBiomeGroup.MUSHROOM_CAVE, 25, WitchHouse.class);
+	DWARVEN_CITY (ConfigBiomeGroup.DWARVEN_CAVE, 25, DwarvenCity.class),
+	WITCH_HOUSE (ConfigBiomeGroup.SHROOM_CAVE, 25, WitchHouse.class);
 	
 	public int totalWeight;
 	private final ConfigBiomeGroup config;
@@ -82,7 +83,7 @@ public enum EnumStructure
 	public GlobalFeature getStructureComponent(Random random, int coordX, int coordZ) {
 		try {
 			Diversity.Divlogger.log(Level.INFO, "EnumStructure : " + name());
-			return (GlobalFeature)pieceClass.getConstructors()[0].newInstance(random, coordX, coordZ);
+			return (GlobalFeature)pieceClass.getConstructors()[1].newInstance(random, coordX, coordZ);
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {

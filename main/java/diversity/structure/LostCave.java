@@ -16,7 +16,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import diversity.Diversity;
-import diversity.cavegen.DwarvesCaveGenerator;
+import diversity.cavegen.DwarvenCaveGenerator;
 import diversity.cavegen.ICaveGenerator;
 import diversity.cavegen.LostCaveGenerator;
 import diversity.suppliers.EnumBlock;

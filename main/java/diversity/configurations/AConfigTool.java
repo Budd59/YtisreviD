@@ -58,21 +58,18 @@ public abstract class AConfigTool
 	public static void values() {
     	ConfigGenerationRate.values();
     	ConfigBiomeGroup.values();    	
-       	ConfigCaveRate.values();
     	ConfigVillager.values();
 	}
 
 	public static void loadAllConfig() {
     	ConfigGenerationRate.loadConfig();
     	ConfigBiomeGroup.loadConfig();    	
-       	ConfigCaveRate.loadConfig();    	
     	ConfigVillager.loadConfig();
 	}
 	
 	public static void saveAllConfig() {
     	ConfigGenerationRate.saveConfig();
     	ConfigBiomeGroup.saveConfig();
-    	ConfigCaveRate.saveConfig();
     	ConfigVillager.saveConfig();
 	}
 }

@@ -11,16 +11,16 @@ import java.util.Random;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import diversity.configurations.ConfigBiomeGroup;
-import diversity.structure.DwarvesCave;
+import diversity.structure.DwarvenCave;
 import diversity.structure.GlobalFeature;
 import diversity.structure.LostCave;
-import diversity.structure.MushroomCave;
+import diversity.structure.ShroomCave;
 
 public enum EnumCave
 {
-	DWARVES_CAVE (ConfigBiomeGroup.DWARVES_CAVE, 25, DwarvesCave.class, EnumStructure.DWARVES_CITY),
+	DWARVEN_CAVE (ConfigBiomeGroup.DWARVEN_CAVE, 25, DwarvenCave.class, EnumStructure.DWARVEN_CITY),
 	LOST_CAVE (ConfigBiomeGroup.LOST_CAVE, 25, LostCave.class),
-	MUSHROOM_CAVE (ConfigBiomeGroup.MUSHROOM_CAVE, 25, MushroomCave.class, EnumStructure.WITCH_HOUSE);
+	SHROOM_CAVE (ConfigBiomeGroup.SHROOM_CAVE, 25, ShroomCave.class, EnumStructure.WITCH_HOUSE);
 	
 	public int totalWeight;
 	private final ConfigBiomeGroup config;

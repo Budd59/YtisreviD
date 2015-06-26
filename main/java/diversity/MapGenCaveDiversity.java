@@ -26,11 +26,6 @@ import diversity.configurations.ConfigGenerationRate;
 import diversity.structure.GlobalFeature;
 import diversity.suppliers.EnumCave;
 import diversity.suppliers.EnumStructure;
-import diversity.suppliers.EnumVillage;
-import diversity.utils.EnumCubeType;
-import diversity.village.VillageDwarf;
-import diversity.village.VillageTools;
-import diversity.village.VillageTools.GlobalStart;
 
 public class MapGenCaveDiversity extends MapGenScatteredFeature
 {

@@ -9,12 +9,12 @@ import javax.vecmath.Point4i;
 import diversity.utils.EnumCubeType;
 import diversity.utils.Table3d;
 
-public class MushroomCaveGenerator implements ICaveGenerator {
+public class ShroomCaveGenerator implements ICaveGenerator {
 	private final int minRadius;
 	private final int maxRadius;
 	private final int radiusRandomer;
 
-	public MushroomCaveGenerator(int minRadius, int maxRadius, int radiusRandomer) {
+	public ShroomCaveGenerator(int minRadius, int maxRadius, int radiusRandomer) {
 		this.minRadius = minRadius;
 		this.maxRadius = maxRadius;
 		this.radiusRandomer = radiusRandomer;
