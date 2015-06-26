@@ -12,7 +12,7 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraftforge.common.ChestGenHooks;
 import diversity.utils.ChestGenTools;
 
-public class WitchHutt  extends GlobalFeature
+public class WitchHutt extends GlobalFeature
 {
     public static final WeightedRandomChestContent[] itemsToGenerateInHut = new WeightedRandomChestContent[] {new WeightedRandomChestContent(Items.rotten_flesh, 0, 4, 6, 10), new WeightedRandomChestContent(Items.bone, 0, 4, 5, 10), new WeightedRandomChestContent(Items.spider_eye, 0, 3, 7, 15), new WeightedRandomChestContent(Items.apple, 0, 1, 4, 8), new WeightedRandomChestContent(Items.glass_bottle, 0, 2, 6, 20), new WeightedRandomChestContent(Items.potionitem, 0, 0, 2, 16), new WeightedRandomChestContent(Items.fermented_spider_eye, 0, 1, 5, 6), new WeightedRandomChestContent(Items.ender_pearl, 0, 1, 1, 1), new WeightedRandomChestContent(Items.gunpowder, 0, 1, 5, 5)};
     	

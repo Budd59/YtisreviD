@@ -9,7 +9,7 @@ import diversity.utils.Table3d;
 
 public interface ICaveGenerator
 {
-	public List<Point4i> getControlPoints(Random random, int initX, int initY, int initZ, int numberOfPoint);
+	public List<Point4i> getControlPoints(Random random, int initX, int initY, int initZ);
 	
 	public Table3d getCavePoints(List<Point4i> sphereCenter, Random random);
 	

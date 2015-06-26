@@ -10,35 +10,35 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
-import net.minecraftforge.common.ChestGenHooks;
 import diversity.Diversity;
 import diversity.cavegen.DwarvesCaveGenerator;
 import diversity.cavegen.ICaveGenerator;
-import diversity.utils.ChestGenTools;
+import diversity.cavegen.LostCaveGenerator;
+import diversity.suppliers.EnumBlock;
 import diversity.utils.EnumCubeType;
 import diversity.utils.Table3d;
+import diversity.world.WorldGenUnderGroundVine;
 
-public class DwarvesCave extends GlobalFeature
+public class LostCave  extends GlobalFeature
 {
 	public Table3d blocks = new Table3d();
 	public Point4i startPoint;
 
-    public DwarvesCave() {}
+    public LostCave() {}
     
-    public DwarvesCave(Random random, int coordX, int coordZ)
+    public LostCave(Random random, int coordX, int coordZ)
     {
         super(random, coordX, coordZ, 7, 5, 9);
         
-        ICaveGenerator caveGen = new DwarvesCaveGenerator(7, 20, 4);
-        List<Point4i> sphereCenter = caveGen.getControlPoints(random, coordX, 40, coordZ);
+        ICaveGenerator caveGen = new LostCaveGenerator(7, 18, 4);
+        List<Point4i> sphereCenter = caveGen.getControlPoints(random, coordX, 68, coordZ);
         blocks = caveGen.getCavePoints(sphereCenter, random);
-        caveGen.generateBlockType(random, blocks, 15);
+        caveGen.generateBlockType(random, blocks, 40);
         blocks.mutateTable();
         
         startPoint = sphereCenter.get(0);
@@ -105,7 +105,7 @@ public class DwarvesCave extends GlobalFeature
 						}
 						else if (blocks.get(x, y, z).equals(EnumCubeType.WATER))
 						{
-							world.setBlock(x, y, z, Blocks.water);
+							world.setBlock(x, y, z, EnumBlock.poison_water.block);
 						}
 					}
 				}
@@ -122,35 +122,75 @@ public class DwarvesCave extends GlobalFeature
 					{
 						if (blocks.get(x, y, z).equals(EnumCubeType.ROOF))
 						{
-							if (random.nextInt(30)==0)
-								world.setBlock(x, y, z, Blocks.glowstone);
-							else
-								world.setBlock(x, y, z, Blocks.stone);
+							generateRoof(world, random, x, y, z);
 						}
 						else if (blocks.get(x, y, z).equals(EnumCubeType.WALL))
 						{
-							world.setBlock(x, y, z, Blocks.stone);
+							generateWall(world, random, x, y, z);
 						}
 						else if (blocks.get(x, y, z).equals(EnumCubeType.GROUND))
 						{
-							world.setBlock(x, y, z, Blocks.stone);
+							world.setBlock(x, y, z, Blocks.grass);
 						}
 						else if (blocks.get(x, y, z).equals(EnumCubeType.UNDERGROUND))
 						{
-							world.setBlock(x, y, z, Blocks.stone);
-						}
-						else if (blocks.get(x, y, z).equals(EnumCubeType.ORE))
-						{
-							if (y<30)
-								world.setBlock(x, y, z, Blocks.gold_ore);
-							else
-								world.setBlock(x, y, z, Blocks.iron_ore);
-							//BiomeGenBase.extremeHills.theBiomeDecorator.goldGen.generate(world, random, x, y, z);
+							generateUnderGround(world, random, x, y, z);
 						}
 						blocks.remove(x, y, z);
 					}
 				}
 	        }
+		}
+	}
+	
+	private void generateRoof(World world, Random random, int x, int y, int z) {
+		if (y > 60 && !world.getBlock(x, y + 2, z).getMaterial().equals(Material.water))
+		{
+			if (world.isAirBlock(x, y + 4, z))
+			{
+				boolean canContinue = false;
+				int tempY = y;
+				while (tempY < y+10)
+		        {
+					world.setBlockToAir(x, tempY, z);
+					tempY++;
+		        }
+				if (random.nextInt(5) == 0)
+				{
+					//WorldGenUnderGroundVine gen = new WorldGenUnderGroundVine();
+					//gen.generate(world, random, x, y, z, blocks.lastKey().intValue());
+				}
+			}
+		}
+	}
+
+	private void generateWall(World world, Random random, int x, int y, int z) {
+		if (random.nextInt(10) == 0 && y < 60) {
+			world.setBlock(x, y , z, Blocks.vine);
+			while (random.nextBoolean() || random.nextBoolean())
+			{
+				y--;
+				if (blocks.containsKey(x, y, z) && blocks.get(x, y, z).equals(EnumCubeType.AIR))
+				{
+					world.setBlock(x, y , z, Blocks.vine);
+				} else {
+					return;
+				}
+			}
+		} else {
+			world.setBlockToAir(x, y , z);
+		}
+	}
+
+	private void generateUnderGround(World world, Random random, int x, int y, int z) {
+		if (blocks.get(x, y+1, z).equals(EnumCubeType.WATER)) {
+			if (random.nextInt(30) == 0) {
+				world.setBlock(x, y, z, Blocks.gold_ore);
+			} else {
+				world.setBlock(x, y, z, Blocks.stone);
+			}
+		} else {
+			world.setBlock(x, y, z, Blocks.dirt);
 		}
 	}
 }

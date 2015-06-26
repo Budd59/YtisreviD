@@ -27,7 +27,7 @@ public class DwarvesCaveGenerator implements ICaveGenerator
 	}
 	
 	@Override
-	public List<Point4i> getControlPoints(Random random, int initX, int initY, int initZ, int numberOfPoint) {
+	public List<Point4i> getControlPoints(Random random, int initX, int initY, int initZ) {
 		List<Point4i> list = new ArrayList<Point4i>();
 		list.add(new Point4i(initX, initY, initZ, maxRadius));	
 		
@@ -60,18 +60,35 @@ public class DwarvesCaveGenerator implements ICaveGenerator
 		teta = Math.toRadians(44.04862568);
 
 		for (double tempTeta = 0; tempTeta < 2*Math.PI; tempTeta = tempTeta + teta) {
-			int coloneX = initX + (int) (Math.cos(tempTeta)* maxRadius*2) + random.nextInt(3)-1;
-			int coloneZ = initZ + (int) (Math.sin(tempTeta)* maxRadius*2) + random.nextInt(3)-1;
-			
-			int tempColoneRadius = maxRadius / 3;
-			//double tetaColone = 2*Math.asin(maxRadius/(3*maxRadius+6));
-			double tetaColone = Math.toRadians(35.27575900);
-			
-			for (double tempTetaColone = 0; tempTetaColone < 2*Math.PI; tempTetaColone = tempTetaColone + tetaColone) {
-				int tempColoneX = coloneX + (int) (Math.cos(tempTetaColone)* coloneRadius) + random.nextInt(3)-1;
-				int tempColoneZ = coloneZ + (int) (Math.sin(tempTetaColone)* coloneRadius) + random.nextInt(3)-1;
+			if (random.nextInt(10)!=0) {
+				int coloneX = initX + (int) (Math.cos(tempTeta)* maxRadius*2.3) + random.nextInt(3)-1;
+				int coloneZ = initZ + (int) (Math.sin(tempTeta)* maxRadius*2.3) + random.nextInt(3)-1;
 				
-				list.add(new Point4i(tempColoneX, coloneY + random.nextInt(3)-1, tempColoneZ, tempColoneRadius));	
+				int tempColoneRadius = maxRadius / 3;
+				//double tetaColone = 2*Math.asin(maxRadius/(3*maxRadius+6));
+				double tetaColone = Math.toRadians(35.27575900);
+				
+				for (double tempTetaColone = 0; tempTetaColone < 2*Math.PI; tempTetaColone = tempTetaColone + tetaColone) {
+					int tempColoneX = coloneX + (int) (Math.cos(tempTetaColone)* coloneRadius) + random.nextInt(3)-1;
+					int tempColoneZ = coloneZ + (int) (Math.sin(tempTetaColone)* coloneRadius) + random.nextInt(3)-1;
+					
+					list.add(new Point4i(tempColoneX, coloneY + random.nextInt(3)-1, tempColoneZ, tempColoneRadius));	
+				}
+			}
+			if (random.nextInt(7)==0) {
+				int coloneX = initX + (int) (Math.cos(tempTeta)* maxRadius*3) + random.nextInt(3)-1;
+				int coloneZ = initZ + (int) (Math.sin(tempTeta)* maxRadius*3) + random.nextInt(3)-1;
+				
+				int tempColoneRadius = maxRadius / 3;
+				//double tetaColone = 2*Math.asin(maxRadius/(3*maxRadius+6));
+				double tetaColone = Math.toRadians(35.27575900);
+				
+				for (double tempTetaColone = Math.toRadians(35.27575900/2); tempTetaColone < 2*Math.PI+Math.toRadians(35.27575900/2); tempTetaColone = tempTetaColone + tetaColone) {
+					int tempColoneX = coloneX + (int) (Math.cos(tempTetaColone)* coloneRadius) + random.nextInt(3)-1;
+					int tempColoneZ = coloneZ + (int) (Math.sin(tempTetaColone)* coloneRadius) + random.nextInt(3)-1;
+					
+					list.add(new Point4i(tempColoneX, coloneY + random.nextInt(3)-1, tempColoneZ, tempColoneRadius));	
+				}
 			}
 		}
 		
@@ -119,8 +136,9 @@ public class DwarvesCaveGenerator implements ICaveGenerator
 				{
 					if (Math.pow(tempX, 2.0D) + Math.pow(tempY, 2.0D) + Math.pow(tempZ, 2.0D) < Math.pow(radius, 2.0D)
 							&& ((y+tempY) >= 30 || ((y+tempY) >= 12
-									//&& Math.pow(x+tempX-sphereCenter.get(0).x, 2.0D) + Math.pow(z+tempZ-sphereCenter.get(0).z, 2.0D) + Math.pow(y+tempY-sphereCenter.get(0).z, 2.0D) > Math.pow(sphereCenter.get(0).w, 2.0D)
-									&& Math.pow(x+tempX-sphereCenter.get(0).x, 2.0D) + Math.pow(z+tempZ-sphereCenter.get(0).z, 2.0D) > Math.pow(sphereCenter.get(0).w*2/3, 2.0D))))
+									&& Math.pow(x+tempX-sphereCenter.get(0).x, 2.0D) + Math.pow(z+tempZ-sphereCenter.get(0).z, 2.0D) + Math.pow(y+tempY-sphereCenter.get(0).z, 2.0D) > Math.pow(sphereCenter.get(0).w/2, 2.0D)
+									//&& Math.pow(x+tempX-sphereCenter.get(0).x, 2.0D) + Math.pow(z+tempZ-sphereCenter.get(0).z, 2.0D) > Math.pow(sphereCenter.get(0).w*2/3, 2.0D))))
+							)))
 					{
 						blocks.put(x + tempX, y + tempY, z + tempZ, EnumCubeType.AIR);
 					}
@@ -174,7 +192,7 @@ public class DwarvesCaveGenerator implements ICaveGenerator
 							blocks.put(x, y, z, EnumCubeType.UNDERGROUND);
 						}
 					} else {
-						if (random.nextInt(15) == 0 && y>=30 && y<=45) {
+						if (y>=15 && y<=45 && random.nextInt((y-15)/5+4)==0) {
 							blocks.put(x, y, z, EnumCubeType.ORE);
 						} else {
 							blocks.put(x, y, z, EnumCubeType.WALL);

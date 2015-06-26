@@ -2,10 +2,14 @@ package diversity.suppliers;
 
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import diversity.structure.DwarvesCave;
+import diversity.structure.LostCave;
+import diversity.structure.MushroomCave;
 
 public enum EnumCavePiece
 {
-	DWARVES_CAVE (EnumCave.DWARVES_CAVE, 25, DwarvesCave.class);
+	DWARVES_CAVE (EnumCave.DWARVES_CAVE, 25, DwarvesCave.class),
+	LOST_CAVE (EnumCave.LOST_CAVE, 25, LostCave.class),
+	MUSHROOM_CAVE (EnumCave.MUSHROOM_CAVE, 25, MushroomCave.class);
 	
 	public final EnumCave structure;
 	public final int weight;

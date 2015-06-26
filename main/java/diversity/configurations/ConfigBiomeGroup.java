@@ -18,15 +18,15 @@ import diversity.suppliers.EnumStructure;
 public enum ConfigBiomeGroup
 {
 	EGYPTIAN_PYRAMID (BiomeGenBase.desert, BiomeGenBase.desertHills),
-	AZTEC_PYRAMID (BiomeGenBase.jungle, BiomeGenBase.jungleEdge, BiomeGenBase.jungleHills),
+	AZTEC_PYRAMID (BiomeGenBase.jungle, BiomeGenBase.jungleHills),
 	CATACOMB (BiomeGenBase.forest),
 	WITCH_HUTT (BiomeGenBase.swampland),
 	INN (BiomeGenBase.plains),
-	LOST_CAVE (BiomeGenBase.jungle, BiomeGenBase.jungleEdge, BiomeGenBase.jungleHills),
+	LOST_CAVE (BiomeGenBase.jungle, BiomeGenBase.jungleHills),
 	MUSHROOM_CAVE (BiomeGenBase.swampland),
 	YETI_CAVE (BiomeGenBase.iceMountains, BiomeGenBase.icePlains.createMutation()),
 	SPIDER_DEN (BiomeGenBase.roofedForest),
-	DWARVES_VILLAGE (BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsEdge, BiomeGenBase.extremeHillsPlus),
+	DWARVES_VILLAGE (BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsPlus),
 	APACHE_VILLAGE (BiomeGenBase.mesaPlateau, BiomeGenBase.mesaPlateau_F),
 	AZTEC_VILLAGE (BiomeGenBase.jungle),
 	INUIT_VILLAGE (BiomeGenBase.icePlains),

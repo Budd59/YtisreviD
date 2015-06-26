@@ -8,8 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.Level;
 
 import net.minecraft.world.biome.BiomeGenBase;
+import diversity.Diversity;
 import diversity.configurations.ConfigBiomeGroup;
 import diversity.structure.GlobalFeature;
 
@@ -66,6 +68,7 @@ public enum EnumStructure
 		
 		try {
 			EnumStructurePiece piece = structure.components.get(random.nextInt(structure.components.size()));
+			Diversity.Divlogger.log(Level.INFO, "structure : " + piece.name());
 			return (GlobalFeature)piece.pieceClass.getConstructors()[1].newInstance(random, coordX, coordZ);
 		} catch (InstantiationException e) {
 			e.printStackTrace();

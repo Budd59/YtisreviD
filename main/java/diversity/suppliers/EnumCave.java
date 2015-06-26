@@ -14,7 +14,9 @@ import diversity.structure.GlobalFeature;
 
 public enum EnumCave
 {
-	DWARVES_CAVE (ConfigBiomeGroup.DWARVES_VILLAGE);
+	DWARVES_CAVE (ConfigBiomeGroup.DWARVES_VILLAGE),
+	LOST_CAVE (ConfigBiomeGroup.LOST_CAVE),
+	MUSHROOM_CAVE (ConfigBiomeGroup.MUSHROOM_CAVE);
 	
 	public int totalWeight;
 	public List<EnumCavePiece> components = new ArrayList<EnumCavePiece>();

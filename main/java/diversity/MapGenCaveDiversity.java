@@ -128,49 +128,49 @@ public class MapGenCaveDiversity extends MapGenScatteredFeature
 
         		this.components.add(feature);
         		
-        		LinkedList structureComponents = new LinkedList();
-        		VillageTools villageInstance = new VillageDwarf(EnumVillage.AZTEC);
-                List list = villageInstance.getStructureVillageWeightedPieceList(random);
-                GlobalStart start = villageInstance.getStart(world.getWorldChunkManager(), 0, random, (coordX << 4) + 2, (coordZ << 4) + 2, list, 1);
-                structureComponents.add(start);
-                start.buildComponent(start, structureComponents, random);
-                List basicComponents = start.field_74930_j;
-                List pieceComponents = start.field_74932_i;
-
-                int l;
-
-                while (!basicComponents.isEmpty() || !pieceComponents.isEmpty())
-                {
-                    StructureComponent structurecomponent;
-
-                    if (basicComponents.isEmpty())
-                    {
-                        l = random.nextInt(pieceComponents.size());
-                        structurecomponent = (StructureComponent)pieceComponents.remove(l);
-                        structurecomponent.buildComponent(start, structureComponents, random);
-                    }
-                    else
-                    {
-                        l = random.nextInt(basicComponents.size());
-                        structurecomponent = (StructureComponent)basicComponents.remove(l);
-                        structurecomponent.buildComponent(start, structureComponents, random);
-                    }
-                }
-
-                l = 0;
-                                
-                this.components.addAll(structureComponents);
-                Iterator iterator = this.components.iterator();
-
-                while (iterator.hasNext())
-                {
-                	StructureComponent structurecomponent1 = (StructureComponent)iterator.next();
-
-                    if (!(structurecomponent1 instanceof StructureVillagePieces.Road))
-                    {
-                        ++l;
-                    }
-                }
+//        		LinkedList structureComponents = new LinkedList();
+//        		VillageTools villageInstance = new VillageDwarf(EnumVillage.AZTEC);
+//                List list = villageInstance.getStructureVillageWeightedPieceList(random);
+//                GlobalStart start = villageInstance.getStart(world.getWorldChunkManager(), 0, random, (coordX << 4) + 2, (coordZ << 4) + 2, list, 1);
+//                structureComponents.add(start);
+//                start.buildComponent(start, structureComponents, random);
+//                List basicComponents = start.field_74930_j;
+//                List pieceComponents = start.field_74932_i;
+//
+//                int l;
+//
+//                while (!basicComponents.isEmpty() || !pieceComponents.isEmpty())
+//                {
+//                    StructureComponent structurecomponent;
+//
+//                    if (basicComponents.isEmpty())
+//                    {
+//                        l = random.nextInt(pieceComponents.size());
+//                        structurecomponent = (StructureComponent)pieceComponents.remove(l);
+//                        structurecomponent.buildComponent(start, structureComponents, random);
+//                    }
+//                    else
+//                    {
+//                        l = random.nextInt(basicComponents.size());
+//                        structurecomponent = (StructureComponent)basicComponents.remove(l);
+//                        structurecomponent.buildComponent(start, structureComponents, random);
+//                    }
+//                }
+//
+//                l = 0;
+//                                
+//                this.components.addAll(structureComponents);
+//                Iterator iterator = this.components.iterator();
+//
+//                while (iterator.hasNext())
+//                {
+//                	StructureComponent structurecomponent1 = (StructureComponent)iterator.next();
+//
+//                    if (!(structurecomponent1 instanceof StructureVillagePieces.Road))
+//                    {
+//                        ++l;
+//                    }
+//                }
 
                 
         	}

@@ -2,7 +2,6 @@ package diversity.structure;
 
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Level;
 
 import javax.vecmath.Point4i;
 
@@ -10,35 +9,30 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
-import net.minecraftforge.common.ChestGenHooks;
-import diversity.Diversity;
-import diversity.cavegen.DwarvesCaveGenerator;
+import diversity.DiversityHandler;
 import diversity.cavegen.ICaveGenerator;
-import diversity.utils.ChestGenTools;
+import diversity.cavegen.MushroomCaveGenerator;
+import diversity.suppliers.EnumBlock;
 import diversity.utils.EnumCubeType;
 import diversity.utils.Table3d;
 
-public class DwarvesCave extends GlobalFeature
+public class MushroomCave extends GlobalFeature
 {
 	public Table3d blocks = new Table3d();
 	public Point4i startPoint;
 
-    public DwarvesCave() {}
+    public MushroomCave() {}
     
-    public DwarvesCave(Random random, int coordX, int coordZ)
+    public MushroomCave(Random random, int coordX, int coordZ)
     {
         super(random, coordX, coordZ, 7, 5, 9);
         
-        ICaveGenerator caveGen = new DwarvesCaveGenerator(7, 20, 4);
-        List<Point4i> sphereCenter = caveGen.getControlPoints(random, coordX, 40, coordZ);
+        ICaveGenerator caveGen = new MushroomCaveGenerator(7, 14, 4);
+        List<Point4i> sphereCenter = caveGen.getControlPoints(random, coordX, 42, coordZ);
         blocks = caveGen.getCavePoints(sphereCenter, random);
-        caveGen.generateBlockType(random, blocks, 15);
+        caveGen.generateBlockType(random, blocks, 29);
         blocks.mutateTable();
         
         startPoint = sphereCenter.get(0);
@@ -105,7 +99,7 @@ public class DwarvesCave extends GlobalFeature
 						}
 						else if (blocks.get(x, y, z).equals(EnumCubeType.WATER))
 						{
-							world.setBlock(x, y, z, Blocks.water);
+							world.setBlock(x, y, z, EnumBlock.phos_water.block);
 						}
 					}
 				}
@@ -122,10 +116,7 @@ public class DwarvesCave extends GlobalFeature
 					{
 						if (blocks.get(x, y, z).equals(EnumCubeType.ROOF))
 						{
-							if (random.nextInt(30)==0)
-								world.setBlock(x, y, z, Blocks.glowstone);
-							else
-								world.setBlock(x, y, z, Blocks.stone);
+							world.setBlock(x, y, z, Blocks.stone);
 						}
 						else if (blocks.get(x, y, z).equals(EnumCubeType.WALL))
 						{
@@ -133,24 +124,17 @@ public class DwarvesCave extends GlobalFeature
 						}
 						else if (blocks.get(x, y, z).equals(EnumCubeType.GROUND))
 						{
-							world.setBlock(x, y, z, Blocks.stone);
+							world.setBlock(x, y, z, EnumBlock.fungal.block);
 						}
 						else if (blocks.get(x, y, z).equals(EnumCubeType.UNDERGROUND))
 						{
-							world.setBlock(x, y, z, Blocks.stone);
-						}
-						else if (blocks.get(x, y, z).equals(EnumCubeType.ORE))
-						{
-							if (y<30)
-								world.setBlock(x, y, z, Blocks.gold_ore);
-							else
-								world.setBlock(x, y, z, Blocks.iron_ore);
-							//BiomeGenBase.extremeHills.theBiomeDecorator.goldGen.generate(world, random, x, y, z);
+							world.setBlock(x, y, z, Blocks.dirt);
 						}
 						blocks.remove(x, y, z);
 					}
 				}
 	        }
 		}
+		DiversityHandler.listMushroomChunk.add(new Integer[]{structureBoundingBox.minX-8, structureBoundingBox.minZ-8});
 	}
 }
