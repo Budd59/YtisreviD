@@ -9,6 +9,8 @@ import java.util.Random;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 
+import javax.vecmath.Point4i;
+
 import com.google.common.collect.Table;
 
 import net.minecraft.block.Block;
@@ -23,6 +25,7 @@ import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import diversity.configurations.ConfigGenerationRate;
+import diversity.structure.DwarvenCave;
 import diversity.structure.GlobalFeature;
 import diversity.suppliers.EnumCave;
 import diversity.suppliers.EnumStructure;
@@ -123,56 +126,20 @@ public class MapGenCaveDiversity extends MapGenScatteredFeature
         		Diversity.Divlogger.log(Level.INFO, coordX*16 + " " + coordZ*16);
         		this.components.add(feature);
 
-        		feature = cave.getStructureComponent(random, coordX*16, coordZ*16);
-        		if (feature != null) {
-        			this.components.add(feature);
+        		GlobalFeature structureFeature = cave.getStructureComponent(0, random, coordX*16, coordZ*16);
+        		if (structureFeature != null) {
+        			this.components.add(structureFeature);
         		}
-
-//        		LinkedList structureComponents = new LinkedList();
-//        		VillageTools villageInstance = new VillageDwarf(EnumVillage.AZTEC);
-//                List list = villageInstance.getStructureVillageWeightedPieceList(random);
-//                GlobalStart start = villageInstance.getStart(world.getWorldChunkManager(), 0, random, (coordX << 4) + 2, (coordZ << 4) + 2, list, 1);
-//                structureComponents.add(start);
-//                start.buildComponent(start, structureComponents, random);
-//                List basicComponents = start.field_74930_j;
-//                List pieceComponents = start.field_74932_i;
-//
-//                int l;
-//
-//                while (!basicComponents.isEmpty() || !pieceComponents.isEmpty())
-//                {
-//                    StructureComponent structurecomponent;
-//
-//                    if (basicComponents.isEmpty())
-//                    {
-//                        l = random.nextInt(pieceComponents.size());
-//                        structurecomponent = (StructureComponent)pieceComponents.remove(l);
-//                        structurecomponent.buildComponent(start, structureComponents, random);
-//                    }
-//                    else
-//                    {
-//                        l = random.nextInt(basicComponents.size());
-//                        structurecomponent = (StructureComponent)basicComponents.remove(l);
-//                        structurecomponent.buildComponent(start, structureComponents, random);
-//                    }
-//                }
-//
-//                l = 0;
-//                                
-//                this.components.addAll(structureComponents);
-//                Iterator iterator = this.components.iterator();
-//
-//                while (iterator.hasNext())
-//                {
-//                	StructureComponent structurecomponent1 = (StructureComponent)iterator.next();
-//
-//                    if (!(structurecomponent1 instanceof StructureVillagePieces.Road))
-//                    {
-//                        ++l;
-//                    }
-//                }
-
-                
+        		
+    			if (feature instanceof DwarvenCave) {
+    				for (Point4i point : ((DwarvenCave)feature).scaffoldingPoint) {
+    					structureFeature = cave.getStructureComponent(1, random, point.x, point.z);
+    	        		if (feature != null) {
+    	            		this.components.add(structureFeature);
+    	        		}
+    				}
+    				
+    			}
         	}
             this.updateBoundingBox();
         }

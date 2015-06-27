@@ -18,6 +18,7 @@ import diversity.structure.AztecPyramid;
 import diversity.structure.Catacomb;
 import diversity.structure.DwarvenCity;
 import diversity.structure.DwarvenCave;
+import diversity.structure.DwarvenScaffolding;
 import diversity.structure.EgyptianPyramid;
 import diversity.structure.GlobalFeature;
 import diversity.structure.Inn;
@@ -26,42 +27,51 @@ import diversity.structure.WitchHutt;
 
 public enum EnumStructure
 {	
-	EGYPTIAN_PYRAMID (ConfigBiomeGroup.EGYPTIAN_PYRAMID, 25, EgyptianPyramid.class),
-	AZTEC_PYRAMID (ConfigBiomeGroup.AZTEC_PYRAMID, 25, AztecPyramid.class),
-	CATACOMB (ConfigBiomeGroup.CATACOMB, 25, Catacomb.class),
-	WITCH_HUTT (ConfigBiomeGroup.WITCH_HUTT, 25, WitchHutt.class),
-	INN (ConfigBiomeGroup.INN, 25, Inn.class),
-	DWARVEN_CITY (ConfigBiomeGroup.DWARVEN_CAVE, 25, DwarvenCity.class),
-	WITCH_HOUSE (ConfigBiomeGroup.SHROOM_CAVE, 25, WitchHouse.class);
+	EGYPTIAN_PYRAMID (ConfigBiomeGroup.EGYPTIAN_PYRAMID, EgyptianPyramid.class),
+	AZTEC_PYRAMID (ConfigBiomeGroup.AZTEC_PYRAMID, AztecPyramid.class),
+	CATACOMB (ConfigBiomeGroup.CATACOMB, Catacomb.class),
+	WITCH_HUTT (ConfigBiomeGroup.WITCH_HUTT, WitchHutt.class),
+	INN (ConfigBiomeGroup.INN, Inn.class),
+	DWARVEN_CITY (DwarvenCity.class),
+	DWARVEN_SCAFFOLDING (DwarvenScaffolding.class),
+	WITCH_HOUSE (WitchHouse.class);
 	
 	public int totalWeight;
 	private final ConfigBiomeGroup config;
-	public final int weight;
 	public final Class pieceClass;
 	
 	private static Map<BiomeGenBase, List<EnumStructure>> biomeEnumMap = new HashMap();
 	
-	private EnumStructure(ConfigBiomeGroup config, int weight, Class pieceClass)
+	private EnumStructure(ConfigBiomeGroup config, Class pieceClass)
 	{
 		this.config = config;
-		this.weight = weight;
 		this.pieceClass = pieceClass;
+	}
+	
+	private EnumStructure(Class pieceClass)
+	{
+		this(null, pieceClass);
 	}
 	
 	public static void load() {
 		biomeEnumMap.clear();
 		for (EnumStructure enumStructure : EnumStructure.values())
-		for (BiomeGenBase biome : enumStructure.config.getBiomes())
 		{
-			if (!biomeEnumMap.containsKey(biome))
+			if (enumStructure.config != null)
 			{
-				biomeEnumMap.put(biome, new ArrayList<EnumStructure>(Arrays.asList(enumStructure)));
-			}
-			else 
-			{
-				if (!biomeEnumMap.get(biome).contains(enumStructure))
+				for (BiomeGenBase biome : enumStructure.config.getBiomes())
 				{
-					biomeEnumMap.get(biome).add(enumStructure);
+					if (!biomeEnumMap.containsKey(biome))
+					{
+						biomeEnumMap.put(biome, new ArrayList<EnumStructure>(Arrays.asList(enumStructure)));
+					}
+					else 
+					{
+						if (!biomeEnumMap.get(biome).contains(enumStructure))
+						{
+							biomeEnumMap.get(biome).add(enumStructure);
+						}
+					}
 				}
 			}
 		}

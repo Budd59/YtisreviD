@@ -18,30 +18,26 @@ import diversity.structure.ShroomCave;
 
 public enum EnumCave
 {
-	DWARVEN_CAVE (ConfigBiomeGroup.DWARVEN_CAVE, 25, DwarvenCave.class, EnumStructure.DWARVEN_CITY),
-	LOST_CAVE (ConfigBiomeGroup.LOST_CAVE, 25, LostCave.class),
-	SHROOM_CAVE (ConfigBiomeGroup.SHROOM_CAVE, 25, ShroomCave.class, EnumStructure.WITCH_HOUSE);
+	DWARVEN_CAVE (ConfigBiomeGroup.DWARVEN_CAVE, DwarvenCave.class, EnumStructure.DWARVEN_CITY, EnumStructure.DWARVEN_SCAFFOLDING),
+	LOST_CAVE (ConfigBiomeGroup.LOST_CAVE, LostCave.class),
+	SHROOM_CAVE (ConfigBiomeGroup.SHROOM_CAVE, ShroomCave.class, EnumStructure.WITCH_HOUSE);
 	
-	public int totalWeight;
 	private final ConfigBiomeGroup config;
-	public final int weight;
 	public final Class pieceClass;
-	private EnumStructure structure;
+	private EnumStructure[] structure;
 	
 	private static Map<BiomeGenBase, List<EnumCave>> biomeEnumMap = new HashMap();
 	
-	private EnumCave(ConfigBiomeGroup config, int weight, Class pieceClass)
+	private EnumCave(ConfigBiomeGroup config, Class pieceClass)
 	{
 		this.config = config;
-		this.weight = weight;
 		this.pieceClass = pieceClass;
 	}
 	
-	private EnumCave(ConfigBiomeGroup config, int weight, Class pieceClass, EnumStructure structure)
+	private EnumCave(ConfigBiomeGroup config, Class pieceClass, EnumStructure... structure)
 	{
 		this.config = config;
 		this.structure = structure;
-		this.weight = weight;
 		this.pieceClass = pieceClass;
 	}
 	
@@ -94,9 +90,9 @@ public enum EnumCave
 		return null;
 	}
 	
-	public GlobalFeature getStructureComponent(Random random, int coordX, int coordZ) {
+	public GlobalFeature getStructureComponent(int structureNumber, Random random, int coordX, int coordZ) {
 		if (structure != null) {
-			return structure.getStructureComponent(random, coordX, coordZ);
+			return structure[structureNumber].getStructureComponent(random, coordX, coordZ);
 		}
 		return null;
 	}
