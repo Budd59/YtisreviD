@@ -122,9 +122,9 @@ public class DwarvenCave extends GlobalFeature
 					{
 						if (blocks.get(x, y, z).equals(EnumCubeType.ROOF))
 						{
-							if (random.nextInt(30)==0)
-								world.setBlock(x, y, z, Blocks.glowstone);
-							else
+//							if (random.nextInt(30)==0)
+//								world.setBlock(x, y, z, Blocks.glowstone);
+//							else
 								world.setBlock(x, y, z, Blocks.stone);
 						}
 						else if (blocks.get(x, y, z).equals(EnumCubeType.WALL))

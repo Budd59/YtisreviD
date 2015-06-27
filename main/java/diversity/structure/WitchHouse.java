@@ -56,21 +56,21 @@ public class WitchHouse extends GlobalFeature
 		this.fillWithMetadataBlocks(world, structureBoundingBox, 2, 4, 2, 8, 4, 5, Blocks.planks, 1, Blocks.planks, 1, false);
 		this.fillWithMetadataBlocks(world, structureBoundingBox, 1, 5, 3, 9, 5, 4, Blocks.planks, 1, Blocks.planks, 1, false);
 		
-		this.fillWithMetadataBlocks(world, structureBoundingBox, 5, 3, 2, 5, 3, 5, Blocks.log, 4, Blocks.log, 4, false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 5, 3, 2, 5, 3, 5, Blocks.log, getMetadataWithOffset(Blocks.log, 4), Blocks.log, getMetadataWithOffset(Blocks.log, 4), false);
 
-		this.fillWithMetadataBlocks(world, structureBoundingBox, 1, 3, 0, 9, 3, 0, Blocks.spruce_stairs, 1, Blocks.spruce_stairs, 1, false);
-		this.fillWithMetadataBlocks(world, structureBoundingBox, 0, 4, 1, 10, 4, 1, Blocks.spruce_stairs, 1, Blocks.spruce_stairs, 1, false);
-		this.fillWithMetadataBlocks(world, structureBoundingBox, 0, 5, 2, 10, 5, 2, Blocks.spruce_stairs, 1, Blocks.spruce_stairs, 1, false);
-		this.fillWithMetadataBlocks(world, structureBoundingBox, 0, 6, 3, 10, 6, 3, Blocks.spruce_stairs, 1, Blocks.spruce_stairs, 1, false);
-		this.fillWithMetadataBlocks(world, structureBoundingBox, 0, 6, 4, 10, 6, 4, Blocks.spruce_stairs, 0, Blocks.spruce_stairs, 0, false);
-		this.fillWithMetadataBlocks(world, structureBoundingBox, 0, 5, 5, 10, 5, 5, Blocks.spruce_stairs, 0, Blocks.spruce_stairs, 0, false);
-		this.fillWithMetadataBlocks(world, structureBoundingBox, 0, 4, 6, 10, 4, 6, Blocks.spruce_stairs, 0, Blocks.spruce_stairs, 0, false);
-		this.fillWithMetadataBlocks(world, structureBoundingBox, 1, 3, 7, 9, 3, 7, Blocks.spruce_stairs, 0, Blocks.spruce_stairs, 0, false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 1, 3, 0, 9, 3, 0, Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 1), Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 1), false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 0, 4, 1, 10, 4, 1, Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 1), Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 1), false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 0, 5, 2, 10, 5, 2, Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 1), Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 1), false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 0, 6, 3, 10, 6, 3, Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 1), Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 1), false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 0, 6, 4, 10, 6, 4, Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 0), Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 0), false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 0, 5, 5, 10, 5, 5, Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 0), Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 0), false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 0, 4, 6, 10, 4, 6, Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 0), Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 0), false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 1, 3, 7, 9, 3, 7, Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 0), Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 0), false);
 
-		this.placeBlockAtCurrentPosition(world, Blocks.spruce_stairs, 6, 0, 5, 4, structureBoundingBox);
-		this.placeBlockAtCurrentPosition(world, Blocks.spruce_stairs, 7, 10, 5, 4, structureBoundingBox);
-		this.placeBlockAtCurrentPosition(world, Blocks.spruce_stairs, 6, 0, 5, 3, structureBoundingBox);
-		this.placeBlockAtCurrentPosition(world, Blocks.spruce_stairs, 7, 10, 5, 3, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 6), 0, 5, 4, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 7), 10, 5, 4, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 6), 0, 5, 3, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.spruce_stairs, getMetadataWithOffset(Blocks.spruce_stairs, 7), 10, 5, 3, structureBoundingBox);
 
 		
 		this.placeBlockAtCurrentPosition(world, Blocks.web, 0, 0, 1+random.nextInt(4), 3, structureBoundingBox);
@@ -91,8 +91,8 @@ public class WitchHouse extends GlobalFeature
 		this.placeBlockAtCurrentPosition(world, Blocks.log, 0, 5, 1, 2, structureBoundingBox);
 		this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 5, 2, 2, structureBoundingBox);
 
-		this.placeBlockAtCurrentPosition(world, Blocks.bed, 10, 2, 1, 3, structureBoundingBox);
-		this.placeBlockAtCurrentPosition(world, Blocks.bed, 2, 3, 1, 3, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.bed, getMetadataWithOffset(Blocks.bed, 10), 2, 1, 3, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.bed, getMetadataWithOffset(Blocks.bed, 1), 3, 1, 3, structureBoundingBox);
 
 		this.placeBlockAtCurrentPosition(world, Blocks.torch, 2, 3, 2, 2, structureBoundingBox);
 		this.placeBlockAtCurrentPosition(world, Blocks.torch, 2, 7, 2, 2, structureBoundingBox);

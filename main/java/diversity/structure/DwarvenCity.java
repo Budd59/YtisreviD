@@ -33,6 +33,12 @@ public class DwarvenCity extends GlobalFeature
 	@Override
 	protected boolean build(World world, Random random,	StructureBoundingBox structureBoundingBox)
 	{
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 2, 0, 2, 14, 0, 14, Blocks.cobblestone, 0, Blocks.cobblestone, 0, false);
+		
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 5, 0, 1, 11, 0, 1, Blocks.cobblestone, 0, Blocks.cobblestone, 0, false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 5, 0, 15, 11, 0, 15, Blocks.cobblestone, 0, Blocks.cobblestone, 0, false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 1, 0, 5, 1, 0, 11, Blocks.cobblestone, 0, Blocks.cobblestone, 0, false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 15, 0, 5, 15, 0, 11, Blocks.cobblestone, 0, Blocks.cobblestone, 0, false);
 		
 		// extern wall
 		this.fillWithMetadataBlocks(world, structureBoundingBox, 5, 0, 0, 11, 6, 0, Blocks.stonebrick, 0, Blocks.stonebrick, 0, false);
@@ -304,15 +310,15 @@ public class DwarvenCity extends GlobalFeature
 
 		
 		// bridge
-		this.func_151554_b(world, Blocks.stonebrick, 0, 17, 0, 7, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 18, 0, 7, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 17, 0, 8, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 18, 0, 8, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 17, 0, 9, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 18, 0, 9, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 19, 0, 7, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 19, 0, 8, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 19, 0, 9, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 17, -1, 7, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 18, -1, 7, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 17, -1, 8, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 18, -1, 8, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 17, -1, 9, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 18, -1, 9, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 19, -1, 7, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 19, -1, 8, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 19, -1, 9, structureBoundingBox);
 
 		this.fillWithMetadataBlocks(world, structureBoundingBox, 20, -5, 7, 20, 0, 9, Blocks.stonebrick, 0, Blocks.stonebrick, 0, false);
 		this.fillWithMetadataBlocks(world, structureBoundingBox, 20, -6, 7, 20, -6, 9, Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 5), Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 5), false);
@@ -334,24 +340,25 @@ public class DwarvenCity extends GlobalFeature
 		this.fillWithMetadataBlocks(world, structureBoundingBox, 33, -5, 7, 33, 0, 9, Blocks.stonebrick, 0, Blocks.stonebrick, 0, false);
 		this.fillWithMetadataBlocks(world, structureBoundingBox, 33, -6, 7, 33, -6, 9, Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 4), Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 4), false);
 				
-		this.func_151554_b(world, Blocks.stonebrick, 0, 34, 0, 7, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 35, 0, 7, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 34, 0, 8, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 35, 0, 8, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 34, 0, 9, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 35, 0, 9, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 36, 0, 7, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 36, 0, 8, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 36, 0, 9, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 37, 0, 7, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 37, 0, 8, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 37, 0, 9, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 38, 0, 7, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 38, 0, 8, structureBoundingBox);
-		this.func_151554_b(world, Blocks.stonebrick, 0, 38, 0, 9, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 34, -1, 7, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 35, -1, 7, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 34, -1, 8, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 35, -1, 8, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 34, -1, 9, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 35, -1, 9, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 36, -1, 7, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 36, -1, 8, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 36, -1, 9, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 37, -1, 7, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 37, -1, 8, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 37, -1, 9, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 38, -1, 7, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 38, -1, 8, structureBoundingBox);
+		this.func_151554_b(world, Blocks.stonebrick, 0, 38, -1, 9, structureBoundingBox);
 		this.func_151554_b(world, Blocks.stonebrick, 0, 39, -1, 7, structureBoundingBox);
 		this.func_151554_b(world, Blocks.stonebrick, 0, 39, -1, 8, structureBoundingBox);
 		this.func_151554_b(world, Blocks.stonebrick, 0, 39, -1, 9, structureBoundingBox);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 16, 0, 7, 38, 0, 9, Blocks.cobblestone, 0, Blocks.cobblestone, 0, false);
 		
 		for (int k = 0; k <= 15; k++) {
 			if (k%3==0) {
@@ -408,6 +415,100 @@ public class DwarvenCity extends GlobalFeature
 		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 35, 7, 10, structureBoundingBox);
 		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 35, 7, 8, structureBoundingBox);
 
+		//central colonne
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 8, 1, 8, 8, 14, 8, Blocks.stonebrick, 0, Blocks.stonebrick, 0, false);
+		//inside first roof		
+		this.placeBlockAtCurrentPosition(world, Blocks.cobblestone_wall, 0, 6, 3, 0, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.cobblestone_wall, 0, 10, 3, 0, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.cobblestone_wall, 0, 6, 3, 16, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.cobblestone_wall, 0, 10, 3, 16, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.cobblestone_wall, 0, 0, 3, 6, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.cobblestone_wall, 0, 0, 3, 10, structureBoundingBox);
+
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 4, 1, 2, 4, 4, 11, Blocks.stonebrick, 0, Blocks.stonebrick, 0, false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 2, 1, 12, 14, 4, 12, Blocks.stonebrick, 0, Blocks.stonebrick, 0, false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 1, 1, 8, 3, 4, 8, Blocks.stonebrick, 0, Blocks.stonebrick, 0, false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 8, 1, 13, 8, 4, 15, Blocks.stonebrick, 0, Blocks.stonebrick, 0, false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 8, 1, 1, 8, 2, 2, Blocks.stonebrick, 0, Blocks.stonebrick, 0, false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 7, 1, 3, 7, 2, 3, Blocks.stonebrick, 0, Blocks.stonebrick, 0, false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 9, 1, 3, 9, 2, 3, Blocks.stonebrick, 0, Blocks.stonebrick, 0, false);
+		
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 6, 1, 1, 6, 1, 2, Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 0), Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 0), false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 7, 2, 1, 7, 2, 2, Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 0), Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 0), false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 9, 2, 1, 9, 2, 2, Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 1), Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 1), false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 10, 1, 1, 10, 1, 2, Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 1), Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 1), false);
+
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 7, 3, 3, 9, 3, 3, Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 3), Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 3), false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 7, 4, 4, 9, 4, 4, Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 3), Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 3), false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 7, 5, 5, 9, 5, 5, Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 3), Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 3), false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 7, 5, 2, 9, 5, 4, Blocks.air, 0, Blocks.air, 0, false);
+
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 6), 8, 2, 3, structureBoundingBox);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 7, 3, 4, 9, 3, 4, Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 6), Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 6), false);
+
+		this.placeDoorAtCurrentPosition(world, structureBoundingBox, random, 4, 1, 6, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		this.placeDoorAtCurrentPosition(world, structureBoundingBox, random, 4, 1, 10, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		this.placeDoorAtCurrentPosition(world, structureBoundingBox, random, 6, 1, 12, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		this.placeDoorAtCurrentPosition(world, structureBoundingBox, random, 10, 1, 12, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 3, 8, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 9, 3, 8, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 8, 3, 7, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 8, 3, 9, structureBoundingBox);
+
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 12, 3, 2, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 14, 3, 4, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 3, 4, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 3, 3, 10, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 3, 14, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 12, 3, 14, structureBoundingBox);
+
+		//inside second roof
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 11, 6, 5, 11, 14, 5, Blocks.stonebrick, 0, Blocks.stonebrick, 0, false);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 11, 6, 4, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stonebrick, 0, 12, 6, 4, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stonebrick, 0, 12, 6, 5, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 12, 7, 5, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 13, 12, 7, 6, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 11, 8, 6, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 13, 10, 8, 6, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 10, 9, 5, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 13, 10, 9, 4, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 11, 10, 4, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 13, 12, 10, 4, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 12, 11, 5, structureBoundingBox);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 10, 11, 6, 12, 11, 6, Blocks.stone_slab, 13, Blocks.stone_slab, 13, false);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 13, 10, 12, 5, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 10, 11, 5, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 10, 11, 4, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 11, 11, 4, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 12, 11, 4, structureBoundingBox);
+		
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 11, 6, 11, 11, 14, 11, Blocks.stonebrick, 0, Blocks.stonebrick, 0, false);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 11, 6, 12, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stonebrick, 0, 12, 6, 12, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stonebrick, 0, 12, 6, 11, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 12, 7, 11, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 13, 12, 7, 10, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 11, 8, 10, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 13, 10, 8, 10, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 10, 9, 11, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 13, 10, 9, 12, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 11, 10, 12, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 13, 12, 10, 12, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 12, 11, 11, structureBoundingBox);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 10, 11, 10, 12, 11, 10, Blocks.stone_slab, 13, Blocks.stone_slab, 13, false);
+		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 13, 10, 12, 11, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 10, 11, 11, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 10, 11, 12, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 11, 11, 12, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 12, 11, 12, structureBoundingBox);
+		
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 8, 8, 3, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 8, 8, 13, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 3, 8, 8, structureBoundingBox);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 13, 8, 8, structureBoundingBox);
+		
 		return true;
 	}
 
