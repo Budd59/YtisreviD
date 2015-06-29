@@ -20,13 +20,22 @@ public class EntityDwarf extends EntityGlobalVillager
 	public EntityDwarf(World world, EnumVillager type)
 	{
 		super(world, type);
-		
+		this.setSize(0.6F, 1.2F);
 		if (rand.nextBoolean()) {
 			this.setCurrentItemOrArmor(0, new ItemStack(Items.iron_axe));
 		} else {
-			this.setCurrentItemOrArmor(0, new ItemStack(EnumItem.iron_spear.item));
+			this.setCurrentItemOrArmor(0, new ItemStack(Items.iron_sword));
 		}
 	}
+	
+    /**
+     * Returns the item that this EntityLiving is holding, if any.
+     */
+	@Override
+    public ItemStack getHeldItem()
+    {
+        return (canDefend() && !isChild()) ? super.getHeldItem() : (isMiner() && !isChild()) ? new ItemStack(Items.iron_pickaxe) : null;
+    }
 	
 	@Override
     public EntityVillager createChild(EntityAgeable p_90011_1_)
@@ -39,6 +48,10 @@ public class EntityDwarf extends EntityGlobalVillager
 	@Override
 	protected boolean canAskForHelp() {
 		return getProfession() == EnumVillager.DWARF_KING.profession;
+	}
+	
+	public boolean isMiner() {
+		return getProfession() == EnumVillager.DWARF_MINER.profession;
 	}
 	
 	@Override

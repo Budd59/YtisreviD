@@ -17,6 +17,7 @@ import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookAtTradePlayer;
 import net.minecraft.entity.ai.EntityAIMoveIndoors;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIOpenDoor;
 import net.minecraft.entity.ai.EntityAIPlay;
 import net.minecraft.entity.ai.EntityAIRestrictOpenDoor;
@@ -68,6 +69,7 @@ public abstract class EntityGlobalVillager extends EntityVillager
 	private EntityAIBase entityHurt = new EntityAIHurtByTarget(this, true);
 	private EntityAITradePlayer aiTradePlayer = new EntityAITradePlayer(this);
 	private EntityAILookAtTradePlayer aiLookAtTradePlayer = new EntityAILookAtTradePlayer(this);
+	//private EntityAINearestAttackableTarget aiAttackZombie = new EntityAINearestAttackableTarget(this, EntityZombie.class, 30, true);
 	
 	public EntityGlobalVillager(World world) {
 		this(world, EnumVillager.SETTLED_VILLAGER);
@@ -112,6 +114,7 @@ public abstract class EntityGlobalVillager extends EntityVillager
 	        this.tasks.addTask(1, aiMoveTowardsRestriction);
 			this.targetTasks.addTask(2, chiefHurt);
 	        this.targetTasks.addTask(3, entityHurt);
+	        //this.targetTasks.addTask(4, aiAttackZombie);
 		} else {
 			this.tasks.removeTask(attackOnCollide);
 			this.tasks.removeTask(aiMoveTowardsRestriction);

@@ -202,24 +202,25 @@ public enum EnumVillager implements IVillageTradeHandler
 			new IItem[]{EPrice.apple, EPrice.cooked_porkchop, EPrice.cooked_chicken, EPrice.bread, EPrice.mushroom_stew}
 	),
 	DWARF_SMITH (EnumTribe.DWARF, "smith",
-			new IItem[]{EPrice.wheat, EPrice.wheat_seeds, EPrice.leather},
-			new IItem[]{EPrice.iron_horse_armor, EPrice.saddle, EPrice.lead}
+			new IItem[]{EPrice.coal, EPrice.cobblestone, EPrice.oak_planks, EPrice.iron_ingot},
+			new IItem[]{EPrice.stonebrick, EPrice.iron_pickaxe, EPrice.iron_axe, EPrice.chainmail_helmet, EPrice.chainmail_chestplate, 
+			EPrice.chainmail_leggings, EPrice.chainmail_boots, EPrice.iron_helmet, EPrice.iron_chestplate, EPrice.iron_leggings, EPrice.iron_boots, EPrice.iron_sword}
 	),
 	DWARF_WARRIOR (EnumTribe.DWARF, "warrior",
-			new IItem[]{EPrice.string, EPrice.stick, EPrice.flint, EPrice.feather},
-			new IItem[]{EPrice.bow, EPrice.arrow, EPrice.lead}
+			new IItem[]{},
+			new IItem[]{}
 	),
 	DWARF_KING (EnumTribe.DWARF, "king",
-			new IItem[]{EPrice.bone, EPrice.gray_dye, EPrice.orange_dye, EPrice.light_blue_dye, EPrice.bowl},
-			new IItem[]{EPrice.bottle_o_enchanting, EPrice.potion_nausea, EPrice.potion_speed, EPrice.potion_fire_resistance},
+			new IItem[]{EPrice.gold_ingot, EPrice.rose_red, EPrice.golden_apple, EPrice.golden_sword, EPrice.golden_helmet},
+			new IItem[]{EPrice.bottle_o_enchanting, EPrice.potion_haste, EPrice.potion_speed, EPrice.diamond},
 	true),
 	DWARF_HEALER (EnumTribe.DWARF, "healer",
-			new IItem[]{EPrice.feather},
-			new IItem[]{EPrice.stone_axe, EPrice.golden_horse_armor, EPrice.emerald}
+			new IItem[]{EPrice.melon, EPrice.glass_bottle, EPrice.nether_wart},
+			new IItem[]{EPrice.potion_instant_health, EPrice.potion_health_boost}
     ),
 	DWARF_MINER (EnumTribe.DWARF, "miner",
-			new IItem[]{EPrice.iron_axe, EPrice.iron_sword, EPrice.leather},
-			new IItem[]{EPrice.stone_axe, EPrice.stone_sword, EPrice.lead, EPrice.leather_helmet, EPrice.leather_tunic, EPrice.leather_pants, EPrice.leather_boots}
+			new IItem[]{EPrice.iron_pickaxe, EPrice.iron_shovel, EPrice.torch},
+			new IItem[]{EPrice.coal, EPrice.redstone, EPrice.stone}
 	);
 	
 
