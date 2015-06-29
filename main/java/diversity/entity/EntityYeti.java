@@ -70,12 +70,13 @@ public class EntityYeti  extends EntityMob
      */
     protected void attackEntity(Entity p_70785_1_, float p_70785_2_)
     {
-        if (this.attackTime <= 0 && p_70785_2_ < 3.2F && p_70785_1_.boundingBox.maxY > this.boundingBox.minY && p_70785_1_.boundingBox.minY < this.boundingBox.maxY)
+        if (this.attackTime <= 0 && p_70785_2_ < 3.5F && p_70785_1_.boundingBox.maxY > this.boundingBox.minY && p_70785_1_.boundingBox.minY < this.boundingBox.maxY)
         {
             this.attackTime = 20;
             this.attackEntityAsMob(p_70785_1_);
             setAttackTimer(0);
         }
+        
     }
     
 	@Override

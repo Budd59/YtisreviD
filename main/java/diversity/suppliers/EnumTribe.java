@@ -8,6 +8,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import diversity.Diversity;
 import diversity.entity.EntityApache;
 import diversity.entity.EntityAztec;
+import diversity.entity.EntityDwarf;
 import diversity.entity.EntityEgyptian;
 import diversity.entity.EntityGlobalVillager;
 import diversity.entity.EntityInuit;
@@ -26,7 +27,8 @@ public enum EnumTribe {
 	LAKESIDE (70, "lakeside", EntityLakeside.class),
 	SETTLED (80, "settled", EntitySettled.class),
 	TIBETAN (50, "tibetan", EntityTibetan.class),
-	ZULU (40, "zulu", EntityZulu.class);
+	ZULU (40, "zulu", EntityZulu.class),
+	DWARF (90, "dwarf", EntityDwarf.class);
 
 	public final List<EnumVillager> villagers = new ArrayList<EnumVillager>();
 	
