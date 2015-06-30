@@ -90,7 +90,7 @@ public class Diversity
     
     @EventHandler
     public void init(FMLInitializationEvent event)
-    {		
+    {
 		EnumVillage.values();
 		EnumVillageBasicPiece.register();
 		EnumVillagePiece.register();

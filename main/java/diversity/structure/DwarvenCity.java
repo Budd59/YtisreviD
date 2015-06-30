@@ -10,6 +10,8 @@ import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraftforge.common.ChestGenHooks;
+import diversity.entity.EntityDwarf;
+import diversity.suppliers.EnumVillager;
 import diversity.utils.ChestGenTools;
 
 public class DwarvenCity extends GlobalFeature
@@ -509,12 +511,53 @@ public class DwarvenCity extends GlobalFeature
 		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 3, 8, 8, structureBoundingBox);
 		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 13, 8, 8, structureBoundingBox);
 		
+		this.spawnEntity(world, structureBoundingBox, 6, 6, 10, 0);
+		this.spawnEntity(world, structureBoundingBox, 7, 6, 10, 1);
+		this.spawnEntity(world, structureBoundingBox, 6, 6, 9, 1);
+		
+		this.spawnEntity(world, structureBoundingBox, 6, 1, 14, 2);
+		this.spawnEntity(world, structureBoundingBox, 7, 1, 14, 2);
+		this.spawnEntity(world, structureBoundingBox, 9, 1, 14, 2);
+		this.spawnEntity(world, structureBoundingBox, 10, 1, 14, 2);
+		
+		this.spawnEntity(world, structureBoundingBox, 2, 6, 10, 3);
+		this.spawnEntity(world, structureBoundingBox, 2, 6, 6, 1);
+		
+		this.spawnEntity(world, structureBoundingBox, 15, 6, 7, 1);
+		this.spawnEntity(world, structureBoundingBox, 15, 6, 9, 1);
+
+		this.spawnEntity(world, structureBoundingBox, 9, 1, 7, 4);
+		this.spawnEntity(world, structureBoundingBox, 14, 1, 7, 1);
+		this.spawnEntity(world, structureBoundingBox, 14, 1, 9, 1);
+
+		
+		this.spawnEntity(world, structureBoundingBox, 34, 1, 8, 4);
+		this.spawnEntity(world, structureBoundingBox, 35, 1, 7, 1);
+		this.spawnEntity(world, structureBoundingBox, 35, 1, 8, 1);
+		this.spawnEntity(world, structureBoundingBox, 35, 1, 9, 1);
+		this.spawnEntity(world, structureBoundingBox, 36, 1, 7, 1);
+		this.spawnEntity(world, structureBoundingBox, 36, 1, 8, 1);
+		this.spawnEntity(world, structureBoundingBox, 36, 1, 9, 1);
 		return true;
 	}
 
 	@Override
 	protected EntityLiving getNewEntity(World world, int choice) {
-		return new EntityWitch(world);
+		switch (choice)
+		{
+			case 0:
+				return new EntityDwarf(world, EnumVillager.DWARF_KING);
+			case 1:
+				return new EntityDwarf(world, EnumVillager.DWARF_WARRIOR);
+			case 2:
+				return new EntityDwarf(world, EnumVillager.DWARF_MINER);
+			case 3:
+				return new EntityDwarf(world, EnumVillager.DWARF_SMITH);
+			case 4:
+				return new EntityDwarf(world, EnumVillager.DWARF_HEALER);
+			default:
+				return new EntityDwarf(world, EnumVillager.DWARF_MINER);
+		}
 	}
 
 }
