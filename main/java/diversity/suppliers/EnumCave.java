@@ -15,14 +15,16 @@ import diversity.structure.DwarvenCave;
 import diversity.structure.GlobalFeature;
 import diversity.structure.LostCave;
 import diversity.structure.ShroomCave;
-import diversity.structure.YetiCave;
+import diversity.structure.SpiderDen;
+import diversity.structure.YetiDen;
 
 public enum EnumCave
 {
 	DWARVEN_CAVE (ConfigBiomeGroup.DWARVEN_CAVE, DwarvenCave.class, EnumStructure.DWARVEN_CITY, EnumStructure.DWARVEN_SCAFFOLDING),
 	LOST_CAVE (ConfigBiomeGroup.LOST_CAVE, LostCave.class),
 	SHROOM_CAVE (ConfigBiomeGroup.SHROOM_CAVE, ShroomCave.class, EnumStructure.WITCH_HOUSE),
-	YETI_CAVE (ConfigBiomeGroup.YETI_CAVE, YetiCave.class);
+	YETI_DEN (ConfigBiomeGroup.YETI_DEN, YetiDen.class),
+	SPIDER_DEN (ConfigBiomeGroup.SPIDER_DEN, SpiderDen.class);
 	
 	private final ConfigBiomeGroup config;
 	public final Class pieceClass;

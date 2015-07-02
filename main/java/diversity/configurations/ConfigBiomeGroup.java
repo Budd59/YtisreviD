@@ -24,7 +24,7 @@ public enum ConfigBiomeGroup
 	INN (BiomeGenBase.plains),
 	LOST_CAVE (BiomeGenBase.jungle, BiomeGenBase.jungleHills),
 	SHROOM_CAVE (BiomeGenBase.swampland),
-	YETI_CAVE (BiomeGenBase.iceMountains, BiomeGenBase.icePlains.createMutation()),
+	YETI_DEN (BiomeGenBase.iceMountains, BiomeGenBase.icePlains.createMutation()),
 	SPIDER_DEN (BiomeGenBase.roofedForest),
 	DWARVEN_CAVE (BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsPlus),
 	APACHE_VILLAGE (BiomeGenBase.mesaPlateau, BiomeGenBase.mesaPlateau_F),

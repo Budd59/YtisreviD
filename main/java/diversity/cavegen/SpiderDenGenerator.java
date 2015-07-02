@@ -11,14 +11,14 @@ import javax.vecmath.Point4i;
 import diversity.utils.EnumCubeType;
 import diversity.utils.Table3d;
 
-public class YetiCaveGenerator implements ICaveGenerator {
+public class SpiderDenGenerator implements ICaveGenerator  {
 	private final int minRadius;
 	private final int maxRadius;
 	private final int radiusRandomer;
 	
 	private Map<Point4i, List<Point4i>> map = new HashMap<Point4i, List<Point4i>>();
 
-	public YetiCaveGenerator(int minRadius, int maxRadius, int radiusRandomer) {
+	public SpiderDenGenerator(int minRadius, int maxRadius, int radiusRandomer) {
 		this.minRadius = minRadius;
 		this.maxRadius = maxRadius;
 		this.radiusRandomer = radiusRandomer;
@@ -27,24 +27,17 @@ public class YetiCaveGenerator implements ICaveGenerator {
 	@Override
 	public List<Point4i> getControlPoints(Random random, int initX, int initY, int initZ) {
 		List<Point4i> list = new ArrayList<Point4i>();
-		list.add(new Point4i(initX, initY, initZ, maxRadius-1));	
-		
-		int tempX = 0;
-		int tempY = 0;
-		int tempZ = 0;
-		int counter = 10;
-		
-		double teta = 2 * Math.PI * random.nextFloat();
-		
-		while (counter > 0)
-		{
-			teta+=Math.PI * (1/4-random.nextFloat()/2);
-			tempX+=(maxRadius-2) * Math.cos(teta) - random.nextInt(2);
-			tempY+=+2;
-			tempZ+=(maxRadius-2) * Math.sin(teta) - random.nextInt(2);
+		list.add(new Point4i(initX, initY, initZ, maxRadius));	
 
-			list.add(new Point4i(initX+tempX, initY+tempY, initZ+tempZ, maxRadius-2));
-			counter--;
+		float randX = random.nextFloat() + 0.125f;
+		float randZ = 1.625f - randX;
+		
+		double teta = Math.toRadians(59);
+		
+		for (double tempTeta = 0; tempTeta < 2*Math.PI; tempTeta = tempTeta + teta) {
+			int coloneX = initX + (int) (Math.cos(tempTeta)* maxRadius * 1.3 *randX) + random.nextInt(3)-1;
+			int coloneZ = initZ + (int) (Math.sin(tempTeta)* maxRadius * 1.3 *randZ) + random.nextInt(3)-1;
+			list.add(new Point4i(coloneX, initY + random.nextInt(3)-1, coloneZ, maxRadius/2));	
 		}
 				
 		return list;
@@ -71,10 +64,10 @@ public class YetiCaveGenerator implements ICaveGenerator {
 			int maxZ = radius - radiusRandomer / 2 + random.nextInt(radiusRandomer + 1);
 
 			for (int tempY = maxY; tempY >= minY; tempY--)
-			for (int tempX = minX; tempX <= maxX; tempX++)
-			for (int tempZ = minZ; tempZ <= maxZ; tempZ++)
+			for (int tempX = minX*2; tempX <= maxX*2; tempX++)
+			for (int tempZ = minZ*2; tempZ <= maxZ*2; tempZ++)
 			{
-				if (Math.pow(tempX, 2.0D) + Math.pow(tempY, 2.0D) + Math.pow(tempZ, 2.0D) < Math.pow(radius, 2.0D))
+				if (Math.pow(tempX/2, 2.0D) + Math.pow(tempY, 2.0D) + Math.pow(tempZ/2, 2.0D) < Math.pow(radius, 2.0D))
 				{
 					blocks.put(x + tempX, y + tempY, z + tempZ, EnumCubeType.AIR);
 				}
