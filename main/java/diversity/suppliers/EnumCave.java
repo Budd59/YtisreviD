@@ -79,7 +79,8 @@ public enum EnumCave
 		
 	public GlobalFeature getCaveComponent(Random random, int coordX, int coordZ) {		
 		try {
-			return (GlobalFeature)pieceClass.getConstructors()[1].newInstance(random, coordX, coordZ);
+			return (GlobalFeature)pieceClass.getConstructor(Random.class, int.class, int.class).newInstance(random, coordX, coordZ);
+			//return (GlobalFeature)pieceClass.getConstructors()[1].newInstance(random, coordX, coordZ);
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -89,6 +90,8 @@ public enum EnumCave
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		}
 		return null;
