@@ -26,12 +26,10 @@ public class YetiCave extends GlobalFeature
 	public Table3d blocks = new Table3d();
 	public Point4i startPoint;
 	
-	private int caveH = -1;
-	private boolean canPlaceBlock = false;
+	private Integer caveH = -100;
 	
 	public ICaveGenerator caveGen;
-	public List<Point4i> sphereCenter;
-	
+	public List<Point4i> sphereCenter = new ArrayList<Point4i>();	
 
     public YetiCave() {}
     
@@ -42,8 +40,8 @@ public class YetiCave extends GlobalFeature
         caveGen = new YetiCaveGenerator(3, 6, 4);
         sphereCenter = caveGen.getControlPoints(random, coordX, 55, coordZ);
         blocks = caveGen.getCavePoints(sphereCenter, random);
-        //caveGen.generateBlockType(random, blocks, 0);
-        //blocks.mutateTable();
+        caveGen.generateBlockType(random, blocks, 0);
+        blocks.mutateTable();
         
         startPoint = sphereCenter.get(0);
         int maxX = startPoint.x, minX = startPoint.x;
@@ -75,7 +73,6 @@ public class YetiCave extends GlobalFeature
     {
         super.func_143012_a(p_143012_1_);
         p_143012_1_.setInteger("caveH", caveH);
-        p_143012_1_.setBoolean("canPlaceBlock", canPlaceBlock);
         p_143012_1_.setInteger("startX", startPoint.x);
         p_143012_1_.setInteger("startY", startPoint.y);
         p_143012_1_.setInteger("startZ", startPoint.z);
@@ -86,7 +83,6 @@ public class YetiCave extends GlobalFeature
     {
         super.func_143011_b(p_143011_1_);
         caveH = p_143011_1_.getInteger("caveH");
-        canPlaceBlock = p_143011_1_.getBoolean("canPlaceBlock");
         startPoint = new Point4i();
         startPoint.x = p_143011_1_.getInteger("startX");
         startPoint.y = p_143011_1_.getInteger("startY");
@@ -94,7 +90,7 @@ public class YetiCave extends GlobalFeature
         
         Random rand = new Random();
         caveGen = new YetiCaveGenerator(3, 6, 4);
-        sphereCenter = caveGen.getControlPoints(rand, boundingBox.minX, 55, boundingBox.minZ);
+        sphereCenter = ((YetiCaveGenerator)caveGen).getControlPoints(rand, boundingBox.minX, 55, boundingBox.minZ);
 		blocks = caveGen.getCavePoints(sphereCenter, rand);
         caveGen.generateBlockType(rand, blocks, 0);
         blocks.mutateTable();
@@ -109,15 +105,16 @@ public class YetiCave extends GlobalFeature
         }
         else
         {
-        	if (!canPlaceBlock && structureBoundingBox.getCenterX()==boundingBox.getCenterX() && structureBoundingBox.getCenterZ()==boundingBox.getCenterZ())
-        	{
-        		blocks = caveGen.getCavePoints(sphereCenter, random);
-                caveGen.generateBlockType(random, blocks, 0);
-                blocks.mutateTable();
-        		caveH = world.getTopSolidOrLiquidBlock(structureBoundingBox.getCenterX(), structureBoundingBox.getCenterZ()) - 16 - blocks.descendingKeySet().last();
-        		canPlaceBlock = true;
+        	if(caveH == -100) {
+	        	for (int index = 0; index < sphereCenter.size(); index++) {
+	        		Point4i center = sphereCenter.get(index);
+	        		if (structureBoundingBox.intersectsWith(center.x, center.z, center.x, center.z)) {
+	        			caveH = world.getTopSolidOrLiquidBlock(center.x, center.z) - center.y - (sphereCenter.size()-1-index)*2;
+	        			break;
+	        		}
+	        	}
         	}
-        	if (canPlaceBlock)
+        	if (caveH != -100)
         	{
         		this.generateCaveBlocks(world, random, structureBoundingBox);
         		if (structureBoundingBox.intersectsWith(startPoint.x, startPoint.z, startPoint.x, startPoint.z)) {
@@ -125,17 +122,6 @@ public class YetiCave extends GlobalFeature
 	                entity.setLocationAndAngles((double)startPoint.x + 0.5D, (double)startPoint.y+caveH, (double)startPoint.z + 0.5D, 0.0F, 0.0F);
 	                world.spawnEntityInWorld(entity);
         		}
-        	}
-        	else
-        	{
-    			List<Point4i> tempList = new ArrayList<Point4i>(sphereCenter);
-    			for (Point4i point : tempList) {
-    				if (point.x != startPoint.x && point.z != startPoint.z && structureBoundingBox.intersectsWith(point.x-6, point.z-6, point.x+6, point.z+6))
-    				{
-    					sphereCenter.remove(point);
-    				}
-    			}
-    			tempList.clear();
         	}
             return true;
         }
@@ -161,7 +147,7 @@ public class YetiCave extends GlobalFeature
 						{
 							if (blocks.get(x, y, z).equals(EnumCubeType.AIR))
 							{
-								if (blocks.containsKey(x, y-1, z) && blocks.get(x, y-1, z).equals(EnumCubeType.GROUND) && world.getTopSolidOrLiquidBlock(x, z) - (y+caveH) > 14 && random.nextInt(6)==0)
+								if (blocks.containsKey(x, y-1, z) && blocks.get(x, y-1, z).equals(EnumCubeType.GROUND) && (world.getTopSolidOrLiquidBlock(x, z) - (y+caveH)) > 15 && random.nextInt(6)==0)
 								{
 									world.setBlock(x, y+caveH, z, Blocks.skull, 1, 0);
 									TileEntitySkull tileEntity = (TileEntitySkull)Blocks.skull.createTileEntity(world, 0);
@@ -169,7 +155,7 @@ public class YetiCave extends GlobalFeature
 				        			world.setTileEntity(x, y+caveH, z, tileEntity);
 								}
 								else {
-									world.setBlock(x, y+caveH, z, Blocks.air);
+									world.setBlock(x, y+caveH, z, Blocks.air, 0, 1);
 								}
 							}
 						}
