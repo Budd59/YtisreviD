@@ -14,7 +14,6 @@ import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import diversity.Diversity;
-import diversity.DiversityHandler;
 import diversity.cavegen.ICaveGenerator;
 import diversity.cavegen.YetiDenGenerator;
 import diversity.entity.EntityYeti;

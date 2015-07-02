@@ -3,6 +3,8 @@ package diversity.client.render.item;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import diversity.item.ItemBlowgun;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
@@ -23,6 +25,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
+@SideOnly(Side.CLIENT)
 public class RenderBlowgun implements IItemRenderer {
 	 private RenderManager renderManager;
 	 private Minecraft mc;

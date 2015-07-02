@@ -3,6 +3,7 @@ package diversity.proxy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import diversity.Diversity;
@@ -33,6 +36,8 @@ import diversity.client.render.entity.RenderWarriorSkeleton;
 import diversity.client.render.entity.RenderWorshipper;
 import diversity.client.render.entity.RenderYeti;
 import diversity.client.render.entity.RenderZulu;
+import diversity.client.render.item.RenderBlowgun;
+import diversity.client.render.item.RenderSpear;
 import diversity.entity.EntityApache;
 import diversity.entity.EntityAztec;
 import diversity.entity.EntityDarkSpider;
@@ -49,6 +54,8 @@ import diversity.entity.EntityWarriorSkeleton;
 import diversity.entity.EntityWorshipper;
 import diversity.entity.EntityYeti;
 import diversity.entity.EntityZulu;
+import diversity.item.ItemBlowgun;
+import diversity.item.ItemSpear;
 import diversity.suppliers.EnumEntity;
 import diversity.suppliers.EnumItem;
 import diversity.suppliers.EnumTribe;
@@ -57,6 +64,13 @@ import diversity.utils.ResourceTools;
 
 public class ClientProxy extends ServerProxy
 {
+	@Override
+	public void registerHandler() {
+		handler = new ClientHandler();
+    	MinecraftForge.TERRAIN_GEN_BUS.register(handler);    	  	
+    	MinecraftForge.EVENT_BUS.register(handler);   
+	}
+	
 	@Override
 	public void registerRenderers()
 	{
@@ -249,9 +263,37 @@ public class ClientProxy extends ServerProxy
 	    return new Integer[] {principalColor, secondColor};
 	}
 	
+	private static Map<Class, Class> map = new HashMap<Class, Class>();
+	static {
+		map.put(ItemBlowgun.class, RenderBlowgun.class);
+		map.put(ItemSpear.class, RenderSpear.class);
+	}
+	
 	@Override
 	public void registerItemRenderer(EnumItem item) {
-		MinecraftForgeClient.registerItemRenderer(item.item, item.renderer);
+		if (map.containsKey(item.item.getClass())) {
+			try {
+				MinecraftForgeClient.registerItemRenderer(item.item, (IItemRenderer)map.get(item.item.getClass()).getConstructor().newInstance());
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override

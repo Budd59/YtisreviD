@@ -107,8 +107,9 @@ public class Diversity
 		EnumVillager.register();
 		EnumEntity.register();
 
-    	MinecraftForge.TERRAIN_GEN_BUS.register(new DiversityHandler());    	  	
-    	MinecraftForge.EVENT_BUS.register(new DiversityHandler());    	  	
+    	//MinecraftForge.TERRAIN_GEN_BUS.register(new DiversityHandler());    	  	
+    	//MinecraftForge.EVENT_BUS.register(new DiversityHandler());
+		Diversity.proxy.registerHandler();
     }
     
     @EventHandler

@@ -11,7 +11,7 @@ import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
-import diversity.DiversityHandler;
+import diversity.Diversity;
 import diversity.cavegen.ICaveGenerator;
 import diversity.cavegen.ShroomCaveGenerator;
 import diversity.suppliers.EnumBlock;
@@ -135,6 +135,6 @@ public class ShroomCave extends GlobalFeature
 				}
 	        }
 		}
-		DiversityHandler.listMushroomChunk.add(new Integer[]{structureBoundingBox.minX-8, structureBoundingBox.minZ-8});
+		Diversity.proxy.handler.listMushroomChunk.add(new Integer[]{structureBoundingBox.minX-8, structureBoundingBox.minZ-8});
 	}
 }

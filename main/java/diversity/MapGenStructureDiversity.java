@@ -119,7 +119,7 @@ public class MapGenStructureDiversity extends MapGenScatteredFeature
     @Override
     public void func_151539_a(IChunkProvider chunkProvider, World world, int chunkX, int chunkZ, Block[] blocks)
     {
-    	DiversityHandler.mapGenCaveStructureDiversity.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);
+    	Diversity.proxy.handler.mapGenCaveStructureDiversity.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);
     	super.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);
     }
     
@@ -130,7 +130,7 @@ public class MapGenStructureDiversity extends MapGenScatteredFeature
     @Override
     public boolean generateStructuresInChunk(World world, Random random, int p_75051_3_, int p_75051_4_)
     {
-        return DiversityHandler.mapGenCaveStructureDiversity.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_) && super.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_);
+        return Diversity.proxy.handler.mapGenCaveStructureDiversity.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_) && super.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_);
     }
     
 }
