@@ -67,7 +67,7 @@ public enum EnumEntity
 			//int id = EntityRegistry.findGlobalUniqueEntityId();
 			int id = getUniqueEntityId();
 			Integer[] eggcolor = Diversity.proxy.searchEggColor(entity);
-			EntityRegistry.registerModEntity(entity.entityClass, Diversity.MODID + "." + entity.name().toLowerCase(), id, Diversity.instance, 64, 1, true);
+			EntityRegistry.registerModEntity(entity.entityClass, entity.name().toLowerCase(), id, Diversity.instance, 64, 1, true);
 			//EntityRegistry.registerGlobalEntityID(entity.entityClass, Diversity.MODID + "." + entity.name().toLowerCase(), id, eggcolor[0], eggcolor[1]);
 			EntityList.IDtoClassMapping.put(id, entity.entityClass);
 			EntityList.entityEggs.put(id, new EntityList.EntityEggInfo(id, eggcolor[0], eggcolor[1]));
