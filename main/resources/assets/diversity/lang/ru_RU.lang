@@ -70,3 +70,22 @@ item.wooden_spear.name=Деревянное копье
 item.stone_spear.name=Каменное копье
 item.diamond_spear.name=Алмазное копье
 item.golden_spear.name=Золотое копье
+
+entity.diversity.darkspider.name=
+entity.diversity.yeti.name=
+
+entity.diversity.dwarf.name=
+entity.diversity.dwarf.warrior.name=
+entity.diversity.dwarf.smith.name=
+entity.diversity.dwarf.healer.name=
+entity.diversity.dwarf.king.name=
+entity.diversity.dwarf.miner.name=
+
+
+item.phos_water_bucket.name=
+item.poison_water_bucket.name=
+tile.phos_mushroom.name=
+tile.blue_mushroom.name=
+tile.blue_vine.name=
+tile.fungal.name=
+tile.fungus.name=

@@ -70,3 +70,22 @@ item.wooden_spear.name=Lance en bois
 item.stone_spear.name=Lance en pierre
 item.diamond_spear.name=Lance en diamant
 item.golden_spear.name=Lance en or
+
+entity.diversity.darkspider.name=Veuve Noire
+entity.diversity.yeti.name=Yeti
+
+entity.diversity.dwarf.name=Villageois Nain
+entity.diversity.dwarf.warrior.name=Guerrier
+entity.diversity.dwarf.smith.name=Forgeron
+entity.diversity.dwarf.healer.name=Soigneur
+entity.diversity.dwarf.king.name=Roi
+entity.diversity.dwarf.miner.name=Mineur
+
+
+item.phos_water_bucket.name=Sceau d'Eau Phosphorescente
+item.poison_water_bucket.name=Sceau d'Eau Empoisonnée
+tile.phos_mushroom.name=Champignon Phosphorescent
+tile.blue_mushroom.name=Champignon Bleu
+tile.blue_vine.name=Liane Bleue
+tile.fungal.name=Sol Fongique
+tile.fungus.name=Fongus

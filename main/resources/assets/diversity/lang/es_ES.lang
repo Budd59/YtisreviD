@@ -70,3 +70,22 @@ item.wooden_spear.name=Lanza de madera
 item.stone_spear.name=Lanza de piedra
 item.diamond_spear.name=Lanza diamante
 item.golden_spear.name=Lanza de oro
+
+entity.diversity.darkspider.name=Araña oscura
+entity.diversity.yeti.name=Yeti
+
+entity.diversity.dwarf.name=Aldeano Enana
+entity.diversity.dwarf.warrior.name=Guerrero
+entity.diversity.dwarf.smith.name=Herrero
+entity.diversity.dwarf.healer.name=Curador
+entity.diversity.dwarf.king.name=Rey
+entity.diversity.dwarf.miner.name=Minero
+
+
+item.phos_water_bucket.name=Sello de Agua Forsforescente
+item.poison_water_bucket.name=Sello de Agua Envenenada
+tile.phos_mushroom.name=Hongo Forsforescente
+tile.blue_mushroom.name=Hongo Azul
+tile.blue_vine.name=Liana Azul
+tile.fungal.name=Hongos
+tile.fungus.name=Hongo
