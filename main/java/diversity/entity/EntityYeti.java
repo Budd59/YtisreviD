@@ -45,7 +45,7 @@ public class EntityYeti  extends EntityMob
 	{
 		super(world);
 		
-		this.setSize(2.0F, 4.0F);
+		this.setSize(1.7F, 3.0F);
 		this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 1.0D, false));
         this.tasks.addTask(2, new EntityAIMoveTowardsRestriction(this, 1.0D));
@@ -70,7 +70,7 @@ public class EntityYeti  extends EntityMob
      */
     protected void attackEntity(Entity p_70785_1_, float p_70785_2_)
     {
-        if (this.attackTime <= 0 && p_70785_2_ < 3.5F && p_70785_1_.boundingBox.maxY > this.boundingBox.minY && p_70785_1_.boundingBox.minY < this.boundingBox.maxY)
+        if (p_70785_1_!= this &&  this.attackTime <= 0 && p_70785_2_ < 3.5F && p_70785_1_.boundingBox.maxY > this.boundingBox.minY && p_70785_1_.boundingBox.minY < this.boundingBox.maxY)
         {
             this.attackTime = 20;
             this.attackEntityAsMob(p_70785_1_);
