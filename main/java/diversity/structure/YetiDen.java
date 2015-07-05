@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 
-import javax.vecmath.Point4i;
-
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,17 +16,18 @@ import diversity.cavegen.ICaveGenerator;
 import diversity.cavegen.YetiDenGenerator;
 import diversity.entity.EntityYeti;
 import diversity.utils.EnumCubeType;
+import diversity.utils.Point;
 import diversity.utils.Table3d;
 
 public class YetiDen extends GlobalFeature
 {
 	public Table3d blocks = new Table3d();
-	public Point4i startPoint;
+	public Point startPoint;
 	
 	private Integer caveH = -100;
 	
 	public ICaveGenerator caveGen;
-	public List<Point4i> sphereCenter = new ArrayList<Point4i>();	
+	public List<Point> sphereCenter = new ArrayList<Point>();	
 
     public YetiDen() {}
     
@@ -82,7 +81,7 @@ public class YetiDen extends GlobalFeature
     {
         super.func_143011_b(p_143011_1_);
         caveH = p_143011_1_.getInteger("caveH");
-        startPoint = new Point4i();
+        startPoint = new Point();
         startPoint.x = p_143011_1_.getInteger("startX");
         startPoint.y = p_143011_1_.getInteger("startY");
         startPoint.z = p_143011_1_.getInteger("startZ");
@@ -106,7 +105,7 @@ public class YetiDen extends GlobalFeature
         {
         	if(caveH == -100) {
 	        	for (int index = 0; index < sphereCenter.size(); index++) {
-	        		Point4i center = sphereCenter.get(index);
+	        		Point center = sphereCenter.get(index);
 	        		if (structureBoundingBox.intersectsWith(center.x, center.z, center.x, center.z)) {
 	        			caveH = world.getTopSolidOrLiquidBlock(center.x, center.z) - center.y - (sphereCenter.size()-1-index)*2;
 	        			break;

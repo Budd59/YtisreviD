@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 
-import javax.vecmath.Point4i;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityWitch;
@@ -21,13 +19,14 @@ import diversity.cavegen.ICaveGenerator;
 import diversity.cavegen.JungleValleyGenerator;
 import diversity.suppliers.EnumBlock;
 import diversity.utils.EnumCubeType;
+import diversity.utils.Point;
 import diversity.utils.Table3d;
 import diversity.world.WorldGenUnderGroundVine;
 
 public class JungleValley  extends GlobalFeature
 {
 	public Table3d blocks = new Table3d();
-	public Point4i startPoint;
+	public Point startPoint;
 
     public JungleValley() {}
     
@@ -36,7 +35,7 @@ public class JungleValley  extends GlobalFeature
         super(random, coordX, coordZ, 7, 5, 9);
         
         ICaveGenerator caveGen = new JungleValleyGenerator(7, 18, 4);
-        List<Point4i> sphereCenter = caveGen.getControlPoints(random, coordX, 68, coordZ);
+        List<Point> sphereCenter = caveGen.getControlPoints(random, coordX, 68, coordZ);
         blocks = caveGen.getCavePoints(sphereCenter, random);
         caveGen.generateBlockType(random, blocks, 40);
         blocks.mutateTable();

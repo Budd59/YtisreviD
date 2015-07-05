@@ -3,8 +3,6 @@ package diversity.structure;
 import java.util.List;
 import java.util.Random;
 
-import javax.vecmath.Point4i;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityWitch;
@@ -16,12 +14,13 @@ import diversity.cavegen.ICaveGenerator;
 import diversity.cavegen.ShroomCaveGenerator;
 import diversity.suppliers.EnumBlock;
 import diversity.utils.EnumCubeType;
+import diversity.utils.Point;
 import diversity.utils.Table3d;
 
 public class ShroomCave extends GlobalFeature
 {
 	public Table3d blocks = new Table3d();
-	public Point4i startPoint;
+	public Point startPoint;
 
     public ShroomCave() {}
     
@@ -30,7 +29,7 @@ public class ShroomCave extends GlobalFeature
         super(random, coordX, coordZ, 7, 5, 9);
         
         ICaveGenerator caveGen = new ShroomCaveGenerator(7, 14, 4);
-        List<Point4i> sphereCenter = caveGen.getControlPoints(random, coordX, 42, coordZ);
+        List<Point> sphereCenter = caveGen.getControlPoints(random, coordX, 42, coordZ);
         blocks = caveGen.getCavePoints(sphereCenter, random);
         caveGen.generateBlockType(random, blocks, 29);
         blocks.mutateTable();

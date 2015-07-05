@@ -7,6 +7,8 @@ public class Point {
 	public int z;
 	public int radius;
 	
+	public Point() {}
+	
 	public Point(int x, int y, int z, int radius) {
 		super();
 		this.x = x;

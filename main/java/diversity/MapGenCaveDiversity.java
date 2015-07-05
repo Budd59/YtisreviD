@@ -9,8 +9,6 @@ import java.util.Random;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 
-import javax.vecmath.Point4i;
-
 import com.google.common.collect.Table;
 
 import net.minecraft.block.Block;
@@ -29,6 +27,7 @@ import diversity.structure.DwarvenCave;
 import diversity.structure.GlobalFeature;
 import diversity.suppliers.EnumCave;
 import diversity.suppliers.EnumStructure;
+import diversity.utils.Point;
 
 public class MapGenCaveDiversity extends MapGenScatteredFeature
 {
@@ -131,7 +130,7 @@ public class MapGenCaveDiversity extends MapGenScatteredFeature
         		}
         		
     			if (feature instanceof DwarvenCave) {
-    				for (Point4i point : ((DwarvenCave)feature).scaffoldingPoint) {
+    				for (Point point : ((DwarvenCave)feature).scaffoldingPoint) {
     					structureFeature = cave.getStructureComponent(1, random, point.x, point.z);
     	        		if (feature != null) {
     	            		this.components.add(structureFeature);

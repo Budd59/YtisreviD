@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 
-import javax.vecmath.Point4i;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityWitch;
@@ -23,13 +21,14 @@ import diversity.cavegen.DwarvenCaveGenerator;
 import diversity.cavegen.ICaveGenerator;
 import diversity.utils.ChestGenTools;
 import diversity.utils.EnumCubeType;
+import diversity.utils.Point;
 import diversity.utils.Table3d;
 
 public class DwarvenCave extends GlobalFeature
 {
 	public Table3d blocks = new Table3d();
-	public Point4i startPoint;
-	public List<Point4i> scaffoldingPoint = new ArrayList<Point4i>();
+	public Point startPoint;
+	public List<Point> scaffoldingPoint = new ArrayList<Point>();
 
     public DwarvenCave() {}
     
@@ -38,9 +37,9 @@ public class DwarvenCave extends GlobalFeature
         super(random, coordX, coordZ, 7, 5, 9);
         
         ICaveGenerator caveGen = new DwarvenCaveGenerator(7, 20, 4);
-        List<Point4i> sphereCenter = caveGen.getControlPoints(random, coordX, 40, coordZ);
+        List<Point> sphereCenter = caveGen.getControlPoints(random, coordX, 40, coordZ);
 	    for (int index = 0; index < sphereCenter.size(); index = index + 2) {
-	    	if (sphereCenter.get(index).w == 20/3 && random.nextInt(10)==0) {
+	    	if (sphereCenter.get(index).radius == 20/3 && random.nextInt(10)==0) {
         		scaffoldingPoint.add(sphereCenter.get(index));
         	}
 	    }
