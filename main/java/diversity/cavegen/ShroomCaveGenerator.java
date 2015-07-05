@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javax.vecmath.Point4i;
-
 import diversity.utils.EnumCubeType;
+import diversity.utils.Point;
 import diversity.utils.Table3d;
 
 public class ShroomCaveGenerator implements ICaveGenerator {
@@ -21,9 +20,9 @@ public class ShroomCaveGenerator implements ICaveGenerator {
 	}
 	
 	@Override
-	public List<Point4i> getControlPoints(Random random, int initX, int initY, int initZ) {
-		List<Point4i> list = new ArrayList<Point4i>();
-		list.add(new Point4i(initX, initY, initZ, maxRadius));	
+	public List<Point> getControlPoints(Random random, int initX, int initY, int initZ) {
+		List<Point> list = new ArrayList<Point>();
+		list.add(new Point(initX, initY, initZ, maxRadius));	
 		
 		int coloneY = initY - 3;
 		int coloneRadius = maxRadius;
@@ -32,7 +31,7 @@ public class ShroomCaveGenerator implements ICaveGenerator {
 		for (double tempTeta = 0.5*Math.PI; tempTeta <= 2.5*Math.PI; tempTeta = tempTeta + teta) {
 			int coloneX = initX + (int) (Math.cos(tempTeta)* maxRadius*2.5) + random.nextInt(3)-1;
 			int coloneZ = initZ + (int) (Math.sin(tempTeta)* maxRadius*2.5) + random.nextInt(3)-1;
-			list.add(new Point4i(coloneX, coloneY + random.nextInt(3)-1, coloneZ, coloneRadius));	
+			list.add(new Point(coloneX, coloneY + random.nextInt(3)-1, coloneZ, coloneRadius));	
 		}
 		
 		
@@ -45,7 +44,7 @@ public class ShroomCaveGenerator implements ICaveGenerator {
 		for (double tempTeta = 0; tempTeta < 2*Math.PI; tempTeta = tempTeta + teta) {
 			int coloneX = initX + (int) (Math.cos(tempTeta)* maxRadius/2.2) + random.nextInt(3)-1;
 			int coloneZ = initZ + (int) (Math.sin(tempTeta)* maxRadius/2.2) + random.nextInt(3)-1;
-			list.add(new Point4i(coloneX, coloneY + random.nextInt(3)-1, coloneZ, coloneRadius));	
+			list.add(new Point(coloneX, coloneY + random.nextInt(3)-1, coloneZ, coloneRadius));	
 		}
 		
 		coloneY = initY;
@@ -53,7 +52,7 @@ public class ShroomCaveGenerator implements ICaveGenerator {
 		for (double tempTeta = 0; tempTeta < 2*Math.PI; tempTeta = tempTeta + teta) {
 			int coloneX = initX + (int) (Math.cos(tempTeta)* maxRadius*1.7) + random.nextInt(3)-1;
 			int coloneZ = initZ + (int) (Math.sin(tempTeta)* maxRadius*1.7) + random.nextInt(3)-1;
-			list.add(new Point4i(coloneX, coloneY + random.nextInt(7) - 1, coloneZ, coloneRadius));	
+			list.add(new Point(coloneX, coloneY + random.nextInt(7) - 1, coloneZ, coloneRadius));	
 		}
 		
 		coloneY = initY- maxRadius/4+2-1;
@@ -71,7 +70,7 @@ public class ShroomCaveGenerator implements ICaveGenerator {
 					int tempColoneZ = coloneZ + (int) (Math.sin(tempTetaColone)* coloneRadius*1.7) + random.nextInt(3)-1;
 					
 					if (random.nextInt(10)!=0) {
-						list.add(new Point4i(tempColoneX, coloneY + random.nextInt(7)-4, tempColoneZ, coloneRadius));
+						list.add(new Point(tempColoneX, coloneY + random.nextInt(7)-4, tempColoneZ, coloneRadius));
 					}
 				}
 			}
@@ -81,15 +80,15 @@ public class ShroomCaveGenerator implements ICaveGenerator {
 	}
 	
 	@Override
-	public Table3d getCavePoints(List<Point4i> sphereCenter, Random random)
+	public Table3d getCavePoints(List<Point> sphereCenter, Random random)
 	{
 		Table3d blocks = new Table3d();
-		for(Point4i center : sphereCenter)
+		for(Point center : sphereCenter)
 		{
 			int x = center.x;
 			int y = center.y;
 			int z = center.z;
-			int radius = center.w;
+			int radius = center.radius;
 	
 			int minY = -radius;
 			int maxY = radius;
@@ -110,7 +109,7 @@ public class ShroomCaveGenerator implements ICaveGenerator {
 							blocks.put(x + tempX, y + tempY, z + tempZ, EnumCubeType.AIR);
 						}
 					}
-			} else if (center.w == maxRadius/2+1) {
+			} else if (center.radius == maxRadius/2+1) {
 				for (double tempY = maxY*1.5; tempY >= minY; tempY--)
 				for (int tempX = minX; tempX <= maxX; tempX++)
 				for (int tempZ = minZ; tempZ <= maxZ; tempZ++)

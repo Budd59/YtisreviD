@@ -6,9 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import javax.vecmath.Point4i;
-
 import diversity.utils.EnumCubeType;
+import diversity.utils.Point;
 import diversity.utils.Table3d;
 
 public class SpiderDenGenerator implements ICaveGenerator  {
@@ -16,7 +15,7 @@ public class SpiderDenGenerator implements ICaveGenerator  {
 	private final int maxRadius;
 	private final int radiusRandomer;
 	
-	private Map<Point4i, List<Point4i>> map = new HashMap<Point4i, List<Point4i>>();
+	private Map<Point, List<Point>> map = new HashMap<Point, List<Point>>();
 
 	public SpiderDenGenerator(int minRadius, int maxRadius, int radiusRandomer) {
 		this.minRadius = minRadius;
@@ -25,9 +24,9 @@ public class SpiderDenGenerator implements ICaveGenerator  {
 	}
 
 	@Override
-	public List<Point4i> getControlPoints(Random random, int initX, int initY, int initZ) {
-		List<Point4i> list = new ArrayList<Point4i>();
-		list.add(new Point4i(initX, initY, initZ, maxRadius));	
+	public List<Point> getControlPoints(Random random, int initX, int initY, int initZ) {
+		List<Point> list = new ArrayList<Point>();
+		list.add(new Point(initX, initY, initZ, maxRadius));	
 
 		float randX = random.nextFloat() + 0.125f;
 		float randZ = 1.625f - randX;
@@ -37,22 +36,22 @@ public class SpiderDenGenerator implements ICaveGenerator  {
 		for (double tempTeta = 0; tempTeta < 2*Math.PI; tempTeta = tempTeta + teta) {
 			int coloneX = initX + (int) (Math.cos(tempTeta)* maxRadius * 1.3 *randX) + random.nextInt(3)-1;
 			int coloneZ = initZ + (int) (Math.sin(tempTeta)* maxRadius * 1.3 *randZ) + random.nextInt(3)-1;
-			list.add(new Point4i(coloneX, initY + random.nextInt(3)-1, coloneZ, maxRadius/2));	
+			list.add(new Point(coloneX, initY + random.nextInt(3)-1, coloneZ, maxRadius/2));	
 		}
 				
 		return list;
 	}
 	
 	@Override
-	public Table3d getCavePoints(List<Point4i> sphereCenter, Random random)
+	public Table3d getCavePoints(List<Point> sphereCenter, Random random)
 	{
 		Table3d blocks = new Table3d();
-		for(Point4i center : sphereCenter)
+		for(Point center : sphereCenter)
 		{
 			int x = center.x;
 			int y = center.y;
 			int z = center.z;
-			int radius = center.w;
+			int radius = center.radius;
 	
 			int minY = -radius;
 			int maxY = radius;

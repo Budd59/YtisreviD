@@ -6,9 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import javax.vecmath.Point4i;
-
 import diversity.utils.EnumCubeType;
+import diversity.utils.Point;
 import diversity.utils.Table3d;
 
 public class YetiDenGenerator implements ICaveGenerator {
@@ -16,7 +15,7 @@ public class YetiDenGenerator implements ICaveGenerator {
 	private final int maxRadius;
 	private final int radiusRandomer;
 	
-	private Map<Point4i, List<Point4i>> map = new HashMap<Point4i, List<Point4i>>();
+	private Map<Point, List<Point>> map = new HashMap<Point, List<Point>>();
 
 	public YetiDenGenerator(int minRadius, int maxRadius, int radiusRandomer) {
 		this.minRadius = minRadius;
@@ -25,9 +24,9 @@ public class YetiDenGenerator implements ICaveGenerator {
 	}
 
 	@Override
-	public List<Point4i> getControlPoints(Random random, int initX, int initY, int initZ) {
-		List<Point4i> list = new ArrayList<Point4i>();
-		list.add(new Point4i(initX, initY, initZ, maxRadius-1));	
+	public List<Point> getControlPoints(Random random, int initX, int initY, int initZ) {
+		List<Point> list = new ArrayList<Point>();
+		list.add(new Point(initX, initY, initZ, maxRadius-1));	
 		
 		int tempX = 0;
 		int tempY = 0;
@@ -43,7 +42,7 @@ public class YetiDenGenerator implements ICaveGenerator {
 			tempY+=2;
 			tempZ+=(maxRadius-2) * Math.sin(teta) - random.nextInt(2);
 
-			list.add(new Point4i(initX+tempX, initY+tempY, initZ+tempZ, maxRadius-2));
+			list.add(new Point(initX+tempX, initY+tempY, initZ+tempZ, maxRadius-2));
 			counter--;
 		}
 				
@@ -51,15 +50,15 @@ public class YetiDenGenerator implements ICaveGenerator {
 	}
 	
 	@Override
-	public Table3d getCavePoints(List<Point4i> sphereCenter, Random random)
+	public Table3d getCavePoints(List<Point> sphereCenter, Random random)
 	{
 		Table3d blocks = new Table3d();
-		for(Point4i center : sphereCenter)
+		for(Point center : sphereCenter)
 		{
 			int x = center.x;
 			int y = center.y;
 			int z = center.z;
-			int radius = center.w;
+			int radius = center.radius;
 	
 			int minY = -radius;
 			int maxY = radius;

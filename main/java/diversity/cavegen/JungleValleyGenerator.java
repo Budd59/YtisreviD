@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javax.vecmath.Point4i;
-
 import diversity.utils.EnumCubeType;
+import diversity.utils.Point;
 import diversity.utils.Table3d;
 
 public class JungleValleyGenerator implements ICaveGenerator {
@@ -21,8 +20,8 @@ public class JungleValleyGenerator implements ICaveGenerator {
 	}
 	
 	@Override
-	public List<Point4i> getControlPoints(Random random, int initX, int initY, int initZ) {
-		List<Point4i> list = new ArrayList<Point4i>();
+	public List<Point> getControlPoints(Random random, int initX, int initY, int initZ) {
+		List<Point> list = new ArrayList<Point>();
 
 		float randX = random.nextFloat() + 0.5f;
 		float randZ = 2f - randX;
@@ -35,7 +34,7 @@ public class JungleValleyGenerator implements ICaveGenerator {
 		for (double tempTeta = 0; tempTeta < 2*Math.PI; tempTeta = tempTeta + teta) {
 			int coloneX = initX + (int) (Math.cos(tempTeta)* maxRadius * 1.3 *randX) + random.nextInt(3)-1;
 			int coloneZ = initZ + (int) (Math.sin(tempTeta)* maxRadius * 1.3 *randZ) + random.nextInt(3)-1;
-			list.add(new Point4i(coloneX, coloneY + random.nextInt(3)-1, coloneZ, coloneRadius));	
+			list.add(new Point(coloneX, coloneY + random.nextInt(3)-1, coloneZ, coloneRadius));	
 		}
 
 		coloneY = coloneY - 5;
@@ -46,7 +45,7 @@ public class JungleValleyGenerator implements ICaveGenerator {
 		for (double tempTeta = 0; tempTeta < 2*Math.PI; tempTeta = tempTeta + teta) {
 			int coloneX = initX + (int) (Math.cos(tempTeta)* maxRadius*2*randX) + random.nextInt(3)-1;
 			int coloneZ = initZ + (int) (Math.sin(tempTeta)* maxRadius*2*randZ) + random.nextInt(3)-1;
-			list.add(new Point4i(coloneX, coloneY + random.nextInt(3)-1, coloneZ, coloneRadius));	
+			list.add(new Point(coloneX, coloneY + random.nextInt(3)-1, coloneZ, coloneRadius));	
 		}
 
 		coloneY = coloneY - 3;
@@ -57,22 +56,22 @@ public class JungleValleyGenerator implements ICaveGenerator {
 		for (double tempTeta = 0; tempTeta < 2*Math.PI; tempTeta = tempTeta + teta) {
 			int coloneX = initX + (int) (Math.cos(tempTeta)* maxRadius*3*randX) + random.nextInt(3)-1;
 			int coloneZ = initZ + (int) (Math.sin(tempTeta)* maxRadius*3*randZ) + random.nextInt(3)-1;
-			list.add(new Point4i(coloneX, coloneY + random.nextInt(3)-1, coloneZ, coloneRadius));	
+			list.add(new Point(coloneX, coloneY + random.nextInt(3)-1, coloneZ, coloneRadius));	
 		}
 		
 		return list;
 	}
 	
 	@Override
-	public Table3d getCavePoints(List<Point4i> sphereCenter, Random random)
+	public Table3d getCavePoints(List<Point> sphereCenter, Random random)
 	{
 		Table3d blocks = new Table3d();
-		for(Point4i center : sphereCenter)
+		for(Point center : sphereCenter)
 		{
 			int x = center.x;
 			int y = center.y;
 			int z = center.z;
-			int radius = center.w;
+			int radius = center.radius;
 	
 			int minY = -radius;
 			int maxY = radius;
@@ -83,7 +82,7 @@ public class JungleValleyGenerator implements ICaveGenerator {
 			int minZ = -radius - radiusRandomer / 2 + random.nextInt(radiusRandomer + 1);
 			int maxZ = radius - radiusRandomer / 2 + random.nextInt(radiusRandomer + 1);
 			
-			if (center.w == maxRadius/2-1) {
+			if (center.radius == maxRadius/2-1) {
 				for (int tempY = maxY; tempY >= minY; tempY--)
 				for (int tempX = minX*2; tempX <= maxX*2; tempX++)
 				for (int tempZ = minZ*2; tempZ <= maxZ*2; tempZ++)
