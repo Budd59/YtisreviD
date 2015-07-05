@@ -13,7 +13,7 @@ import net.minecraft.world.gen.structure.MapGenStructureIO;
 import diversity.configurations.ConfigBiomeGroup;
 import diversity.structure.DwarvenCave;
 import diversity.structure.GlobalFeature;
-import diversity.structure.LostCave;
+import diversity.structure.JungleValley;
 import diversity.structure.ShroomCave;
 import diversity.structure.SpiderDen;
 import diversity.structure.YetiDen;
@@ -21,7 +21,7 @@ import diversity.structure.YetiDen;
 public enum EnumCave
 {
 	DWARVEN_CAVE (ConfigBiomeGroup.DWARVEN_CAVE, DwarvenCave.class, EnumStructure.DWARVEN_CITY, EnumStructure.DWARVEN_SCAFFOLDING),
-	LOST_CAVE (ConfigBiomeGroup.LOST_CAVE, LostCave.class),
+	JUNGLE_VALLEY (ConfigBiomeGroup.JUNGLE_VALLEY, JungleValley.class),
 	SHROOM_CAVE (ConfigBiomeGroup.SHROOM_CAVE, ShroomCave.class, EnumStructure.WITCH_HOUSE),
 	YETI_DEN (ConfigBiomeGroup.YETI_DEN, YetiDen.class),
 	SPIDER_DEN (ConfigBiomeGroup.SPIDER_DEN, SpiderDen.class);
@@ -77,21 +77,21 @@ public enum EnumCave
 		return list.get(random.nextInt(list.size()));
 	}
 		
-	public GlobalFeature getCaveComponent(Random random, int coordX, int coordZ) {		
-		try {
-			return (GlobalFeature)pieceClass.getConstructor(Random.class, int.class, int.class).newInstance(random, coordX, coordZ);
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
+	public GlobalFeature getCaveComponent(Random random, int coordX, int coordZ) {	
+		if (pieceClass.equals(DwarvenCave.class)) {
+			return new DwarvenCave(random, coordX, coordZ);
+		}
+		if (pieceClass.equals(JungleValley.class)) {
+			return new JungleValley(random, coordX, coordZ);
+		}
+		if (pieceClass.equals(ShroomCave.class)) {
+			return new ShroomCave(random, coordX, coordZ);
+		}
+		if (pieceClass.equals(YetiDen.class)) {
+			return new YetiDen(random, coordX, coordZ);
+		}
+		if (pieceClass.equals(SpiderDen.class)) {
+			return new SpiderDen(random, coordX, coordZ);
 		}
 		return null;
 	}

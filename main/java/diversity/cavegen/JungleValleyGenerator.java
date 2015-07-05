@@ -9,12 +9,12 @@ import javax.vecmath.Point4i;
 import diversity.utils.EnumCubeType;
 import diversity.utils.Table3d;
 
-public class LostCaveGenerator implements ICaveGenerator {
+public class JungleValleyGenerator implements ICaveGenerator {
 	private final int minRadius;
 	private final int maxRadius;
 	private final int radiusRandomer;
 
-	public LostCaveGenerator(int minRadius, int maxRadius, int radiusRandomer) {
+	public JungleValleyGenerator(int minRadius, int maxRadius, int radiusRandomer) {
 		this.minRadius = minRadius;
 		this.maxRadius = maxRadius;
 		this.radiusRandomer = radiusRandomer;

@@ -91,20 +91,29 @@ public enum EnumStructure
 	}
 	
 	public GlobalFeature getStructureComponent(Random random, int coordX, int coordZ) {
-		try {
-			return (GlobalFeature)pieceClass.getConstructor(Random.class, int.class, int.class).newInstance(random, coordX, coordZ);
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
+		if (pieceClass.equals(EgyptianPyramid.class)) {
+			return new EgyptianPyramid(random, coordX, coordZ);
+		}
+		if (pieceClass.equals(AztecPyramid.class)) {
+			return new AztecPyramid(random, coordX, coordZ);
+		}
+		if (pieceClass.equals(Catacomb.class)) {
+			return new Catacomb(random, coordX, coordZ);
+		}
+		if (pieceClass.equals(WitchHutt.class)) {
+			return new WitchHutt(random, coordX, coordZ);
+		}
+		if (pieceClass.equals(Inn.class)) {
+			return new Inn(random, coordX, coordZ);
+		}
+		if (pieceClass.equals(DwarvenCity.class)) {
+			return new DwarvenCity(random, coordX, coordZ);
+		}
+		if (pieceClass.equals(DwarvenScaffolding.class)) {
+			return new DwarvenScaffolding(random, coordX, coordZ);
+		}
+		if (pieceClass.equals(WitchHouse.class)) {
+			return new WitchHouse(random, coordX, coordZ);
 		}
 		return null;
 	}

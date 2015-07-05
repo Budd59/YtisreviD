@@ -22,7 +22,7 @@ public enum ConfigBiomeGroup
 	CATACOMB (BiomeGenBase.forest),
 	WITCH_HUTT (BiomeGenBase.swampland),
 	INN (BiomeGenBase.plains),
-	LOST_CAVE (BiomeGenBase.jungle, BiomeGenBase.jungleHills),
+	JUNGLE_VALLEY (BiomeGenBase.jungle, BiomeGenBase.jungleHills),
 	SHROOM_CAVE (BiomeGenBase.swampland),
 	YETI_DEN (BiomeGenBase.iceMountains, BiomeGenBase.icePlains.createMutation()),
 	SPIDER_DEN (BiomeGenBase.roofedForest),

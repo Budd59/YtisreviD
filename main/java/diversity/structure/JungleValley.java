@@ -18,24 +18,24 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import diversity.Diversity;
 import diversity.cavegen.DwarvenCaveGenerator;
 import diversity.cavegen.ICaveGenerator;
-import diversity.cavegen.LostCaveGenerator;
+import diversity.cavegen.JungleValleyGenerator;
 import diversity.suppliers.EnumBlock;
 import diversity.utils.EnumCubeType;
 import diversity.utils.Table3d;
 import diversity.world.WorldGenUnderGroundVine;
 
-public class LostCave  extends GlobalFeature
+public class JungleValley  extends GlobalFeature
 {
 	public Table3d blocks = new Table3d();
 	public Point4i startPoint;
 
-    public LostCave() {}
+    public JungleValley() {}
     
-    public LostCave(Random random, int coordX, int coordZ)
+    public JungleValley(Random random, int coordX, int coordZ)
     {
         super(random, coordX, coordZ, 7, 5, 9);
         
-        ICaveGenerator caveGen = new LostCaveGenerator(7, 18, 4);
+        ICaveGenerator caveGen = new JungleValleyGenerator(7, 18, 4);
         List<Point4i> sphereCenter = caveGen.getControlPoints(random, coordX, 68, coordZ);
         blocks = caveGen.getCavePoints(sphereCenter, random);
         caveGen.generateBlockType(random, blocks, 40);
