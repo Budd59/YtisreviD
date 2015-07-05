@@ -123,7 +123,6 @@ public class MapGenCaveDiversity extends MapGenScatteredFeature
             EnumCave cave = EnumCave.getRandomCave(biome, random);
         	GlobalFeature feature = cave.getCaveComponent(random, coordX * 16, coordZ * 16);
         	if (feature != null) {
-        		Diversity.Divlogger.log(Level.INFO, coordX*16 + " " + coordZ*16);
         		this.components.add(feature);
 
         		GlobalFeature structureFeature = cave.getStructureComponent(0, random, coordX*16, coordZ*16);
