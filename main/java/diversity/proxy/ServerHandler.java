@@ -2,7 +2,9 @@ package diversity.proxy;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
@@ -12,10 +14,15 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent.CheckSpawn;
+import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate;
@@ -27,6 +34,7 @@ import diversity.MapGenStructureDiversity;
 import diversity.MapGenVillageDiversity;
 import diversity.entity.EntityWorshipper;
 import diversity.suppliers.EnumBlock;
+import diversity.suppliers.EnumItem;
 import diversity.world.WorldGenBlueMushroom;
 import diversity.world.WorldGenBlueVine;
 import diversity.world.WorldGenFungus;
@@ -39,7 +47,7 @@ public class ServerHandler
 	public final static MapGenCaveDiversity mapGenCaveStructureDiversity = new MapGenCaveDiversity();
 	
 	@SubscribeEvent
-	public void checkUpdate(InitMapGenEvent event)
+	public void OnInitMapGen(InitMapGenEvent event)
 	{
 		if (EventType.VILLAGE == event.type) {
 			event.newGen = mapGenVillageDiversity;
@@ -94,10 +102,10 @@ public class ServerHandler
 		}
     }
 
-	private WorldGenerator blueMushroom = new WorldGenBlueMushroom();
-	private WorldGenerator phosMushroom = new WorldGenPhosMushroom();
-	private WorldGenerator vineMushroom = new WorldGenBlueVine();
-	private WorldGenerator fungusGen = new WorldGenFungus(1,1);
+	private final WorldGenerator blueMushroom = new WorldGenBlueMushroom();
+	private final WorldGenerator phosMushroom = new WorldGenPhosMushroom();
+	private final WorldGenerator vineMushroom = new WorldGenBlueVine();
+	private final WorldGenerator fungusGen = new WorldGenFungus(1,1);
 	
 	public static List<Integer[]> listMushroomChunk = new ArrayList<Integer[]>();
 	
@@ -193,11 +201,35 @@ public class ServerHandler
     }
 	
 	@SubscribeEvent
-    public void OnPOstDecorate(DecorateBiomeEvent.Post event) {
+    public void OnPostDecorate(DecorateBiomeEvent.Post event) {
 		for (Integer[] chunkP : listMushroomChunk) {
 			if (event.chunkX == chunkP[0] && event.chunkZ == chunkP[1]) {
 				listMushroomChunk.remove(chunkP);
 				return;
+			}
+		}
+	}
+	
+	private final static Map<Block, Item> buckets = new HashMap<Block, Item>();
+	static {
+		buckets.put(EnumBlock.phos_water.block, EnumItem.phos_water_bucket.item);
+		buckets.put(EnumBlock.poison_water.block, EnumItem.poison_water_bucket.item);
+	}
+	
+	@SubscribeEvent	
+	public void onBucketFill(FillBucketEvent event) {
+		Block block = event.world.getBlock(event.target.blockX, event.target.blockY, event.target.blockZ);
+
+		if (event.world.getBlockMetadata(event.target.blockX, event.target.blockY, event.target.blockZ) == 0) 
+		{
+			for (Block bukketBlock : buckets.keySet()) {
+				if (block.equals(bukketBlock)) {
+					event.world.setBlockToAir(event.target.blockX, event.target.blockY, event.target.blockZ);
+					ItemStack result = new ItemStack(buckets.get(bukketBlock));
+					event.result = result;
+					event.setResult(Result.ALLOW);
+					return;
+				}
 			}
 		}
 	}

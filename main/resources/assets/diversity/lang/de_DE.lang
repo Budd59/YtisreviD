@@ -81,9 +81,9 @@ entity.diversity.dwarf.healer.name=
 entity.diversity.dwarf.king.name=
 entity.diversity.dwarf.miner.name=
 
-
 item.phos_water_bucket.name=
 item.poison_water_bucket.name=
+
 tile.phos_mushroom.name=
 tile.blue_mushroom.name=
 tile.blue_vine.name=

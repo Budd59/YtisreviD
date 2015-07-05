@@ -362,6 +362,12 @@ public class DwarvenCity extends GlobalFeature
 		this.func_151554_b(world, Blocks.stonebrick, 0, 39, -1, 9, structureBoundingBox);
 		this.fillWithMetadataBlocks(world, structureBoundingBox, 16, 0, 7, 38, 0, 9, Blocks.cobblestone, 0, Blocks.cobblestone, 0, false);
 		
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 19, 0, 6, 34, 0, 6, Blocks.stone_slab, 11, Blocks.stone_slab, 11, false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 19, 1, 6, 34, 1, 6, Blocks.cobblestone_wall, 0, Blocks.cobblestone_wall, 0, false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 19, 0, 10, 34, 0, 10, Blocks.stone_slab, 11, Blocks.stone_slab, 11, false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 19, 1, 10, 34, 1, 10, Blocks.cobblestone_wall, 0, Blocks.cobblestone_wall, 0, false);
+
+		
 		for (int k = 0; k <= 15; k++) {
 			if (k%3==0) {
 				this.placeBlockAtCurrentPosition(world, Blocks.iron_bars, 0, 19+k, -1, 7, structureBoundingBox);
@@ -406,7 +412,7 @@ public class DwarvenCity extends GlobalFeature
 		this.placeBlockAtCurrentPosition(world, Blocks.stone_brick_stairs, getMetadataWithOffset(Blocks.stone_brick_stairs, 3)+4, 39, 4, 9, structureBoundingBox);
 
 		this.fillWithMetadataBlocks(world, structureBoundingBox, 37, 5, 7, 37, 5, 9, Blocks.log, getMetadataWithOffset(Blocks.log, 4), Blocks.log, getMetadataWithOffset(Blocks.log, 4), false);
-		this.fillWithMetadataBlocks(world, structureBoundingBox, 37, 4, 7, 37, 4, 9, Blocks.iron_bars, 0, Blocks.iron_bars, 0, false);
+		this.fillWithMetadataBlocks(world, structureBoundingBox, 37, 1, 7, 37, 4, 9, Blocks.iron_bars, 0, Blocks.iron_bars, 0, false);
 		
 		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 35, 7, 6, structureBoundingBox);
 		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 37, 7, 6, structureBoundingBox);
@@ -527,17 +533,14 @@ public class DwarvenCity extends GlobalFeature
 		this.spawnEntity(world, structureBoundingBox, 15, 6, 9, 1);
 
 		this.spawnEntity(world, structureBoundingBox, 9, 1, 7, 4);
-		this.spawnEntity(world, structureBoundingBox, 14, 1, 7, 1);
-		this.spawnEntity(world, structureBoundingBox, 14, 1, 9, 1);
+		this.spawnEntity(world, structureBoundingBox, 14, 1, 7, 2);
+		this.spawnEntity(world, structureBoundingBox, 14, 1, 9, 2);
 
 		
 		this.spawnEntity(world, structureBoundingBox, 34, 1, 8, 4);
 		this.spawnEntity(world, structureBoundingBox, 35, 1, 7, 1);
 		this.spawnEntity(world, structureBoundingBox, 35, 1, 8, 1);
 		this.spawnEntity(world, structureBoundingBox, 35, 1, 9, 1);
-		this.spawnEntity(world, structureBoundingBox, 36, 1, 7, 1);
-		this.spawnEntity(world, structureBoundingBox, 36, 1, 8, 1);
-		this.spawnEntity(world, structureBoundingBox, 36, 1, 9, 1);
 		return true;
 	}
 

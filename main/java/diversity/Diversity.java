@@ -65,10 +65,6 @@ public class Diversity
 		EnumBlock.register();
 		EnumItem.register();
 		
-		BucketHandler.buckets.put(EnumBlock.phos_water.block, EnumItem.phos_water_bucket.item);
-		BucketHandler.buckets.put(EnumBlock.poison_water.block, EnumItem.poison_water_bucket.item);
-		MinecraftForge.EVENT_BUS.register(new BucketHandler());
-		
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.mushroom_stew),
 				Item.getItemFromBlock(Blocks.red_mushroom),
 				Item.getItemFromBlock(EnumBlock.blue_mushroom.block),
@@ -107,8 +103,6 @@ public class Diversity
 		EnumVillager.register();
 		EnumEntity.register();
 
-    	//MinecraftForge.TERRAIN_GEN_BUS.register(new DiversityHandler());    	  	
-    	//MinecraftForge.EVENT_BUS.register(new DiversityHandler());
 		Diversity.proxy.registerHandler();
     }
     
