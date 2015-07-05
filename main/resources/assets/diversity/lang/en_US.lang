@@ -82,9 +82,9 @@ entity.diversity.dwarf.healer.name=Healer
 entity.diversity.dwarf.king.name=King
 entity.diversity.dwarf.miner.name=Miner
 
-item.phos_water_bucket.name=Phos Water Bucket
+item.phos_water_bucket.name=Phosphorescent Water Bucket
 item.poison_water_bucket.name=Poison Water Bucket
-tile.phos_mushroom.name=Phos Mushroom
+tile.phos_mushroom.name=Phosphorescent Mushroom
 tile.blue_mushroom.name=Blue Mushroom
 tile.blue_vine.name=Blue Vine
 tile.fungal.name=Fungal
