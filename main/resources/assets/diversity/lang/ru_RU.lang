@@ -71,21 +71,21 @@ item.stone_spear.name=Каменное копье
 item.diamond_spear.name=Алмазное копье
 item.golden_spear.name=Золотое копье
 
-entity.diversity.darkspider.name=Темно-паук
-entity.diversity.yeti.name=йети
+entity.diversity.darkspider.name=Темный Паук
+entity.diversity.yeti.name=Снежный Человек
 
-entity.diversity.dwarf.name=Гном Сельский
-entity.diversity.dwarf.warrior.name=Krieger
-entity.diversity.dwarf.smith.name=кузнец
-entity.diversity.dwarf.healer.name=целитель
-entity.diversity.dwarf.king.name=король
-entity.diversity.dwarf.miner.name=шахтер
+entity.diversity.dwarf.name=Деревенский Гном
+entity.diversity.dwarf.warrior.name=Воин
+entity.diversity.dwarf.smith.name=Кузнец
+entity.diversity.dwarf.healer.name=Целитель
+entity.diversity.dwarf.king.name=Король
+entity.diversity.dwarf.miner.name=Шахтер
 
-item.phos_water_bucket.name=Фосфоресцирующая ведро воды
-item.poison_water_bucket.name=Яд ведро воды
+item.phos_water_bucket.name=Фосфоресцирующoe Ведро Воды
+item.poison_water_bucket.name=Отравленное Ведро Воды
 
-tile.phos_mushroom.name=Фосфоресцирующая гриб
-tile.blue_mushroom.name=Синий гриб
-tile.blue_vine.name=Blau Weinstock
-tile.fungal.name=грибковый
-tile.fungus.name=гриб
+tile.phos_mushroom.name=Фосфоресцирующий Гриб
+tile.blue_mushroom.name=Синий Гриб
+tile.blue_vine.name=Синие Лианы
+tile.fungal.name=Грибковый
+tile.fungus.name=Гриб

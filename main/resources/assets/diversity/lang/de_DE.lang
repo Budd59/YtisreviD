@@ -74,18 +74,18 @@ item.golden_spear.name=Goldenen Speer
 entity.diversity.darkspider.name=Dunkle Spinne
 entity.diversity.yeti.name=Yeti
 
-entity.diversity.dwarf.name=Zwerg Dorfbewohner
+entity.diversity.dwarf.name=Zwerg-Dorfbewohner
 entity.diversity.dwarf.warrior.name=Krieger
 entity.diversity.dwarf.smith.name=Schmied
 entity.diversity.dwarf.healer.name=Heiler
 entity.diversity.dwarf.king.name=König
-entity.diversity.dwarf.miner.name=Bergmann
+entity.diversity.dwarf.miner.name=Bergarbeiter
 
-item.phos_water_bucket.name=Phosphoreszierend Wasser Eimer
-item.poison_water_bucket.name=Gift Wasser Eimer
+item.phos_water_bucket.name=Phosphoreszierender Wassereimer
+item.poison_water_bucket.name=Vergifteter Wassereimer
 
-tile.phos_mushroom.name=Phosphoreszierend Pilz
-tile.blue_mushroom.name=Blau Pilz
-tile.blue_vine.name=Blau Weinstock
-tile.fungal.name=Pilz-
+tile.phos_mushroom.name=Phosphoreszierender Pilz
+tile.blue_mushroom.name=Blauer Pilz
+tile.blue_vine.name=Blaue Ranke
+tile.fungal.name=Pilzartiger
 tile.fungus.name=Pilz
