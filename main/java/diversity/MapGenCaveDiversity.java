@@ -84,7 +84,7 @@ public class MapGenCaveDiversity extends MapGenScatteredFeature
 
         int x1 = x / this.maxDistanceBetweenScatteredFeatures;
         int z1 = z / this.maxDistanceBetweenScatteredFeatures;
-        Random random = this.worldObj.setRandomSeed(x1, z1, 14357617);
+        Random random = this.worldObj.setRandomSeed(x1, z1, 9707617);
         x1 *= this.maxDistanceBetweenScatteredFeatures;
         z1 *= this.maxDistanceBetweenScatteredFeatures;
         x1 += random.nextInt(this.maxDistanceBetweenScatteredFeatures - this.minDistanceBetweenScatteredFeatures);

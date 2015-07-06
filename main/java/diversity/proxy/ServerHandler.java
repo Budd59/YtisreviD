@@ -27,14 +27,19 @@ import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate;
 import net.minecraftforge.event.terraingen.InitMapGenEvent.EventType;
+import net.minecraftforge.event.world.WorldEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import diversity.MapGenCaveDiversity;
 import diversity.MapGenStructureDiversity;
 import diversity.MapGenVillageDiversity;
+import diversity.configurations.AConfigTool;
 import diversity.entity.EntityWorshipper;
 import diversity.suppliers.EnumBlock;
+import diversity.suppliers.EnumCave;
 import diversity.suppliers.EnumItem;
+import diversity.suppliers.EnumStructure;
+import diversity.suppliers.EnumVillage;
 import diversity.world.WorldGenBlueMushroom;
 import diversity.world.WorldGenBlueVine;
 import diversity.world.WorldGenFungus;
@@ -54,6 +59,21 @@ public class ServerHandler
 		} else if (EventType.SCATTERED_FEATURE == event.type) {
 			event.newGen = mapGenStructureDiversity;
 		}
+	}
+	
+	@SubscribeEvent
+	public void OnWorldUnload(WorldEvent.Unload event) {
+		AConfigTool.loadAllConfig(false);
+		AConfigTool.saveAllConfig(false);
+	}
+	
+	@SubscribeEvent
+	public void OnWorldLoad(WorldEvent.Load event) {
+		AConfigTool.loadAllConfig(true);
+		AConfigTool.saveAllConfig(true);
+		EnumStructure.load();
+		EnumCave.load();
+    	EnumVillage.load();
 	}
     
 	@SubscribeEvent

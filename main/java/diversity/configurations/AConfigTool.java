@@ -61,15 +61,15 @@ public abstract class AConfigTool
     	ConfigVillager.values();
 	}
 
-	public static void loadAllConfig() {
-    	ConfigGenerationRate.loadConfig();
-    	ConfigBiomeGroup.loadConfig();    	
-    	ConfigVillager.loadConfig();
+	public static void loadAllConfig(boolean isWorld) {
+    	ConfigGenerationRate.loadConfig(isWorld);
+    	ConfigBiomeGroup.loadConfig(isWorld);    	
+    	ConfigVillager.loadConfig(isWorld);
 	}
 	
-	public static void saveAllConfig() {
-    	ConfigGenerationRate.saveConfig();
-    	ConfigBiomeGroup.saveConfig();
-    	ConfigVillager.saveConfig();
+	public static void saveAllConfig(boolean isWorld) {
+    	ConfigGenerationRate.saveConfig(isWorld);
+    	ConfigBiomeGroup.saveConfig(isWorld);
+    	ConfigVillager.saveConfig(isWorld);
 	}
 }

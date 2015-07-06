@@ -54,11 +54,11 @@ public class Diversity
     public static ServerProxy proxy;
          
     @EventHandler
-    public void PreLoad(FMLPreInitializationEvent event)
+    public void PreInit(FMLPreInitializationEvent event)
     {
     	AConfigTool.values();
-    	AConfigTool.loadAllConfig();
-    	AConfigTool.saveAllConfig();
+    	AConfigTool.loadAllConfig(false);
+    	AConfigTool.saveAllConfig(false);
     	Divlogger = Logger.getLogger("Diversity");
     	
 		EnumFluid.register();
@@ -114,13 +114,5 @@ public class Diversity
     	if (ConfigVillager.removeVanillaSpawnEgg.equals("true")) {
     		EntityList.entityEggs.remove(Integer.valueOf(120));
     	}
-    }
-    
-    @EventHandler
-    public void StartWorld(FMLServerAboutToStartEvent event)
-    {
-		EnumStructure.load();
-		EnumCave.load();
-    	EnumVillage.load();
     }
 }

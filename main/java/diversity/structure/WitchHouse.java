@@ -22,7 +22,6 @@ public class WitchHouse extends GlobalFeature
     public WitchHouse(Random random, int coordX, int coordZ)
     {
         super(random, coordX, coordZ, 10, 8, 8);
-        this.coordBaseMode = 3;
         switch (this.coordBaseMode)
         {
             case 0:

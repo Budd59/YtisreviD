@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import net.minecraftforge.common.DimensionManager;
 import cpw.mods.fml.common.Loader;
 
 public enum ConfigVillager
@@ -27,26 +28,41 @@ public enum ConfigVillager
 		return value;
 	}
 	
-	private static final String configFile = Loader.instance().getConfigDir() + "/diversity-villager.cfg";
-
-	public static void saveConfig() {
+	private static final String configNameFile = "diversity-villager.cfg";
+	private static final String configFile = Loader.instance().getConfigDir() + "/" + configNameFile;
+	
+	public static void saveConfig(boolean isWorld) {
 		Properties properties = new Properties();
 		for (ConfigVillager config : ConfigVillager.values()) {
 			properties.setProperty(config.name(), config.value);
 		}
 
 		try {
-			File file = new File(configFile);
+			File file;
+			if (isWorld) {
+				File folder = new File(DimensionManager.getCurrentSaveRootDirectory(), "config");
+		    	folder.mkdir();
+				file = new File(folder, configNameFile);
+			} else {
+				file = new File(configFile);
+			}
 			properties.store(new FileOutputStream(file), null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static void loadConfig() {
+	public static void loadConfig(boolean isWorld) {
 		Properties properties = new Properties();
 		try {
-			FileInputStream inputStream = new FileInputStream(configFile);
+			FileInputStream inputStream;
+			if (isWorld) {
+				File folder = new File(DimensionManager.getCurrentSaveRootDirectory(), "config");
+		    	folder.mkdir();
+				inputStream = new FileInputStream(new File(folder, configNameFile));
+			} else {
+				inputStream = new FileInputStream(configFile);
+			}
 			properties.load(inputStream);
 			inputStream.close();
 		} catch (IOException e) {
