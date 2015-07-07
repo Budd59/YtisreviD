@@ -204,7 +204,7 @@ public abstract class EntityGlobalVillager extends EntityVillager
 	    			}
 	    		} else {
 	    			Random random = new Random();
-		    		if (chief == null && random.nextInt(ConfigVillager.chanceVillagerBecomesChief.getIntegerConfig())==0)
+		    		if (chief == null && random.nextInt(ConfigVillager.TICK_UNTIL_RANDOM_VILLAGER_BECOMES_CHIEF.getIntegerConfig())==0)
 		    		{
 		    			VillageData.addChief(villageObj, this);
 		    			if (this.isChief())

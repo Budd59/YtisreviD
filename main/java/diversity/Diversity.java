@@ -110,8 +110,7 @@ public class Diversity
     public void PostInit(FMLPostInitializationEvent event)
     {
     	EnumEntity.load();
-    	
-    	if (ConfigVillager.removeVanillaSpawnEgg.equals("true")) {
+    	if (ConfigVillager.REMOVE_VANILLA_SPAWN_EGG.equals("true")) {
     		EntityList.entityEggs.remove(Integer.valueOf(120));
     	}
     }

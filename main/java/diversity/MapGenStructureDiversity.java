@@ -21,31 +21,24 @@ import diversity.suppliers.EnumStructure;
 
 public class MapGenStructureDiversity extends MapGenScatteredFeature
 {
-	/** the maximum distance between scattered features */
-    private int maxDistanceBetweenScatteredFeatures;
-    /** the minimum distance between scattered features */
-    private int minDistanceBetweenScatteredFeatures;
-
     public MapGenStructureDiversity()
     {
-        this.maxDistanceBetweenScatteredFeatures = ConfigGenerationRate.MAXDISTANCEBETWEENSTRUCTURES.getIntegerConfig();
-        this.minDistanceBetweenScatteredFeatures = ConfigGenerationRate.MINDISTANCEBETWEENSTRUCTURES.getIntegerConfig();
     }
 
     public MapGenStructureDiversity(Map p_i2061_1_)
     {
         this();
-        Iterator iterator = p_i2061_1_.entrySet().iterator();
-
-        while (iterator.hasNext())
-        {
-            Entry entry = (Entry)iterator.next();
-
-            if (((String)entry.getKey()).equals("distance"))
-            {
-                this.maxDistanceBetweenScatteredFeatures = MathHelper.parseIntWithDefaultAndMax((String)entry.getValue(), this.maxDistanceBetweenScatteredFeatures, this.minDistanceBetweenScatteredFeatures + 1);
-            }
-        }
+//        Iterator iterator = p_i2061_1_.entrySet().iterator();
+//
+//        while (iterator.hasNext())
+//        {
+//            Entry entry = (Entry)iterator.next();
+//
+//            if (((String)entry.getKey()).equals("distance"))
+//            {
+//                this.maxDistanceBetweenScatteredFeatures = MathHelper.parseIntWithDefaultAndMax((String)entry.getValue(), this.maxDistanceBetweenScatteredFeatures, this.minDistanceBetweenScatteredFeatures + 1);
+//            }
+//        }
     }
 
     @Override
@@ -57,30 +50,33 @@ public class MapGenStructureDiversity extends MapGenScatteredFeature
     @Override
     protected boolean canSpawnStructureAtCoords(int x, int z)
     {
+        int maxDistanceBetweenScatteredFeatures = ConfigGenerationRate.MAXDISTANCEBETWEENSTRUCTURES.getIntegerConfig();
+        int minDistanceBetweenScatteredFeatures = ConfigGenerationRate.MINDISTANCEBETWEENSTRUCTURES.getIntegerConfig();
+    	
     	int coordX = x;
         int coordZ = z;
 
         if (x < 0)
         {
-            x -= this.maxDistanceBetweenScatteredFeatures - 1;
+            x -= maxDistanceBetweenScatteredFeatures - 1;
         }
 
         if (z < 0)
         {
-            z -= this.maxDistanceBetweenScatteredFeatures - 1;
+            z -= maxDistanceBetweenScatteredFeatures - 1;
         }
 
-        int x1 = x / this.maxDistanceBetweenScatteredFeatures;
-        int z1 = z / this.maxDistanceBetweenScatteredFeatures;
+        int x1 = x / maxDistanceBetweenScatteredFeatures;
+        int z1 = z / maxDistanceBetweenScatteredFeatures;
         Random random = this.worldObj.setRandomSeed(x1, z1, 14357617);
-        x1 *= this.maxDistanceBetweenScatteredFeatures;
-        z1 *= this.maxDistanceBetweenScatteredFeatures;
-        x1 += random.nextInt(this.maxDistanceBetweenScatteredFeatures - this.minDistanceBetweenScatteredFeatures);
-        z1 += random.nextInt(this.maxDistanceBetweenScatteredFeatures - this.minDistanceBetweenScatteredFeatures);
+        x1 *= maxDistanceBetweenScatteredFeatures;
+        z1 *= maxDistanceBetweenScatteredFeatures;
+        x1 += random.nextInt(maxDistanceBetweenScatteredFeatures - minDistanceBetweenScatteredFeatures);
+        z1 += random.nextInt(maxDistanceBetweenScatteredFeatures - minDistanceBetweenScatteredFeatures);
 
         if (coordX == x1 && coordZ == z1)
         {
-    	    BiomeGenBase biome = worldObj.getWorldChunkManager().getBiomeGenAt(coordX * 16 + 8, coordZ * 16 + 8);
+    	    BiomeGenBase biome = this.worldObj.getWorldChunkManager().getBiomeGenAt(coordX * 16 + 8, coordZ * 16 + 8);
     	    return EnumStructure.canSpawnInBiome(biome);
         }
 
@@ -130,7 +126,9 @@ public class MapGenStructureDiversity extends MapGenScatteredFeature
     @Override
     public boolean generateStructuresInChunk(World world, Random random, int p_75051_3_, int p_75051_4_)
     {
-        return Diversity.proxy.handler.mapGenCaveStructureDiversity.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_) && super.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_);
+    	boolean bool1 = Diversity.proxy.handler.mapGenCaveStructureDiversity.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_);
+    	boolean bool2 = super.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_);
+        return bool1 && bool2;
     }
     
 }

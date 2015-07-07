@@ -11,8 +11,8 @@ import cpw.mods.fml.common.Loader;
 
 public enum ConfigVillager
 {
-	chanceVillagerBecomesChief("5000"),
-	removeVanillaSpawnEgg ("true");
+	TICK_UNTIL_RANDOM_VILLAGER_BECOMES_CHIEF ("5000"),
+	REMOVE_VANILLA_SPAWN_EGG ("true");
 	
 	private String value;
 	
@@ -48,7 +48,6 @@ public enum ConfigVillager
 			}
 			properties.store(new FileOutputStream(file), null);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 	
@@ -66,7 +65,6 @@ public enum ConfigVillager
 			properties.load(inputStream);
 			inputStream.close();
 		} catch (IOException e) {
-			e.printStackTrace();
 			return;
 		}
 		

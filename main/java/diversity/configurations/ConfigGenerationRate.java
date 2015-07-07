@@ -53,7 +53,6 @@ public enum ConfigGenerationRate
 			}
 			properties.store(new FileOutputStream(file), null);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 	
@@ -71,7 +70,6 @@ public enum ConfigGenerationRate
 			properties.load(inputStream);
 			inputStream.close();
 		} catch (IOException e) {
-			e.printStackTrace();
 			return;
 		}
 		

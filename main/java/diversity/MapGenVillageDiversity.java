@@ -23,33 +23,29 @@ public class MapGenVillageDiversity extends MapGenVillage
 {
     /** World terrain type, 0 for normal, 1 for flat map */
     private int terrainType;
-    private int maxDistanceBetweenVillages;
-    private int minDistanceBetweenVillages;
 	
     public MapGenVillageDiversity()
     {
-        this.maxDistanceBetweenVillages = ConfigGenerationRate.MAXDISTANCEBETWEENVILLAGES.getIntegerConfig();
-        this.minDistanceBetweenVillages = ConfigGenerationRate.MINDISTANCEBETWEENVILLAGES.getIntegerConfig();
     }
 
     public MapGenVillageDiversity(Map p_i2093_1_)
     {
         this();
-        Iterator iterator = p_i2093_1_.entrySet().iterator();
-
-        while (iterator.hasNext())
-        {
-            Entry entry = (Entry)iterator.next();
-
-            if (((String)entry.getKey()).equals("size"))
-            {
-                this.terrainType = MathHelper.parseIntWithDefaultAndMax((String)entry.getValue(), this.terrainType, 0);
-            }
-            else if (((String)entry.getKey()).equals("distance"))
-            {
-                this.maxDistanceBetweenVillages = MathHelper.parseIntWithDefaultAndMax((String)entry.getValue(), this.maxDistanceBetweenVillages, this.minDistanceBetweenVillages + 1);
-            }
-        }
+//        Iterator iterator = p_i2093_1_.entrySet().iterator();
+//
+//        while (iterator.hasNext())
+//        {
+//            Entry entry = (Entry)iterator.next();
+//
+//            if (((String)entry.getKey()).equals("size"))
+//            {
+//                this.terrainType = MathHelper.parseIntWithDefaultAndMax((String)entry.getValue(), this.terrainType, 0);
+//            }
+//            else if (((String)entry.getKey()).equals("distance"))
+//            {
+//                this.maxDistanceBetweenVillages = MathHelper.parseIntWithDefaultAndMax((String)entry.getValue(), this.maxDistanceBetweenVillages, this.minDistanceBetweenVillages + 1);
+//            }
+//        }
     }
 
     @Override
@@ -68,26 +64,28 @@ public class MapGenVillageDiversity extends MapGenVillage
     @Override
     protected boolean canSpawnStructureAtCoords(int x, int z)
     {
+    	int maxDistanceBetweenVillages = ConfigGenerationRate.MAXDISTANCEBETWEENVILLAGES.getIntegerConfig();
+    	int minDistanceBetweenVillages = ConfigGenerationRate.MINDISTANCEBETWEENVILLAGES.getIntegerConfig();
         int coordX = x;
         int coordZ = z;
 
         if (x < 0)
         {
-        	x -= this.maxDistanceBetweenVillages - 1;
+        	x -= maxDistanceBetweenVillages - 1;
         }
 
         if (z < 0)
         {
-        	z -= this.maxDistanceBetweenVillages - 1;
+        	z -= maxDistanceBetweenVillages - 1;
         }
 
-        int i1 = x / this.maxDistanceBetweenVillages;
-        int j1 = z / this.maxDistanceBetweenVillages;
+        int i1 = x / maxDistanceBetweenVillages;
+        int j1 = z / maxDistanceBetweenVillages;
         Random random = this.worldObj.setRandomSeed(i1, j1, 10387312);
-        i1 *= this.maxDistanceBetweenVillages;
-        j1 *= this.maxDistanceBetweenVillages;
-        i1 += random.nextInt(this.maxDistanceBetweenVillages - this.minDistanceBetweenVillages);
-        j1 += random.nextInt(this.maxDistanceBetweenVillages - this.minDistanceBetweenVillages);
+        i1 *= maxDistanceBetweenVillages;
+        j1 *= maxDistanceBetweenVillages;
+        i1 += random.nextInt(maxDistanceBetweenVillages - minDistanceBetweenVillages);
+        j1 += random.nextInt(maxDistanceBetweenVillages - minDistanceBetweenVillages);
 
         if (coordX == i1 && coordZ == j1)
         {
@@ -95,7 +93,7 @@ public class MapGenVillageDiversity extends MapGenVillage
 
             if (flag)
             {
-            	BiomeGenBase biome = worldObj.getWorldChunkManager().getBiomeGenAt(x * 16 + 8, z * 16 + 8);
+            	BiomeGenBase biome = this.worldObj.getWorldChunkManager().getBiomeGenAt(x * 16 + 8, z * 16 + 8);
     	        return EnumVillage.canSpawnInBiome(biome);
             }
         }

@@ -11,8 +11,10 @@ import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -34,6 +36,7 @@ import diversity.MapGenCaveDiversity;
 import diversity.MapGenStructureDiversity;
 import diversity.MapGenVillageDiversity;
 import diversity.configurations.AConfigTool;
+import diversity.configurations.ConfigVillager;
 import diversity.entity.EntityWorshipper;
 import diversity.suppliers.EnumBlock;
 import diversity.suppliers.EnumCave;
@@ -65,6 +68,15 @@ public class ServerHandler
 	public void OnWorldUnload(WorldEvent.Unload event) {
 		AConfigTool.loadAllConfig(false);
 		AConfigTool.saveAllConfig(false);
+    	if (ConfigVillager.REMOVE_VANILLA_SPAWN_EGG.equals("true")) {
+    		if (EntityList.entityEggs.containsKey(Integer.valueOf(120))) {
+    			EntityList.entityEggs.remove(Integer.valueOf(120));
+    		}
+    	} else {
+    		if (!EntityList.entityEggs.containsKey(Integer.valueOf(120))) {
+    			EntityList.entityEggs.put(Integer.valueOf(120), new EntityList.EntityEggInfo(120, 5651507, 12422002));
+    		}
+    	}
 	}
 	
 	@SubscribeEvent
@@ -74,6 +86,15 @@ public class ServerHandler
 		EnumStructure.load();
 		EnumCave.load();
     	EnumVillage.load();
+    	if (ConfigVillager.REMOVE_VANILLA_SPAWN_EGG.equals("true")) {
+    		if (EntityList.entityEggs.containsKey(Integer.valueOf(120))) {
+    			EntityList.entityEggs.remove(Integer.valueOf(120));
+    		}
+    	} else {
+    		if (!EntityList.entityEggs.containsKey(Integer.valueOf(120))) {
+    			EntityList.entityEggs.put(Integer.valueOf(120), new EntityList.EntityEggInfo(120, 5651507, 12422002));
+    		}
+    	}
 	}
     
 	@SubscribeEvent
