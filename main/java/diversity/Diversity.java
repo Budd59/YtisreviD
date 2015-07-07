@@ -43,7 +43,7 @@ public class Diversity
 {
     public static final String MODID = "diversity";
     public static final String NAME = "Diversity";
-    public static final String VERSION = "ALPHA 1.6";
+    public static final String VERSION = "ALPHA 1.6.1";
     
     @Mod.Instance(Diversity.MODID)
     public static Diversity instance;
