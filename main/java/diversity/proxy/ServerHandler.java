@@ -148,15 +148,17 @@ public class ServerHandler
 	private final WorldGenerator vineMushroom = new WorldGenBlueVine();
 	private final WorldGenerator fungusGen = new WorldGenFungus(1,1);
 	
-	public static List<Integer[]> listMushroomChunk = new ArrayList<Integer[]>();
+	public static List<Integer[]> listShroomCaveChunk = new ArrayList<Integer[]>();
+	public static List<Integer[]> listSpiderDenChunk = new ArrayList<Integer[]>();
 	
 	@SubscribeEvent
 	public void OnDecorate(Decorate event)
     {
 		if (event.type == Decorate.EventType.BIG_SHROOM || event.type == Decorate.EventType.SHROOM || event.type == Decorate.EventType.GRASS)
-
-		for (Integer[] chunkP : listMushroomChunk) {
+		for (Integer[] chunkP : listShroomCaveChunk)
+		{
 			if (event.chunkX == chunkP[0] && event.chunkZ == chunkP[1])
+			{
 				if (event.type == Decorate.EventType.BIG_SHROOM) {
 			        for (int j = 0; j < 3; ++j)
 			        {
@@ -238,14 +240,15 @@ public class ServerHandler
 			            }
 					}
 				}
+			}
 		}
     }
 	
 	@SubscribeEvent
     public void OnPostDecorate(DecorateBiomeEvent.Post event) {
-		for (Integer[] chunkP : listMushroomChunk) {
+		for (Integer[] chunkP : listShroomCaveChunk) {
 			if (event.chunkX == chunkP[0] && event.chunkZ == chunkP[1]) {
-				listMushroomChunk.remove(chunkP);
+				listShroomCaveChunk.remove(chunkP);
 				return;
 			}
 		}

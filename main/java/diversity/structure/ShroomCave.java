@@ -134,6 +134,6 @@ public class ShroomCave extends GlobalFeature
 				}
 	        }
 		}
-		Diversity.proxy.handler.listMushroomChunk.add(new Integer[]{structureBoundingBox.minX-8, structureBoundingBox.minZ-8});
+		Diversity.proxy.handler.listShroomCaveChunk.add(new Integer[]{structureBoundingBox.minX-8, structureBoundingBox.minZ-8});
 	}
 }
