@@ -35,16 +35,16 @@ public class SpiderDenGenerator implements ICaveGenerator  {
 		double teta = Math.toRadians(72);
 		
 		for (double tempTeta = 0; tempTeta < 2*Math.PI; tempTeta = tempTeta + teta) {
-			int coloneX = initX + (int) (Math.cos(tempTeta)* maxRadius * 2.2) + random.nextInt(3)-1;
-			int coloneZ = initZ + (int) (Math.sin(tempTeta)* maxRadius * 2.2) + random.nextInt(3)-1;
+			int coloneX = initX + (int) (Math.cos(tempTeta)* maxRadius * 2) + random.nextInt(3)-1;
+			int coloneZ = initZ + (int) (Math.sin(tempTeta)* maxRadius * 2) + random.nextInt(3)-1;
 			list.add(new Point(coloneX, initY +1 + random.nextInt(3), coloneZ, maxRadius-1));	
 		}
 		
 		teta = Math.toRadians(30);
 
 		for (double tempTeta = 0; tempTeta < 2*Math.PI; tempTeta = tempTeta + teta) {
-			int coloneX = initX + (int) (Math.cos(tempTeta)* maxRadius * 3) + random.nextInt(3)-1;
-			int coloneZ = initZ + (int) (Math.sin(tempTeta)* maxRadius * 3) + random.nextInt(3)-1;
+			int coloneX = initX + (int) (Math.cos(tempTeta)* maxRadius * 2.8) + random.nextInt(3)-1;
+			int coloneZ = initZ + (int) (Math.sin(tempTeta)* maxRadius * 2.8) + random.nextInt(3)-1;
 			list.add(new Point(coloneX, initY + 2 + random.nextInt(3), coloneZ, maxRadius-3));
 			
 			if (random.nextInt(2)==0) {
@@ -91,21 +91,21 @@ public class SpiderDenGenerator implements ICaveGenerator  {
 					}
 				}
 			} else if (center.radius == maxRadius-1) {
-				for (double tempY = maxY/2; tempY >= minY; tempY--)
+				for (double tempY = maxY/2; tempY >= minY/2; tempY--)
 				for (int tempX = minX; tempX <= maxX; tempX++)
 				for (int tempZ = minZ; tempZ <= maxZ; tempZ++)
 				{
-					if (tempY > 0) {
+					//if (tempY > 0) {
 						if (Math.pow(tempX, 2.0D) + Math.pow(tempY*2, 2.0D) + Math.pow(tempZ, 2.0D) < Math.pow(radius, 2.0D))
 						{
 							blocks.put(x + tempX, y + (int)tempY, z + tempZ, EnumCubeType.AIR);
 						}
-					} else {
-						if (Math.pow(tempX, 2.0D) + Math.pow(tempY, 2.0D) + Math.pow(tempZ, 2.0D) < Math.pow(radius, 2.0D))
-						{
-							blocks.put(x + tempX, y + (int)tempY, z + tempZ, EnumCubeType.AIR);
-						}
-					}
+					//} else {
+					//	if (Math.pow(tempX, 2.0D) + Math.pow(tempY, 2.0D) + Math.pow(tempZ, 2.0D) < Math.pow(radius, 2.0D))
+					//	{
+					//		blocks.put(x + tempX, y + (int)tempY, z + tempZ, EnumCubeType.AIR);
+					//	}
+					//}
 				}
 			} else if (center.radius == maxRadius-3) {
 				for (int tempY = maxY; tempY >= minY; tempY--)

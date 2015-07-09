@@ -167,7 +167,7 @@ public class SpiderDen extends GlobalFeature
 							{
 								if (blocks.containsKey(x, y-1, z) && blocks.get(x, y-1, z).equals(EnumCubeType.GROUND))
 								{
-									if (y - minY < 3 && random.nextInt(4)==0)
+									if (y - minY < 3 && random.nextInt(2)==0)
 									{
 										world.setBlock(x, y+caveH, z, Blocks.skull, 1, 0);
 										TileEntitySkull tileEntity = (TileEntitySkull)Blocks.skull.createTileEntity(world, 0);
@@ -185,7 +185,7 @@ public class SpiderDen extends GlobalFeature
 									if (world.getTopSolidOrLiquidBlock(x, z)-1>(y+caveH) && y - minY < 18 && random.nextInt((y - minY +4)/3)==0)
 									{
 										world.setBlock(x, y+caveH, z, Blocks.web, 1, 0);
-									} else if (world.getTopSolidOrLiquidBlock(x, z)-1>(y+caveH) && y - minY > 8  && random.nextInt(5)!=0)
+									} else if (world.getTopSolidOrLiquidBlock(x, z)-1>(y+caveH) && y - minY >= 8  && random.nextInt(5)!=0)
 									{
 										world.setBlock(x, y+caveH, z, Blocks.leaves2, 1, 0);
 									} else
@@ -233,7 +233,33 @@ public class SpiderDen extends GlobalFeature
 							}
 							else if (blocks.get(x, y, z).equals(EnumCubeType.GROUND))
 							{
-								world.setBlock(x, y+caveH, z, Blocks.dirt, 1, 3);
+								if (y - minY > 19) {
+									if (world.getTopSolidOrLiquidBlock(x, z)-1==(y+caveH) && random.nextInt(4)!=0) {
+										world.setBlock(x, y+caveH, z, Blocks.grass, 0, 3);
+									} else {
+										world.setBlock(x, y+caveH, z, Blocks.dirt, 0, 3);
+									}
+								} else if (y - minY > 8) {
+									if (random.nextInt(3)==0) {
+										world.setBlock(x, y+caveH, z, Blocks.gravel, 0, 3);
+									} else {
+										world.setBlock(x, y+caveH, z, Blocks.dirt, 1, 3);
+									}
+								} else if (y - minY > 6) {
+									if (random.nextInt(3)!=0) {
+										world.setBlock(x, y+caveH, z, Blocks.gravel, 0, 3);
+									} else {
+										world.setBlock(x, y+caveH, z, Blocks.dirt, 1, 3);
+									}
+								} else  if (y - minY > 5) {
+									if (random.nextInt(3)==0) {
+										world.setBlock(x, y+caveH, z, Blocks.gravel, 0, 3);
+									} else {
+										world.setBlock(x, y+caveH, z, Blocks.stone, 0, 3);
+									}
+								} else {
+									world.setBlock(x, y+caveH, z, Blocks.stone, 0, 3);
+								}
 							}
 							else if (blocks.get(x, y, z).equals(EnumCubeType.UNDERGROUND))
 							{
