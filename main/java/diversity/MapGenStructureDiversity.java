@@ -16,6 +16,7 @@ import net.minecraft.world.gen.structure.MapGenScatteredFeature;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureStart;
 import diversity.configurations.ConfigGenerationRate;
+import diversity.configurations.ConfigGlobal;
 import diversity.structure.GlobalFeature;
 import diversity.suppliers.EnumStructure;
 
@@ -115,8 +116,15 @@ public class MapGenStructureDiversity extends MapGenScatteredFeature
     @Override
     public void func_151539_a(IChunkProvider chunkProvider, World world, int chunkX, int chunkZ, Block[] blocks)
     {
-    	Diversity.proxy.handler.mapGenCaveStructureDiversity.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);
-    	super.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);
+    	if (ConfigGlobal.CAN_SPAWN_MOD_CAVES.getBooleanConfig()) {
+    		Diversity.proxy.handler.mapGenCaveStructureDiversity.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);
+    	}
+    	if (ConfigGlobal.CAN_SPAWN_MOD_STRUCTURES.getBooleanConfig()) {
+        	super.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);
+    	}
+    	if (ConfigGlobal.CAN_SPAWN_VANILLA_STRUCTURES.getBooleanConfig()) {
+    		Diversity.proxy.handler.mapGenScatteredFeature.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);
+    	}
     }
     
     
@@ -126,9 +134,19 @@ public class MapGenStructureDiversity extends MapGenScatteredFeature
     @Override
     public boolean generateStructuresInChunk(World world, Random random, int p_75051_3_, int p_75051_4_)
     {
-    	boolean bool1 = Diversity.proxy.handler.mapGenCaveStructureDiversity.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_);
-    	boolean bool2 = super.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_);
-        return bool1 && bool2;
+    	boolean bool1 = true;
+    	boolean bool2 = true;
+    	boolean bool3 = true;
+    	if (ConfigGlobal.CAN_SPAWN_MOD_CAVES.getBooleanConfig()) {
+    		bool1 = Diversity.proxy.handler.mapGenCaveStructureDiversity.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_);
+    	}
+    	if (ConfigGlobal.CAN_SPAWN_MOD_STRUCTURES.getBooleanConfig()) {
+    		bool2 = super.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_);
+    	}
+    	if (ConfigGlobal.CAN_SPAWN_VANILLA_STRUCTURES.getBooleanConfig()) {
+    		bool3 = Diversity.proxy.handler.mapGenScatteredFeature.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_);
+    	}
+        return bool1 && bool2 && bool3;
     }
     
 }

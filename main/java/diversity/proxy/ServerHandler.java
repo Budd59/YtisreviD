@@ -22,7 +22,10 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.structure.MapGenScatteredFeature;
+import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent.CheckSpawn;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
@@ -36,7 +39,7 @@ import diversity.MapGenCaveDiversity;
 import diversity.MapGenStructureDiversity;
 import diversity.MapGenVillageDiversity;
 import diversity.configurations.AConfigTool;
-import diversity.configurations.ConfigVillager;
+import diversity.configurations.ConfigGlobal;
 import diversity.entity.EntityWorshipper;
 import diversity.suppliers.EnumBlock;
 import diversity.suppliers.EnumCave;
@@ -53,13 +56,17 @@ public class ServerHandler
 	public final static MapGenVillageDiversity mapGenVillageDiversity = new MapGenVillageDiversity();
 	public final static MapGenStructureDiversity mapGenStructureDiversity = new MapGenStructureDiversity();
 	public final static MapGenCaveDiversity mapGenCaveStructureDiversity = new MapGenCaveDiversity();
+	public static MapGenStructure mapGenScatteredFeature;
+	public static MapGenStructure mapGenVillage;
 	
 	@SubscribeEvent
 	public void OnInitMapGen(InitMapGenEvent event)
 	{
 		if (EventType.VILLAGE == event.type) {
+			mapGenVillage = (MapGenStructure) event.originalGen;
 			event.newGen = mapGenVillageDiversity;
 		} else if (EventType.SCATTERED_FEATURE == event.type) {
+			mapGenScatteredFeature = (MapGenStructure) event.originalGen;
 			event.newGen = mapGenStructureDiversity;
 		}
 	}
@@ -68,7 +75,7 @@ public class ServerHandler
 	public void OnWorldUnload(WorldEvent.Unload event) {
 		AConfigTool.loadAllConfig(false);
 		AConfigTool.saveAllConfig(false);
-    	if (ConfigVillager.REMOVE_VANILLA_SPAWN_EGG.equals("true")) {
+    	if (ConfigGlobal.REMOVE_VANILLA_SPAWN_EGG.equals("true")) {
     		if (EntityList.entityEggs.containsKey(Integer.valueOf(120))) {
     			EntityList.entityEggs.remove(Integer.valueOf(120));
     		}
@@ -86,7 +93,7 @@ public class ServerHandler
 		EnumStructure.load();
 		EnumCave.load();
     	EnumVillage.load();
-    	if (ConfigVillager.REMOVE_VANILLA_SPAWN_EGG.equals("true")) {
+    	if (ConfigGlobal.REMOVE_VANILLA_SPAWN_EGG.equals("true")) {
     		if (EntityList.entityEggs.containsKey(Integer.valueOf(120))) {
     			EntityList.entityEggs.remove(Integer.valueOf(120));
     		}

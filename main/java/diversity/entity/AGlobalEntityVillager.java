@@ -47,7 +47,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import diversity.Diversity;
 import diversity.configurations.ConfigGenerationRate;
-import diversity.configurations.ConfigVillager;
+import diversity.configurations.ConfigGlobal;
 import diversity.entity.ai.EntityAIChiefHurtByTarget;
 import diversity.entity.ai.EntityAIOpenGate;
 import diversity.item.ItemSpear;
@@ -204,7 +204,7 @@ public abstract class AGlobalEntityVillager extends EntityVillager
 	    			}
 	    		} else {
 	    			Random random = new Random();
-		    		if (chief == null && random.nextInt(ConfigVillager.TICK_UNTIL_RANDOM_VILLAGER_BECOMES_CHIEF.getIntegerConfig())==0)
+		    		if (chief == null && random.nextInt(ConfigGlobal.TICK_UNTIL_RANDOM_VILLAGER_BECOMES_CHIEF.getIntegerConfig())==0)
 		    		{
 		    			VillageData.addChief(villageObj, this);
 		    			if (this.isChief())

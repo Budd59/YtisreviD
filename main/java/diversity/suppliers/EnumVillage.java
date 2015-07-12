@@ -56,9 +56,6 @@ public enum EnumVillage
 	}
 	
 	public static void load() {
-    	for (BiomeGenBase biome : BiomeGenBase.getBiomeGenArray()) {
-    		BiomeManager.addVillageBiome(biome, true);
-    	}
     	biomeEnumMap.clear();
 		for (EnumVillage enumVillage : EnumVillage.values())
 		{

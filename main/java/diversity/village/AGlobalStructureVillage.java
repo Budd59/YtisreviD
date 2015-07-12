@@ -21,12 +21,7 @@ import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
-
-import diversity.entity.EntityAztec;
 import diversity.entity.AGlobalEntityVillager;
-import diversity.entity.EntityInuit;
 import diversity.suppliers.EnumVillageBasicPiece;
 import diversity.suppliers.EnumVillagePiece;
 import diversity.suppliers.EnumVillage;
@@ -217,7 +212,8 @@ public abstract class AGlobalStructureVillage
                 int i2 = path.getBoundingBox().maxZ - path.getBoundingBox().minZ;
                 int j2 = l1 > i2 ? l1 : i2;
 
-                if (startPiece.getWorldChunkManager().areBiomesViable(j1, k1, j2 / 2 + 4, MapGenVillage.villageSpawnBiomes))
+                BiomeGenBase biome = startPiece.getWorldChunkManager().getBiomeGenAt(j1, k1);
+                if (EnumVillage.canSpawnInBiome(biome))
                 {
                     componentList.add(path);
                     startPiece.field_74930_j.add(path);
@@ -266,8 +262,6 @@ public abstract class AGlobalStructureVillage
 	public static abstract class AGlobalStart extends AGlobalWell
     {	
         public WorldChunkManager worldChunkMngr;
-        /** Boolean that determines if the village is in a desert or not. */
-        public boolean inDesert;
         /** World terrain type, 0 for normal, 1 for flap map */
         public int terrainType;
         public PieceWeight structVillagePieceWeight;
@@ -291,7 +285,6 @@ public abstract class AGlobalStructureVillage
             this.structureVillageWeightedPieceList = p_i2104_6_;
             this.terrainType = p_i2104_7_;
             BiomeGenBase biomegenbase = p_i2104_1_.getBiomeGenAt(p_i2104_4_, p_i2104_5_);
-            this.inDesert = biomegenbase == BiomeGenBase.desert || biomegenbase == BiomeGenBase.desertHills;
             this.biome = biomegenbase;
             
         }
@@ -429,7 +422,6 @@ public abstract class AGlobalStructureVillage
         private AGlobalStart startPiece;
         private AGlobalStructureVillage village;
         
-		Table<Integer, Integer, Integer> points = HashBasedTable.create();
         
         private int recursiveCounter;
         
@@ -458,7 +450,6 @@ public abstract class AGlobalStructureVillage
                     if (structureBoundingBox.isVecInside(x, 64, z))
                     {
                         int y = world.getTopSolidOrLiquidBlock(x, z) - 1;
-                        points.put(x, z, y);
         				BlockData blockData = getPathBlock(random);
         				world.setBlock(x, y, z, blockData.block, blockData.metaData, 2);
                     }

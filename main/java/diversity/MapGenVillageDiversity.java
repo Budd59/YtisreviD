@@ -6,15 +6,18 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import diversity.configurations.ConfigGenerationRate;
+import diversity.configurations.ConfigGlobal;
 import diversity.suppliers.EnumVillage;
 import diversity.village.AGlobalStructureVillage;
 import diversity.village.AGlobalStructureVillage.AGlobalRoad;
@@ -90,13 +93,8 @@ public class MapGenVillageDiversity extends MapGenVillage
 
         if (coordX == i1 && coordZ == j1)
         {
-            boolean flag = this.worldObj.getWorldChunkManager().areBiomesViable(coordX * 16 + 8, coordZ * 16 + 8, 0, villageSpawnBiomes);
-
-            if (flag)
-            {
-            	BiomeGenBase biome = this.worldObj.getWorldChunkManager().getBiomeGenAt(x * 16 + 8, z * 16 + 8);
-    	        return EnumVillage.canSpawnInBiome(biome);
-            }
+        	BiomeGenBase biome = this.worldObj.getWorldChunkManager().getBiomeGenAt(x * 16 + 8, z * 16 + 8);
+	        return EnumVillage.canSpawnInBiome(biome);
         }
 
         return false;
@@ -186,5 +184,34 @@ public class MapGenVillageDiversity extends MapGenVillage
             super.func_143017_b(p_143017_1_);
             this.hasMoreThanTwoComponents = p_143017_1_.getBoolean("Valid");
         }
+    }
+    
+    @Override
+    public void func_151539_a(IChunkProvider chunkProvider, World world, int chunkX, int chunkZ, Block[] blocks)
+    {
+    	if (ConfigGlobal.CAN_SPAWN_VANILLA_VILLAGES.getBooleanConfig()) {
+    		Diversity.proxy.handler.mapGenVillage.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);
+    	}
+    	if (ConfigGlobal.CAN_SPAWN_MOD_VILLAGES.getBooleanConfig()) {
+        	super.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);
+    	}
+    }
+    
+    
+    /**
+     * Generates structures in specified chunk next to existing structures. Does *not* generate StructureStarts.
+     */
+    @Override
+    public boolean generateStructuresInChunk(World world, Random random, int p_75051_3_, int p_75051_4_)
+    {
+    	boolean bool1 = true;
+    	boolean bool2 = true;
+    	if (ConfigGlobal.CAN_SPAWN_VANILLA_VILLAGES.getBooleanConfig()) {
+    		bool1 = Diversity.proxy.handler.mapGenVillage.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_);
+    	}
+    	if (ConfigGlobal.CAN_SPAWN_MOD_VILLAGES.getBooleanConfig()) {
+    		bool2 = super.generateStructuresInChunk(world, random, p_75051_3_, p_75051_4_);
+    	}
+        return bool1 && bool2;
     }
 }

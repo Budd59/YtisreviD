@@ -1,4 +1,4 @@
-package diversity.utils;
+package diversity.configurations;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,38 +11,52 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.DimensionManager;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 
 import cpw.mods.fml.common.Loader;
 
-public class Economy
+public class ConfigEconomy
 {
-	private static final String configFile = Loader.instance().getConfigDir() + "/diversity-economy.cfg";
+	private static final String configNameFile = "diversity-economy.cfg";
+	private static final String configFile = Loader.instance().getConfigDir() + "/" + configNameFile;
 	
-	public static void savePrice() {
+	public static void saveConfig(boolean isWorld) {
 		Properties properties = new Properties();
 		for (Table.Cell<Item, Integer, IPrice> cell : IPrice.priceMap.cellSet()) {
 			properties.setProperty(cell.getValue().name(), String.valueOf(cell.getValue().getPrice()));
 		}
 		
 		try {
-			File file = new File(configFile);
+			File file;
+			if (isWorld) {
+				File folder = new File(DimensionManager.getCurrentSaveRootDirectory(), "config");
+		    	folder.mkdir();
+				file = new File(folder, configNameFile);
+			} else {
+				file = new File(configFile);
+			}
 			properties.store(new FileOutputStream(file), null);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 	
-	public static void loadPrice() {
+	public static void loadConfig(boolean isWorld) {
 		Properties properties = new Properties();
 		try {
-			FileInputStream inputStream = new FileInputStream(configFile);
+			FileInputStream inputStream;
+			if (isWorld) {
+				File folder = new File(DimensionManager.getCurrentSaveRootDirectory(), "config");
+		    	folder.mkdir();
+				inputStream = new FileInputStream(new File(folder, configNameFile));
+			} else {
+				inputStream = new FileInputStream(configFile);
+			}
 			properties.load(inputStream);
 			inputStream.close();
 		} catch (IOException e) {
-			e.printStackTrace();
 			return;
 		}
 		

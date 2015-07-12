@@ -9,8 +9,9 @@ import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.village.MerchantRecipe;
+import diversity.configurations.ConfigEconomy;
+import diversity.configurations.ConfigEconomy.IPrice;
 import diversity.suppliers.EnumTribe;
-import diversity.utils.Economy.IPrice;
 
 public class TradeTools
 {
@@ -33,8 +34,8 @@ public class TradeTools
 		ItemStack sellStack = null;
 
 		int m = 1;
-		if (Economy.getItem(itemPrice) instanceof ItemEnchantedBook) {
-			Enchantment enchantment = Enchantment.enchantmentsList[Economy.getMetadata(itemPrice)];
+		if (ConfigEconomy.getItem(itemPrice) instanceof ItemEnchantedBook) {
+			Enchantment enchantment = Enchantment.enchantmentsList[ConfigEconomy.getMetadata(itemPrice)];
 	        int level = MathHelper.getRandomIntegerInRange(random, enchantment.getMinLevel(), enchantment.getMaxLevel());
 	        if (isBuyTrade) {
 	        	buyStack = Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(enchantment, level));
@@ -66,7 +67,7 @@ public class TradeTools
 		if (isBuyTrade)
 		{
 			if (buyStack == null) {
-				buyStack = new ItemStack(Economy.getItem(itemPrice), m, Economy.getMetadata(itemPrice));
+				buyStack = new ItemStack(ConfigEconomy.getItem(itemPrice), m, ConfigEconomy.getMetadata(itemPrice));
 			}
 			if (ingot_price == 0) {
 				sellStack = new ItemStack(Items.gold_nugget, nugget_price);
@@ -84,7 +85,7 @@ public class TradeTools
 				buyStack2 = new ItemStack(Items.gold_nugget, nugget_price);
 			}
 			if (sellStack == null) {
-				sellStack = new ItemStack(Economy.getItem(itemPrice), m, Economy.getMetadata(itemPrice));
+				sellStack = new ItemStack(ConfigEconomy.getItem(itemPrice), m, ConfigEconomy.getMetadata(itemPrice));
 			}
 		}
 				

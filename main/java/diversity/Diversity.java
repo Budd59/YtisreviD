@@ -21,7 +21,10 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerAboutToStartEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import diversity.configurations.AConfigTool;
-import diversity.configurations.ConfigVillager;
+import diversity.configurations.ConfigEconomy;
+import diversity.configurations.ConfigGlobal;
+import diversity.configurations.ConfigEconomy.EPrice;
+import diversity.configurations.ConfigEconomy.GPrice;
 import diversity.proxy.ServerProxy;
 import diversity.suppliers.EnumCave;
 import diversity.suppliers.EnumVillageBasicPiece;
@@ -34,9 +37,6 @@ import diversity.suppliers.EnumVillagePiece;
 import diversity.suppliers.EnumStructure;
 import diversity.suppliers.EnumVillage;
 import diversity.suppliers.EnumVillager;
-import diversity.utils.Economy;
-import diversity.utils.Economy.EPrice;
-import diversity.utils.Economy.GPrice;
 
 @Mod(modid = Diversity.MODID, name = Diversity.NAME, version = Diversity.VERSION)
 public class Diversity
@@ -56,10 +56,11 @@ public class Diversity
     @EventHandler
     public void PreInit(FMLPreInitializationEvent event)
     {
+    	Divlogger = Logger.getLogger("Diversity");
+    	
     	AConfigTool.values();
     	AConfigTool.loadAllConfig(false);
     	AConfigTool.saveAllConfig(false);
-    	Divlogger = Logger.getLogger("Diversity");
     	
 		EnumFluid.register();
 		EnumBlock.register();
@@ -75,12 +76,7 @@ public class Diversity
 				Items.bowl);
 		
 		EnumTribe.register();
-		
-    	GPrice.values();
-    	EPrice.values();
-    	Economy.savePrice();
-    	Economy.loadPrice();
-    	
+
 		Diversity.proxy.registerRenderers();
     }
     
@@ -110,8 +106,5 @@ public class Diversity
     public void PostInit(FMLPostInitializationEvent event)
     {
     	EnumEntity.load();
-    	if (ConfigVillager.REMOVE_VANILLA_SPAWN_EGG.equals("true")) {
-    		EntityList.entityEggs.remove(Integer.valueOf(120));
-    	}
     }
 }

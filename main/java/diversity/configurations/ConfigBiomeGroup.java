@@ -67,7 +67,6 @@ public enum ConfigBiomeGroup
 		}
 	}
 	
-
 	public static void loadConfig(boolean isWorld) {
 		Properties properties = new Properties();
 		try {

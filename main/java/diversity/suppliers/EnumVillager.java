@@ -11,13 +11,13 @@ import net.minecraft.village.MerchantRecipeList;
 import org.apache.commons.lang3.ArrayUtils;
 
 import diversity.Diversity;
+import diversity.configurations.ConfigEconomy.EPrice;
+import diversity.configurations.ConfigEconomy.GPrice;
+import diversity.configurations.ConfigEconomy.IItem;
+import diversity.configurations.ConfigEconomy.IPrice;
 import diversity.entity.AGlobalEntityVillager;
 import diversity.utils.PathTool;
 import diversity.utils.TradeTools;
-import diversity.utils.Economy.EPrice;
-import diversity.utils.Economy.GPrice;
-import diversity.utils.Economy.IItem;
-import diversity.utils.Economy.IPrice;
 import diversity.utils.VillagerRegistry;
 import diversity.utils.VillagerRegistry.IVillageTradeHandler;
 

@@ -3,6 +3,8 @@ package diversity.configurations;
 import java.util.ArrayList;
 import java.util.List;
 
+import diversity.configurations.ConfigEconomy.EPrice;
+import diversity.configurations.ConfigEconomy.GPrice;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public abstract class AConfigTool
@@ -58,18 +60,22 @@ public abstract class AConfigTool
 	public static void values() {
     	ConfigGenerationRate.values();
     	ConfigBiomeGroup.values();    	
-    	ConfigVillager.values();
+    	ConfigGlobal.values();
+    	GPrice.values();
+    	EPrice.values();
 	}
 
 	public static void loadAllConfig(boolean isWorld) {
     	ConfigGenerationRate.loadConfig(isWorld);
     	ConfigBiomeGroup.loadConfig(isWorld);    	
-    	ConfigVillager.loadConfig(isWorld);
+    	ConfigGlobal.loadConfig(isWorld);
+    	ConfigEconomy.loadConfig(isWorld);
 	}
 	
 	public static void saveAllConfig(boolean isWorld) {
     	ConfigGenerationRate.saveConfig(isWorld);
     	ConfigBiomeGroup.saveConfig(isWorld);
-    	ConfigVillager.saveConfig(isWorld);
+    	ConfigGlobal.saveConfig(isWorld);
+    	ConfigEconomy.saveConfig(isWorld);
 	}
 }
