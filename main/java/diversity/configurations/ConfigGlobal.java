@@ -84,8 +84,6 @@ public enum ConfigGlobal
 			String value = properties.getProperty(config.name());
 			if (value != null && !value.isEmpty()) {
 				config.value = value;
-				Diversity.Divlogger.log(Level.INFO, Boolean.valueOf(value)+"");
-
 			}
 		}
 		
