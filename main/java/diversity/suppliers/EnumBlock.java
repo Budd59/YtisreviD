@@ -2,10 +2,12 @@ package diversity.suppliers;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockChest;
 import net.minecraft.block.material.Material;
 import diversity.Diversity;
 import diversity.block.BlockBlueMushroom;
 import diversity.block.BlockBlueVine;
+import diversity.block.BlockFrozenChest;
 import diversity.block.BlockFungus;
 import diversity.block.BlockMushroomCap;
 import diversity.block.BlockPhosMushroom;
@@ -23,7 +25,8 @@ public enum EnumBlock
 	phos_mushroom (new BlockPhosMushroom().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setLightLevel(0.6F).setBlockName("phos_mushroom").setBlockTextureName(Diversity.MODID+":phos_mushroom")),
 	phos_mushroom_cap (new BlockMushroomCap(Material.wood).setStepSound(Block.soundTypeWood).setBlockName("phos_mushroom").setBlockTextureName(Diversity.MODID+":phos_mushroom")),
 	blue_vine (new BlockBlueVine().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("blue_vine").setBlockTextureName(Diversity.MODID+":blue_vine")),
-	fungus (new BlockFungus().setStepSound(Block.soundTypeWood).setLightLevel(1.0F).setBlockName("fungus").setBlockTextureName(Diversity.MODID+":fungus"));
+	fungus (new BlockFungus().setStepSound(Block.soundTypeWood).setLightLevel(1.0F).setBlockName("fungus").setBlockTextureName(Diversity.MODID+":fungus")),
+	frozen_chest (new BlockFrozenChest(0).setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("frozen_chest").setBlockTextureName(Diversity.MODID+":frozen_chest"));
 
 	public final Block block;
 	

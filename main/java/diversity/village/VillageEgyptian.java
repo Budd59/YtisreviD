@@ -112,16 +112,6 @@ public class VillageEgyptian extends VillageTools
 			else
 				return new BlockData(Blocks.sand, 0);
 		}
-
-		@Override
-		protected BlockData getPathBridge(Random random) {
-			return new BlockData(Blocks.wooden_slab, 1);
-		}
-
-		@Override
-		protected BlockData getUnderPathBlock(Random random) {
-			return new BlockData(Blocks.dirt, 0);
-		}
     }
     
 	public static class Torch  extends GlobalTorch

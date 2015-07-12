@@ -104,16 +104,6 @@ public final class VillageZulu extends VillageTools
 		protected BlockData getPathBlock(Random random) {
 			return new BlockData(Blocks.gravel, 0);
 		}
-
-		@Override
-		protected BlockData getPathBridge(Random random) {
-			return new BlockData(Blocks.wooden_slab, 1);
-		}
-
-		@Override
-		protected BlockData getUnderPathBlock(Random random) {
-			return new BlockData(Blocks.dirt, 0);
-		}
     }
     
     public static class House1  extends GlobalVillage

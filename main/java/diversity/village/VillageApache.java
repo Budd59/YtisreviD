@@ -104,16 +104,6 @@ public final class VillageApache extends VillageTools
 		protected BlockData getPathBlock(Random random) {
 			return new BlockData(Blocks.stained_hardened_clay, 0);
 		}
-
-		@Override
-		protected BlockData getPathBridge(Random random) {
-			return new BlockData(Blocks.wooden_slab, 0);
-		}
-
-		@Override
-		protected BlockData getUnderPathBlock(Random random) {
-			return new BlockData(Blocks.cobblestone, 0);
-		}
     }
     
     public static class House1  extends GlobalVillage

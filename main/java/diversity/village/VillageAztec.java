@@ -109,16 +109,6 @@ public class VillageAztec extends VillageTools
 		protected BlockData getPathBlock(Random random) {
 			return random.nextInt(3)==1 ? new BlockData(Blocks.grass, 0) : (random.nextInt(2)==1 ? new BlockData(Blocks.stonebrick, 1) : new BlockData(Blocks.stonebrick, 0));
 		}
-
-		@Override
-		protected BlockData getPathBridge(Random random) {
-			return new BlockData(Blocks.wooden_slab, 0);
-		}
-
-		@Override
-		protected BlockData getUnderPathBlock(Random random) {
-			return random.nextInt(2)==1 ? new BlockData(Blocks.cobblestone, 0) : new BlockData(Blocks.mossy_cobblestone, 0);
-		}
     }
     
     public static class House1 extends GlobalVillage

@@ -108,16 +108,6 @@ public class VillageTibetan extends VillageTools
 		protected BlockData getPathBlock(Random random) {
 			return new BlockData(Blocks.dirt, 1);
 		}
-
-		@Override
-		protected BlockData getPathBridge(Random random) {
-			return new BlockData(Blocks.wooden_slab, 1);
-		}
-
-		@Override
-		protected BlockData getUnderPathBlock(Random random) {
-			return new BlockData(Blocks.dirt, 0);
-		}
     }
     
     

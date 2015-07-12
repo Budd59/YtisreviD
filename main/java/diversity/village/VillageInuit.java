@@ -17,6 +17,7 @@ import diversity.suppliers.EnumVillageBasicPiece;
 import diversity.suppliers.EnumVillagePiece;
 import diversity.suppliers.EnumVillage;
 import diversity.suppliers.EnumVillager;
+import diversity.utils.Point;
 
 public final class VillageInuit extends VillageTools
 {
@@ -96,27 +97,16 @@ public final class VillageInuit extends VillageTools
 		protected BlockData getPathBlock(Random random) {
 			return new BlockData(Blocks.snow, 0);
 		}
-
-		@Override
-		protected BlockData getPathBridge(Random random) {
-			return new BlockData(Blocks.wooden_slab, 1);
-		}
-
-		@Override
-		protected BlockData getUnderPathBlock(Random random) {
-			return new BlockData(Blocks.cobblestone, 0);
-		}
     }
     
-    public static abstract class GlobalEskimoVillage extends GlobalVillage
+    public static abstract class GlobalInuitVillage extends GlobalVillage
     {
-		public GlobalEskimoVillage() {}
+		public GlobalInuitVillage() {}
 		
- 		public GlobalEskimoVillage(EnumVillagePiece enumPiece, StructureVillagePieces.Start startPiece, int componentType, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 		public GlobalInuitVillage(EnumVillagePiece enumPiece, StructureVillagePieces.Start startPiece, int componentType, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
  			super(enumPiece, startPiece, componentType, structureBoundingBox, coordBaseMode);
 		}
-
-		
+ 		
 		protected void generateSphere(World world, Random random, StructureBoundingBox structureBoundingBox, int baseX, int baseZ, int radius, double offset, int baseIncrement, int topIncrement)
 		{			
 			List<Point> basePoints = new ArrayList<Point>();
@@ -126,9 +116,9 @@ public final class VillageInuit extends VillageTools
 			{
 				for (int topDegree = 0; topDegree <180; topDegree=topDegree+topIncrement)
 				{
-					Point point = VillageTools.getSpherePoint(radius, baseDegree, topDegree, offset);
+					Point point = getSpherePoint(radius, baseDegree, topDegree, offset);
 					point.set(baseX + point.x, baseZ + point.z);
-					Point sidePoint = VillageInuit.getSpherePoint(radius, baseDegree, 180, offset);
+					Point sidePoint = getSpherePoint(radius, baseDegree, 180, offset);
 					sidePoint.set(baseX + sidePoint.x, baseZ + sidePoint.z);
 
 					func_151554_b(world, Blocks.packed_ice, 0, point.x, -1, point.z, structureBoundingBox);
@@ -147,9 +137,24 @@ public final class VillageInuit extends VillageTools
 				}
 			}
 		}
+		
+ 		/*
+ 		Returns point of a sphere, evenly distributed over the sphere.
+ 		The sphere is centered at (x0,y0,z0) with the passed in radius.
+ 		The returned point is returned as a three element array [x,y,z]. 
+ 		*/
+ 		private Point getSpherePoint(int radius, int u, int v, double offset)
+ 		{
+ 		   double theta = 2 * Math.PI * u/360;
+ 		   double phi = Math.PI * v/360;
+ 		   int x = (int)(radius * Math.sin(phi) * Math.cos(theta));
+ 		   int z = (int)(radius * Math.sin(phi) * Math.sin(theta));
+ 		   int y = (int)(radius * Math.cos(phi) + offset);
+ 		   return new Point(x, y, z);
+ 		}
     }
     
-	public static class Igloo1 extends GlobalEskimoVillage
+	public static class Igloo1 extends GlobalInuitVillage
 	{		
 		public Igloo1() {}
 
@@ -213,7 +218,7 @@ public final class VillageInuit extends VillageTools
 		}
 	}
 	
-	public static class Igloo2  extends GlobalEskimoVillage
+	public static class Igloo2  extends GlobalInuitVillage
 	{	
 		public Igloo2() {}
 
@@ -265,7 +270,7 @@ public final class VillageInuit extends VillageTools
 		}
 	}
 	
-	public static class ChiefIgloo  extends GlobalEskimoVillage
+	public static class ChiefIgloo  extends GlobalInuitVillage
 	{	
 		public ChiefIgloo() {}
 
