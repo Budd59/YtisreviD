@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import diversity.suppliers.EnumTribe;
 import diversity.suppliers.EnumVillager;
 
-public class EntityInuit extends EntityGlobalVillager
+public class EntityInuit extends AGlobalEntityVillager
 {
 	public EntityInuit(World world)
 	{
@@ -25,7 +25,7 @@ public class EntityInuit extends EntityGlobalVillager
 	@Override
     public EntityVillager createChild(EntityAgeable p_90011_1_)
     {
-		EntityGlobalVillager entityvillager = new EntityInuit(this.worldObj);
+		AGlobalEntityVillager entityvillager = new EntityInuit(this.worldObj);
         entityvillager.onSpawnWithEgg((IEntityLivingData)null);
         return entityvillager;
     }

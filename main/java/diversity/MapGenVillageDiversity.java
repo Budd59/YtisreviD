@@ -16,8 +16,9 @@ import net.minecraft.world.gen.structure.StructureStart;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import diversity.configurations.ConfigGenerationRate;
 import diversity.suppliers.EnumVillage;
-import diversity.village.VillageTools;
-import diversity.village.VillageTools.GlobalStart;
+import diversity.village.AGlobalStructureVillage;
+import diversity.village.AGlobalStructureVillage.AGlobalRoad;
+import diversity.village.AGlobalStructureVillage.AGlobalStart;
 
 public class MapGenVillageDiversity extends MapGenVillage
 {
@@ -112,14 +113,14 @@ public class MapGenVillageDiversity extends MapGenVillage
         {
             super(coordX, coordZ);
             BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(coordX * 16 + 8, coordZ * 16 + 8);
-            VillageTools villageInstance = EnumVillage.getRandomVillage(biome, random);
+            AGlobalStructureVillage villageInstance = EnumVillage.getRandomVillage(biome, random);
             if (villageInstance == null) {
             	this.hasMoreThanTwoComponents = false;
             	this.updateBoundingBox();
             	return;
             }
             List list = villageInstance.getStructureVillageWeightedPieceList(random);
-            GlobalStart start = villageInstance.getStart(world.getWorldChunkManager(), 0, random, (coordX << 4) + 2, (coordZ << 4) + 2, list, terrainType);
+            AGlobalStart start = villageInstance.getStart(world.getWorldChunkManager(), 0, random, (coordX << 4) + 2, (coordZ << 4) + 2, list, terrainType);
             this.components.add(start);
             start.buildComponent(start, this.components, random);
             List basicComponents = start.field_74930_j;
@@ -152,7 +153,7 @@ public class MapGenVillageDiversity extends MapGenVillage
             {
             	StructureComponent structurecomponent1 = (StructureComponent)iterator.next();
 
-                if (!(structurecomponent1 instanceof StructureVillagePieces.Road))
+                if (!(structurecomponent1 instanceof AGlobalRoad))
                 {
                     ++l;
                 }

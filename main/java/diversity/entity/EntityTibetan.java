@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import diversity.suppliers.EnumTribe;
 import diversity.suppliers.EnumVillager;
 
-public class EntityTibetan extends EntityGlobalVillager
+public class EntityTibetan extends AGlobalEntityVillager
 {
 	public EntityTibetan(World world)
 	{
@@ -22,7 +22,7 @@ public class EntityTibetan extends EntityGlobalVillager
 	@Override
     public EntityVillager createChild(EntityAgeable p_90011_1_)
     {
-		EntityGlobalVillager entityvillager = new EntityTibetan(this.worldObj);
+		AGlobalEntityVillager entityvillager = new EntityTibetan(this.worldObj);
         entityvillager.onSpawnWithEgg((IEntityLivingData)null);
         return entityvillager;
     }

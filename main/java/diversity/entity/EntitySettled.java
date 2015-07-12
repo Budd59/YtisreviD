@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import diversity.suppliers.EnumTribe;
 import diversity.suppliers.EnumVillager;
 
-public class EntitySettled extends EntityGlobalVillager implements IRangedAttackMob
+public class EntitySettled extends AGlobalEntityVillager implements IRangedAttackMob
 {
     private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
 
@@ -35,7 +35,7 @@ public class EntitySettled extends EntityGlobalVillager implements IRangedAttack
 	@Override
     public EntityVillager createChild(EntityAgeable p_90011_1_)
     {
-        EntityGlobalVillager entityvillager = new EntitySettled(this.worldObj);
+        AGlobalEntityVillager entityvillager = new EntitySettled(this.worldObj);
         entityvillager.onSpawnWithEgg((IEntityLivingData)null);
         return entityvillager;
     }

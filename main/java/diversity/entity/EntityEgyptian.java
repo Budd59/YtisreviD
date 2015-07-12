@@ -10,7 +10,7 @@ import diversity.suppliers.EnumItem;
 import diversity.suppliers.EnumTribe;
 import diversity.suppliers.EnumVillager;
 
-public class EntityEgyptian extends EntityGlobalVillager
+public class EntityEgyptian extends AGlobalEntityVillager
 {
 	public EntityEgyptian(World world)
 	{
@@ -30,7 +30,7 @@ public class EntityEgyptian extends EntityGlobalVillager
 	@Override
     public EntityVillager createChild(EntityAgeable p_90011_1_)
     {
-		EntityGlobalVillager entityvillager = new EntityEgyptian(this.worldObj);
+		AGlobalEntityVillager entityvillager = new EntityEgyptian(this.worldObj);
         entityvillager.onSpawnWithEgg((IEntityLivingData)null);
         return entityvillager;
     }

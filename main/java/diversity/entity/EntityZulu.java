@@ -9,7 +9,7 @@ import diversity.suppliers.EnumItem;
 import diversity.suppliers.EnumTribe;
 import diversity.suppliers.EnumVillager;
 
-public class EntityZulu extends EntityGlobalVillager
+public class EntityZulu extends AGlobalEntityVillager
 {
 	public EntityZulu(World world)
 	{
@@ -25,7 +25,7 @@ public class EntityZulu extends EntityGlobalVillager
 	@Override
     public EntityVillager createChild(EntityAgeable p_90011_1_)
     {
-		EntityGlobalVillager entityvillager = new EntityZulu(this.worldObj);
+		AGlobalEntityVillager entityvillager = new EntityZulu(this.worldObj);
         entityvillager.onSpawnWithEgg((IEntityLivingData)null);
         return entityvillager;
     }

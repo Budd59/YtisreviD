@@ -43,7 +43,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import diversity.Diversity;
@@ -55,8 +54,9 @@ import diversity.item.ItemSpear;
 import diversity.suppliers.EnumTribe;
 import diversity.suppliers.EnumVillager;
 import diversity.utils.VillageData;
+import diversity.utils.VillagerRegistry;
 
-public abstract class EntityGlobalVillager extends EntityVillager
+public abstract class AGlobalEntityVillager extends EntityVillager
 {	
     private Village villageObj;
     public final EnumTribe tribe;
@@ -71,11 +71,11 @@ public abstract class EntityGlobalVillager extends EntityVillager
 	private EntityAILookAtTradePlayer aiLookAtTradePlayer = new EntityAILookAtTradePlayer(this);
 	//private EntityAINearestAttackableTarget aiAttackZombie = new EntityAINearestAttackableTarget(this, EntityZombie.class, 30, true);
 	
-	public EntityGlobalVillager(World world) {
+	public AGlobalEntityVillager(World world) {
 		this(world, EnumVillager.SETTLED_VILLAGER);
 	}
 	
-	public EntityGlobalVillager(World world, EnumVillager type)
+	public AGlobalEntityVillager(World world, EnumVillager type)
 	{
 		super(world, type.profession);
 		this.tasks.taskEntries.clear();
@@ -192,7 +192,7 @@ public abstract class EntityGlobalVillager extends EntityVillager
 	    			VillageData.onAnihilated(villageObj);
 	    			return;
 	    		}
-	    		EntityGlobalVillager chief = (EntityGlobalVillager) getChief();
+	    		AGlobalEntityVillager chief = (AGlobalEntityVillager) getChief();
 	    		if (this.isChief())
 	    		{
 	    			if (chief == null)
@@ -328,7 +328,7 @@ public abstract class EntityGlobalVillager extends EntityVillager
                 }
             }
 
-            return p_142018_1_ instanceof EntityPlayer && p_142018_2_ instanceof EntityGlobalVillager ? false : !(p_142018_1_ instanceof EntityHorse) || !((EntityHorse)p_142018_1_).isTame();
+            return p_142018_1_ instanceof EntityPlayer && p_142018_2_ instanceof AGlobalEntityVillager ? false : !(p_142018_1_ instanceof EntityHorse) || !((EntityHorse)p_142018_1_).isTame();
         }
         else
         {

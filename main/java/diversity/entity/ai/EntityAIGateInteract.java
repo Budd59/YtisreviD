@@ -10,7 +10,7 @@ import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import diversity.entity.EntityGlobalVillager;
+import diversity.entity.AGlobalEntityVillager;
 
 public abstract class EntityAIGateInteract extends EntityAIDoorInteract
 {
@@ -85,7 +85,7 @@ public abstract class EntityAIGateInteract extends EntityAIDoorInteract
     /**
      * Called upon block activation (right click on the block.)
      */
-    protected boolean onGateActivated(World p_149727_1_, int p_149727_2_, int p_149727_3_, int p_149727_4_, EntityGlobalVillager p_149727_5_, BlockFenceGate gate)
+    protected boolean onGateActivated(World p_149727_1_, int p_149727_2_, int p_149727_3_, int p_149727_4_, AGlobalEntityVillager p_149727_5_, BlockFenceGate gate)
     {
         int i1 = p_149727_1_.getBlockMetadata(p_149727_2_, p_149727_3_, p_149727_4_);
 

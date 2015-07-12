@@ -1,48 +1,48 @@
 package diversity.suppliers;
 
 import net.minecraft.world.gen.structure.MapGenStructureIO;
-import diversity.village.VillageApache;
-import diversity.village.VillageAztec;
-import diversity.village.VillageEgyptian;
-import diversity.village.VillageInuit;
-import diversity.village.VillageLakeside;
-import diversity.village.VillageSettled;
-import diversity.village.VillageTibetan;
-import diversity.village.VillageZulu;
+import diversity.village.StructureVillageApache;
+import diversity.village.StructureVillageAztec;
+import diversity.village.StructureVillageEgyptian;
+import diversity.village.StructureVillageInuit;
+import diversity.village.StructureVillageLakeside;
+import diversity.village.StructureVillageSettled;
+import diversity.village.StructureVillageTibetan;
+import diversity.village.StructureVillageZulu;
 
 public enum EnumVillageBasicPiece implements IEnumPiece
 {
-	APACHE_START (EnumVillage.APACHE, VillageApache.Start.class),
-	APACHE_PATH (EnumVillage.APACHE, VillageApache.Path.class),
-	APACHE_TORCH (EnumVillage.APACHE, VillageApache.Torch.class),
+	APACHE_START (EnumVillage.APACHE, StructureVillageApache.Start.class),
+	APACHE_PATH (EnumVillage.APACHE, StructureVillageApache.Path.class),
+	APACHE_TORCH (EnumVillage.APACHE, StructureVillageApache.Torch.class),
 	
-	AZTEC_START (EnumVillage.AZTEC, VillageAztec.Start.class),
-	AZTEC_PATH (EnumVillage.AZTEC, VillageAztec.Path.class),
-	AZTEC_TORCH (EnumVillage.AZTEC, VillageAztec.Torch.class),
+	AZTEC_START (EnumVillage.AZTEC, StructureVillageAztec.Start.class),
+	AZTEC_PATH (EnumVillage.AZTEC, StructureVillageAztec.Path.class),
+	AZTEC_TORCH (EnumVillage.AZTEC, StructureVillageAztec.Torch.class),
 	
-	ESKIMO_START (EnumVillage.INUIT, VillageInuit.Start.class),
-	ESKIMO_PATH (EnumVillage.INUIT, VillageInuit.Path.class),
-	ESKIMO_TORCH (EnumVillage.INUIT, VillageInuit.Torch.class),
+	ESKIMO_START (EnumVillage.INUIT, StructureVillageInuit.Start.class),
+	ESKIMO_PATH (EnumVillage.INUIT, StructureVillageInuit.Path.class),
+	ESKIMO_TORCH (EnumVillage.INUIT, StructureVillageInuit.Torch.class),
 
-	SETTLED_START (EnumVillage.SETTLED, VillageSettled.Start.class),
-	SETTLED_PATH (EnumVillage.SETTLED, VillageSettled.Path.class),
-	SETTLED_TORCH (EnumVillage.SETTLED, VillageSettled.Torch.class),
+	SETTLED_START (EnumVillage.SETTLED, StructureVillageSettled.Start.class),
+	SETTLED_PATH (EnumVillage.SETTLED, StructureVillageSettled.Path.class),
+	SETTLED_TORCH (EnumVillage.SETTLED, StructureVillageSettled.Torch.class),
 	
-	ZOULOU_START (EnumVillage.ZULU, VillageZulu.Start.class),
-	ZOULOU_PATH (EnumVillage.ZULU, VillageZulu.Path.class),
-	ZOULOU_TORCH (EnumVillage.ZULU, VillageZulu.Torch.class),
+	ZOULOU_START (EnumVillage.ZULU, StructureVillageZulu.Start.class),
+	ZOULOU_PATH (EnumVillage.ZULU, StructureVillageZulu.Path.class),
+	ZOULOU_TORCH (EnumVillage.ZULU, StructureVillageZulu.Torch.class),
 	
-	TIBETAN_START (EnumVillage.TIBETAN, VillageTibetan.Start.class),
-	TIBETAN_PATH (EnumVillage.TIBETAN, VillageTibetan.Path.class),
-	TIBETAN_TORCH (EnumVillage.TIBETAN, VillageTibetan.Torch.class),
+	TIBETAN_START (EnumVillage.TIBETAN, StructureVillageTibetan.Start.class),
+	TIBETAN_PATH (EnumVillage.TIBETAN, StructureVillageTibetan.Path.class),
+	TIBETAN_TORCH (EnumVillage.TIBETAN, StructureVillageTibetan.Torch.class),
 	
-	EGYPTIAN_START (EnumVillage.EGYPTIAN, VillageEgyptian.Start.class),
-	EGYPTIAN_PATH (EnumVillage.EGYPTIAN, VillageEgyptian.Path.class),
-	EGYPTIAN_TORCH (EnumVillage.EGYPTIAN, VillageEgyptian.Torch.class),
+	EGYPTIAN_START (EnumVillage.EGYPTIAN, StructureVillageEgyptian.Start.class),
+	EGYPTIAN_PATH (EnumVillage.EGYPTIAN, StructureVillageEgyptian.Path.class),
+	EGYPTIAN_TORCH (EnumVillage.EGYPTIAN, StructureVillageEgyptian.Torch.class),
 	
-	LAKE_START (EnumVillage.LAKESIDE, VillageLakeside.Start.class),
-	LAKE_PATH (EnumVillage.LAKESIDE, VillageLakeside.Path.class),
-	LAKE_TORCH (EnumVillage.LAKESIDE, VillageLakeside.Torch.class);
+	LAKE_START (EnumVillage.LAKESIDE, StructureVillageLakeside.Start.class),
+	LAKE_PATH (EnumVillage.LAKESIDE, StructureVillageLakeside.Path.class),
+	LAKE_TORCH (EnumVillage.LAKESIDE, StructureVillageLakeside.Torch.class);
 	
 	public EnumVillage village;
 	public Class pieceClass;

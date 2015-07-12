@@ -2,15 +2,15 @@ package diversity.entity.ai;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
-import diversity.entity.EntityGlobalVillager;
+import diversity.entity.AGlobalEntityVillager;
 
 public class EntityAIChiefHurtByTarget extends EntityAITarget
 {
-	EntityGlobalVillager theDefendingVillager;
+	AGlobalEntityVillager theDefendingVillager;
     EntityLivingBase theChiefAttacker;
     private int field_142051_e;
 
-    public EntityAIChiefHurtByTarget(EntityGlobalVillager p_i1667_1_)
+    public EntityAIChiefHurtByTarget(AGlobalEntityVillager p_i1667_1_)
     {
         super(p_i1667_1_, false);
         this.theDefendingVillager = p_i1667_1_;

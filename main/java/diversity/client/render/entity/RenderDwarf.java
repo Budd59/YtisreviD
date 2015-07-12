@@ -23,7 +23,7 @@ import diversity.client.model.ModelAztec;
 import diversity.client.model.ModelDwarf;
 import diversity.client.model.ModelGlobalVillager;
 import diversity.entity.EntityDwarf;
-import diversity.entity.EntityGlobalVillager;
+import diversity.entity.AGlobalEntityVillager;
 import diversity.utils.ResourceTools;
 
 
@@ -42,7 +42,7 @@ public class RenderDwarf extends RenderLiving
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntityGlobalVillager p_77032_1_, int p_77032_2_, float p_77032_3_)
+    protected int shouldRenderPass(AGlobalEntityVillager p_77032_1_, int p_77032_2_, float p_77032_3_)
     {
         return this.shouldRenderPass((EntityLiving)p_77032_1_, p_77032_2_, p_77032_3_);
     }
@@ -160,7 +160,7 @@ public class RenderDwarf extends RenderLiving
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntityGlobalVillager entity)
+    protected ResourceLocation getEntityTexture(AGlobalEntityVillager entity)
     {
     	if (!entity.isChild()) {
     		return VillagerRegistry.getVillagerSkin(entity.getProfession(), defaultTexture);
@@ -175,7 +175,7 @@ public class RenderDwarf extends RenderLiving
     @Override
     protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntityGlobalVillager)p_110775_1_);
+        return this.getEntityTexture((AGlobalEntityVillager)p_110775_1_);
     }
     
     /**
@@ -184,14 +184,14 @@ public class RenderDwarf extends RenderLiving
      */
     protected void preRenderCallback(EntityLivingBase p_77041_1_, float p_77041_2_)
     {
-        this.preRenderCallback((EntityGlobalVillager)p_77041_1_, p_77041_2_);
+        this.preRenderCallback((AGlobalEntityVillager)p_77041_1_, p_77041_2_);
     }
     
     /**
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityGlobalVillager p_77041_1_, float p_77041_2_)
+    protected void preRenderCallback(AGlobalEntityVillager p_77041_1_, float p_77041_2_)
     {
     	super.preRenderCallback(p_77041_1_, p_77041_2_);
         float f1 = 0.9375F;
@@ -217,7 +217,7 @@ public class RenderDwarf extends RenderLiving
      */
     public void doRender(EntityVillager p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        super.doRender((EntityGlobalVillager)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
+        super.doRender((AGlobalEntityVillager)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
     
     /**
@@ -228,7 +228,7 @@ public class RenderDwarf extends RenderLiving
      */
     public void doRender(EntityLiving p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityGlobalVillager)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
+        this.doRender((AGlobalEntityVillager)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
     
     /**
@@ -239,7 +239,7 @@ public class RenderDwarf extends RenderLiving
      */
     public void doRender(EntityLivingBase p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityGlobalVillager)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
+        this.doRender((AGlobalEntityVillager)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
     
     /**
@@ -250,6 +250,6 @@ public class RenderDwarf extends RenderLiving
      */
     public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        this.doRender((EntityGlobalVillager)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
+        this.doRender((AGlobalEntityVillager)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 }

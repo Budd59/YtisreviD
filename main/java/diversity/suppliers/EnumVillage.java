@@ -10,27 +10,27 @@ import java.util.Random;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeManager;
 import diversity.configurations.ConfigBiomeGroup;
-import diversity.village.VillageApache;
-import diversity.village.VillageAztec;
-import diversity.village.VillageEgyptian;
-import diversity.village.VillageInuit;
-import diversity.village.VillageLakeside;
-import diversity.village.VillageSettled;
-import diversity.village.VillageTibetan;
-import diversity.village.VillageTools;
-import diversity.village.VillageZulu;
+import diversity.village.StructureVillageApache;
+import diversity.village.StructureVillageAztec;
+import diversity.village.StructureVillageEgyptian;
+import diversity.village.StructureVillageInuit;
+import diversity.village.StructureVillageLakeside;
+import diversity.village.StructureVillageSettled;
+import diversity.village.StructureVillageTibetan;
+import diversity.village.AGlobalStructureVillage;
+import diversity.village.StructureVillageZulu;
 
 public enum EnumVillage
 {
-	APACHE (VillageApache.class, ConfigBiomeGroup.APACHE_VILLAGE, true),
-	AZTEC (VillageAztec.class, ConfigBiomeGroup.AZTEC_VILLAGE, true),
-	INUIT (VillageInuit.class, ConfigBiomeGroup.INUIT_VILLAGE, true),
-	SETTLED (VillageSettled.class, ConfigBiomeGroup.SETTLED_VILLAGE, true),
-	ZULU (VillageZulu.class, ConfigBiomeGroup.ZULU_VILLAGE, true),
-	TIBETAN (VillageTibetan.class, ConfigBiomeGroup.TIBETAN_VILLAGE, true), 
-	EGYPTIAN (VillageEgyptian.class, ConfigBiomeGroup.EGYPTIAN_VILLAGE, true),
-	LAKESIDE (VillageLakeside.class, ConfigBiomeGroup.LAKESIDE_VILLAGE, true);	
-	public VillageTools instance;
+	APACHE (StructureVillageApache.class, ConfigBiomeGroup.APACHE_VILLAGE, true),
+	AZTEC (StructureVillageAztec.class, ConfigBiomeGroup.AZTEC_VILLAGE, true),
+	INUIT (StructureVillageInuit.class, ConfigBiomeGroup.INUIT_VILLAGE, true),
+	SETTLED (StructureVillageSettled.class, ConfigBiomeGroup.SETTLED_VILLAGE, true),
+	ZULU (StructureVillageZulu.class, ConfigBiomeGroup.ZULU_VILLAGE, true),
+	TIBETAN (StructureVillageTibetan.class, ConfigBiomeGroup.TIBETAN_VILLAGE, true), 
+	EGYPTIAN (StructureVillageEgyptian.class, ConfigBiomeGroup.EGYPTIAN_VILLAGE, true),
+	LAKESIDE (StructureVillageLakeside.class, ConfigBiomeGroup.LAKESIDE_VILLAGE, true);	
+	public AGlobalStructureVillage instance;
 	private final boolean canSpawnRandomly;
 	private final ConfigBiomeGroup config;
 	public final List<EnumVillagePiece> pieces = new ArrayList<EnumVillagePiece>();
@@ -40,11 +40,11 @@ public enum EnumVillage
 	
 	private EnumVillage(Class villageClass, ConfigBiomeGroup config, boolean canSpawnRandomly)
 	{
-		if (villageClass.getSuperclass()==VillageTools.class)
+		if (villageClass.getSuperclass()==AGlobalStructureVillage.class)
 		{
 			try
 			{
-				this.instance = (VillageTools)villageClass.getConstructors()[0].newInstance(this);
+				this.instance = (AGlobalStructureVillage)villageClass.getConstructors()[0].newInstance(this);
 			}
 			catch (Exception e)
 			{
@@ -86,7 +86,7 @@ public enum EnumVillage
 		return biomeEnumMap.get(biome) != null && !biomeEnumMap.get(biome).isEmpty();
 	}
 	
-	public static VillageTools getRandomVillage(BiomeGenBase biome, Random rand)
+	public static AGlobalStructureVillage getRandomVillage(BiomeGenBase biome, Random rand)
 	{
 		List<EnumVillage> list = biomeEnumMap.get(biome);
 		if (list == null || list.isEmpty())

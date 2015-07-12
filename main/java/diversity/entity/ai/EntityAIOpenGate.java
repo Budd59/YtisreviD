@@ -1,7 +1,7 @@
 package diversity.entity.ai;
 
 import net.minecraft.entity.EntityLiving;
-import diversity.entity.EntityGlobalVillager;
+import diversity.entity.AGlobalEntityVillager;
 
 public class EntityAIOpenGate  extends EntityAIGateInteract
 {
@@ -29,7 +29,7 @@ public class EntityAIOpenGate  extends EntityAIGateInteract
     public void startExecuting()
     {
         this.field_75360_j = 20;
-        onGateActivated(this.theEntity.worldObj, this.entityPosX, this.entityPosY, this.entityPosZ, (EntityGlobalVillager)this.theEntity, this.field_151504_e);
+        onGateActivated(this.theEntity.worldObj, this.entityPosX, this.entityPosY, this.entityPosZ, (AGlobalEntityVillager)this.theEntity, this.field_151504_e);
     }
 
     /**
@@ -39,7 +39,7 @@ public class EntityAIOpenGate  extends EntityAIGateInteract
     {
         if (this.field_75361_i)
         {
-            onGateActivated(this.theEntity.worldObj, this.entityPosX, this.entityPosY, this.entityPosZ, (EntityGlobalVillager)this.theEntity, this.field_151504_e);
+            onGateActivated(this.theEntity.worldObj, this.entityPosX, this.entityPosY, this.entityPosZ, (AGlobalEntityVillager)this.theEntity, this.field_151504_e);
         }
     }
 

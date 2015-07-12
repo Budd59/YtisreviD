@@ -10,7 +10,7 @@ import diversity.entity.EntityApache;
 import diversity.entity.EntityAztec;
 import diversity.entity.EntityDwarf;
 import diversity.entity.EntityEgyptian;
-import diversity.entity.EntityGlobalVillager;
+import diversity.entity.AGlobalEntityVillager;
 import diversity.entity.EntityInuit;
 import diversity.entity.EntityLakeside;
 import diversity.entity.EntitySettled;
@@ -49,7 +49,7 @@ public enum EnumTribe {
 		return villagers.get(new Random().nextInt(villagers.size()));
 	}
 
-	public static EnumTribe getEnumTribe(EntityGlobalVillager villager) {
+	public static EnumTribe getEnumTribe(AGlobalEntityVillager villager) {
 		for (EnumTribe tribe : EnumTribe.values()) {
 			if (tribe.entityClass.isInstance(villager)) {
 				return tribe;

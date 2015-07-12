@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import diversity.suppliers.EnumTribe;
 import diversity.suppliers.EnumVillager;
 
-public class EntityLakeside extends EntityGlobalVillager
+public class EntityLakeside extends AGlobalEntityVillager
 {
 	public EntityLakeside(World world)
 	{
@@ -29,7 +29,7 @@ public class EntityLakeside extends EntityGlobalVillager
 	@Override
     public EntityVillager createChild(EntityAgeable p_90011_1_)
     {
-		EntityGlobalVillager entityvillager = new EntityLakeside(this.worldObj);
+		AGlobalEntityVillager entityvillager = new EntityLakeside(this.worldObj);
         entityvillager.onSpawnWithEgg((IEntityLivingData)null);
         return entityvillager;
     }

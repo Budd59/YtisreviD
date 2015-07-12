@@ -21,35 +21,35 @@ import diversity.suppliers.EnumVillage;
 import diversity.suppliers.EnumVillager;
 import diversity.utils.DirectionTools;
 
-public class VillageLakeside extends VillageTools
+public class StructureVillageLakeside extends AGlobalStructureVillage
 {
-	private static VillageLakeside instance;
+	private static StructureVillageLakeside instance;
 
-	public VillageLakeside(EnumVillage ENUM) {
+	public StructureVillageLakeside(EnumVillage ENUM) {
 		super(ENUM);
 		instance = this;
 	}
     
 	@Override
-	public GlobalStart getStart(WorldChunkManager worldChunkManager, int i, Random rand, int j, int k, List list, int numberOfVillagers)
+	public AGlobalStart getStart(WorldChunkManager worldChunkManager, int i, Random rand, int j, int k, List list, int numberOfVillagers)
 	{
 		return new Start(worldChunkManager, i, rand, j, k, list, numberOfVillagers);
 	}
 
 	@Override
-	protected GlobalTorch getTorch(GlobalStart villagePiece, int par2, Random rand, StructureBoundingBox boundingBox, int coordBaseMode)
+	protected AGlobalTorch getTorch(AGlobalStart villagePiece, int par2, Random rand, StructureBoundingBox boundingBox, int coordBaseMode)
 	{
 		return new Torch(villagePiece, par2, rand, boundingBox, coordBaseMode);
 	}
 	
 
 	@Override
-	protected GlobalPath getPath(GlobalStart p_75080_0_, int p_75080_7_, Random p_75080_2_, StructureBoundingBox structureboundingbox, int p_75080_6_)
+	protected AGlobalPath getPath(AGlobalStart p_75080_0_, int p_75080_7_, Random p_75080_2_, StructureBoundingBox structureboundingbox, int p_75080_6_)
 	{
 		return new Path(p_75080_0_, p_75080_7_, p_75080_2_, structureboundingbox, p_75080_6_);
 	}
 	
-	public static class Start extends GlobalStart
+	public static class Start extends AGlobalStart
     {
         public Start() {}
 
@@ -122,13 +122,13 @@ public class VillageLakeside extends VillageTools
         }
     }
 	
-    public static class Path extends GlobalPath
+    public static class Path extends AGlobalPath
     {
     	public Path() {}
 
-    	public Path(GlobalStart p_i2105_1_, int p_i2105_2_, Random p_i2105_3_, StructureBoundingBox p_i2105_4_, int p_i2105_5_)
+    	public Path(AGlobalStart p_i2105_1_, int p_i2105_2_, Random p_i2105_3_, StructureBoundingBox p_i2105_4_, int p_i2105_5_)
         {
-            super(instance, p_i2105_1_, p_i2105_2_, p_i2105_3_, p_i2105_4_, p_i2105_5_);
+            super(p_i2105_1_, p_i2105_2_, p_i2105_3_, p_i2105_4_, p_i2105_5_);
         }
 		
 		@Override
@@ -184,13 +184,13 @@ public class VillageLakeside extends VillageTools
 		}
     }
     
-	public static class Torch  extends GlobalTorch
+	public static class Torch  extends AGlobalTorch
 	{		
 		public Torch() {}
 
-		public Torch(StructureVillagePieces.Start startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode)
+		public Torch(AGlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode)
 		{
-			super(EnumVillageBasicPiece.LAKE_TORCH, startPiece, componentType, random, structureBoundingBox, coordBaseMode);
+			super(startPiece, componentType, random, structureBoundingBox, coordBaseMode);
 			setOffset(3);
 		}
 
@@ -213,16 +213,16 @@ public class VillageLakeside extends VillageTools
         }
     }
 	
-	public static class House1 extends GlobalVillage
+	public static class House1 extends AGlobalVillage
 	{
 		public House1() {}
 		
- 		public House1(StructureVillagePieces.Start villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.LAKESIDE_HOUSE1, villagePiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public House1(AGlobalStart villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(villagePiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(3);
  		}
 
-		public static House1 buildComponent( StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
+		public static House1 buildComponent( AGlobalStart villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
 			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 7, 4, 6, coordBaseMode);
 			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new House1(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
 		}
@@ -277,8 +277,8 @@ public class VillageLakeside extends VillageTools
 			this.placeDoorAtCurrentPosition(world, structureBoundingBox, random, 3, 1, 1, this.getMetadataWithOffset(Blocks.wooden_door, 1));
 			this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 3, 3, 2, structureBoundingBox);
 			
-			this.spawnEntity(world, structureBoundingBox, 3, 1, 3, 0);
-			this.spawnEntity(world, structureBoundingBox, 3, 1, 3, 0);
+			this.spawnVillager(world, structureBoundingBox, 3, 1, 3, 0);
+			this.spawnVillager(world, structureBoundingBox, 3, 1, 3, 0);
 			
 			return true;
 		}
@@ -289,16 +289,16 @@ public class VillageLakeside extends VillageTools
 		}
 	}
 	
-	public static class House2 extends GlobalVillage
+	public static class House2 extends AGlobalVillage
 	{
 		public House2() {}
 		
- 		public House2(StructureVillagePieces.Start villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.LAKESIDE_HOUSE2, villagePiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public House2(AGlobalStart villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(villagePiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(4);
  		}
 
-		public static House2 buildComponent( StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
+		public static House2 buildComponent( AGlobalStart villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
 			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 8, 4, 6, coordBaseMode);
 			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new House2(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
 		}
@@ -360,7 +360,7 @@ public class VillageLakeside extends VillageTools
 			this.placeDoorAtCurrentPosition(world, structureBoundingBox, random, 4, 1, 1, this.getMetadataWithOffset(Blocks.wooden_door, 1));
 			this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 3, 2, structureBoundingBox);
 			
-			this.spawnEntity(world, structureBoundingBox, 3, 1, 3, 0);
+			this.spawnVillager(world, structureBoundingBox, 3, 1, 3, 0);
 			
 			return true;
 		}
@@ -371,16 +371,16 @@ public class VillageLakeside extends VillageTools
 		}
 	}
 	
-	public static class Tower extends GlobalVillage
+	public static class Tower extends AGlobalVillage
 	{
 		public Tower() {}
 		
- 		public Tower(StructureVillagePieces.Start villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.LAKESIDE_TOWER, villagePiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public Tower(AGlobalStart villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(villagePiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(7);
  		}
 
-		public static Tower buildComponent( StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
+		public static Tower buildComponent( AGlobalStart villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
 			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 6, 7, 5, coordBaseMode);
 			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new Tower(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
 		}
@@ -497,9 +497,9 @@ public class VillageLakeside extends VillageTools
 			this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 2, 4, structureBoundingBox);
 			this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 5, 2, structureBoundingBox);
 			
-			this.spawnEntity(world, structureBoundingBox, 3, 1, 3, 0);
-			this.spawnEntity(world, structureBoundingBox, 3, 1, 3, 0);
-			this.spawnEntity(world, structureBoundingBox, 3, 4, 3, 0);
+			this.spawnVillager(world, structureBoundingBox, 3, 1, 3, 0);
+			this.spawnVillager(world, structureBoundingBox, 3, 1, 3, 0);
+			this.spawnVillager(world, structureBoundingBox, 3, 4, 3, 0);
 			
 			return true;
 		}
@@ -510,18 +510,18 @@ public class VillageLakeside extends VillageTools
 		}
 	}
 	
-	public static class Breeding extends GlobalVillage
+	public static class Breeding extends AGlobalVillage
 	{
         private static Planks randomSwampPlanks = new Planks(null);
 		
 		public Breeding() {}
 		
- 		public Breeding(StructureVillagePieces.Start villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.LAKESIDE_BREEDING, villagePiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public Breeding(AGlobalStart villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(villagePiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(4);
  		}
 
-		public static Breeding buildComponent( StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
+		public static Breeding buildComponent( AGlobalStart villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
 			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 10, 4, 8, coordBaseMode);
 			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new Breeding(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
 		}
@@ -638,11 +638,11 @@ public class VillageLakeside extends VillageTools
 			this.placeDoorAtCurrentPosition(world, structureBoundingBox, random, 6, 1, 4, this.getMetadataWithOffset(Blocks.wooden_door, 1));
 			this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 6, 3, 2, structureBoundingBox);
 			
-			this.spawnEntity(world, structureBoundingBox, 2, -2, 1, 0);
-			this.spawnEntity(world, structureBoundingBox, 2, -2, 1, 1);
-			this.spawnEntity(world, structureBoundingBox, 2, -2, 1, 1);
-			this.spawnEntity(world, structureBoundingBox, 2, -2, 1, 1);
-			this.spawnEntity(world, structureBoundingBox, 2, -2, 1, 1);
+			this.spawnVillager(world, structureBoundingBox, 2, -2, 1, 0);
+			this.spawnVillager(world, structureBoundingBox, 2, -2, 1, 1);
+			this.spawnVillager(world, structureBoundingBox, 2, -2, 1, 1);
+			this.spawnVillager(world, structureBoundingBox, 2, -2, 1, 1);
+			this.spawnVillager(world, structureBoundingBox, 2, -2, 1, 1);
 			
 			return true;
 		}
@@ -659,18 +659,18 @@ public class VillageLakeside extends VillageTools
 		}
 	}
 	
-	public static class Field extends GlobalField
+	public static class Field extends AGlobalField
 	{
         private static Planks randomSwampPlanks = new Planks(null);
 		
 		public Field() {}
 		
- 		public Field(StructureVillagePieces.Start villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.LAKESIDE_FIELD, villagePiece, componentType, random, structureBoundingBox, coordBaseMode);
+ 		public Field(AGlobalStart villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(villagePiece, componentType, random, structureBoundingBox, coordBaseMode);
  			setOffset(1);
  		}
 
-		public static Field buildComponent( StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
+		public static Field buildComponent( AGlobalStart villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
 			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 8, 4, 7, coordBaseMode);
 			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new Field(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
 		}
@@ -748,8 +748,8 @@ public class VillageLakeside extends VillageTools
                 this.placeBlockAtCurrentPosition(world, cropTypeB, MathHelper.getRandomIntegerInRange(random, 2, 7), x, 1, 6, structureBoundingBox);
             }
             
-            this.spawnEntity(world, structureBoundingBox, 3, 1, 1, 0);
-            this.spawnEntity(world, structureBoundingBox, 3, 1, 1, 0);
+            this.spawnVillager(world, structureBoundingBox, 3, 1, 1, 0);
+            this.spawnVillager(world, structureBoundingBox, 3, 1, 1, 0);
     		
 			return true;
 		}

@@ -19,11 +19,11 @@ import diversity.suppliers.EnumVillage;
 import diversity.suppliers.EnumVillager;
 import diversity.utils.DirectionTools;
 
-public class VillageTibetan extends VillageTools
+public class StructureVillageTibetan extends AGlobalStructureVillage
 {
-	private static VillageTibetan instance;
+	private static StructureVillageTibetan instance;
 	
-	public VillageTibetan(EnumVillage village) {
+	public StructureVillageTibetan(EnumVillage village) {
 		super(village);
 		instance = this;
 	}
@@ -34,16 +34,16 @@ public class VillageTibetan extends VillageTools
 	}
 
 	@Override
-	protected GlobalTorch getTorch(GlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+	protected AGlobalTorch getTorch(AGlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
 		return new Torch(startPiece, componentType, random, structureBoundingBox, coordBaseMode);
 	}
 
 	@Override
-	protected GlobalPath getPath(GlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureboundingbox, int coordBaseMode) {
+	protected AGlobalPath getPath(AGlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureboundingbox, int coordBaseMode) {
 		return new Path(startPiece, componentType, random, structureboundingbox, coordBaseMode);
 	}
 	
-	public static class Start extends GlobalStart
+	public static class Start extends AGlobalStart
     {
         public Start() {}
 
@@ -95,13 +95,13 @@ public class VillageTibetan extends VillageTools
         }
     }
 	
-    public static class Path extends GlobalPath
+    public static class Path extends AGlobalPath
     {
     	public Path() {}
 
-    	public Path(GlobalStart p_i2105_1_, int p_i2105_2_, Random p_i2105_3_, StructureBoundingBox p_i2105_4_, int p_i2105_5_)
+    	public Path(AGlobalStart p_i2105_1_, int p_i2105_2_, Random p_i2105_3_, StructureBoundingBox p_i2105_4_, int p_i2105_5_)
         {
-            super(instance, p_i2105_1_, p_i2105_2_, p_i2105_3_, p_i2105_4_, p_i2105_5_);
+            super(p_i2105_1_, p_i2105_2_, p_i2105_3_, p_i2105_4_, p_i2105_5_);
         }
 		
 		@Override
@@ -111,13 +111,13 @@ public class VillageTibetan extends VillageTools
     }
     
     
-	public static class Torch  extends GlobalTorch
+	public static class Torch  extends AGlobalTorch
 	{		
 		public Torch() {}
 
-		public Torch(StructureVillagePieces.Start startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode)
+		public Torch(AGlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode)
 		{
-			super(EnumVillageBasicPiece.TIBETAN_TORCH, startPiece, componentType, random, structureBoundingBox, coordBaseMode);
+			super(startPiece, componentType, random, structureBoundingBox, coordBaseMode);
 			setOffset(2);
 		}
 
@@ -159,7 +159,7 @@ public class VillageTibetan extends VillageTools
 	}
 
     
-    public static class MainHouse  extends GlobalVillage
+    public static class MainHouse  extends AGlobalVillage
     {
     	private int darkOakStair0;
     	private int darkOakStair1;
@@ -168,8 +168,8 @@ public class VillageTibetan extends VillageTools
     	
  		public MainHouse() {}
  		
- 		public MainHouse(StructureVillagePieces.Start villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.TIBETAN_MAINHOUSE, villagePiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public MainHouse(AGlobalStart villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(villagePiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(13);
  			darkOakStair0 = coordBaseMode==0 ? 0 : coordBaseMode == 1 ? 2 : coordBaseMode == 2 ? 0 : 2;
            	darkOakStair1 = coordBaseMode==0 ? 1 : coordBaseMode == 1 ? 3 : coordBaseMode == 2 ? 1 : 3;
@@ -177,7 +177,7 @@ public class VillageTibetan extends VillageTools
            	darkOakStair3 = coordBaseMode==0 ? 2 : coordBaseMode == 1 ? 1 : coordBaseMode == 2 ? 3 : 0;
  		}
 
-		public static MainHouse buildComponent(StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
+		public static MainHouse buildComponent(AGlobalStart villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
  			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 15, 13, coordBaseMode);
  			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new MainHouse(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
  		}
@@ -431,7 +431,7 @@ public class VillageTibetan extends VillageTools
            	this.placeBlockAtCurrentPosition(world, Blocks.planks, 0, 5, 9, 6, structureBoundingBox);
            	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 5, 10, 6, structureBoundingBox);
 
-           	this.spawnEntity(world, structureBoundingBox, 5, 4, 2, 0);
+           	this.spawnVillager(world, structureBoundingBox, 5, 4, 2, 0);
            	
  			return true;
  		}
@@ -442,7 +442,7 @@ public class VillageTibetan extends VillageTools
 		}
  	}
 	
-    public static class House2  extends GlobalVillage
+    public static class House2  extends AGlobalVillage
     {
     	private int darkOakStair0;
     	private int darkOakStair1;
@@ -451,8 +451,8 @@ public class VillageTibetan extends VillageTools
 		
  		public House2() {}
  		
- 		public House2(StructureVillagePieces.Start villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.TIBETAN_HOUSE2, villagePiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public House2(AGlobalStart villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(villagePiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(9);
  			darkOakStair0 = coordBaseMode==0 ? 0 : coordBaseMode == 1 ? 2 : coordBaseMode == 2 ? 0 : 2;
            	darkOakStair1 = coordBaseMode==0 ? 1 : coordBaseMode == 1 ? 3 : coordBaseMode == 2 ? 1 : 3;
@@ -460,7 +460,7 @@ public class VillageTibetan extends VillageTools
            	darkOakStair3 = coordBaseMode==0 ? 2 : coordBaseMode == 1 ? 1 : coordBaseMode == 2 ? 3 : 0;
  		}
 
- 		public static House2 buildComponent(StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
+ 		public static House2 buildComponent(AGlobalStart villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
  			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 7, 11, 8, coordBaseMode);
  			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new House2(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
  		}
@@ -625,7 +625,7 @@ public class VillageTibetan extends VillageTools
            	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 4, 3, structureBoundingBox);
            	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 4, 3, structureBoundingBox);
 			
-           	this.spawnEntity(world, structureBoundingBox, 3, 4, 3, 0);
+           	this.spawnVillager(world, structureBoundingBox, 3, 4, 3, 0);
            	
  			return true;
  		}
@@ -636,16 +636,16 @@ public class VillageTibetan extends VillageTools
 		}
  	}
     
-    public static class Field  extends GlobalField
+    public static class Field  extends AGlobalField
     {    	
 		public Field() {}
 		
- 		public Field(StructureVillagePieces.Start startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.TIBETAN_FIELD, startPiece, componentType, random, structureBoundingBox, coordBaseMode);
+ 		public Field(AGlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(startPiece, componentType, random, structureBoundingBox, coordBaseMode);
 			setOffset(0);
 		}
 
-		public static Field buildComponent( StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
+		public static Field buildComponent( AGlobalStart villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
 			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 13, 2, 9, coordBaseMode);
 			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new Field(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
 		}
@@ -693,7 +693,7 @@ public class VillageTibetan extends VillageTools
                 this.placeBlockAtCurrentPosition(world, cropTypeD, MathHelper.getRandomIntegerInRange(random, 2, 7), 11, 1, i, structureBoundingBox);
             }
             
-            this.spawnEntity(world, structureBoundingBox, 4, 2, 4, 0);
+            this.spawnVillager(world, structureBoundingBox, 4, 2, 4, 0);
 
 			return true;
 		}
@@ -704,7 +704,7 @@ public class VillageTibetan extends VillageTools
 		}
     }
     
-    public static class House1  extends GlobalVillage
+    public static class House1  extends AGlobalVillage
     {
 		private int darkOakStair0;
 		private int darkOakStair1;
@@ -713,8 +713,8 @@ public class VillageTibetan extends VillageTools
 		
  		public House1() {}
  		
- 		public House1(StructureVillagePieces.Start villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.TIBETAN_HOUSE1, villagePiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public House1(AGlobalStart villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(villagePiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(8);
  			darkOakStair0 = coordBaseMode==0 ? 0 : coordBaseMode == 1 ? 2 : coordBaseMode == 2 ? 0 : 2;
            	darkOakStair1 = coordBaseMode==0 ? 1 : coordBaseMode == 1 ? 3 : coordBaseMode == 2 ? 1 : 3;
@@ -722,7 +722,7 @@ public class VillageTibetan extends VillageTools
            	darkOakStair3 = coordBaseMode==0 ? 2 : coordBaseMode == 1 ? 1 : coordBaseMode == 2 ? 3 : 0;
  		}
 
- 		public static House1 buildComponent(StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
+ 		public static House1 buildComponent(AGlobalStart villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
  			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 10, 10, coordBaseMode);
  			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new House1(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
  		}
@@ -950,9 +950,9 @@ public class VillageTibetan extends VillageTools
            	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 4, 5, structureBoundingBox);
            	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 6, 4, 5, structureBoundingBox);
 			
-           	this.spawnEntity(world, structureBoundingBox, 3, 4, 5, 0);
-           	this.spawnEntity(world, structureBoundingBox, 3, 4, 5, 0);
-           	this.spawnEntity(world, structureBoundingBox, 3, 4, 5, 0);
+           	this.spawnVillager(world, structureBoundingBox, 3, 4, 5, 0);
+           	this.spawnVillager(world, structureBoundingBox, 3, 4, 5, 0);
+           	this.spawnVillager(world, structureBoundingBox, 3, 4, 5, 0);
            	
  			return true;
  		}

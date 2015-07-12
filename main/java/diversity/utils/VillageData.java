@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.village.Village;
-import diversity.entity.EntityGlobalVillager;
+import diversity.entity.AGlobalEntityVillager;
 
 public class VillageData
 {
-	private static final Map<Village, EntityGlobalVillager> map = new HashMap<Village, EntityGlobalVillager>();
+	private static final Map<Village, AGlobalEntityVillager> map = new HashMap<Village, AGlobalEntityVillager>();
 
-	public static void addChief(Village village, EntityGlobalVillager chief)
+	public static void addChief(Village village, AGlobalEntityVillager chief)
 	{
 		if (!map.containsKey(village) || map.get(village)==null)
 		{
@@ -19,7 +19,7 @@ public class VillageData
 		}
 	}
 	
-	public static EntityGlobalVillager getChief(Village village)
+	public static AGlobalEntityVillager getChief(Village village)
 	{
 		return map.get(village);
 	}

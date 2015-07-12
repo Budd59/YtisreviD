@@ -18,32 +18,32 @@ import diversity.suppliers.EnumVillagePiece;
 import diversity.suppliers.EnumVillage;
 import diversity.suppliers.EnumVillager;
 
-public final class VillageZulu extends VillageTools
+public final class StructureVillageZulu extends AGlobalStructureVillage
 {
-	private static VillageZulu instance;
+	private static StructureVillageZulu instance;
 	
-	public VillageZulu(EnumVillage ENUM) {
+	public StructureVillageZulu(EnumVillage ENUM) {
 		super(ENUM);
 		instance = this;
 	}
 	
 	@Override
-	protected GlobalPath getPath(GlobalStart p_75080_0_, int p_75080_7_, Random p_75080_2_, StructureBoundingBox structureboundingbox, int p_75080_6_) {
+	protected AGlobalPath getPath(AGlobalStart p_75080_0_, int p_75080_7_, Random p_75080_2_, StructureBoundingBox structureboundingbox, int p_75080_6_) {
 		return new Path(p_75080_0_, p_75080_7_, p_75080_2_, structureboundingbox, p_75080_6_);
 	}
 
 	@Override
-	public GlobalStart getStart(WorldChunkManager worldChunkManager, int i, Random rand, int j, int k, List list, int terrainType)
+	public AGlobalStart getStart(WorldChunkManager worldChunkManager, int i, Random rand, int j, int k, List list, int terrainType)
 	{
 		return new Start(worldChunkManager, i, rand, j, k, list, terrainType);
 	}
 
 	@Override
-	protected GlobalTorch getTorch(GlobalStart villagePiece, int par2, Random rand, StructureBoundingBox boundingBox, int coordBaseMode) {
+	protected AGlobalTorch getTorch(AGlobalStart villagePiece, int par2, Random rand, StructureBoundingBox boundingBox, int coordBaseMode) {
 		return new Torch(villagePiece, par2, rand, boundingBox, coordBaseMode);
 	}
 	
-	public static class Start extends GlobalStart
+	public static class Start extends AGlobalStart
     {
         public Start() {}
 
@@ -91,13 +91,13 @@ public final class VillageZulu extends VillageTools
         }
     }
 	
-    public static class Path extends GlobalPath
+    public static class Path extends AGlobalPath
     {
     	public Path() {}
 
-    	public Path(GlobalStart p_i2105_1_, int p_i2105_2_, Random p_i2105_3_, StructureBoundingBox p_i2105_4_, int p_i2105_5_)
+    	public Path(AGlobalStart p_i2105_1_, int p_i2105_2_, Random p_i2105_3_, StructureBoundingBox p_i2105_4_, int p_i2105_5_)
         {
-            super(instance, p_i2105_1_, p_i2105_2_, p_i2105_3_, p_i2105_4_, p_i2105_5_);
+            super(p_i2105_1_, p_i2105_2_, p_i2105_3_, p_i2105_4_, p_i2105_5_);
         }
 		
 		@Override
@@ -106,18 +106,18 @@ public final class VillageZulu extends VillageTools
 		}
     }
     
-    public static class House1  extends GlobalVillage
+    public static class House1  extends AGlobalVillage
     {
 		public House1() {}
 		
- 		public House1(StructureVillagePieces.Start villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.ZULU_HOUSE1, villagePiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public House1(AGlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(startPiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(4);
  		}
 
-		public static House1 buildComponent( StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
+		public static House1 buildComponent( AGlobalStart startPiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
 			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 9, 6, 9, coordBaseMode);
-			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new House1(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
+			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new House1(startPiece, p5, random, structureboundingbox, coordBaseMode) : null;
 		}
 
 		@Override
@@ -181,8 +181,8 @@ public final class VillageZulu extends VillageTools
 			this.placeBlockAtCurrentPosition(world, Blocks.fence,0, 7, 2, 4, structureBoundingBox);
 			this.placeBlockAtCurrentPosition(world, Blocks.torch,0, 4, 2, 6, structureBoundingBox);
 			
-			this.spawnEntity(world, structureBoundingBox, 4, 2, 4, 0);
-			this.spawnEntity(world, structureBoundingBox, 4, 2, 4, 0);
+			this.spawnVillager(world, structureBoundingBox, 4, 2, 4, 0);
+			this.spawnVillager(world, structureBoundingBox, 4, 2, 4, 0);
 			
 			return true;
 		}
@@ -193,18 +193,18 @@ public final class VillageZulu extends VillageTools
 		}
 	}
     
-    public static class House2 extends GlobalVillage
+    public static class House2 extends AGlobalVillage
     {
  		public House2() {}
  		
- 		public House2(StructureVillagePieces.Start villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.ZULU_HOUSE2, villagePiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public House2(AGlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(startPiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(5);
  		}
 
- 		public static House2 buildComponent( StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
+ 		public static House2 buildComponent( AGlobalStart startPiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
  			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 9, 7, 9, coordBaseMode);
- 			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new House2(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
+ 			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new House2(startPiece, p5, random, structureboundingbox, coordBaseMode) : null;
  		}
  		
  		@Override
@@ -294,8 +294,8 @@ public final class VillageZulu extends VillageTools
 			this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 6, 1, 5, structureBoundingBox);
 			this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 6, 2, 5, structureBoundingBox);
  			
-			this.spawnEntity(world, structureBoundingBox, 4, 2, 4, 0);
-			this.spawnEntity(world, structureBoundingBox, 4, 2, 4, 0);
+			this.spawnVillager(world, structureBoundingBox, 4, 2, 4, 0);
+			this.spawnVillager(world, structureBoundingBox, 4, 2, 4, 0);
 			
  			return true;
  		}
@@ -306,18 +306,18 @@ public final class VillageZulu extends VillageTools
 		}
  	}
     
-    public static class House3  extends GlobalVillage
+    public static class House3  extends AGlobalVillage
     {
  		public House3() {}
  		
- 		public House3(StructureVillagePieces.Start villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.ZULU_HOUSE3, villagePiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public House3(AGlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(startPiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(5);
  		}
 
- 		public static House3 buildComponent( StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
+ 		public static House3 buildComponent( AGlobalStart startPiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
  			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 7, 7, coordBaseMode);
- 			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new House3(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
+ 			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new House3(startPiece, p5, random, structureboundingbox, coordBaseMode) : null;
  		}
  		
  		@Override
@@ -369,8 +369,8 @@ public final class VillageZulu extends VillageTools
             this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 5, 2, 4, structureBoundingBox);
             this.fillWithBlocks(world, structureBoundingBox, 3, 1, 0, 7, 2, 0, Blocks.air, Blocks.air, false);
             
-            this.spawnEntity(world, structureBoundingBox, 5, 2, 3, 0);
-            this.spawnEntity(world, structureBoundingBox, 5, 2, 3, 1);
+            this.spawnVillager(world, structureBoundingBox, 5, 2, 3, 0);
+            this.spawnVillager(world, structureBoundingBox, 5, 2, 3, 1);
             
  			return true;
  		}
@@ -387,18 +387,18 @@ public final class VillageZulu extends VillageTools
 		}
  	}
     
-    public static class House4  extends GlobalVillage
+    public static class House4  extends AGlobalVillage
     {
  		public House4() {}
  		
- 		public House4(StructureVillagePieces.Start villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.ZULU_HOUSE4, villagePiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public House4(AGlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(startPiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(3);
  		}
 
- 		public static House4 buildComponent(StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
+ 		public static House4 buildComponent(AGlobalStart startPiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5) {
  			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 8, 5, 8, coordBaseMode);
- 			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new House4(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
+ 			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new House4(startPiece, p5, random, structureboundingbox, coordBaseMode) : null;
  		}
  		
  		@Override
@@ -447,7 +447,7 @@ public final class VillageZulu extends VillageTools
             this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 5, 2, 3, structureBoundingBox);
             this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 3, 2, 4, structureBoundingBox);
             
-            this.spawnEntity(world, structureBoundingBox, 3, 2, 3, 0);
+            this.spawnVillager(world, structureBoundingBox, 3, 2, 3, 0);
             
  			return true;
  		}
@@ -458,19 +458,19 @@ public final class VillageZulu extends VillageTools
 		}
  	}
     
-	public static class Livestock  extends GlobalVillage
+	public static class Livestock  extends AGlobalVillage
 	{
 		public Livestock() {}
 
- 		public Livestock(StructureVillagePieces.Start villagePiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.ZULU_LIVESTOCK, villagePiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public Livestock(AGlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(startPiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(3);
  		}
 
-		public static Livestock buildComponent(StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5)
+		public static Livestock buildComponent(AGlobalStart startPiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5)
 		{
 			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 10, 4, 10, coordBaseMode);
-			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new Livestock(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
+			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new Livestock(startPiece, p5, random, structureboundingbox, coordBaseMode) : null;
 		}
 
 
@@ -493,11 +493,11 @@ public final class VillageZulu extends VillageTools
 			this.fillWithBlocks(world, structureBoundingBox, 1, 0, 1, 8, 0, 8, Blocks.air, Blocks.air, false);
 			this.placeBlockAtCurrentPosition(world, Blocks.fence_gate, this.getMetadataWithOffset(Blocks.fence_gate, 0), 3, 0, 0, structureBoundingBox);
 			
-			this.spawnEntity(world, structureBoundingBox, 4, 2, 4, 0);
-			this.spawnEntity(world, structureBoundingBox, 4, 2, 4, 1);
-			this.spawnEntity(world, structureBoundingBox, 4, 2, 4, 1);
-			this.spawnEntity(world, structureBoundingBox, 4, 2, 4, 1);
-			this.spawnEntity(world, structureBoundingBox, 4, 2, 4, 1);
+			this.spawnVillager(world, structureBoundingBox, 4, 2, 4, 0);
+			this.spawnVillager(world, structureBoundingBox, 4, 2, 4, 1);
+			this.spawnVillager(world, structureBoundingBox, 4, 2, 4, 1);
+			this.spawnVillager(world, structureBoundingBox, 4, 2, 4, 1);
+			this.spawnVillager(world, structureBoundingBox, 4, 2, 4, 1);
 			
 			return true;
 		}
@@ -514,13 +514,13 @@ public final class VillageZulu extends VillageTools
 		}
 	}
     
-	public static class Torch  extends GlobalTorch
+	public static class Torch  extends AGlobalTorch
 	{		
 		public Torch() {}
 
-		public Torch(StructureVillagePieces.Start startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode)
+		public Torch(AGlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode)
 		{
-			super(EnumVillageBasicPiece.ZOULOU_TORCH, startPiece, componentType, random, structureBoundingBox, coordBaseMode);
+			super(startPiece, componentType, random, structureBoundingBox, coordBaseMode);
 			setOffset(3);
 		}
 

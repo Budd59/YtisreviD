@@ -13,7 +13,7 @@ import diversity.suppliers.EnumItem;
 import diversity.suppliers.EnumTribe;
 import diversity.suppliers.EnumVillager;
 
-public class EntityAztec extends EntityGlobalVillager implements IRangedAttackMob
+public class EntityAztec extends AGlobalEntityVillager implements IRangedAttackMob
 {
     private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
 	
@@ -41,7 +41,7 @@ public class EntityAztec extends EntityGlobalVillager implements IRangedAttackMo
 	@Override
     public EntityVillager createChild(EntityAgeable p_90011_1_)
     {
-		EntityGlobalVillager entityvillager = new EntityAztec(this.worldObj);
+		AGlobalEntityVillager entityvillager = new EntityAztec(this.worldObj);
         entityvillager.onSpawnWithEgg((IEntityLivingData)null);
         return entityvillager;
     }

@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import diversity.entity.EntityGlobalVillager;
+import diversity.entity.AGlobalEntityVillager;
 
 @SideOnly(Side.CLIENT)
 public abstract class ModelGlobalVillager extends ModelBiped
@@ -75,7 +75,7 @@ public abstract class ModelGlobalVillager extends ModelBiped
         	this.bipedHead.render(p_78088_7_);
         }
         this.bipedBody.render(p_78088_7_);
-        if (p_78088_1_ instanceof EntityGlobalVillager && ((EntityGlobalVillager)p_78088_1_).canDefend() && !((EntityGlobalVillager) p_78088_1_).isChild()) {
+        if (p_78088_1_ instanceof AGlobalEntityVillager && ((AGlobalEntityVillager)p_78088_1_).canDefend() && !((AGlobalEntityVillager) p_78088_1_).isChild()) {
             this.bipedRightArm.render(p_78088_7_);
             this.bipedLeftArm.render(p_78088_7_);
         } else {

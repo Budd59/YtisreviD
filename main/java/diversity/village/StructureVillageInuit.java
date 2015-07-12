@@ -19,31 +19,31 @@ import diversity.suppliers.EnumVillage;
 import diversity.suppliers.EnumVillager;
 import diversity.utils.Point;
 
-public final class VillageInuit extends VillageTools
+public final class StructureVillageInuit extends AGlobalStructureVillage
 {
-	private static VillageInuit instance;
+	private static StructureVillageInuit instance;
 	
-	public VillageInuit(EnumVillage village) {
+	public StructureVillageInuit(EnumVillage village) {
 		super(village);
 		instance = this;
 	}
 	
 	@Override
-	protected GlobalPath getPath(GlobalStart p_75080_0_, int p_75080_7_, Random p_75080_2_, StructureBoundingBox structureboundingbox, int p_75080_6_) {
+	protected AGlobalPath getPath(AGlobalStart p_75080_0_, int p_75080_7_, Random p_75080_2_, StructureBoundingBox structureboundingbox, int p_75080_6_) {
 		return new Path(p_75080_0_, p_75080_7_, p_75080_2_, structureboundingbox, p_75080_6_);
 	}
     
 	@Override
-	public GlobalStart getStart(WorldChunkManager worldChunkManager, int i, Random rand, int j, int k, List list, int numberOfVillagers) {
+	public AGlobalStart getStart(WorldChunkManager worldChunkManager, int i, Random rand, int j, int k, List list, int numberOfVillagers) {
 		return new Start(worldChunkManager, i, rand, j, k, list, numberOfVillagers);
 	}
 
 	@Override
-	protected GlobalTorch getTorch(GlobalStart villagePiece, int par2, Random rand, StructureBoundingBox boundingBox, int coordBaseMode) {
+	protected AGlobalTorch getTorch(AGlobalStart villagePiece, int par2, Random rand, StructureBoundingBox boundingBox, int coordBaseMode) {
 		return new Torch(villagePiece, par2, rand, boundingBox, coordBaseMode);
 	}
 
-	public static class Start extends GlobalStart
+	public static class Start extends AGlobalStart
     {
         public Start() {}
 
@@ -84,13 +84,13 @@ public final class VillageInuit extends VillageTools
         }
     }   
     
-    public static class Path extends GlobalPath
+    public static class Path extends AGlobalPath
     {
     	public Path() {}
 
-    	public Path(GlobalStart p_i2105_1_, int p_i2105_2_, Random p_i2105_3_, StructureBoundingBox p_i2105_4_, int p_i2105_5_)
+    	public Path(AGlobalStart p_i2105_1_, int p_i2105_2_, Random p_i2105_3_, StructureBoundingBox p_i2105_4_, int p_i2105_5_)
         {
-            super(instance, p_i2105_1_, p_i2105_2_, p_i2105_3_, p_i2105_4_, p_i2105_5_);
+            super(p_i2105_1_, p_i2105_2_, p_i2105_3_, p_i2105_4_, p_i2105_5_);
         }
 		
 		@Override
@@ -99,12 +99,12 @@ public final class VillageInuit extends VillageTools
 		}
     }
     
-    public static abstract class GlobalInuitVillage extends GlobalVillage
+    public static abstract class GlobalInuitVillage extends AGlobalVillage
     {
 		public GlobalInuitVillage() {}
 		
- 		public GlobalInuitVillage(EnumVillagePiece enumPiece, StructureVillagePieces.Start startPiece, int componentType, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(enumPiece, startPiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public GlobalInuitVillage(AGlobalStart startPiece, int componentType, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(startPiece, componentType, structureBoundingBox, coordBaseMode);
 		}
  		
 		protected void generateSphere(World world, Random random, StructureBoundingBox structureBoundingBox, int baseX, int baseZ, int radius, double offset, int baseIncrement, int topIncrement)
@@ -158,12 +158,12 @@ public final class VillageInuit extends VillageTools
 	{		
 		public Igloo1() {}
 
- 		public Igloo1(StructureVillagePieces.Start startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.INUIT_IGLOO1, startPiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public Igloo1(AGlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(startPiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(3);
 		}
 
-		public static Igloo1 buildComponent(StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5)
+		public static Igloo1 buildComponent(AGlobalStart villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5)
 		{
 			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 9, 5, 10, coordBaseMode);
 			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new Igloo1(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
@@ -206,8 +206,8 @@ public final class VillageInuit extends VillageTools
 			this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 2, 5, structureBoundingBox);
 			this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 2, 5, structureBoundingBox);
 			
-			this.spawnEntity(world, structureBoundingBox, 4, 2, 5, 0);
-			this.spawnEntity(world, structureBoundingBox, 4, 2, 5, 0);
+			this.spawnVillager(world, structureBoundingBox, 4, 2, 5, 0);
+			this.spawnVillager(world, structureBoundingBox, 4, 2, 5, 0);
 			
 			return true;
 		}
@@ -222,12 +222,12 @@ public final class VillageInuit extends VillageTools
 	{	
 		public Igloo2() {}
 
- 		public Igloo2(StructureVillagePieces.Start startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.INUIT_IGLOO2, startPiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public Igloo2(AGlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(startPiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(2);
 		}
 
-		public static Igloo2 buildComponent(StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5)
+		public static Igloo2 buildComponent(AGlobalStart villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5)
 		{
 			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 8, 4, 8, coordBaseMode);
 			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new Igloo2(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
@@ -258,8 +258,8 @@ public final class VillageInuit extends VillageTools
 
 			this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 3, 2, 5, structureBoundingBox);
 			
-			this.spawnEntity(world, structureBoundingBox, 3, 2, 3, 0);
-			this.spawnEntity(world, structureBoundingBox, 3, 2, 3, 0);
+			this.spawnVillager(world, structureBoundingBox, 3, 2, 3, 0);
+			this.spawnVillager(world, structureBoundingBox, 3, 2, 3, 0);
 
 			return true;
 		}
@@ -274,12 +274,12 @@ public final class VillageInuit extends VillageTools
 	{	
 		public ChiefIgloo() {}
 
- 		public ChiefIgloo(StructureVillagePieces.Start startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.INUIT_CHIEFIGLOO, startPiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public ChiefIgloo(AGlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(startPiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(2);
 		}
 
-		public static ChiefIgloo buildComponent(StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5)
+		public static ChiefIgloo buildComponent(AGlobalStart villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5)
 		{
 			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 8, 4, 9, coordBaseMode);
 			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new ChiefIgloo(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
@@ -322,7 +322,7 @@ public final class VillageInuit extends VillageTools
 			this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 2, 5, structureBoundingBox);
 			this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 2, 5, structureBoundingBox);
 			
-			this.spawnEntity(world, structureBoundingBox, 4, 2, 5, 0);
+			this.spawnVillager(world, structureBoundingBox, 4, 2, 5, 0);
 			
 			return true;
 		}
@@ -333,18 +333,18 @@ public final class VillageInuit extends VillageTools
 		}
 	}
 	
-	public static class Kennel  extends GlobalVillage
+	public static class Kennel  extends AGlobalVillage
 	{
 		private int averageGroundLevel = -1;
 		
 		public Kennel() {}
 
- 		public Kennel(StructureVillagePieces.Start startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
- 			super(EnumVillagePiece.INUIT_KENNEL, startPiece, componentType, structureBoundingBox, coordBaseMode);
+ 		public Kennel(AGlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode) {
+ 			super(startPiece, componentType, structureBoundingBox, coordBaseMode);
  			setOffset(3);
 		}
 
-		public static Kennel buildComponent(StructureVillagePieces.Start villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5)
+		public static Kennel buildComponent(AGlobalStart villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int p5)
 		{
 			StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 7, 4, 6, coordBaseMode);
 			return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new Kennel(villagePiece, p5, random, structureboundingbox, coordBaseMode) : null;
@@ -367,10 +367,10 @@ public final class VillageInuit extends VillageTools
 			this.fillWithBlocks(world, structureBoundingBox, 1, 0, 1, 5, 0, 4, Blocks.air, Blocks.air, false);
 			this.placeBlockAtCurrentPosition(world, Blocks.fence_gate, this.getMetadataWithOffset(Blocks.fence_gate, 0), 2, 0, 0, structureBoundingBox);
 			
-			this.spawnEntity(world, structureBoundingBox, 3, 2, 3, 0);
-			this.spawnEntity(world, structureBoundingBox, 3, 2, 3, 1);
-			this.spawnEntity(world, structureBoundingBox, 3, 2, 3, 1);
-			this.spawnEntity(world, structureBoundingBox, 3, 2, 3, 1);
+			this.spawnVillager(world, structureBoundingBox, 3, 2, 3, 0);
+			this.spawnVillager(world, structureBoundingBox, 3, 2, 3, 1);
+			this.spawnVillager(world, structureBoundingBox, 3, 2, 3, 1);
+			this.spawnVillager(world, structureBoundingBox, 3, 2, 3, 1);
 			
 			return true;
 		}
@@ -387,13 +387,13 @@ public final class VillageInuit extends VillageTools
 		}
 	}
 	
-	public static class Torch  extends GlobalTorch
+	public static class Torch  extends AGlobalTorch
 	{		
 		public Torch() {}
 
-		public Torch(StructureVillagePieces.Start startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode)
+		public Torch(AGlobalStart startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int coordBaseMode)
 		{
-			super(EnumVillageBasicPiece.ESKIMO_TORCH, startPiece, componentType, random, structureBoundingBox, coordBaseMode);
+			super(startPiece, componentType, random, structureBoundingBox, coordBaseMode);
 			setOffset(3);
 		}
 

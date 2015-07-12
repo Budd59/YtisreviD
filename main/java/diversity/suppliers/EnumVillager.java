@@ -10,16 +10,16 @@ import net.minecraft.village.MerchantRecipeList;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 import diversity.Diversity;
-import diversity.entity.EntityGlobalVillager;
+import diversity.entity.AGlobalEntityVillager;
 import diversity.utils.PathTool;
 import diversity.utils.TradeTools;
 import diversity.utils.Economy.EPrice;
 import diversity.utils.Economy.GPrice;
 import diversity.utils.Economy.IItem;
 import diversity.utils.Economy.IPrice;
+import diversity.utils.VillagerRegistry;
+import diversity.utils.VillagerRegistry.IVillageTradeHandler;
 
 public enum EnumVillager implements IVillageTradeHandler
 {
@@ -279,7 +279,7 @@ public enum EnumVillager implements IVillageTradeHandler
 	@Override
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random)
 	{
-		if (villager instanceof EntityGlobalVillager)
+		if (villager instanceof AGlobalEntityVillager)
 		{
 			List<IItem> totalList = new ArrayList<IItem>();
 			totalList.addAll(buyList);
@@ -291,11 +291,11 @@ public enum EnumVillager implements IVillageTradeHandler
 				{
 					if (buyList.contains(item))
 					{
-						recipeList.addToListWithCheck(TradeTools.getBuyTrade((IPrice)item, ((EntityGlobalVillager) villager).tribe, random));
+						recipeList.addToListWithCheck(TradeTools.getBuyTrade((IPrice)item, ((AGlobalEntityVillager) villager).tribe, random));
 					}
 					if (sellList.contains(item))
 					{
-						recipeList.addToListWithCheck(TradeTools.getSellTrade((IPrice)item, ((EntityGlobalVillager) villager).tribe, random));
+						recipeList.addToListWithCheck(TradeTools.getSellTrade((IPrice)item, ((AGlobalEntityVillager) villager).tribe, random));
 					}
 				}
 			}

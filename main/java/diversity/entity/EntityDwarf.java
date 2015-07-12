@@ -10,7 +10,7 @@ import diversity.suppliers.EnumItem;
 import diversity.suppliers.EnumTribe;
 import diversity.suppliers.EnumVillager;
 
-public class EntityDwarf extends EntityGlobalVillager
+public class EntityDwarf extends AGlobalEntityVillager
 {
 	public EntityDwarf(World world)
 	{
@@ -40,7 +40,7 @@ public class EntityDwarf extends EntityGlobalVillager
 	@Override
     public EntityVillager createChild(EntityAgeable p_90011_1_)
     {
-		EntityGlobalVillager entityvillager = new EntityDwarf(this.worldObj);
+		AGlobalEntityVillager entityvillager = new EntityDwarf(this.worldObj);
         entityvillager.onSpawnWithEgg((IEntityLivingData)null);
         return entityvillager;
     }
