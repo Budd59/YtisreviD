@@ -12,6 +12,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.passive.EntityVillager;
@@ -59,6 +60,9 @@ public class ServerHandler
 	public static MapGenStructure mapGenScatteredFeature;
 	public static MapGenStructure mapGenVillage;
 	
+	public final static EntityEggInfo vanillaVillagerEggInfo = (EntityEggInfo)EntityList.entityEggs.get(Integer.valueOf(120));
+
+	
 	@SubscribeEvent
 	public void OnInitMapGen(InitMapGenEvent event)
 	{
@@ -81,7 +85,7 @@ public class ServerHandler
     		}
     	} else {
     		if (!EntityList.entityEggs.containsKey(Integer.valueOf(120))) {
-    			EntityList.entityEggs.put(Integer.valueOf(120), new EntityList.EntityEggInfo(120, 5651507, 12422002));
+    			EntityList.entityEggs.put(Integer.valueOf(120), vanillaVillagerEggInfo);
     		}
     	}
 	}
@@ -99,7 +103,7 @@ public class ServerHandler
     		}
     	} else {
     		if (!EntityList.entityEggs.containsKey(Integer.valueOf(120))) {
-    			EntityList.entityEggs.put(Integer.valueOf(120), new EntityList.EntityEggInfo(120, 5651507, 12422002));
+    			EntityList.entityEggs.put(Integer.valueOf(120), vanillaVillagerEggInfo);
     		}
     	}
 	}
