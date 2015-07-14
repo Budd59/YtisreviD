@@ -121,7 +121,7 @@ public abstract class AGlobalEntityVillager extends EntityAgeable implements IMe
 	{
 		super(world);
 		this.tasks.taskEntries.clear();
-        //this.setProfession(type);
+        this.setProfession(type.profession);
         
         this.setSize(0.6F, 1.8F);
         this.getNavigator().setBreakDoors(true);
