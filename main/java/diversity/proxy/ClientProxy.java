@@ -11,6 +11,8 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.util.ResourceLocation;
@@ -21,7 +23,9 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import diversity.Diversity;
 import diversity.block.BlockFrozenChest;
+import diversity.block.TileEntityFrozenChest;
 import diversity.client.render.block.RenderBlockFrozenChest;
+import diversity.client.render.block.TileEntityFrozenChestRenderer;
 import diversity.client.render.entity.RenderApache;
 import diversity.client.render.entity.RenderAztec;
 import diversity.client.render.entity.RenderDarkSpider;
@@ -300,9 +304,36 @@ public class ClientProxy extends ServerProxy
 	
 	@Override
 	public void registerBlockRenderer(EnumBlock block) {
-		if (map.containsKey(block.block.getClass())) {
+		if (map.containsKey(block.blockClass)) {
 			try {
-				RenderingRegistry.registerBlockHandler((ISimpleBlockRenderingHandler)map.get(block.block.getClass()).getConstructor().newInstance());
+				RenderingRegistry.registerBlockHandler((ISimpleBlockRenderingHandler)map.get(block.blockClass).getConstructor().newInstance());
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	static {
+		map.put(TileEntityFrozenChest.class, TileEntityFrozenChestRenderer.class);
+	}
+	
+	@Override
+	public void registerTileEntityRenderer(EnumBlock block) {
+		if (map.containsKey(block.tileEntityClass)) {
+			try {
+				TileEntitySpecialRenderer renderer = (TileEntitySpecialRenderer) map.get(block.tileEntityClass).getConstructor().newInstance();
+				TileEntityRendererDispatcher.instance.mapSpecialRenderers.put(block.tileEntityClass, renderer);
+				renderer.func_147497_a(TileEntityRendererDispatcher.instance);
 			} catch (InstantiationException e) {
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
@@ -319,7 +350,6 @@ public class ClientProxy extends ServerProxy
 		}
 	}
 
-
 	@Override
 	public void registerVillagerSkin(EnumVillager villager) {
 		ResourceLocation resource = new ResourceLocation(Diversity.MODID, villager.resourcePath);
@@ -335,7 +365,7 @@ public class ClientProxy extends ServerProxy
 	public void registerBlockRessource(EnumBlock block) {
 		ResourceTools.register(block.blockClass, block.resourcePath);
 	}
-	
+
 	@Override
 	public String getI18format(EnumVillager villager) {
 		return I18n.format("entity." + Diversity.MODID + '.' + villager.tribe.name().toLowerCase() + '.' + villager.villagerName + ".name", new Object[0]);

@@ -45,4 +45,6 @@ public class ServerProxy
 	public void registerBlockRenderer(EnumBlock block) {}
 
 	public void registerBlockRessource(EnumBlock block) {}
+
+	public void registerTileEntityRenderer(EnumBlock block) {}
 }

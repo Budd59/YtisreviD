@@ -1,16 +1,21 @@
 package diversity.block;
 
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import diversity.client.render.block.RenderBlockFrozenChest;
+import diversity.suppliers.EnumBlock;
 import net.minecraft.block.BlockChest;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
 public class BlockFrozenChest extends BlockChest {
-
+	
 	public BlockFrozenChest(int p_i45397_1_) {
 		super(p_i45397_1_);
 	}
@@ -18,9 +23,10 @@ public class BlockFrozenChest extends BlockChest {
     /**
      * The type of render function that is called for this block
      */
+	@Override
     public int getRenderType()
     {
-        return -1;
+        return EnumBlock.frozen_chest.renderId;
     }
 	
     /**
@@ -44,11 +50,20 @@ public class BlockFrozenChest extends BlockChest {
         	return true;
         }
     }
+
+    /**
+     * Returns a new instance of a block's tile entity class. Called on placing the block.
+     */
+    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_)
+    {
+        TileEntityChest tileentitychest = new TileEntityFrozenChest();
+        return tileentitychest;
+    }
     
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister)
-	{
-		this.blockIcon = par1IconRegister.registerIcon(getTextureName());
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister p_149651_1_)
+    {
+        this.blockIcon = p_149651_1_.registerIcon("ice");
+    }
 }

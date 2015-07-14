@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL12;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import diversity.Diversity;
 import diversity.block.BlockFrozenChest;
 import diversity.block.TileEntityFrozenChest;
 import diversity.utils.ResourceTools;
@@ -16,15 +17,16 @@ import net.minecraft.block.BlockChest;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.model.ModelLargeChest;
 import net.minecraft.client.renderer.tileentity.TileEntityChestRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityFrozenChestRenderer extends TileEntityChestRenderer {
+public class TileEntityFrozenChestRenderer extends TileEntitySpecialRenderer {
 	
-    private static final ResourceLocation frozen_chest = ResourceTools.getResource(BlockFrozenChest.class);
-    private static final ResourceLocation frozen_chest_double = new ResourceLocation(frozen_chest.getResourcePath().split(".png")[0]+"_double.png");
+    private final ResourceLocation frozen_chest;
+    private final ResourceLocation frozen_chest_double;
 
     private ModelChest field_147510_h = new ModelChest();
     private ModelChest field_147511_i = new ModelLargeChest();
@@ -38,6 +40,9 @@ public class TileEntityFrozenChestRenderer extends TileEntityChestRenderer {
         {
             this.field_147509_j = true;
         }
+        
+        frozen_chest = ResourceTools.getResource(BlockFrozenChest.class);
+        frozen_chest_double = new ResourceLocation(Diversity.MODID, frozen_chest.getResourcePath().split(".png")[0]+"_double.png");
     }
 
     public void renderTileEntityAt(TileEntityFrozenChest p_147500_1_, double p_147500_2_, double p_147500_4_, double p_147500_6_, float p_147500_8_)
