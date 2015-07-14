@@ -14,6 +14,7 @@ import diversity.block.BlockPhosMushroom;
 import diversity.block.BlockFungal;
 import diversity.block.BlockPhosWater;
 import diversity.block.BlockPoisonWater;
+import diversity.utils.PathTool;
 
 public enum EnumBlock
 {
@@ -29,13 +30,19 @@ public enum EnumBlock
 	frozen_chest (new BlockFrozenChest(0).setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("frozen_chest").setBlockTextureName(Diversity.MODID+":frozen_chest"));
 
 	public final Block block;
+	public final Class blockClass;
+	public final String resourcePath;
 	
 	private EnumBlock (Block block) {
 		this.block = block;
+		this.blockClass = block.getClass();
+		this.resourcePath = PathTool.blockTexturePath + name().toLowerCase() + PathTool.ext;
 	}
 	
 	public static void register() {
 		for (EnumBlock enumBlock : EnumBlock.values()) {
+			Diversity.proxy.registerBlockRenderer(enumBlock);
+			Diversity.proxy.registerBlockRessource(enumBlock);
 			GameRegistry.registerBlock(enumBlock.block, enumBlock.name());
 		}
 	}

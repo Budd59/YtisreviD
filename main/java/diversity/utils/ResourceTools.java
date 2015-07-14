@@ -10,15 +10,15 @@ public class ResourceTools {
 
 	private static Map<Class, ResourceLocation> resources =  new HashMap<Class, ResourceLocation>();
 	
-	public static void register(Class entityClass, String resourcePath)
+	public static void register(Class objectClass, String resourcePath)
 	{
 		if (resourcePath != null) {
-			resources.put(entityClass, new ResourceLocation(Diversity.MODID, resourcePath));
+			resources.put(objectClass, new ResourceLocation(Diversity.MODID, resourcePath));
 		}
 	}
 	
-	public static ResourceLocation getResource(Class entityClass)
+	public static ResourceLocation getResource(Class objectClass)
 	{
-		return resources.get(entityClass);
+		return resources.get(objectClass);
 	}
 }

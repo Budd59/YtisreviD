@@ -17,9 +17,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
 import diversity.Diversity;
+import diversity.block.BlockFrozenChest;
+import diversity.client.render.block.RenderBlockFrozenChest;
 import diversity.client.render.entity.RenderApache;
 import diversity.client.render.entity.RenderAztec;
 import diversity.client.render.entity.RenderDarkSpider;
@@ -56,11 +58,13 @@ import diversity.entity.EntityYeti;
 import diversity.entity.EntityZulu;
 import diversity.item.ItemBlowgun;
 import diversity.item.ItemSpear;
+import diversity.suppliers.EnumBlock;
 import diversity.suppliers.EnumEntity;
 import diversity.suppliers.EnumItem;
 import diversity.suppliers.EnumTribe;
 import diversity.suppliers.EnumVillager;
 import diversity.utils.ResourceTools;
+import diversity.utils.VillagerRegistry;
 
 public class ClientProxy extends ServerProxy
 {
@@ -275,26 +279,46 @@ public class ClientProxy extends ServerProxy
 			try {
 				MinecraftForgeClient.registerItemRenderer(item.item, (IItemRenderer)map.get(item.item.getClass()).getConstructor().newInstance());
 			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
+	
+	static {
+		map.put(BlockFrozenChest.class, RenderBlockFrozenChest.class);
+	}
+	
+	@Override
+	public void registerBlockRenderer(EnumBlock block) {
+		if (map.containsKey(block.block.getClass())) {
+			try {
+				RenderingRegistry.registerBlockHandler((ISimpleBlockRenderingHandler)map.get(block.block.getClass()).getConstructor().newInstance());
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 
 	@Override
 	public void registerVillagerSkin(EnumVillager villager) {
@@ -305,6 +329,11 @@ public class ClientProxy extends ServerProxy
 	@Override
 	public void registerEntityResource(EnumEntity entity) {
 		ResourceTools.register(entity.entityClass, entity.resourcePath);
+	}
+	
+	@Override
+	public void registerBlockRessource(EnumBlock block) {
+		ResourceTools.register(block.blockClass, block.resourcePath);
 	}
 	
 	@Override

@@ -1,5 +1,7 @@
 package diversity.block;
 
-public class TileEntityFrozenChest {
+import net.minecraft.tileentity.TileEntityChest;
+
+public class TileEntityFrozenChest extends TileEntityChest {
 
 }

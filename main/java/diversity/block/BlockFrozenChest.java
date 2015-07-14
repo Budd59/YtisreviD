@@ -16,6 +16,14 @@ public class BlockFrozenChest extends BlockChest {
 	}
 	
     /**
+     * The type of render function that is called for this block
+     */
+    public int getRenderType()
+    {
+        return -1;
+    }
+	
+    /**
      * Called upon block activation (right click on the block.)
      */
     public boolean onBlockActivated(World world, int p_149727_2_, int p_149727_3_, int p_149727_4_, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_)

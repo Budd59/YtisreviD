@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.common.MinecraftForge;
+import diversity.suppliers.EnumBlock;
 import diversity.suppliers.EnumEntity;
 import diversity.suppliers.EnumItem;
 import diversity.suppliers.EnumTribe;
@@ -40,4 +41,8 @@ public class ServerProxy
 	public void registerItemRenderer(EnumItem item) {}
 
 	public Block getBlockAtEntityViewPoint(EntityLivingBase entity, float renderPartialTicks) {return null;}
+
+	public void registerBlockRenderer(EnumBlock block) {}
+
+	public void registerBlockRessource(EnumBlock block) {}
 }
