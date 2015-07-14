@@ -33,7 +33,7 @@ public class EntityApache extends AGlobalEntityVillager implements IRangedAttack
 	}
 	
 	@Override
-    public EntityVillager createChild(EntityAgeable p_90011_1_)
+    public AGlobalEntityVillager createChild(EntityAgeable p_90011_1_)
     {
         AGlobalEntityVillager entityvillager = new EntityApache(this.worldObj);
         entityvillager.onSpawnWithEgg((IEntityLivingData)null);

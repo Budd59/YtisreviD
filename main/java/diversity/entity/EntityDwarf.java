@@ -38,7 +38,7 @@ public class EntityDwarf extends AGlobalEntityVillager
     }
 	
 	@Override
-    public EntityVillager createChild(EntityAgeable p_90011_1_)
+    public AGlobalEntityVillager  createChild(EntityAgeable p_90011_1_)
     {
 		AGlobalEntityVillager entityvillager = new EntityDwarf(this.worldObj);
         entityvillager.onSpawnWithEgg((IEntityLivingData)null);

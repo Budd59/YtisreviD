@@ -33,7 +33,7 @@ public class EntitySettled extends AGlobalEntityVillager implements IRangedAttac
 	}
 	
 	@Override
-    public EntityVillager createChild(EntityAgeable p_90011_1_)
+    public AGlobalEntityVillager  createChild(EntityAgeable p_90011_1_)
     {
         AGlobalEntityVillager entityvillager = new EntitySettled(this.worldObj);
         entityvillager.onSpawnWithEgg((IEntityLivingData)null);

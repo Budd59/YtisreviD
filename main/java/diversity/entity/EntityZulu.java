@@ -23,7 +23,7 @@ public class EntityZulu extends AGlobalEntityVillager
 	}
 	
 	@Override
-    public EntityVillager createChild(EntityAgeable p_90011_1_)
+    public AGlobalEntityVillager createChild(EntityAgeable p_90011_1_)
     {
 		AGlobalEntityVillager entityvillager = new EntityZulu(this.worldObj);
         entityvillager.onSpawnWithEgg((IEntityLivingData)null);

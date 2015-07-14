@@ -39,7 +39,7 @@ public class EntityAztec extends AGlobalEntityVillager implements IRangedAttackM
 	}
 	
 	@Override
-    public EntityVillager createChild(EntityAgeable p_90011_1_)
+    public AGlobalEntityVillager  createChild(EntityAgeable p_90011_1_)
     {
 		AGlobalEntityVillager entityvillager = new EntityAztec(this.worldObj);
         entityvillager.onSpawnWithEgg((IEntityLivingData)null);

@@ -21,6 +21,7 @@ import com.google.common.collect.Multimap;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import diversity.entity.AGlobalEntityVillager;
 import diversity.village.AGlobalStructureVillage.AGlobalStart;
 import diversity.village.AGlobalStructureVillage.PieceWeight;
 
@@ -85,10 +86,10 @@ public class VillagerRegistry
          * Called to allow changing the content of the {@link MerchantRecipeList} for the villager
          * supplied during creation
          *
-         * @param villager
+         * @param aGlobalEntityVillager
          * @param recipeList
          */
-        void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random);
+        void manipulateTradesForVillager(AGlobalEntityVillager aGlobalEntityVillager, MerchantRecipeList recipeList, Random random);
     }
 
     public static VillagerRegistry instance()
@@ -175,15 +176,15 @@ public class VillagerRegistry
      * Callback to handle trade setup for villagers
      *
      * @param recipeList
-     * @param villager
+     * @param aGlobalEntityVillager
      * @param villagerType
      * @param random
      */
-    public static void manageVillagerTrades(MerchantRecipeList recipeList, EntityVillager villager, int villagerType, Random random)
+    public static void manageVillagerTrades(MerchantRecipeList recipeList, AGlobalEntityVillager aGlobalEntityVillager, int villagerType, Random random)
     {
         for (IVillageTradeHandler handler : instance().tradeHandlers.get(villagerType))
         {
-            handler.manipulateTradesForVillager(villager, recipeList, random);
+            handler.manipulateTradesForVillager(aGlobalEntityVillager, recipeList, random);
         }
     }
 
@@ -205,26 +206,26 @@ public class VillagerRegistry
 
 
     @SuppressWarnings("unchecked")
-    public static void addEmeraldBuyRecipe(EntityVillager villager, MerchantRecipeList list, Random random, Item item, float chance, int min, int max)
+    public static void addEmeraldBuyRecipe(AGlobalEntityVillager villager, MerchantRecipeList list, Random random, Item item, float chance, int min, int max)
     {
         if (min > 0 && max > 0)
         {
-            EntityVillager.villagersSellingList.put(item, new Tuple(min, max));
+        	AGlobalEntityVillager.villagersSellingList.put(item, new Tuple(min, max));
         }
-        EntityVillager.func_146091_a(list, item, random, chance);
+        AGlobalEntityVillager.func_146091_a(list, item, random, chance);
     }
 
     @SuppressWarnings("unchecked")
-    public static void addEmeraldSellRecipe(EntityVillager villager, MerchantRecipeList list, Random random, Item item, float chance, int min, int max)
+    public static void addEmeraldSellRecipe(AGlobalEntityVillager villager, MerchantRecipeList list, Random random, Item item, float chance, int min, int max)
     {
         if (min > 0 && max > 0)
         {
-            EntityVillager.blacksmithSellingList.put(item, new Tuple(min, max));
+        	AGlobalEntityVillager.blacksmithSellingList.put(item, new Tuple(min, max));
         }
-        EntityVillager.func_146089_b(list, item, random, chance);
+        AGlobalEntityVillager.func_146089_b(list, item, random, chance);
     }
 
-    public static void applyRandomTrade(EntityVillager villager, Random rand)
+    public static void applyRandomTrade(AGlobalEntityVillager villager, Random rand)
     {
         int extra = instance().newVillagerIds.size();
         int trade = rand.nextInt(5 + extra);

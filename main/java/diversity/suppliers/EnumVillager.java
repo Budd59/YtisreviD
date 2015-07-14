@@ -277,7 +277,7 @@ public enum EnumVillager implements IVillageTradeHandler
 	}
 	
 	@Override
-	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random)
+	public void manipulateTradesForVillager(AGlobalEntityVillager villager, MerchantRecipeList recipeList, Random random)
 	{
 		if (villager instanceof AGlobalEntityVillager)
 		{
