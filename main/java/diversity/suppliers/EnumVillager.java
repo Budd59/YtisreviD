@@ -33,7 +33,7 @@ public enum EnumVillager implements IVillageTradeHandler
 	),
 	APACHE_SHAMAN (EnumTribe.APACHE, "shaman",
 			new IItem[]{EPrice.bone, EPrice.gray_dye, EPrice.orange_dye, EPrice.light_blue_dye, EPrice.bowl},
-			new IItem[]{EPrice.bottle_o_enchanting, EPrice.potion_nausea, EPrice.potion_speed, EPrice.potion_fire_resistance}
+			new IItem[]{EPrice.bottle_o_enchanting, EPrice.potion_nausea, EPrice.potion_switfness_I, EPrice.potion_fire_resistance_I}
 	),
 	APACHE_CHIEF (EnumTribe.APACHE, "chief",
 			new IItem[]{EPrice.feather},
@@ -186,7 +186,7 @@ public enum EnumVillager implements IVillageTradeHandler
 	),
 	SETTLED_PRIEST (EnumTribe.SETTLED, "priest",
 			new IItem[]{EPrice.redstone, EPrice.glowstone_dust},
-			new IItem[]{EPrice.ender_pearl, EPrice.bottle_o_enchanting, EPrice.glowstone, EPrice.potion_renegeration, EPrice.potion_health_boost}
+			new IItem[]{EPrice.ender_pearl, EPrice.bottle_o_enchanting, EPrice.glowstone, EPrice.potion_renegeration_II, EPrice.potion_health_boost}
 	),
 	SETTLED_SMITH (EnumTribe.SETTLED, "smith",
 			new IItem[]{EPrice.iron_ingot},
@@ -212,7 +212,7 @@ public enum EnumVillager implements IVillageTradeHandler
 	),
 	DWARF_KING (EnumTribe.DWARF, "king",
 			new IItem[]{EPrice.gold_ingot, EPrice.rose_red, EPrice.golden_apple, EPrice.golden_sword, EPrice.golden_helmet},
-			new IItem[]{EPrice.bottle_o_enchanting, EPrice.potion_haste, EPrice.potion_speed, EPrice.diamond},
+			new IItem[]{EPrice.bottle_o_enchanting, EPrice.potion_haste, EPrice.potion_switfness_I, EPrice.diamond},
 	true),
 	DWARF_HEALER (EnumTribe.DWARF, "healer",
 			new IItem[]{EPrice.melon, EPrice.glass_bottle, EPrice.nether_wart},

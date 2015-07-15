@@ -33,12 +33,7 @@ public class RenderBlockFrozenChest implements ISimpleBlockRenderingHandler
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-		if (block.equals(EnumBlock.frozen_chest.block))
-		{
-            TileEntityRendererDispatcher.instance.renderTileEntityAt(EnumBlock.frozen_chest.tileEntity, 0.0D, 0.0D, 0.0D, 0.0F);
-            return true;
-		}
-		return false;
+		return true;
 	}
 
 	@Override

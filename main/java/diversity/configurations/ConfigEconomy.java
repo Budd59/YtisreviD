@@ -17,6 +17,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 
 import cpw.mods.fml.common.Loader;
+import diversity.suppliers.EnumPotion;
 
 public class ConfigEconomy
 {
@@ -417,7 +418,14 @@ public class ConfigEconomy
 		blaze_rod				(Items.blaze_rod	,	0,	30),
 		ghast_tear				(Items.ghast_tear	,	0,	80),
 		nether_wart				(Items.nether_wart	,	0,	32),
-		potion_speed			(Items.potionitem	,	1,	30),
+		potion_renegeration_I	(Items.potionitem	,	EnumPotion.regeneration.id_potion_I,	30),
+		potion_renegeration_II	(Items.potionitem	,	EnumPotion.regeneration.id_potion_II,	45),
+		potion_renegeration_I_EXT(Items.potionitem	,	EnumPotion.regeneration.id_potion_I_EXT,	80),
+		potion_renegeration_II_EXT(Items.potionitem	,	EnumPotion.regeneration.id_potion_II_EXT,	120),
+		potion_switfness_I		(Items.potionitem	,	EnumPotion.swiftness.id_potion_I,	30),
+		potion_switfness_II		(Items.potionitem	,	EnumPotion.swiftness.id_potion_II,	45),
+		potion_switfness_I_EXT	(Items.potionitem	,	EnumPotion.swiftness.id_potion_I_EXT,	80),
+		potion_switfness_II_EXT	(Items.potionitem	,	EnumPotion.swiftness.id_potion_II_EXT,	120),
 		potion_slowness			(Items.potionitem	,	2,	30),
 		potion_haste			(Items.potionitem	,	3,	30),
 		potion_mining_fatigue	(Items.potionitem	,	4,	30),
@@ -426,9 +434,8 @@ public class ConfigEconomy
 		potion_instant_damage	(Items.potionitem	,	7,	30),
 		potion_jump_boost		(Items.potionitem	,	8,	30),
 		potion_nausea			(Items.potionitem	,	9,	30),
-		potion_renegeration		(Items.potionitem	,	10,	30),
 		potion_resistance		(Items.potionitem	,	11,	30),
-		potion_fire_resistance	(Items.potionitem	,	12,	30),
+		potion_fire_resistance_I(Items.potionitem	,	EnumPotion.fireResistance.id_potion_I,	30),
 		potion_water_breathing	(Items.potionitem	,	13,	30),
 		potion_invisibility		(Items.potionitem	,	14,	30),
 		potion_blindness		(Items.potionitem	,	15,	30),

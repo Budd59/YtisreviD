@@ -27,6 +27,7 @@ import diversity.configurations.ConfigEconomy.EPrice;
 import diversity.configurations.ConfigEconomy.GPrice;
 import diversity.proxy.ServerProxy;
 import diversity.suppliers.EnumCave;
+import diversity.suppliers.EnumPotion;
 import diversity.suppliers.EnumVillageBasicPiece;
 import diversity.suppliers.EnumBlock;
 import diversity.suppliers.EnumEntity;
@@ -52,11 +53,13 @@ public class Diversity
     
     @SidedProxy(clientSide="diversity.proxy.ClientProxy", serverSide="diversity.proxy.ServerProxy")
     public static ServerProxy proxy;
-         
+    
     @EventHandler
     public void PreInit(FMLPreInitializationEvent event)
     {
     	Divlogger = Logger.getLogger("Diversity");
+    	
+    	EnumPotion.values();
     	
     	AConfigTool.values();
     	AConfigTool.loadAllConfig(false);
