@@ -79,15 +79,15 @@ public class ServerHandler
 	public void OnWorldUnload(WorldEvent.Unload event) {
 		AConfigTool.loadAllConfig(false);
 		AConfigTool.saveAllConfig(false);
-    	if (ConfigGlobal.REMOVE_VANILLA_SPAWN_EGG.equals("true")) {
-    		if (EntityList.entityEggs.containsKey(Integer.valueOf(120))) {
-    			EntityList.entityEggs.remove(Integer.valueOf(120));
-    		}
-    	} else {
-    		if (!EntityList.entityEggs.containsKey(Integer.valueOf(120))) {
-    			EntityList.entityEggs.put(Integer.valueOf(120), vanillaVillagerEggInfo);
-    		}
-    	}
+//    	if (ConfigGlobal.REMOVE_VANILLA_SPAWN_EGG.equals("true")) {
+//    		if (EntityList.entityEggs.containsKey(Integer.valueOf(120))) {
+//    			EntityList.entityEggs.remove(Integer.valueOf(120));
+//    		}
+//    	} else {
+//    		if (!EntityList.entityEggs.containsKey(Integer.valueOf(120))) {
+//    			EntityList.entityEggs.put(Integer.valueOf(120), vanillaVillagerEggInfo);
+//    		}
+//    	}
 	}
 	
 	@SubscribeEvent
@@ -97,15 +97,15 @@ public class ServerHandler
 		EnumStructure.load();
 		EnumCave.load();
     	EnumVillage.load();
-    	if (ConfigGlobal.REMOVE_VANILLA_SPAWN_EGG.equals("true")) {
-    		if (EntityList.entityEggs.containsKey(Integer.valueOf(120))) {
-    			EntityList.entityEggs.remove(Integer.valueOf(120));
-    		}
-    	} else {
-    		if (!EntityList.entityEggs.containsKey(Integer.valueOf(120))) {
-    			EntityList.entityEggs.put(Integer.valueOf(120), vanillaVillagerEggInfo);
-    		}
-    	}
+//    	if (ConfigGlobal.REMOVE_VANILLA_SPAWN_EGG.equals("true")) {
+//    		if (EntityList.entityEggs.containsKey(Integer.valueOf(120))) {
+//    			EntityList.entityEggs.remove(Integer.valueOf(120));
+//    		}
+//    	} else {
+//    		if (!EntityList.entityEggs.containsKey(Integer.valueOf(120))) {
+//    			EntityList.entityEggs.put(Integer.valueOf(120), vanillaVillagerEggInfo);
+//    		}
+//    	}
 	}
     
 	@SubscribeEvent

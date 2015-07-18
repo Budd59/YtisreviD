@@ -4,8 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Vector;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -25,11 +29,10 @@ public class ConfigEconomy
 	private static final String configFile = Loader.instance().getConfigDir() + "/" + configNameFile;
 	
 	public static void saveConfig(boolean isWorld) {
-		Properties properties = new Properties();
-		for (Table.Cell<Item, Integer, IPrice> cell : IPrice.priceMap.cellSet()) {
+		Properties properties = new SortedProperties();
+		for (Table.Cell<Item, Integer, IPrice> cell : IPrice.priceTable.cellSet()) {
 			properties.setProperty(cell.getValue().name(), String.valueOf(cell.getValue().getPrice()));
 		}
-		
 		try {
 			File file;
 			if (isWorld) {
@@ -61,7 +64,7 @@ public class ConfigEconomy
 			return;
 		}
 		
-		for (Table.Cell<Item, Integer, IPrice> cell : IPrice.priceMap.cellSet()) {
+		for (Table.Cell<Item, Integer, IPrice> cell : IPrice.priceTable.cellSet()) {
 			String price = properties.getProperty(cell.getValue().name());
 			if (price != null && !price.isEmpty()) {
 				cell.getValue().setPrice(Float.valueOf(price));
@@ -70,9 +73,23 @@ public class ConfigEconomy
 		}
 	}
 	
+	public static class SortedProperties extends Properties {
+		  public Enumeration keys() {
+		     Enumeration keysEnum = super.keys();
+		     Vector<String> keyList = new Vector<String>();
+		     while(keysEnum.hasMoreElements()){
+		       keyList.add((String)keysEnum.nextElement());
+		     }
+		     Collections.sort(keyList);
+		     return keyList.elements();
+		  }
+
+		}
+	
+	
 	public static float getPrice(Item item, int metaData)
 	{
-		return Float.valueOf(IPrice.priceMap.get(item, metaData).getPrice());
+		return Float.valueOf(IPrice.priceTable.get(item, metaData).getPrice());
 	}
 	
 	public static float getPrice(Item item)
@@ -82,7 +99,7 @@ public class ConfigEconomy
 	
 	public static Item getItem(IPrice itemPrice)
 	{
-		for (Table.Cell<Item, Integer, IPrice> cell : IPrice.priceMap.cellSet()) {
+		for (Table.Cell<Item, Integer, IPrice> cell : IPrice.priceTable.cellSet()) {
 			if (cell.getValue().name().equals(itemPrice.name())) {
 				return cell.getRowKey();
 			}
@@ -92,7 +109,7 @@ public class ConfigEconomy
 	
 	public static int getMetadata(IPrice itemPrice)
 	{
-		for (Table.Cell<Item, Integer, IPrice> cell : IPrice.priceMap.cellSet()) {
+		for (Table.Cell<Item, Integer, IPrice> cell : IPrice.priceTable.cellSet()) {
 			if (cell.getValue().name().equals(itemPrice.name())) {
 				return cell.getColumnKey();
 			}
@@ -102,8 +119,8 @@ public class ConfigEconomy
 	
 	public interface IPrice
 	{
-		public static Table<Item, Integer, IPrice> priceMap = HashBasedTable.create();
-		
+		public static Table<Item, Integer, IPrice> priceTable = HashBasedTable.create();
+				
 		public abstract String name();
 		
 		public abstract float getPrice();
@@ -113,7 +130,7 @@ public class ConfigEconomy
 	
 	public interface IItem {}
 	
-	public static enum GPrice implements IItem
+	public static enum EnumGroupObject implements IItem
 	{
 		wool			(Blocks.wool),
 		dye				(Items.dye),
@@ -123,24 +140,26 @@ public class ConfigEconomy
 		
 		Item item;
 		
-		private GPrice(Block block)
+		private EnumGroupObject(Block block)
 		{
 			this(Item.getItemFromBlock(block));
 		}
 		
-		private GPrice(Item item)
+		private EnumGroupObject(Item item)
 		{
-			this.item = item;;
+			this.item = item;
+			if (item.equals(Items.potionitem)) {
+			}
 		}
 		
 		public IItem[] getIPrices()
 		{
-			Map<Integer, IPrice> map = IPrice.priceMap.row(item);
+			Map<Integer, IPrice> map = IPrice.priceTable.row(item);
 			return map.values().toArray(new IItem[] {});
 		}
 	}
 	
-	public enum EPrice implements IPrice, IItem
+	public enum EnumObject implements IPrice, IItem
 	{
 		stone 					(Blocks.stone		, 	0, 	3),
 		grass_block				(Blocks.grass		, 	0, 	3),
@@ -418,35 +437,19 @@ public class ConfigEconomy
 		blaze_rod				(Items.blaze_rod	,	0,	30),
 		ghast_tear				(Items.ghast_tear	,	0,	80),
 		nether_wart				(Items.nether_wart	,	0,	32),
-		potion_renegeration_I	(Items.potionitem	,	EnumPotion.regeneration.id_potion_I,	30),
-		potion_renegeration_II	(Items.potionitem	,	EnumPotion.regeneration.id_potion_II,	45),
-		potion_renegeration_I_EXT(Items.potionitem	,	EnumPotion.regeneration.id_potion_I_EXT,	80),
-		potion_renegeration_II_EXT(Items.potionitem	,	EnumPotion.regeneration.id_potion_II_EXT,	120),
-		potion_switfness_I		(Items.potionitem	,	EnumPotion.swiftness.id_potion_I,	30),
-		potion_switfness_II		(Items.potionitem	,	EnumPotion.swiftness.id_potion_II,	45),
-		potion_switfness_I_EXT	(Items.potionitem	,	EnumPotion.swiftness.id_potion_I_EXT,	80),
-		potion_switfness_II_EXT	(Items.potionitem	,	EnumPotion.swiftness.id_potion_II_EXT,	120),
-		potion_slowness			(Items.potionitem	,	2,	30),
-		potion_haste			(Items.potionitem	,	3,	30),
-		potion_mining_fatigue	(Items.potionitem	,	4,	30),
-		potion_strength			(Items.potionitem	,	5,	30),
-		potion_instant_health	(Items.potionitem	,	6,	30),
-		potion_instant_damage	(Items.potionitem	,	7,	30),
-		potion_jump_boost		(Items.potionitem	,	8,	30),
-		potion_nausea			(Items.potionitem	,	9,	30),
-		potion_resistance		(Items.potionitem	,	11,	30),
-		potion_fire_resistance_I(Items.potionitem	,	EnumPotion.fireResistance.id_potion_I,	30),
-		potion_water_breathing	(Items.potionitem	,	13,	30),
-		potion_invisibility		(Items.potionitem	,	14,	30),
-		potion_blindness		(Items.potionitem	,	15,	30),
-		potion_night_vision		(Items.potionitem	,	16,	30),
-		potion_hunger			(Items.potionitem	,	17,	30),
-		potion_weakness			(Items.potionitem	,	18,	30),
-		potion_poison			(Items.potionitem	,	19,	30),
-		potion_wither			(Items.potionitem	,	20,	30),
-		potion_health_boost		(Items.potionitem	,	21,	30),
-		potion_absorption		(Items.potionitem	,	22,	30),
-		potion_saturation		(Items.potionitem	,	23,	30),
+//		potion_renegeration		(Items.potionitem	,	EnumPotion.regeneration, 30),
+//		potion_switfness		(Items.potionitem	,	EnumPotion.swiftness, 30),
+//		potion_fireResistance	(Items.potionitem	,	EnumPotion.fireResistance, 30),
+//		potion_poison			(Items.potionitem	,	EnumPotion.poison, 30),
+//		potion_heal				(Items.potionitem	,	EnumPotion.heal, 30),
+//		potion_nightVision		(Items.potionitem	,	EnumPotion.nightVision, 30),
+//		potion_weakness			(Items.potionitem	,	EnumPotion.weakness, 30),
+//		potion_strength			(Items.potionitem	,	EnumPotion.strength, 30),
+//		potion_slowness			(Items.potionitem	,	EnumPotion.slowness, 30),
+//		potion_leaping			(Items.potionitem	,	EnumPotion.leaping, 30),
+//		potion_harm				(Items.potionitem	,	EnumPotion.harm, 30),
+//		potion_waterBreathing	(Items.potionitem	,	EnumPotion.waterBreathing, 30),
+//		potion_invisibility		(Items.potionitem	,	EnumPotion.invisibility, 30),
 		glass_bottle			(Items.glass_bottle	,	0,	9),
 		spider_eye				(Items.spider_eye	,	0,	3),
 		fermented_spider_eye	(Items.fermented_spider_eye, 0, 11),
@@ -503,16 +506,24 @@ public class ConfigEconomy
 		;
 		
 		private float price;
+		public PPrice potion_I;
+		public PPrice potion_II;
+		public PPrice potion_I_ext;
+		public PPrice potion_II_ext;
+		public PPrice splash_I;
+		public PPrice splash_II;
+		public PPrice splash_I_ext;
+		public PPrice splash_II_ext;
 		
-		private EPrice(Block block, int metadataId, float price)
+		EnumObject(Block block, int metadataId, float price)
 		{
 			this(Item.getItemFromBlock(block), metadataId, price);
 		}
-		
-		private EPrice(Item item, int metadataId, float price)
+
+		EnumObject(Item item, int metadataId, float price)
 		{
 			this.price = price;
-			priceMap.put(item, metadataId, this);
+			priceTable.put(item, metadataId, this);
 		}
 
 		@Override
@@ -524,5 +535,34 @@ public class ConfigEconomy
 		public void setPrice(float price) {
 			this.price = price;
 		}
+	}
+	
+	public static class PPrice implements IPrice,IItem {
+		
+		private float price;
+		private String name;
+
+		
+		public PPrice(String name, int metadata, float price) {
+			this.name = name;
+			this.price = price;
+			this.priceTable.put(Items.potionitem, metadata, this);
+		}
+
+		@Override
+		public String name() {
+			return name;
+		}
+
+		@Override
+		public float getPrice() {
+			return price;
+		}
+
+		@Override
+		public void setPrice(float price) {
+			this.price = price;
+		}
+		
 	}
 }

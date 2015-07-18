@@ -11,8 +11,8 @@ import net.minecraft.village.MerchantRecipeList;
 import org.apache.commons.lang3.ArrayUtils;
 
 import diversity.Diversity;
-import diversity.configurations.ConfigEconomy.EPrice;
-import diversity.configurations.ConfigEconomy.GPrice;
+import diversity.configurations.ConfigEconomy.EnumObject;
+import diversity.configurations.ConfigEconomy.EnumGroupObject;
 import diversity.configurations.ConfigEconomy.IItem;
 import diversity.configurations.ConfigEconomy.IPrice;
 import diversity.entity.AGlobalEntityVillager;
@@ -24,24 +24,24 @@ import diversity.utils.VillagerRegistry.IVillageTradeHandler;
 public enum EnumVillager implements IVillageTradeHandler
 {
 	APACHE_BREEDER (EnumTribe.APACHE, "breeder",
-			new IItem[]{EPrice.wheat, EPrice.wheat_seeds, EPrice.leather},
-			new IItem[]{EPrice.iron_horse_armor, EPrice.saddle, EPrice.lead}
+			new IItem[]{EnumObject.wheat, EnumObject.wheat_seeds, EnumObject.leather},
+			new IItem[]{EnumObject.iron_horse_armor, EnumObject.saddle, EnumObject.lead}
 	),
 	APACHE_HUNTER (EnumTribe.APACHE, "hunter",
-			new IItem[]{EPrice.string, EPrice.stick, EPrice.flint, EPrice.feather},
-			new IItem[]{EPrice.bow, EPrice.arrow, EPrice.lead}
+			new IItem[]{EnumObject.string, EnumObject.stick, EnumObject.flint, EnumObject.feather},
+			new IItem[]{EnumObject.bow, EnumObject.arrow, EnumObject.lead}
 	),
 	APACHE_SHAMAN (EnumTribe.APACHE, "shaman",
-			new IItem[]{EPrice.bone, EPrice.gray_dye, EPrice.orange_dye, EPrice.light_blue_dye, EPrice.bowl},
-			new IItem[]{EPrice.bottle_o_enchanting, EPrice.potion_nausea, EPrice.potion_switfness_I, EPrice.potion_fire_resistance_I}
+			new IItem[]{EnumObject.bone, EnumObject.gray_dye, EnumObject.orange_dye, EnumObject.light_blue_dye, EnumObject.bowl},
+			new IItem[]{EnumObject.bottle_o_enchanting, EnumPotion.regeneration.potion_I_ext}
 	),
 	APACHE_CHIEF (EnumTribe.APACHE, "chief",
-			new IItem[]{EPrice.feather},
-			new IItem[]{EPrice.stone_axe, EPrice.golden_horse_armor, EPrice.emerald},
+			new IItem[]{EnumObject.feather},
+			new IItem[]{EnumObject.stone_axe, EnumObject.golden_horse_armor, EnumObject.emerald},
 	true),
 	APACHE_WARRIOR (EnumTribe.APACHE, "warrior",
-			new IItem[]{EPrice.iron_axe, EPrice.iron_sword, EPrice.leather},
-			new IItem[]{EPrice.stone_axe, EPrice.stone_sword, EPrice.lead, EPrice.leather_helmet, EPrice.leather_tunic, EPrice.leather_pants, EPrice.leather_boots}
+			new IItem[]{EnumObject.iron_axe, EnumObject.iron_sword, EnumObject.leather},
+			new IItem[]{EnumObject.stone_axe, EnumObject.stone_sword, EnumObject.lead, EnumObject.leather_helmet, EnumObject.leather_tunic, EnumObject.leather_pants, EnumObject.leather_boots}
 	),
 	
 	AZTEC_HUNTER (EnumTribe.AZTEC, "hunter",
@@ -51,176 +51,176 @@ public enum EnumVillager implements IVillageTradeHandler
 			//new IItem[]{EPrice.arrow, EPrice.bow}
 	),
 	AZTEC_DYER (EnumTribe.AZTEC, "dyer",
-			new IItem[]{EPrice.red_wool, EPrice.dandelion_yellow, EPrice.cactus_green},
-			new IItem[]{EPrice.yellow_wool, EPrice.lime_wool}
+			new IItem[]{EnumObject.red_wool, EnumObject.dandelion_yellow, EnumObject.cactus_green},
+			new IItem[]{EnumObject.yellow_wool, EnumObject.lime_wool}
 	),
 	AZTEC_CHIEF (EnumTribe.AZTEC, "chief",
-			new IItem[]{EPrice.diamond},
-			new IItem[]{EPrice.emerald},
+			new IItem[]{EnumObject.diamond},
+			new IItem[]{EnumObject.emerald},
 	true),
 	AZTEC_HIGHPRIEST (EnumTribe.AZTEC, "highpriest",
-			new IItem[]{EPrice.ender_pearl, EPrice.rose_red},
-			new IItem[]{EPrice.emerald, EPrice.potion_poison, EPrice.potion_night_vision, EPrice.potion_weakness, EPrice.potion_slowness}
+			new IItem[]{EnumObject.ender_pearl, EnumObject.rose_red},
+			new IItem[]{EnumObject.emerald, EnumPotion.regeneration.potion_II, EnumPotion.leaping.potion_II_ext}
 	),
 	AZTEC_BREEDER (EnumTribe.AZTEC, "breeder",
-			new IItem[]{EPrice.wheat_seeds, EPrice.pumpkin_seeds, EPrice.melon_seeds},
-			new IItem[]{EPrice.raw_chicken, EPrice.cooked_chicken, EPrice.egg}
+			new IItem[]{EnumObject.wheat_seeds, EnumObject.pumpkin_seeds, EnumObject.melon_seeds},
+			new IItem[]{EnumObject.raw_chicken, EnumObject.cooked_chicken, EnumObject.egg}
 	),
 	AZTEC_FARMER (EnumTribe.AZTEC, "farmer",
-			new IItem[]{EPrice.wheat_seeds, EPrice.pumpkin_seeds, EPrice.melon_seeds},
-			new IItem[]{EPrice.raw_chicken, EPrice.cooked_chicken, EPrice.egg}
+			new IItem[]{EnumObject.wheat_seeds, EnumObject.pumpkin_seeds, EnumObject.melon_seeds},
+			new IItem[]{EnumObject.raw_chicken, EnumObject.cooked_chicken, EnumObject.egg}
 	),
 
 	INUIT_FISHERMAN (EnumTribe.INUIT, "fisherman",
-			new IItem[]{EPrice.stick, EPrice.string, EPrice.leather, EPrice.white_wool},
-			new IItem[]{EPrice.raw_fish, EPrice.cooked_fish, EPrice.raw_salmon, EPrice.cooked_salmon, EPrice.fishing_rod}
+			new IItem[]{EnumObject.stick, EnumObject.string, EnumObject.leather, EnumObject.white_wool},
+			new IItem[]{EnumObject.raw_fish, EnumObject.cooked_fish, EnumObject.raw_salmon, EnumObject.cooked_salmon, EnumObject.fishing_rod}
 	),
 	INUIT_HUNTER (EnumTribe.INUIT, "hunter",
-			new IItem[]{EPrice.string, EPrice.stick, EPrice.flint, EPrice.feather, EPrice.leather},
-			new IItem[]{EPrice.bow, EPrice.arrow, EPrice.leather_helmet, EPrice.leather_tunic, EPrice.leather_pants, EPrice.leather_boots}
+			new IItem[]{EnumObject.string, EnumObject.stick, EnumObject.flint, EnumObject.feather, EnumObject.leather},
+			new IItem[]{EnumObject.bow, EnumObject.arrow, EnumObject.leather_helmet, EnumObject.leather_tunic, EnumObject.leather_pants, EnumObject.leather_boots}
 	),
 	INUIT_KENNELMASTER (EnumTribe.INUIT, "kennelmaster",
-			new IItem[]{EPrice.bone, EPrice.raw_porkchop, EPrice.raw_beef, EPrice.raw_fish, EPrice.raw_salmon},
-			new IItem[]{EPrice.lead}
+			new IItem[]{EnumObject.bone, EnumObject.raw_porkchop, EnumObject.raw_beef, EnumObject.raw_fish, EnumObject.raw_salmon},
+			new IItem[]{EnumObject.lead}
 	),
 	INUIT_CHIEF (EnumTribe.INUIT, "chief",
-			new IItem[]{EPrice.diamond, EPrice.diamond_sword},
-			new IItem[]{EPrice.emerald, EPrice.enchanted_book_fortune, EPrice.enchanted_book_silk_touch},
+			new IItem[]{EnumObject.diamond, EnumObject.diamond_sword},
+			new IItem[]{EnumObject.emerald, EnumObject.enchanted_book_fortune, EnumObject.enchanted_book_silk_touch},
 	true),
 	
 	ZULU_FARMER (EnumTribe.ZULU, "farmer",
-			new IItem[]{EPrice.wheat, EPrice.wheat_seeds},
-			new IItem[]{EPrice.wheat, EPrice.bread, EPrice.stone_hoe}
+			new IItem[]{EnumObject.wheat, EnumObject.wheat_seeds},
+			new IItem[]{EnumObject.wheat, EnumObject.bread, EnumObject.stone_hoe}
 	),
 	ZULU_WARRIOR (EnumTribe.ZULU, "warrior",
-			new IItem[]{EPrice.iron_axe, EPrice.iron_sword, EPrice.leather},
-			new IItem[]{EPrice.stone_axe, EPrice.stone_sword, EPrice.iron_axe, EPrice.leather_helmet, EPrice.leather_tunic, EPrice.leather_pants, EPrice.leather_boots}
+			new IItem[]{EnumObject.iron_axe, EnumObject.iron_sword, EnumObject.leather},
+			new IItem[]{EnumObject.stone_axe, EnumObject.stone_sword, EnumObject.iron_axe, EnumObject.leather_helmet, EnumObject.leather_tunic, EnumObject.leather_pants, EnumObject.leather_boots}
 	),
 	ZULU_BREEDER (EnumTribe.ZULU, "breeder",
-			new IItem[]{EPrice.wheat, EPrice.wheat_seeds},
-			new IItem[]{EPrice.raw_beef, EPrice.steak, EPrice.leather}
+			new IItem[]{EnumObject.wheat, EnumObject.wheat_seeds},
+			new IItem[]{EnumObject.raw_beef, EnumObject.steak, EnumObject.leather}
 	),
 	ZULU_CHIEF (EnumTribe.ZULU, "chief",
-			new IItem[]{EPrice.golden_sword, EPrice.golden_helmet, EPrice.golden_chesplate, EPrice.golden_leggings, EPrice.golden_boots},
-			new IItem[]{EPrice.emerald, EPrice.diamond},
+			new IItem[]{EnumObject.golden_sword, EnumObject.golden_helmet, EnumObject.golden_chesplate, EnumObject.golden_leggings, EnumObject.golden_boots},
+			new IItem[]{EnumObject.emerald, EnumObject.diamond},
 	true),
 	ZULU_GURU (EnumTribe.ZULU, "guru",
-			new IItem[]{EPrice.bone, EPrice.ink, EPrice.light_gray_dye, EPrice.gray_dye, EPrice.bone_meal},
-			new IItem[]{EPrice.bowl, EPrice.bottle_o_enchanting, EPrice.potion_nausea, EPrice.potion_jump_boost, EPrice.potion_saturation, EPrice.potion_instant_damage}
+			new IItem[]{EnumObject.bone, EnumObject.ink, EnumObject.light_gray_dye, EnumObject.gray_dye, EnumObject.bone_meal},
+			new IItem[]{EnumObject.bowl, EnumObject.bottle_o_enchanting, EnumPotion.swiftness.potion_II, EnumPotion.harm.potion_II_ext, EnumPotion.weakness.splash_II}
 	),
 	
 	TIBETAN_MONK (EnumTribe.TIBETAN, "monk",
-			new IItem[]{EPrice.pumpkin, EPrice.pumpkin_seeds, EPrice.wheat_seeds},
-			new IItem[]{EPrice.wheat, EPrice.bread, EPrice.pumpkin_pie}
+			new IItem[]{EnumObject.pumpkin, EnumObject.pumpkin_seeds, EnumObject.wheat_seeds},
+			new IItem[]{EnumObject.wheat, EnumObject.bread, EnumObject.pumpkin_pie}
 	),
 	TIBETAN_MASTER (EnumTribe.TIBETAN, "master",
-			new IItem[]{EPrice.rose_red, EPrice.dandelion_yellow, EPrice.orange_dye, EPrice.bone_meal},
-			new IItem[]{EPrice.bottle_o_enchanting, EPrice.potion_invisibility, EPrice.enchanted_book_infinity}
+			new IItem[]{EnumObject.rose_red, EnumObject.dandelion_yellow, EnumObject.orange_dye, EnumObject.bone_meal},
+			new IItem[]{EnumObject.bottle_o_enchanting, EnumPotion.invisibility.potion_II, EnumObject.enchanted_book_infinity}
 	),
 	TIBETAN_GREATWISE (EnumTribe.TIBETAN, "greatwise",
-			new IItem[]{EPrice.clock, EPrice.enchanted_book_protection},
-			new IItem[]{EPrice.emerald, EPrice.compass, EPrice.diamond, EPrice.ender_pearl},
+			new IItem[]{EnumObject.clock, EnumObject.enchanted_book_protection},
+			new IItem[]{EnumObject.emerald, EnumObject.compass, EnumObject.diamond, EnumObject.ender_pearl},
 	true),
 	
 	EGYPTIAN_FARMER (EnumTribe.EGYPTIAN, "farmer",
-			new IItem[]{EPrice.bone_meal, EPrice.wheat_seeds, EPrice.sugar_canes},
-			new IItem[]{EPrice.wheat, EPrice.sugar}
+			new IItem[]{EnumObject.bone_meal, EnumObject.wheat_seeds, EnumObject.sugar_canes},
+			new IItem[]{EnumObject.wheat, EnumObject.sugar}
 	),
 	EGYPTIAN_SCULPTOR (EnumTribe.EGYPTIAN, "sculptor",
-			new IItem[]{EPrice.sandstone},
-			new IItem[]{EPrice.chiseled_sandstone, EPrice.smooth_sandstone}
+			new IItem[]{EnumObject.sandstone},
+			new IItem[]{EnumObject.chiseled_sandstone, EnumObject.smooth_sandstone}
 	),
 	EGYPTIAN_SCRIBE (EnumTribe.EGYPTIAN, "scribe",
-			new IItem[]{EPrice.ink, EPrice.lapis_lazuli, EPrice.purple_dye, EPrice.paper, EPrice.sugar},
-			new IItem[]{EPrice.map, EPrice.empty_map}
+			new IItem[]{EnumObject.ink, EnumObject.lapis_lazuli, EnumObject.purple_dye, EnumObject.paper, EnumObject.sugar},
+			new IItem[]{EnumObject.map, EnumObject.empty_map}
 	),
 	EGYPTIAN_PRIEST (EnumTribe.EGYPTIAN, "priest",
-			new IItem[]{EPrice.ink, EPrice.lapis_lazuli, EPrice.purple_dye, EPrice.bone_meal},
-			new IItem[]{EPrice.bottle_o_enchanting, EPrice.bowl, EPrice.enchanted_book_protection, EPrice.enchanted_book_blast_protection, EPrice.enchanted_book_flame}
+			new IItem[]{EnumObject.ink, EnumObject.lapis_lazuli, EnumObject.purple_dye, EnumObject.bone_meal},
+			new IItem[]{EnumObject.bottle_o_enchanting, EnumObject.bowl, EnumObject.enchanted_book_protection, EnumObject.enchanted_book_blast_protection, EnumObject.enchanted_book_flame}
 	),
 	EGYPTIAN_PAINTER (EnumTribe.EGYPTIAN, "painter",
-			ArrayUtils.addAll(new IItem[]{EPrice.paper, EPrice.white_wool, EPrice.stick}, GPrice.dye.getIPrices()),
-			new IItem[]{EPrice.painting}
+			ArrayUtils.addAll(new IItem[]{EnumObject.paper, EnumObject.white_wool, EnumObject.stick}, EnumGroupObject.dye.getIPrices()),
+			new IItem[]{EnumObject.painting}
 	),
 	EGYPTIAN_GUARD (EnumTribe.EGYPTIAN, "guard",
-			new IItem[]{EPrice.iron_axe, EPrice.iron_sword, EPrice.leather},
-			new IItem[]{EPrice.stone_axe, EPrice.stone_sword, EPrice.lead, EPrice.iron_helmet, EPrice.iron_chestplate, EPrice.iron_leggings, EPrice.iron_boots}
+			new IItem[]{EnumObject.iron_axe, EnumObject.iron_sword, EnumObject.leather},
+			new IItem[]{EnumObject.stone_axe, EnumObject.stone_sword, EnumObject.lead, EnumObject.iron_helmet, EnumObject.iron_chestplate, EnumObject.iron_leggings, EnumObject.iron_boots}
 	),
 	EGYPTIAN_PHARAOH (EnumTribe.EGYPTIAN, "pharaoh",
-			new IItem[]{EPrice.diamond, EPrice.compass},
-			new IItem[]{EPrice.emerald, EPrice.clock},
+			new IItem[]{EnumObject.diamond, EnumObject.compass},
+			new IItem[]{EnumObject.emerald, EnumObject.clock},
 	true),
 	
 	LAKESIDE_FISHERMAN (EnumTribe.LAKESIDE, "fisherman",
-			new IItem[]{EPrice.stick, EPrice.string},
-			new IItem[]{EPrice.raw_fish, EPrice.cooked_fish, EPrice.fishing_rod}
+			new IItem[]{EnumObject.stick, EnumObject.string},
+			new IItem[]{EnumObject.raw_fish, EnumObject.cooked_fish, EnumObject.fishing_rod}
 	),
 	LAKESIDE_FARMER (EnumTribe.LAKESIDE, "farmer",
-			new IItem[]{EPrice.iron_hoe},
-			new IItem[]{EPrice.carrot, EPrice.potato, EPrice.baked_potato, EPrice.lily_pad, EPrice.vines}
+			new IItem[]{EnumObject.iron_hoe},
+			new IItem[]{EnumObject.carrot, EnumObject.potato, EnumObject.baked_potato, EnumObject.lily_pad, EnumObject.vines}
 	),	
 	LAKESIDE_BREEDER (EnumTribe.LAKESIDE, "breeder",
-			new IItem[]{EPrice.potato, EPrice.poisonous_potato, EPrice.carrot},
-			new IItem[]{EPrice.raw_porkchop, EPrice.cooked_porkchop, EPrice.bone}
+			new IItem[]{EnumObject.potato, EnumObject.poisonous_potato, EnumObject.carrot},
+			new IItem[]{EnumObject.raw_porkchop, EnumObject.cooked_porkchop, EnumObject.bone}
 	),
 	LAKESIDE_GUARD (EnumTribe.LAKESIDE, "guard",
-			new IItem[]{EPrice.iron_axe, EPrice.iron_sword, EPrice.leather},
-			new IItem[]{EPrice.stone_axe, EPrice.stone_sword, EPrice.lead, EPrice.iron_helmet, EPrice.iron_chestplate, EPrice.iron_leggings, EPrice.iron_boots}
+			new IItem[]{EnumObject.iron_axe, EnumObject.iron_sword, EnumObject.leather},
+			new IItem[]{EnumObject.stone_axe, EnumObject.stone_sword, EnumObject.lead, EnumObject.iron_helmet, EnumObject.iron_chestplate, EnumObject.iron_leggings, EnumObject.iron_boots}
 	),
 	LAKESIDE_CHIEF (EnumTribe.LAKESIDE, "chief",
-			new IItem[]{EPrice.compass},
-			new IItem[]{EPrice.emerald, EPrice.enchanted_book_punch, EPrice.enchanted_book_aqua_affinity},
+			new IItem[]{EnumObject.compass},
+			new IItem[]{EnumObject.emerald, EnumObject.enchanted_book_punch, EnumObject.enchanted_book_aqua_affinity},
 	true),
 	
 	SETTLED_BUTCHER (EnumTribe.SETTLED, "butcher",
-			new IItem[]{EPrice.coal, EPrice.raw_porkchop},
-			new IItem[]{EPrice.leather_boots, EPrice.leather_tunic, EPrice.leather_pants, EPrice.leather_boots, EPrice.saddle, EPrice.cooked_porkchop, EPrice.steak, EPrice.carrot_on_a_stick}
+			new IItem[]{EnumObject.coal, EnumObject.raw_porkchop},
+			new IItem[]{EnumObject.leather_boots, EnumObject.leather_tunic, EnumObject.leather_pants, EnumObject.leather_boots, EnumObject.saddle, EnumObject.cooked_porkchop, EnumObject.steak, EnumObject.carrot_on_a_stick}
 	),		
 	SETTLED_FARMER (EnumTribe.SETTLED, "farmer",
-			new IItem[]{EPrice.wheat_seeds, EPrice.carrot, EPrice.potato},
-			new IItem[]{EPrice.wheat, EPrice.carrot, EPrice.baked_potato}
+			new IItem[]{EnumObject.wheat_seeds, EnumObject.carrot, EnumObject.potato},
+			new IItem[]{EnumObject.wheat, EnumObject.carrot, EnumObject.baked_potato}
 	),
 	SETTLED_LIBRARIAN (EnumTribe.SETTLED, "librarian",
-			new IItem[]{EPrice.paper, EPrice.book},
-			new IItem[]{EPrice.compass, EPrice.clock, EPrice.bookshelf, EPrice.enchanted_book_looting, EPrice.enchanted_book_projectile_protection, EPrice.enchanted_book_sharpness}
+			new IItem[]{EnumObject.paper, EnumObject.book},
+			new IItem[]{EnumObject.compass, EnumObject.clock, EnumObject.bookshelf, EnumObject.enchanted_book_looting, EnumObject.enchanted_book_projectile_protection, EnumObject.enchanted_book_sharpness}
 	),
 	SETTLED_PRIEST (EnumTribe.SETTLED, "priest",
-			new IItem[]{EPrice.redstone, EPrice.glowstone_dust},
-			new IItem[]{EPrice.ender_pearl, EPrice.bottle_o_enchanting, EPrice.glowstone, EPrice.potion_renegeration_II, EPrice.potion_health_boost}
+			new IItem[]{EnumObject.redstone, EnumObject.glowstone_dust},
+			new IItem[]{EnumObject.ender_pearl, EnumObject.bottle_o_enchanting, EnumPotion.invisibility.potion_II, EnumPotion.heal.potion_II}
 	),
 	SETTLED_SMITH (EnumTribe.SETTLED, "smith",
-			new IItem[]{EPrice.iron_ingot},
-			new IItem[]{EPrice.chainmail_helmet, EPrice.chainmail_chestplate, EPrice.chainmail_leggings, EPrice.chainmail_boots, EPrice.iron_helmet, EPrice.iron_chestplate, EPrice.iron_leggings, EPrice.iron_boots}
+			new IItem[]{EnumObject.iron_ingot},
+			new IItem[]{EnumObject.chainmail_helmet, EnumObject.chainmail_chestplate, EnumObject.chainmail_leggings, EnumObject.chainmail_boots, EnumObject.iron_helmet, EnumObject.iron_chestplate, EnumObject.iron_leggings, EnumObject.iron_boots}
 	),
 	SETTLED_VILLAGER (EnumTribe.SETTLED, "villager",
-			new IItem[]{EPrice.wheat, EPrice.white_wool},
-			new IItem[]{EPrice.apple, EPrice.cookie, EPrice.shears, EPrice.bread}
+			new IItem[]{EnumObject.wheat, EnumObject.white_wool},
+			new IItem[]{EnumObject.apple, EnumObject.cookie, EnumObject.shears, EnumObject.bread}
 	),
 	SETTLED_GUARD (EnumTribe.SETTLED, "guard"),
 	SETTLED_INNKEEPER (EnumTribe.SETTLED, "innkeeper",
 			new IItem[]{},
-			new IItem[]{EPrice.apple, EPrice.cooked_porkchop, EPrice.cooked_chicken, EPrice.bread, EPrice.mushroom_stew}
+			new IItem[]{EnumObject.apple, EnumObject.cooked_porkchop, EnumObject.cooked_chicken, EnumObject.bread, EnumObject.mushroom_stew}
 	),
 	DWARF_SMITH (EnumTribe.DWARF, "smith",
-			new IItem[]{EPrice.coal, EPrice.cobblestone, EPrice.oak_planks, EPrice.iron_ingot},
-			new IItem[]{EPrice.stonebrick, EPrice.iron_pickaxe, EPrice.iron_axe, EPrice.chainmail_helmet, EPrice.chainmail_chestplate, 
-			EPrice.chainmail_leggings, EPrice.chainmail_boots, EPrice.iron_helmet, EPrice.iron_chestplate, EPrice.iron_leggings, EPrice.iron_boots, EPrice.iron_sword}
+			new IItem[]{EnumObject.coal, EnumObject.cobblestone, EnumObject.oak_planks, EnumObject.iron_ingot},
+			new IItem[]{EnumObject.stonebrick, EnumObject.iron_pickaxe, EnumObject.iron_axe, EnumObject.chainmail_helmet, EnumObject.chainmail_chestplate, 
+			EnumObject.chainmail_leggings, EnumObject.chainmail_boots, EnumObject.iron_helmet, EnumObject.iron_chestplate, EnumObject.iron_leggings, EnumObject.iron_boots, EnumObject.iron_sword}
 	),
 	DWARF_WARRIOR (EnumTribe.DWARF, "warrior",
 			new IItem[]{},
 			new IItem[]{}
 	),
 	DWARF_KING (EnumTribe.DWARF, "king",
-			new IItem[]{EPrice.gold_ingot, EPrice.rose_red, EPrice.golden_apple, EPrice.golden_sword, EPrice.golden_helmet},
-			new IItem[]{EPrice.bottle_o_enchanting, EPrice.potion_haste, EPrice.potion_switfness_I, EPrice.diamond},
+			new IItem[]{EnumObject.gold_ingot, EnumObject.rose_red, EnumObject.golden_apple, EnumObject.golden_sword, EnumObject.golden_helmet},
+			new IItem[]{EnumObject.bottle_o_enchanting, EnumObject.diamond, EnumPotion.nightVision.potion_II_ext, EnumPotion.strength.potion_II_ext, EnumPotion.poison.splash_I},
 	true),
 	DWARF_HEALER (EnumTribe.DWARF, "healer",
-			new IItem[]{EPrice.melon, EPrice.glass_bottle, EPrice.nether_wart},
-			new IItem[]{EPrice.potion_instant_health, EPrice.potion_health_boost}
+			new IItem[]{EnumObject.melon, EnumObject.glass_bottle, EnumObject.nether_wart},
+			new IItem[]{EnumPotion.regeneration.splash_II, EnumPotion.regeneration.potion_I_ext}
     ),
 	DWARF_MINER (EnumTribe.DWARF, "miner",
-			new IItem[]{EPrice.iron_pickaxe, EPrice.iron_shovel, EPrice.torch},
-			new IItem[]{EPrice.coal, EPrice.redstone, EPrice.stone}
+			new IItem[]{EnumObject.iron_pickaxe, EnumObject.iron_shovel, EnumObject.torch},
+			new IItem[]{EnumObject.coal, EnumObject.redstone, EnumObject.stone}
 	);
 	
 

@@ -1,15 +1,20 @@
 package diversity.configurations;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import diversity.configurations.ConfigEconomy.EPrice;
-import diversity.configurations.ConfigEconomy.GPrice;
+import diversity.configurations.ConfigEconomy.EnumObject;
+import diversity.configurations.ConfigEconomy.EnumGroupObject;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
 
 public abstract class AConfigTool
 {
 	static String join(BiomeGenBase[] biomes) {
+		biomes = biomes.clone();
 		int biomeNumber = 0;
 		for (BiomeGenBase biome : BiomeGenBase.getBiomeGenArray()) {
 			if (biome != null) {
@@ -21,7 +26,43 @@ public abstract class AConfigTool
 		}
 	    StringBuilder sb = new StringBuilder();
 	    String loopDelim = "";
-	    for(BiomeGenBase biome : biomes) {
+	    
+	    Set<BiomeGenBase> toRemoveList = new HashSet<BiomeGenBase>();
+	    List<BiomeGenBase> biomeList = new ArrayList<BiomeGenBase>();
+    	List<BiomeGenBase> typeList = new ArrayList<BiomeGenBase>();
+
+    	
+	    for (BiomeDictionary.Type enumType : BiomeDictionary.Type.values()) {
+	    	if (BiomeDictionary.getBiomesForType(enumType).length != 0) {
+			    for (BiomeGenBase biome : biomes) {
+			    	biomeList.add(biome);
+			    }
+			    for (BiomeGenBase biome : BiomeDictionary.getBiomesForType(enumType)) {
+			    	typeList.add(biome);
+			    }
+			    
+		    	if (biomeList.containsAll(typeList)) {
+		    		toRemoveList.addAll(typeList);
+			        sb.append(loopDelim);
+		    		sb.append(enumType.name());
+			        loopDelim = ",";
+		    	}
+		    	
+		    	biomeList.clear();
+		    	typeList.clear();
+	    	}
+		}
+	    
+	    for (BiomeGenBase biome : biomes) {
+	    	biomeList.add(biome);
+	    }
+	    biomeList.removeAll(toRemoveList);
+	    
+	    if (toRemoveList.isEmpty()) {
+	        loopDelim = "";
+	    }
+	    
+	    for(BiomeGenBase biome : biomeList) {
 	    	if (biome != null) {
 		        sb.append(loopDelim);
 		        sb.append(biome.biomeID);            
@@ -35,7 +76,7 @@ public abstract class AConfigTool
 		if (config == null) {
 			return null;
 		}
-		List<BiomeGenBase> biomes = new ArrayList<BiomeGenBase>();
+		Set<BiomeGenBase> biomes = new HashSet<BiomeGenBase>();
 		if (config.equals("ALL")) {
 			for (BiomeGenBase biome : BiomeGenBase.getBiomeGenArray()) {
 				if (biome != null) {
@@ -46,11 +87,27 @@ public abstract class AConfigTool
 			String[] values = config.split(",");
 			for (String value : values) {
 				if (value != null && !value.isEmpty()) {
-					BiomeGenBase biome = BiomeGenBase.getBiome(Integer.valueOf(value));
-					if (biome != null) {
-						biomes.add(biome);
+					boolean isInDictionnary = false;
+					for (BiomeDictionary.Type enumType : BiomeDictionary.Type.values()) {
+						if (value.equals(enumType.name())) {
+					    	List<BiomeGenBase> typeList = new ArrayList<BiomeGenBase>();
+							for (BiomeGenBase biome : BiomeDictionary.getBiomesForType(enumType)) {
+						    	typeList.add(biome);
+						    }
+							biomes.addAll(typeList);
+							isInDictionnary = true;
+							break;
+						}
 					}
-				
+					if (!isInDictionnary) {
+						try {
+							BiomeGenBase biome = BiomeGenBase.getBiome(Integer.valueOf(value));
+							if (biome != null) {
+								biomes.add(biome);
+							}
+						}
+						catch (Exception e) {}
+					}
 				}
 			}
 		}
@@ -61,8 +118,8 @@ public abstract class AConfigTool
     	ConfigGenerationRate.values();
     	ConfigBiomeGroup.values();    	
     	ConfigGlobal.values();
-    	GPrice.values();
-    	EPrice.values();
+    	EnumGroupObject.values();
+    	EnumObject.values();
 	}
 
 	public static void loadAllConfig(boolean isWorld) {

@@ -50,6 +50,7 @@ public enum ConfigBiomeGroup
 	public static void saveConfig(boolean isWorld) {
 		Properties properties = new Properties();
 		for (ConfigBiomeGroup config : ConfigBiomeGroup.values()) {
+			BiomeGenBase[] biomes = config.biomes.clone();
 			properties.setProperty(config.name(), AConfigTool.join(config.biomes));
 		}
 		
