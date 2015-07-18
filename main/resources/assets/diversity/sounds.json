@@ -1,0 +1,4 @@
+{
+  "mummy": {"category": "master","sounds": [{"name": "mummy","stream": false}]},
+  "mummy_speak": {"category": "master","sounds": [{"name": "mummy_speak","stream": false}]}
+}

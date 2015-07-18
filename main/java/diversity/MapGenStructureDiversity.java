@@ -12,6 +12,7 @@ import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.ChunkProviderGenerate;
 import net.minecraft.world.gen.structure.MapGenScatteredFeature;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureStart;
@@ -116,11 +117,13 @@ public class MapGenStructureDiversity extends MapGenScatteredFeature
     @Override
     public void func_151539_a(IChunkProvider chunkProvider, World world, int chunkX, int chunkZ, Block[] blocks)
     {
-    	if (ConfigGlobal.CAN_SPAWN_MOD_CAVES.getBooleanConfig()) {
-    		Diversity.proxy.handler.mapGenCaveStructureDiversity.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);
-    	}
-    	if (ConfigGlobal.CAN_SPAWN_MOD_STRUCTURES.getBooleanConfig()) {
-        	super.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);
+    	if (chunkProvider.getClass().equals(ChunkProviderGenerate.class)) {
+	    	if (ConfigGlobal.CAN_SPAWN_MOD_CAVES.getBooleanConfig()) {
+	    		Diversity.proxy.handler.mapGenCaveStructureDiversity.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);
+	    	}
+	    	if (ConfigGlobal.CAN_SPAWN_MOD_STRUCTURES.getBooleanConfig()) {
+	        	super.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);
+	    	}
     	}
     	if (ConfigGlobal.CAN_SPAWN_VANILLA_STRUCTURES.getBooleanConfig()) {
     		Diversity.proxy.handler.mapGenScatteredFeature.func_151539_a(chunkProvider, world, chunkX, chunkZ, blocks);

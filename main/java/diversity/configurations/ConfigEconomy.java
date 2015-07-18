@@ -437,19 +437,6 @@ public class ConfigEconomy
 		blaze_rod				(Items.blaze_rod	,	0,	30),
 		ghast_tear				(Items.ghast_tear	,	0,	80),
 		nether_wart				(Items.nether_wart	,	0,	32),
-//		potion_renegeration		(Items.potionitem	,	EnumPotion.regeneration, 30),
-//		potion_switfness		(Items.potionitem	,	EnumPotion.swiftness, 30),
-//		potion_fireResistance	(Items.potionitem	,	EnumPotion.fireResistance, 30),
-//		potion_poison			(Items.potionitem	,	EnumPotion.poison, 30),
-//		potion_heal				(Items.potionitem	,	EnumPotion.heal, 30),
-//		potion_nightVision		(Items.potionitem	,	EnumPotion.nightVision, 30),
-//		potion_weakness			(Items.potionitem	,	EnumPotion.weakness, 30),
-//		potion_strength			(Items.potionitem	,	EnumPotion.strength, 30),
-//		potion_slowness			(Items.potionitem	,	EnumPotion.slowness, 30),
-//		potion_leaping			(Items.potionitem	,	EnumPotion.leaping, 30),
-//		potion_harm				(Items.potionitem	,	EnumPotion.harm, 30),
-//		potion_waterBreathing	(Items.potionitem	,	EnumPotion.waterBreathing, 30),
-//		potion_invisibility		(Items.potionitem	,	EnumPotion.invisibility, 30),
 		glass_bottle			(Items.glass_bottle	,	0,	9),
 		spider_eye				(Items.spider_eye	,	0,	3),
 		fermented_spider_eye	(Items.fermented_spider_eye, 0, 11),
@@ -506,14 +493,6 @@ public class ConfigEconomy
 		;
 		
 		private float price;
-		public PPrice potion_I;
-		public PPrice potion_II;
-		public PPrice potion_I_ext;
-		public PPrice potion_II_ext;
-		public PPrice splash_I;
-		public PPrice splash_II;
-		public PPrice splash_I_ext;
-		public PPrice splash_II_ext;
 		
 		EnumObject(Block block, int metadataId, float price)
 		{

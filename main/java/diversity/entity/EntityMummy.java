@@ -1,5 +1,7 @@
 package diversity.entity;
 
+import diversity.Diversity;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -173,6 +175,17 @@ public class EntityMummy extends EntityMob
     public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_)
     {
          return super.attackEntityFrom(p_70097_1_, p_70097_2_);
+    }
+    
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    protected String getLivingSound()
+    {
+    	if (rand.nextInt(4)==0) {
+    		return Diversity.MODID+":mummy_speak";
+    	}
+        return Diversity.MODID+":mummy";
     }
 
     /**
