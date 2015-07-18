@@ -46,8 +46,6 @@ public class ServerProxy
 
 	public void registerBlockRessource(EnumBlock block) {}
 	
-	public void registerSound() {}
-
 	public void registerTileEntityRenderer(EnumBlock block) {}
 
 }

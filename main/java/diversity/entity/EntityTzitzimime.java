@@ -1,5 +1,7 @@
 package diversity.entity;
 
+import diversity.Diversity;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -64,6 +66,38 @@ public class EntityTzitzimime extends EntityMob
         return true;
     }
         
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    protected String getLivingSound()
+    {
+    	if (rand.nextBoolean()) {
+    		return Diversity.MODID +":skeleton";
+    	}
+        return "mob.skeleton.say";
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    protected String getHurtSound()
+    {
+        return "mob.skeleton.hurt";
+    }
+
+    /**
+     * Returns the sound this mob makes on death.
+     */
+    protected String getDeathSound()
+    {
+        return "mob.skeleton.death";
+    }
+
+    protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_)
+    {
+        this.playSound("mob.skeleton.step", 0.15F, 1.0F);
+    }
+    
     /**
      * If Animal, checks if the age timer is negative
      */
