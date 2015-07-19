@@ -165,6 +165,7 @@ public class EntityMummy extends EntityMob
      */
     public void onLivingUpdate()
     {
+        super.onLivingUpdate();
         if (mummyActiveTest())
         {
         		worldObj.spawnParticle("reddust", posX, posY+1.666, posZ, 1.0D /*red*/,  0.0D/*green*/, 0.0D /*blue*/);
@@ -179,7 +180,6 @@ public class EntityMummy extends EntityMob
         	this.rotationYaw = this.prevRotationYaw;
         	this.rotationYawHead = this.prevRotationYawHead;
         }
-        super.onLivingUpdate();
     }
     
     /**
@@ -214,7 +214,7 @@ public class EntityMummy extends EntityMob
         {
         	return true;
         }
-        else if(this.worldObj.getSavedLightValue(EnumSkyBlock.Sky, i, j, k) <= this.rand.nextInt(32))
+        else
         {
         	int l = this.worldObj.getBlockLightValue(i, j, k);
         	if (l != 0)
@@ -261,18 +261,9 @@ public class EntityMummy extends EntityMob
      */
     protected String getLivingSound()
     {
-    	int i = MathHelper.floor_double(this.posX);
-        int j = MathHelper.floor_double(this.boundingBox.minY);
-        int k = MathHelper.floor_double(this.posZ);
-
-        if (this.worldObj.getSavedLightValue(EnumSkyBlock.Sky, i, j, k) <= this.rand.nextInt(32))
+        if (mummyActiveTest())
         {
-            int l = this.worldObj.getBlockLightValue(i, j, k);
-
-        	if (l != 0)
-        	{
-        		return Diversity.MODID+":mummy";
-        	}
+        	return Diversity.MODID+":mummy";
         }
         return null;
     }
