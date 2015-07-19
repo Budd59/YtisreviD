@@ -22,6 +22,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
 public class EntityMummy extends EntityMob
@@ -159,14 +161,26 @@ public class EntityMummy extends EntityMob
      */
     public void onLivingUpdate()
     {
-    	worldObj.spawnParticle("reddust", posX, posY+1.666, posZ, 1.0D /*red*/,  0.0D/*green*/, 0.0D /*blue*/);
-    	
-        if (this.isRiding() && this.getAttackTarget() != null && this.ridingEntity instanceof EntityChicken)
-        {
-            ((EntityLiving)this.ridingEntity).getNavigator().setPath(this.getNavigator().getPath(), 1.5D);
-        }
+    	int i = MathHelper.floor_double(this.posX);
+        int j = MathHelper.floor_double(this.boundingBox.minY);
+        int k = MathHelper.floor_double(this.posZ);
 
-        super.onLivingUpdate();
+        if (this.worldObj.getSavedLightValue(EnumSkyBlock.Sky, i, j, k) <= this.rand.nextInt(32))
+        {
+            int l = this.worldObj.getBlockLightValue(i, j, k);
+
+        	if (l != 0)
+        	{
+        		worldObj.spawnParticle("reddust", posX, posY+1.666, posZ, 1.0D /*red*/,  0.0D/*green*/, 0.0D /*blue*/);
+            	
+                if (this.isRiding() && this.getAttackTarget() != null && this.ridingEntity instanceof EntityChicken)
+                {
+                    ((EntityLiving)this.ridingEntity).getNavigator().setPath(this.getNavigator().getPath(), 1.5D);
+                }
+
+                super.onLivingUpdate();
+        	}
+        }    	
     }
 
     /**
@@ -182,10 +196,20 @@ public class EntityMummy extends EntityMob
      */
     protected String getLivingSound()
     {
-    	if (rand.nextInt(4)==0) {
-    		return Diversity.MODID+":mummy_speak";
-    	}
-        return Diversity.MODID+":mummy";
+    	int i = MathHelper.floor_double(this.posX);
+        int j = MathHelper.floor_double(this.boundingBox.minY);
+        int k = MathHelper.floor_double(this.posZ);
+
+        if (this.worldObj.getSavedLightValue(EnumSkyBlock.Sky, i, j, k) <= this.rand.nextInt(32))
+        {
+            int l = this.worldObj.getBlockLightValue(i, j, k);
+
+        	if (l != 0)
+        	{
+        		return Diversity.MODID+":mummy";
+        	}
+        }
+        return null;
     }
 
     /**

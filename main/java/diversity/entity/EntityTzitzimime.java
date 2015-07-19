@@ -72,7 +72,7 @@ public class EntityTzitzimime extends EntityMob
     protected String getLivingSound()
     {
     	if (rand.nextBoolean()) {
-    		return Diversity.MODID +":skeleton";
+    		return Diversity.MODID +":skeleton_say";
     	}
         return "mob.skeleton.say";
     }
@@ -90,7 +90,8 @@ public class EntityTzitzimime extends EntityMob
      */
     protected String getDeathSound()
     {
-        return "mob.skeleton.death";
+    	return Diversity.MODID + ":tzitzimime_death";
+        //return "mob.skeleton.death";
     }
 
     protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_)

@@ -1,4 +1,5 @@
 {
   "mummy": {"category": "master","sounds": [{"name": "mummy","stream": false}]},
-  "mummy_speak": {"category": "master","sounds": [{"name": "mummy_speak","stream": false}]}
+  "skeleton_say": {"category": "master","sounds": [{"name": "skeleton_say","stream": false}]},
+  "tzitzimime_death": {"category": "master","sounds": [{"name": "tzitzimime_death","stream": false}]}
 }
