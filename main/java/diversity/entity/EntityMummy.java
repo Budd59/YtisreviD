@@ -21,6 +21,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
@@ -60,13 +61,6 @@ public class EntityMummy extends EntityMob
         this.getDataWatcher().addObject(14, Byte.valueOf((byte)0));
     }
 
-    /**
-     * Returns true if the newer Entity AI code should be run
-     */
-    protected boolean isAIEnabled()
-    {
-        return true;
-    }
         
     /**
      * If Animal, checks if the age timer is negative
@@ -156,33 +150,104 @@ public class EntityMummy extends EntityMob
     }
     
     /**
+     * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
+     * (Animals, Spiders at day, peaceful PigZombies).
+     */
+    protected Entity findPlayerToAttack()
+    {
+        EntityPlayer entityplayer = this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
+        return mummyActiveTest() && entityplayer != null && this.canEntityBeSeen(entityplayer) ? entityplayer : null;
+    }
+    
+    /**
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
     public void onLivingUpdate()
     {
-    	int i = MathHelper.floor_double(this.posX);
-        int j = MathHelper.floor_double(this.boundingBox.minY);
-        int k = MathHelper.floor_double(this.posZ);
-
-        if (this.worldObj.getSavedLightValue(EnumSkyBlock.Sky, i, j, k) <= this.rand.nextInt(32))
+        if (mummyActiveTest())
         {
-            int l = this.worldObj.getBlockLightValue(i, j, k);
-
-        	if (l != 0)
-        	{
         		worldObj.spawnParticle("reddust", posX, posY+1.666, posZ, 1.0D /*red*/,  0.0D/*green*/, 0.0D /*blue*/);
             	
                 if (this.isRiding() && this.getAttackTarget() != null && this.ridingEntity instanceof EntityChicken)
                 {
                     ((EntityLiving)this.ridingEntity).getNavigator().setPath(this.getNavigator().getPath(), 1.5D);
                 }
-
-                super.onLivingUpdate();
-        	}
         }    	
+        else
+        {
+        	this.rotationYaw = this.prevRotationYaw;
+        	this.rotationYawHead = this.prevRotationYawHead;
+        }
+        super.onLivingUpdate();
     }
+    
+    /**
+     * Returns true if the newer Entity AI code should be run
+     */
+    public boolean isAIEnabled()
+    {
+ 	   if(!mummyActiveTest())
+ 	   {
+ 		   return false;
+ 	   }
+ 	   else
+ 	   {
+ 		   return true;
+ 	   }
+    }
+    
+    /**
+     * Returns true if this entity should push and be pushed by other entities when colliding.
+     */
+    public boolean canBePushed()
+    {
+        return true;
+    }
+    
+    public boolean mummyActiveTest()
+    {
+    	int i = MathHelper.floor_double(this.posX);
+        int j = MathHelper.floor_double(this.boundingBox.minY);
+        int k = MathHelper.floor_double(this.posZ);
+        if(this.getAttackTarget() != null)
+        {
+        	return true;
+        }
+        else if(this.worldObj.getSavedLightValue(EnumSkyBlock.Sky, i, j, k) <= this.rand.nextInt(32))
+        {
+        	int l = this.worldObj.getBlockLightValue(i, j, k);
+        	if (l != 0)
+        	{
+        		return true;
+        	}
+        }
 
+        return false;
+
+    }
+    
+    public void moveEntity(double d, double d1, double d2)
+    {
+        if (mummyActiveTest())
+        {
+            super.moveEntity(d, d1, d2);
+        }
+    }
+    
+    protected void updateEntityActionState()
+    {
+        if (mummyActiveTest())
+        {
+     	   super.updateEntityActionState();
+        }
+    }
+    
+    public boolean isMovementCeased()
+    {
+    	return !mummyActiveTest();
+    }
+    
     /**
      * Called when the entity is attacked.
      */
