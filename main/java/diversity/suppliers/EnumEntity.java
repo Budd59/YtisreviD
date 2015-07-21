@@ -8,6 +8,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import diversity.Diversity;
 import diversity.configurations.ConfigBiomeGroup;
 import diversity.entity.EntityDarkSpider;
+import diversity.entity.EntityDarkSpiderTest;
 import diversity.entity.EntityMummy;
 import diversity.entity.EntityTzitzimime;
 import diversity.entity.EntityWarriorSkeleton;
@@ -22,7 +23,9 @@ public enum EnumEntity
 	WARRIOR_SKELETON (EntityWarriorSkeleton.class, 75, 2, 5, EnumCreatureType.monster, BiomeGenBase.swampland),
 	WORSHIPPER (EntityWorshipper.class, 25, 1, 2, EnumCreatureType.monster, ConfigBiomeGroup.WITCH_HUTT),
 	DARKSPIDER (EntityDarkSpider.class),
-	YETI (EntityYeti.class);
+	YETI (EntityYeti.class),
+	DARKSPIDERTEST (EntityDarkSpiderTest.class)
+	;
 	
 	public final Class entityClass;
 	public final String resourcePath;
