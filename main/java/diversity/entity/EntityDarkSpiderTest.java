@@ -130,7 +130,7 @@ public class EntityDarkSpiderTest extends EntitySpider
     public void onLivingUpdate() {
     	super.onLivingUpdate();
     	if (getPhase() < 2) {
-    		this.rotationYaw = prevRotationYaw;
+    		//this.rotationYaw = prevRotationYaw;
     	}
     }
     
@@ -383,17 +383,17 @@ public class EntityDarkSpiderTest extends EntitySpider
 	
 	            if (this.canEntityBeSeen(this.targetedEntity))
 	            {
-	                if (this.attackCounter == 10)
+	                if (this.attackCounter == 15)
 	                {
 	                    this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1007, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
 	                }
 	
 	                ++this.attackCounter;
 	
-	                if (this.attackCounter == 20)
+	                if (this.attackCounter == 30)
 	                {
 	                    this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1008, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
-	                    EntitySnowball entitylargefireball = new EntitySnowball(this.worldObj, this);
+	                    EntitySpiderProjectile entitylargefireball = new EntitySpiderProjectile(this.worldObj, this);
 	                    double d8 = 4.0D;
 	                    Vec3 vec3 = this.getLook(1.0F);
 	                    entitylargefireball.posX = this.posX + vec3.xCoord * d8;

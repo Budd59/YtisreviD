@@ -10,6 +10,7 @@ import diversity.configurations.ConfigBiomeGroup;
 import diversity.entity.EntityDarkSpider;
 import diversity.entity.EntityDarkSpiderTest;
 import diversity.entity.EntityMummy;
+import diversity.entity.EntitySpiderProjectile;
 import diversity.entity.EntityTzitzimime;
 import diversity.entity.EntityWarriorSkeleton;
 import diversity.entity.EntityWorshipper;
@@ -24,7 +25,7 @@ public enum EnumEntity
 	WORSHIPPER (EntityWorshipper.class, 25, 1, 2, EnumCreatureType.monster, ConfigBiomeGroup.WITCH_HUTT),
 	DARKSPIDER (EntityDarkSpider.class),
 	YETI (EntityYeti.class),
-	DARKSPIDERTEST (EntityDarkSpiderTest.class)
+	DARKSPIDERTEST (EntityDarkSpiderTest.class),
 	;
 	
 	public final Class entityClass;

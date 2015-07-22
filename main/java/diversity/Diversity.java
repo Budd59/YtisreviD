@@ -2,6 +2,8 @@ package diversity;
 
 import java.util.logging.Logger;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSkull;
 import net.minecraft.entity.EntityList;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -103,6 +105,13 @@ public class Diversity
 		EnumEntity.register();
 
 		Diversity.proxy.registerHandler();
+		
+		GameRegistry.addRecipe(
+			    new ItemStack(EnumBlock.bones.block),
+			    "xxx",
+			    "xyx",
+			    "xxx",
+			    'x', new ItemStack(Items.bone), 'y', new ItemStack(Blocks.skull));
     }
     
     @EventHandler

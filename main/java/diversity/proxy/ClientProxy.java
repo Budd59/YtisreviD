@@ -37,6 +37,7 @@ import diversity.client.render.entity.RenderInuit;
 import diversity.client.render.entity.RenderLakeside;
 import diversity.client.render.entity.RenderMummy;
 import diversity.client.render.entity.RenderSettled;
+import diversity.client.render.entity.RenderSpiderProjectile;
 import diversity.client.render.entity.RenderTibetan;
 import diversity.client.render.entity.RenderTzitzimime;
 import diversity.client.render.entity.RenderWarriorSkeleton;
@@ -56,6 +57,7 @@ import diversity.entity.EntityInuit;
 import diversity.entity.EntityLakeside;
 import diversity.entity.EntityMummy;
 import diversity.entity.EntitySettled;
+import diversity.entity.EntitySpiderProjectile;
 import diversity.entity.EntityTibetan;
 import diversity.entity.EntityTzitzimime;
 import diversity.entity.EntityWarriorSkeleton;
@@ -101,6 +103,7 @@ public class ClientProxy extends ServerProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityYeti.class, new RenderYeti());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDwarf.class, new RenderDwarf());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDarkSpiderTest.class, new RenderDarkSpiderTest());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpiderProjectile.class, new RenderSpiderProjectile());
 	}
 	
 	/**

@@ -9,6 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import diversity.Diversity;
 import diversity.block.BlockBlueMushroom;
 import diversity.block.BlockBlueVine;
+import diversity.block.BlockBones;
 import diversity.block.BlockFrozenChest;
 import diversity.block.BlockFungus;
 import diversity.block.BlockMushroomCap;
@@ -30,6 +31,7 @@ public enum EnumBlock
 	phos_mushroom_cap (new BlockMushroomCap(Material.wood).setStepSound(Block.soundTypeWood).setBlockName("phos_mushroom").setBlockTextureName(Diversity.MODID+":phos_mushroom")),
 	blue_vine (new BlockBlueVine().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("blue_vine").setBlockTextureName(Diversity.MODID+":blue_vine")),
 	fungus (new BlockFungus().setStepSound(Block.soundTypeWood).setLightLevel(1.0F).setBlockName("fungus").setBlockTextureName(Diversity.MODID+":fungus")),
+	bones (new BlockBones().setHardness(2.0F).setStepSound(Block.soundTypeGravel).setBlockName("bones").setBlockTextureName(Diversity.MODID+":bones")),
 	frozen_chest (new BlockFrozenChest(0).setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("frozen_chest").setBlockTextureName(Diversity.MODID+":frozen_chest"), new TileEntityFrozenChest());
 
 	public final Block block;
