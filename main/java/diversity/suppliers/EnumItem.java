@@ -13,6 +13,7 @@ import diversity.entity.EntitySpiderProjectile;
 import diversity.item.ItemBlowgun;
 import diversity.item.ItemSpear;
 import diversity.item.ItemSpiderGlandStick;
+import diversity.item.ItemSpiderProjectile;
 
 public enum EnumItem
 {
@@ -27,7 +28,9 @@ public enum EnumItem
 	poison_water_bucket (new ItemBucket(EnumBlock.poison_water.block).setUnlocalizedName("poison_water_bucket").setContainerItem(Items.bucket).setTextureName(Diversity.MODID+":poison_water_bucket")),
 	spider_gland (new Item().setUnlocalizedName("spider_gland").setCreativeTab(CreativeTabs.tabMaterials).setTextureName(Diversity.MODID+":spider_gland"), EntitySpiderProjectile.class),
 	spider_gland_stick (new ItemSpiderGlandStick().setUnlocalizedName("spider_gland_stick").setTextureName(Diversity.MODID+":spider_gland_stick")),
-	spider_gland_arrow (new Item().setUnlocalizedName("spider_gland_arrow").setCreativeTab(CreativeTabs.tabCombat).setTextureName(Diversity.MODID+":spider_gland_arrow"), EntitySpiderGlandArrow.class);
+	spider_gland_arrow (new Item().setUnlocalizedName("spider_gland_arrow").setCreativeTab(CreativeTabs.tabCombat).setTextureName(Diversity.MODID+":spider_gland_arrow"), EntitySpiderGlandArrow.class),
+	spider_projectile (new ItemSpiderProjectile().setUnlocalizedName("spider_projectile").setTextureName(Diversity.MODID+":spider_projectile"));
+	
 
 	public Item item;
 	public final Class entityClass;

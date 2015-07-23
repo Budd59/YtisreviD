@@ -11,10 +11,13 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.resources.IResource;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -105,7 +108,7 @@ public class ClientProxy extends ServerProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityYeti.class, new RenderYeti());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDwarf.class, new RenderDwarf());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDarkSpiderTest.class, new RenderDarkSpiderTest());
-		RenderingRegistry.registerEntityRenderingHandler(EntitySpiderProjectile.class, new RenderSpiderProjectile());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpiderProjectile.class, new RenderSnowball(EnumItem.spider_projectile.item));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpiderGlandArrow.class, new RenderSpiderGlandArrow());
 	}
 	
