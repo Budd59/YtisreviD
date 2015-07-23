@@ -79,6 +79,30 @@ public class Diversity
 				Item.getItemFromBlock(Blocks.brown_mushroom),
 				Item.getItemFromBlock(EnumBlock.blue_mushroom.block),
 				Items.bowl);
+		ItemStack boneStack = new ItemStack(Items.bone);
+		GameRegistry.addRecipe(
+			    new ItemStack(EnumBlock.bones.block,16),
+			    "xxx",
+			    "xyx",
+			    "xxx",
+			    'x', boneStack, 'y', new ItemStack(Items.skull));
+		GameRegistry.addShapelessRecipe(
+			    new ItemStack(EnumBlock.bones.block,4),
+			    boneStack,boneStack,boneStack,
+			    boneStack,boneStack,boneStack,
+			    boneStack,boneStack,boneStack);
+		GameRegistry.addRecipe(
+			    new ItemStack(EnumItem.spider_gland_stick.item),
+			    " y ",
+			    " x ",
+			    " x ",
+			    'x', new ItemStack(Items.stick), 'y', new ItemStack(EnumItem.spider_gland.item));
+		GameRegistry.addRecipe(
+			    new ItemStack(EnumItem.spider_gland_stick.item),
+			    "  z",
+			    " y ",
+			    "x  ",
+			    'x', new ItemStack(Items.feather), 'y', new ItemStack(Items.stick), 'z', new ItemStack(EnumItem.spider_gland.item));
 		
 		EnumTribe.register();
 
@@ -106,12 +130,6 @@ public class Diversity
 
 		Diversity.proxy.registerHandler();
 		
-		GameRegistry.addRecipe(
-			    new ItemStack(EnumBlock.bones.block),
-			    "xxx",
-			    "xyx",
-			    "xxx",
-			    'x', new ItemStack(Items.bone), 'y', new ItemStack(Blocks.skull));
     }
     
     @EventHandler

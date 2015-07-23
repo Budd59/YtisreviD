@@ -8,10 +8,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 import diversity.Diversity;
 import diversity.entity.EntityDart;
+import diversity.entity.EntitySpiderGlandArrow;
 import diversity.entity.EntitySpiderProjectile;
 import diversity.item.ItemBlowgun;
 import diversity.item.ItemSpear;
-import diversity.item.ItemSpiderGland;
+import diversity.item.ItemSpiderGlandStick;
 
 public enum EnumItem
 {
@@ -24,7 +25,9 @@ public enum EnumItem
 	golden_spear (new ItemSpear(Item.ToolMaterial.GOLD).setUnlocalizedName("golden_spear").setTextureName(Diversity.MODID+":golden_spear")),
 	phos_water_bucket (new ItemBucket(EnumBlock.phos_water.block).setUnlocalizedName("phos_water_bucket").setContainerItem(Items.bucket).setTextureName(Diversity.MODID+":phos_water_bucket")),
 	poison_water_bucket (new ItemBucket(EnumBlock.poison_water.block).setUnlocalizedName("poison_water_bucket").setContainerItem(Items.bucket).setTextureName(Diversity.MODID+":poison_water_bucket")),
-	spider_gland (new ItemSpiderGland().setUnlocalizedName("spider_gland").setTextureName(Diversity.MODID+":spider_gland").setCreativeTab(CreativeTabs.tabMisc), EntitySpiderProjectile.class);
+	spider_gland (new Item().setUnlocalizedName("spider_gland").setCreativeTab(CreativeTabs.tabMaterials).setTextureName(Diversity.MODID+":spider_gland"), EntitySpiderProjectile.class),
+	spider_gland_stick (new ItemSpiderGlandStick().setUnlocalizedName("spider_gland_stick").setTextureName(Diversity.MODID+":spider_gland_stick")),
+	spider_gland_arrow (new Item().setUnlocalizedName("spider_gland_arrow").setCreativeTab(CreativeTabs.tabCombat).setTextureName(Diversity.MODID+":spider_gland_arrow"), EntitySpiderGlandArrow.class);
 
 	public Item item;
 	public final Class entityClass;
