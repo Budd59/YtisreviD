@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityList.EntityEggInfo;
@@ -17,6 +18,7 @@ import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -28,6 +30,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.MapGenScatteredFeature;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent.CheckSpawn;
+import net.minecraftforge.event.entity.player.ArrowLooseEvent;
+import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
@@ -41,6 +45,7 @@ import diversity.MapGenStructureDiversity;
 import diversity.MapGenVillageDiversity;
 import diversity.configurations.AConfigTool;
 import diversity.configurations.ConfigGlobal;
+import diversity.entity.EntitySpiderGlandArrow;
 import diversity.entity.EntityWorshipper;
 import diversity.suppliers.EnumBlock;
 import diversity.suppliers.EnumCave;
@@ -288,4 +293,79 @@ public class ServerHandler
 			}
 		}
 	}
+	
+	@SubscribeEvent
+	public void OnArrowNockEvent(ArrowNockEvent event) {
+		if (event.entityPlayer.capabilities.isCreativeMode || event.entityPlayer.inventory.hasItem(EnumItem.spider_gland_arrow.item))
+        {
+        	event.entityPlayer.setItemInUse(event.result, Items.bow.getMaxItemUseDuration(event.result));
+    		event.setCanceled(true);
+        }
+	}
+	@SubscribeEvent
+	public void OnArrowLooseEvent(ArrowLooseEvent event) {
+		boolean flag = event.entityPlayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, event.bow) > 0;
+
+        if (flag || event.entityPlayer.inventory.hasItem(EnumItem.spider_gland_arrow.item))
+        {
+            float f = (float)event.charge / 20.0F;
+            f = (f * f + f * 2.0F) / 3.0F;
+
+            if ((double)f < 0.1D)
+            {
+                return;
+            }
+
+            if (f > 1.0F)
+            {
+                f = 1.0F;
+            }
+
+            EntitySpiderGlandArrow entityarrow = new EntitySpiderGlandArrow(event.entityPlayer.worldObj, event.entityPlayer, f * 2.0F);
+
+            if (f == 1.0F)
+            {
+                entityarrow.setIsCritical(true);
+            }
+
+            int k = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, event.bow);
+
+            if (k > 0)
+            {
+                entityarrow.setDamage(entityarrow.getDamage() + (double)k * 0.5D + 0.5D);
+            }
+
+            int l = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, event.bow);
+
+            if (l > 0)
+            {
+                entityarrow.setKnockbackStrength(l);
+            }
+
+            if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, event.bow) > 0)
+            {
+                entityarrow.setFire(100);
+            }
+
+            event.bow.damageItem(1, event.entityPlayer);
+            event.entityPlayer.worldObj.playSoundAtEntity(event.entityPlayer, "random.bow", 1.0F, 1.0F / (event.entityPlayer.worldObj.rand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+
+            if (flag)
+            {
+                entityarrow.canBePickedUp = 2;
+            }
+            else
+            {
+            	event.entityPlayer.inventory.consumeInventoryItem(EnumItem.spider_gland_arrow.item);
+            }
+
+            if (!event.entityPlayer.worldObj.isRemote)
+            {
+            	event.entityPlayer.worldObj.spawnEntityInWorld(entityarrow);
+            }
+            
+            event.setCanceled(true);
+        }
+	}
+
 }

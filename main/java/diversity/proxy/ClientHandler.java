@@ -9,15 +9,20 @@ import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ActiveRenderInfo;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.client.event.EntityViewRenderEvent.FogColors;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent.CheckSpawn;
+import net.minecraftforge.event.entity.player.ArrowLooseEvent;
+import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate;
@@ -27,8 +32,10 @@ import cpw.mods.fml.common.eventhandler.Event.Result;
 import diversity.MapGenCaveDiversity;
 import diversity.MapGenStructureDiversity;
 import diversity.MapGenVillageDiversity;
+import diversity.entity.EntitySpiderGlandArrow;
 import diversity.entity.EntityWorshipper;
 import diversity.suppliers.EnumBlock;
+import diversity.suppliers.EnumItem;
 import diversity.world.WorldGenBlueMushroom;
 import diversity.world.WorldGenBlueVine;
 import diversity.world.WorldGenFungus;
@@ -129,5 +136,4 @@ public class ClientHandler extends ServerHandler
         event.green = green;
         event.blue = blue;
     }
-
 }

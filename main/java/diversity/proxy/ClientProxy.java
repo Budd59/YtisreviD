@@ -41,7 +41,6 @@ import diversity.client.render.entity.RenderLakeside;
 import diversity.client.render.entity.RenderMummy;
 import diversity.client.render.entity.RenderSettled;
 import diversity.client.render.entity.RenderSpiderGlandArrow;
-import diversity.client.render.entity.RenderSpiderProjectile;
 import diversity.client.render.entity.RenderTibetan;
 import diversity.client.render.entity.RenderTzitzimime;
 import diversity.client.render.entity.RenderWarriorSkeleton;
